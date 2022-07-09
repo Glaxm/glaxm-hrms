@@ -1,0 +1,200 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div>
+      <app-card cardTitle="{{jobdefinationForm.value.jobdefinationId ? 'Edit Job Defination':'Add Job Defination'}}"
+        [options]="false">
+        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+          <ul _ngcontent-epm-c40="" class="nav">
+          </ul>
+          <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateJobdefination()"
+              *ngIf="!isView">{{jobdefinationForm.value.jobdefinationId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ?
+              'Back':'Cancel'}}</button>
+          </div>
+        </nav>
+
+
+
+        <form action="javascript:" class="needs-validation" novalidate [formGroup]="jobdefinationForm">
+          <div class="form-row">
+
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Holding</label>
+              <select class="form-control validation_border" disabled formControlName="holdingId"
+                (change)="selectHolding(jobdefinationForm.value.holdingId)"
+                [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }">
+                <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+              </select>
+              <div *ngIf="submitted && f.holdingId.errors" class="invalid-feedback">
+                <div *ngIf="f.holdingId.errors.required">Holding is required</div>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Company</label>
+              <select class="form-control validation_border" formControlName="companyId"
+                [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
+                <option *ngFor="let cl of companyList" value="{{cl.gCompanyId}}">{{cl.name}}</option>
+              </select>
+              <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+                <div *ngIf="f.companyId.errors.required">Company is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Job Function</label>
+              <select class="form-control" formControlName="jobfunctionId">
+                <option *ngFor="let cl of jobfunList" value="{{cl.jobfunctionId}}">{{cl.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Job Defination </label>
+              <input type="text" formControlName="name" class="form-control validation_border"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">job defination is required</div>
+              </div>
+            </div>
+
+
+
+          </div>
+
+
+          <div class="form-row">
+
+
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Standard Quantity</label>
+              <input type="number" formControlName="stdQnty" class="form-control">
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Unit of Measure</label>
+              <select class="form-control " formControlName="xunitmeasureId">
+                <option *ngFor="let cl of uomList" value="{{cl.xunitmeasureId}}">{{cl.uomName}}</option>
+              </select>
+            </div>
+
+
+
+
+          </div>
+
+
+          <div class="form-row">
+
+
+
+
+            <!-- <div class="col-md-2 mb-2">
+
+              <div class="custom-control custom-checkbox">
+                <label for="validationCustom04"></label><br>
+                <input type="checkbox" class="custom-control-input" formControlName="gangTarget" 
+                id="customCheck4" >
+                <label class="custom-control-label" for="customCheck4">Gang Target</label>
+              </div>
+            </div>
+            <div class="col-md-2 mb-2">
+              <div class="custom-control custom-checkbox">
+                <label for="validationCustom04"></label><br>
+                <input type="checkbox" class="custom-control-input" formControlName="fixedRate" 
+                id="customCheck5">
+                <label class="custom-control-label" for="customCheck5">Fixed Rate</label>
+              </div>
+
+            </div>
+
+            <div class="col-md-3 mb-2">
+              <div class="custom-control custom-checkbox">
+                <label for="validationCustom04"></label><br>
+                <input type="checkbox" class="custom-control-input" formControlName="dependRate" id="customCheck6"
+               >
+                <label class="custom-control-label" for="customCheck6">Basic Depend Rate</label>
+              </div>
+
+            </div> -->
+
+
+
+            <div class="col-md-2 mb-3">
+
+              <div class="radio radio-primary d-inline">
+                  <input class="form-check-input" type="radio" name="rates"
+                      formControlName="rates" id="GANGTARGET" value="GANGTARGET">
+                  <label class="cr" for="GANGTARGET">Gang Target </label>
+              </div>
+          </div>
+          <div class="col-md-2 mb-3">
+
+              <div class="radio radio-primary d-inline">
+                  <input class="form-check-input" type="radio" name="rates"
+                      formControlName="rates" id="FIXEDRATE" value="FIXEDRATE">
+                  <label class="cr" for="FIXEDRATE">Fixed Rate</label>
+              </div>
+          </div>
+
+          <div class="col-md-3 mb-3">
+
+            <div class="radio radio-primary d-inline">
+                <input class="form-check-input" type="radio" name="rates"
+                    formControlName="rates" id="BASICDEPENDSRATE" value="BASICDEPENDSRATE">
+                <label class="cr" for="BASICDEPENDSRATE">Basic Depend Rate</label>
+            </div>
+        </div>
+
+
+            <div class="col-md-0.5 mb-3" *ngIf="jobdefinationForm.value.rates=='FIXEDRATE'">
+              <label for="validationCustom01">Rates</label>
+          </div>
+          <div class="col-md-3 mb-3" *ngIf="jobdefinationForm.value.rates=='FIXEDRATE'">
+            <input type="text" formControlName="rate" class="form-control">
+          </div>
+
+
+
+
+          </div>
+
+
+          <div class="form-row">
+
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Description</label>
+              <input type="text" formControlName="description" class="form-control">
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Code</label>
+              <input type="text" formControlName="code" class="form-control">
+            </div>
+
+          </div>
+
+          <div class="form-row">
+
+            <div class="col-md-6 mb-3">
+
+              <label for="validationCustom01">Status</label>
+              <select class="form-control validation_border" formControlName="status">
+                <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+              </select>
+            </div>
+          </div>
+
+
+        </form>
+
+
+      </app-card>
+
+    </div>
+  </div>
+</div>

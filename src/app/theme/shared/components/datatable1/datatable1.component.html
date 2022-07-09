@@ -1,0 +1,88 @@
+<div class="table-responsive">
+    <div class="dataTables_wrapper form-inline dt-bootstrap">
+        <!-- <div class="html5buttons">
+  Showing {{start}} to {{this.pageentry}} of {{dataset.recordsTotal}} entries
+  </div> -->
+        <div class="dataTables_length">
+            <label>Show
+        <select name="DataTables_Table_4_length" aria-controls="DataTables_Table_4" class="" [(ngModel)]="rowsOnPage"
+          (change)="showEntries(rowsOnPage)">
+          <option [ngValue]="10">10</option>
+          <option [ngValue]="50">50</option>
+          <option [ngValue]="100">100</option>
+        </select>
+        entries</label>
+        </div>
+
+    </div>
+</div>
+<p></p>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <ng-container *ngFor="let column of columns,let i = index">
+                <th [ngClass]="{
+                    'sorting':(column.type !== 'radio' &&  column.type !== 'button'),
+                    'idClass':(column.type === 'radio' || column.type === 'button') }" [style.width.%]="column.width1" (click)="funSort(i)">{{column.header}}
+                </th>
+            </ng-container>
+        </tr>
+
+    </thead>
+    <tbody>
+        <tr *ngIf="enableFilter">
+            <th *ngFor="let column of columns,let j = index" [style.width.%]="column.width1">
+                <input type="text" class="form-control" *ngIf="enableFilter && column.type!='radio'  && column.type!='Date'" [(ngModel)]="qtd[j]" (ngModelChange)="search(qtd[j])" placeholder="{{column.header}}" />
+            </th>
+        </tr>
+    </tbody>
+    <ng-container>
+        <tbody>
+            <ng-container [style.height.%]="height" style="overflow-y: auto; position: relative;display:block; background-color: chartreuse;">
+                <tr *ngFor="let row of getData()">
+                    <ng-container *ngFor="let column of columns">
+                        <td [style.width.%]="column.width1" (click)="actionEvent==undefined ?  aTag(row,column.header):true" [ngClass]="{active:id1 === row[id]}">
+                            <input *ngIf="column.type=='radio'" (click)="radio1(row[column.value]);aTag(row,column.header)" name="options" type="radio" style="margin:0px;">
+                            <div *ngIf="column.type!='radio' && column.type!='checkbox' && column.type!='number' && column.type!='Date' && column.type!='button'">
+                                {{row[column.value] | stringSize:column.width1}}</div>
+                            <!-- <div class="b" *ngIf="column.type=='Date'">{{row[column.value] | dateFormat }}</div> -->
+                            <div class="b" *ngIf="column.type=='button'">
+
+                                <!-- <button 
+                  (click)="navigate(row)"><span class="glyphicon glyphicon-new-window"></span></button> -->
+                                <button class="b" class="btn btn-white btn-icon btn-outline-success btn-sm" (click)="navigate(row,column.header)">{{column.buttonName}}</button>
+                            </div>
+                            <div class="b" *ngIf="column.type=='a'"><a (click)="aTag(row,column.header)">{{row.action}}</a></div>
+                            <div class="b pull-right" *ngIf="column.type=='number'">{{row[column.value]}}</div>
+                            <input *ngIf="column.type=='checkbox'" (click)="checkbox1(row,$event.target.checked);" name="options" type="checkbox" style="margin:0px;">
+                        </td>
+                    </ng-container>
+                </tr>
+            </ng-container>
+        </tbody>
+    </ng-container>
+</table>
+
+
+<div class="dataTables_paginate paging_simple_numbers" style="text-align: right;" *ngIf="dataset.recordsTotal>10">
+    <!-- <div class="dataTables_length">
+  Showing {{start}} to {{this.pageentry}} of {{dataset.recordsTotal}} entries
+  </div> -->
+    <ul class="pagination" style="margin:0px;">
+        <li class="paginate_button previous ">
+            <a role="button" (click)="changePage(pageno-1)" *ngIf="this.totalPageCount.length>1 && pageno > 1  " class="prvious">Previous</a>
+        </li>
+
+        <li *ngFor="let total of totalPageCount" [ngClass]="{active:pageno === total}" class="paginate_button">
+            <a role="button" (click)="changePage(total)">
+          {{ total }}
+      </a>
+        </li>
+
+
+        <li class="paginate_button next">
+            <a role="button" (click)="changePage(pageno+1)" *ngIf="this.totalPageCount.length>1 &&  pageno.toString()!= this.result.toFixed()">Next</a>
+        </li>
+    </ul>
+</div>

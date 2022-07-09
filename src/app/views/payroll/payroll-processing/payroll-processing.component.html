@@ -1,0 +1,231 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="Payroll Processing" [options]="false">
+
+
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="payrollProcessingForm">
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <select class="form-control validation_border" formControlName="companyId" (change)="selectcompany(payrollProcessingForm.value.companyId)" [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
+
+                                <option *ngFor="let sl of companyList" value="{{sl.gCompanyId}}">{{sl.name}}
+                                </option>
+                            </select>
+                            <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+                                <div *ngIf="f.companyId.errors.required">Company is required</div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Department </label>
+                            <select class="form-control" formControlName="departmentid">
+                                <option></option>
+                                <option *ngFor="let sl of deptList" value="{{sl.deptId}}">{{sl.name}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Sponsor Type </label>
+                            <select class="form-control" formControlName="sponsortypeid" (change)="selecteSponsorType(payrollProcessingForm.value.sponsortypeid)">
+                                <option></option>
+                                <option *ngFor="let sl of sponsorTypeList" value="{{sl.xvisasponsorId}}">
+                                    {{sl.companyName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom01">Employee </label>
+                            <ng-multiselect-dropdown [placeholder]="" [data]="empList" name="employeeName" formControlName="employeeId1" [(ngModel)]="selectedEmpList" [settings]="dropdownSettings" (onSelect)="onEmployeeSelect($event)" (onDeSelect)="onEmployeeDeSelect($event)" (onSelectAll)="onSelectAllEmployee($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Month </label>
+                            <select class="form-control validation_border" formControlName="monthId" (change)="getMonthById(payrollProcessingForm.value.monthId)" [ngClass]="{ 'is-invalid': submitted && f.monthId.errors }">
+                                <option></option>
+                                <option *ngFor="let sl of monthList" value="{{sl.monthId}}">{{sl.name}}
+                                </option>
+                            </select>
+
+                            <div *ngIf="submitted && f.monthId.errors" class="invalid-feedback">
+                                <div *ngIf="f.monthId.errors.required">Month is required</div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom02">From Date</label>
+                            <div class="input-group">
+
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="startDate1" [ngClass]="{ 'is-invalid': submitted && f.startDate1.errors }"
+                                    #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event)" (click)="dp1.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <div *ngIf="submitted && f.startDate1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.startDate1.errors.required">From Date is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom02">To Date</label>
+                            <div class="input-group">
+
+                                <input class="form-control validation_border" type="text" placeholder="Select a date" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="endDate1" #dp2="angular-mydatepicker" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.endDate1.errors }"
+                                    (ngModelChange)="changeEndDate($event)" (click)="dp2.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <div *ngIf="submitted && f.endDate1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.endDate1.errors.required">TO Date is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1 mb-3">
+                            <label for="validationCustom01">WPS </label>
+                            <select class="form-control validation_border" formControlName="wps1" [ngClass]="{ 'is-invalid': submitted && f.wps1.errors }">
+
+                                <option *ngFor="let sl of wpsList" value="{{sl.value}}">{{sl.name}}
+                                </option>
+                            </select>
+                            <div *ngIf="submitted && f.wps1.errors" class="invalid-feedback">
+                                <div *ngIf="f.wps1.errors.required">WPS is required</div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-1.5 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom01"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="isEosb1" id="customCheck1">
+                                <label class="custom-control-label" for="customCheck1">End of Service</label>
+                            </div>
+                        </div>
+                        <div class="col-md-1.5 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom02"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="forLeave1" id="customCheck2">
+                                <label class="custom-control-label" for="customCheck2">Settlement</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1 mb-3">
+                            <label for="validationCustom02"><br></label>
+                            <div class="input-group">
+
+                                <button type="button" (click)="payrollProcessing()" class="btn btn-success" [disabled]="this.btnLoader" ngbTooltip="btn-success" data-toggle="tooltip" data-placement="top" title="Filter">
+                                    <span *ngIf="this.btnLoader" class="spinner-border spinner-border-sm"
+                                        role="status"></span>
+                                    <span *ngIf="this.btnLoader" class="load-text"></span>
+                                    <span *ngIf="!this.btnLoader" class="btn-text">Process</span>
+                                </button>
+
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-md-1 mb-3">
+                            <label for="validationCustom02"><br></label>
+                            <div class="input-group">
+                                <button type="button" class="btn btn-info" ngbTooltip="btn-success" data-toggle="tooltip" data-placement="top" title="Filter" (click)="publishFun('P')">
+                                   Publish
+                                </button>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-1 mb-3">
+                            <label for="validationCustom02"><br></label>
+                            <div class="input-group">
+                                <button type="button" class="btn btn-warning" ngbTooltip="btn-success" data-toggle="tooltip" data-placement="top" title="Filter" (click)="publishFun('U')">
+                                   Unpublish
+                                </button>
+
+                            </div>
+                        </div> -->
+
+                        <!--  -->
+
+
+                        <!-- <div class="col-md-1 mb-1">
+                            <label for="validationCustom02"><br></label>
+                            <div class="input-group">
+
+                                <button _ngcontent-tsp-c114="" type="button" class="btn btn-icon btn-outline-primary ng-tns-c94-43">
+                                    <i _ngcontent-tsp-c114="" class="feather icon-thumbs-up"></i>
+                                </button>
+
+
+                            </div>
+                        </div> -->
+
+                        <!-- <div class="col-md-1 mb-1">
+                            <label for="validationCustom02"><br></label>
+                            <div class="input-group">
+
+                                <button _ngcontent-tsp-c114="" type="button" class="btn btn-icon btn-outline-secondary ng-tns-c94-43">
+                                    <i _ngcontent-tsp-c114="" class="feather icon-camera"></i>
+                                </button>
+
+                            </div>
+                        </div> -->
+
+
+
+                        <!--  -->
+
+
+                    </div>
+                </form>
+
+                <div *ngIf="detailsList?.length>0">
+                    <hr>
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Employee Code</th>
+                                    <th>Employee Name</th>
+                                    <th>Net Salary</th>
+                                    <th> WPS </th>
+                                    <th>Payslip View</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dl of detailsList">
+
+                                    <td>{{dl.empcode}}</td>
+                                    <td>{{dl.empname}}</td>
+                                    <td>{{dl.netSalary}}</td>
+                                    <td>{{dl.wps}}</td>
+                                    <td>
+                                        <button class="btn btn-outline-primary" type="button" [disabled]="submitted" (click)="paySlipView(dl,'PRINT')" data-toggle="tooltip" data-placement="top" title="Payslip View">
+                                            <i class="fa fa-print"></i>
+                                        </button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <!-- <button class="btn btn-outline-primary" type="button" [disabled]="submitted" (click)="paySlipView(dl,'VIEW')" data-toggle="tooltip" data-placement="top" title="Payslip View">
+                                            <i class="fa fa-eye"></i>
+                                        </button> -->
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </app-card>
+        </div>
+
+
+    </div>
+</div>

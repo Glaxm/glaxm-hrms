@@ -1,0 +1,262 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{userForm.value.userId ? 'Edit User':'Add User'}}" [options]="false">
+
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUser()" *ngIf="!isView">{{userForm.value.userId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ?
+              'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="userForm">
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <ng-multiselect-dropdown [placeholder]="" [data]="companyList" name="employeeName" formControlName="companyId" [(ngModel)]="selectedEmpList" [settings]="dropdownSettings" (onSelect)="onEmployeeSelect($event)" (onDeSelect)="onEmployeeDeSelect($event)"
+                                (onSelectAll)="onSelectAllEmployee($event)" [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+                                <div *ngIf="f.companyId.errors.required">Company is required</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">User Employee</label>
+                            <ng-multiselect-dropdown name="city" [placeholder]="'Select Employee'" [data]="employeeList" formControlName="employee" [(ngModel)]="selectedItemsemp" [settings]="dropdownSettingsemp" (onSelect)="onItemSelectemp($event)" [ngClass]="{ 'is-invalid': submitted && f.employee.errors }">
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="submitted && f.employee.errors" class="invalid-feedback">
+                                <div *ngIf="f.employee.errors.required">User Employee is required</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Username</label>
+                            <input type="text" formControlName="userName" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
+                            <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+                                <div *ngIf="f.userName.errors.required">Username is required</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Email</label>
+                            <input type="text" formControlName="email" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                <div *ngIf="f.email.errors.required">Email is required</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Department</label>
+                            <ng-multiselect-dropdown [placeholder]="" [data]="deptList" name="deptName" formControlName="dept" [(ngModel)]="selectedDeptList" [settings]="deptSettings" (onSelect)="onDeptSelect($event)" (onDeSelect)="onDeptDeSelect($event)" (onSelectAll)="onSelectAllDept($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Workflow</label>
+                            <ng-multiselect-dropdown [placeholder]="" [data]="workflowList" name="workflow" formControlName="workflow" [(ngModel)]="selectedworkflowList" [settings]="dropdownSettingsWorkflow" (onSelect)="onWorkflowSelect($event)" (onDeSelect)="onWorkflowDeSelect($event)"
+                                (onSelectAll)="onSelectAllWorkflow($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Employee</label>
+                            <ng-multiselect-dropdown [placeholder]="" [data]="departtWiseList" name="deptWiseEmpName" formControlName="deptWiseEmp1" [(ngModel)]="selectedDeptWiseList" [settings]="deptWiseSettings" (onSelect)="onDeptWiseSelect($event)" (onDeSelect)="onDeptWiseDeSelect($event)"
+                                (onSelectAll)="onSelectAllDeptWise($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control validation_border" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+              <option *ngFor="let sl of statusList" value="{{sl.valueCode}}">{{sl.valueName}}</option>
+
+            </select>
+                            <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                                <div *ngIf="f.status.errors.required">Status is required</div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Dasboard Settings</label>
+                            <ng-multiselect-dropdown [placeholder]="" [data]="dashSettingList" name="dashSetting" formControlName="dashSetting" [(ngModel)]="selectedDashSettingList" [settings]="dashboardSettings" (onSelect)="onDashSettingSelect($event)" (onDeSelect)="onDashSettingDeSelect($event)"
+                                (onSelectAll)="onSelectAllDashSetting($event)" [ngClass]="{ 'is-invalid': submitted && f.company.errors }">
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="submitted && f.dashSetting.errors" class="invalid-feedback">
+                                <div *ngIf="f.dashSetting.errors.required">Dasboard Settings is required</div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Description</label>
+                            <input type="text" formControlName="description" class="form-control">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </app-card>
+        </div>
+
+        <div *ngIf="!isUserRole && userForm.value.userId">
+            <app-card cardTitle="User Role Summary" [options]="false">
+
+
+                <!-- <div class="col-md-6 " style="position: absolute;left: 75%;top: 5%;">
+               <button type="button" class="btn btn-primary btn-sm" (click)="addUserRole();isUserRole=true" *ngIf="!isView">Add</button>&nbsp;&nbsp;
+               <button type="button" class="btn btn-primary btn-sm" (click)="editUserRole();isUserRole=true" *ngIf="!isView">Edit</button>&nbsp;&nbsp;
+               <button type="button" class="btn btn-primary btn-sm" (click)="editUserRole();isUserRole=true">View</button>&nbsp;&nbsp;
+               <button type="button" class="btn btn-primary btn-sm" (click)="deleteUserRole()" *ngIf="!isView">Delete</button>
+           </div> -->
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+
+                        <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="addUserRole();isUserRole=true" *ngIf="!isView" data-toggle="tooltip" data-placement="top" title="Add">
+              <i class="fa fa-plus"></i>
+            </button>&nbsp;&nbsp;
+                        <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="editUserRole();isUserRole=true" *ngIf="!isView" data-toggle="tooltip" data-placement="top" title="Edit">
+              <i class="fas fa-pencil-alt"></i>
+            </button>&nbsp;&nbsp;
+                        <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="editUserRole();isUserRole=true" data-toggle="tooltip" data-placement="top" title="View">
+              <i class="fa fa-eye"></i>
+            </button>&nbsp;&nbsp;
+                        <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="deleteUserRole()" *ngIf="!isView" data-toggle="tooltip" data-placement="top" title="Delete">
+              <i class="fa fa-trash"></i>
+            </button>&nbsp;&nbsp;
+                        <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="enableFilter = !enableFilter;" [ngClass]="{'filterClass': enableFilter}" data-toggle="tooltip" data-placement="top" title="Filter">
+              <i class="fa fa-filter"></i>
+            </button>
+                    </div>
+                </nav>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Role</th>
+                                <!-- <th>Start Date</th>
+                                <th>End Date</th> -->
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let rm of userRoleList">
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(rm)">
+                                    </div>
+                                </td>
+                                <td>{{rm.roleName}}</td>
+                                <!-- <td>{{rm.startDate | date: 'dd-MM-yyyy'}}</td>
+                                <td>{{rm.endDate | date: 'dd-MM-yyyy'}}</td> -->
+                                <td>{{rm.status}}</td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </app-card>
+        </div>
+        <div *ngIf="isUserRole">
+            <app-card cardTitle="Add User Role" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="saveUserRole()" *ngIf="!isView">{{userRoleForm.value.userRoleId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="isUserRole=false">{{isView ?
+              'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="userRoleForm">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Role</label>
+                            <select class="form-control" formControlName="roleId">
+                <option *ngFor="let ml of roleList" value="{{ml.roleId}}">{{ml.roleName}}</option>
+              </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control" formControlName="status">
+                <option *ngFor="let sl of statusList" value="{{sl.valueCode}}">{{sl.valueName}}</option>
+
+              </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Start Date</label>
+                            <div class="input-group">
+
+                                <input class="form-control" placeholder="Select a date" angular-mydatepicker name="startDate11" [options]="myDatePickerOptions" type="text" formControlName="startDate11" #dp3="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate1($event)"
+                                    (click)="dp3.toggleCalendar()" />
+                             
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">End Date</label>
+                            <div class="input-group">
+
+                                <input class="form-control" placeholder="Select a date" angular-mydatepicker name="endDate11" [options]="myDatePickerOptions" type="text" formControlName="endDate11" #dp4="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate1($event)"
+                                    (click)="dp4.toggleCalendar()" />
+                           
+                            </div>
+                        </div>
+
+                    </div> -->
+
+                    <!--         
+           <hr>
+           <div class="text-center">
+             <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="saveUserRole()" *ngIf="!isView">{{userRoleForm.value.userRoleId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+             <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="isUserRole=false">{{isView ? 'Back':'Cancel'}}</button>
+           </div>
+  -->
+                </form>
+
+            </app-card>
+        </div>
+
+
+    </div>
+</div>

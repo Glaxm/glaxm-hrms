@@ -1,0 +1,107 @@
+<div class="row">
+
+    <div class="col-sm-12">
+
+
+
+
+        <form action="javascript:" class="needs-validation" novalidate [formGroup]="benefitsForm">
+
+            <app-card cardTitle="Annual Leave" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" *ngIf="isview=='N'" (click)="addUpdateBenifitsData()">{{benefitsId ? 'Update':'Save'}}</button> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                        <!-- <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="showNextStep($event)" data-toggle="tooltip" data-placement="top" title="Next">
+                            <i class="fa fa-arrow-right"></i>
+                          </button> -->
+
+                    </div>
+                </nav>
+                <div class="form-row">
+
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Employee</label>
+                        <input type="text" formControlName="value" disabled class="form-control">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Annual Leave Entitlement Type</label>
+                        <select class="form-control" formControlName="xEmpleaveId">
+          <option *ngFor="let dl of aleaveentitelmenttypeList" value="{{dl.value}}">{{dl.name}}
+          </option>
+      </select>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Annual Leave Entitlement Days</label>
+                        <select class="form-control" formControlName="lentldays">
+      <option *ngFor="let dl of aleaveentitelmentdaysList" value="{{dl.value}}">{{dl.name}}
+      </option>
+  </select>
+                    </div>
+
+                </div>
+
+            </app-card>
+
+        </form>
+
+
+        <!-- ////////////////////////////////////////////////////////// -->
+        <!-- </app-card> -->
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+
+        <!--  -->
+
+
+        <!--  -->
+        <app-card cardTitle="Leave Balance Summary - {{displayName}}" [options]="false">
+
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Leave Item</th>
+                            <th>Leave alloted</th>
+                            <th>Leave Taken</th>
+                            <th>Leave Balance</th>
+                            <th>Last Settlement Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dl of leaveballist">
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(dl)">
+                                </div>
+                            </td>
+                            <td>{{dl.leaveitemName}}</td>
+                            <td>{{dl.allocleaves}}</td>
+                            <td>{{dl.takenleaves}}</td>
+                            <td>{{dl.balanceleaves}}</td>
+                            <td>{{dl.lastticketsettledupto}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </app-card>
+    </div>
+
+
+</div>

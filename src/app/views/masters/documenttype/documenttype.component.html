@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="Document Type Summary" [options]="false">
+
+            <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                <ul _ngcontent-epm-c40="" class="nav">
+                </ul>
+                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="add()" data-toggle="tooltip" data-placement="top" *ngIf="flags.createFlag=='Y'" title="Add">
+                <i class="fa fa-plus"></i>
+                </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="edit()" data-toggle="tooltip" data-placement="top" *ngIf="flags.editFlag=='Y'" title="Edit">
+               <i class="fas fa-pencil-alt"></i>
+               </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="view()" data-toggle="tooltip" data-placement="top" *ngIf="flags.readFlag=='Y'" title="View">
+              <i class="fa fa-eye"></i>
+              </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="delete()" data-toggle="tooltip" data-placement="top" *ngIf="flags.deleteFlag=='Y'" title="Delete">
+             <i class="fa fa-trash"></i>
+             </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="enableFilter = !enableFilter;" [ngClass]="{'filterClass': enableFilter}" data-toggle="tooltip" data-placement="top" title="Filter">
+                <i class="fa fa-filter"></i>
+                </button>&nbsp;
+                    <div class="btn-group" role="group" ngbDropdown *ngIf="(flags.importFlag=='Y' && flags.exportFlag=='Y') || (flags.importFlag=='Y' && flags.exportFlag=='N') || (flags.importFlag=='N' && flags.exportFlag=='Y')">
+                        <button type="button" class="btn btn-primary" ngbDropdownToggle>
+                      More
+                    </button>
+                        <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu style="right: 0;
+                    left: auto;">
+
+                            <a class="dropdown-item" href="javascript:" (click)="exporttoexcel()" *ngIf="flags.exportFlag=='Y'">Export Data</a>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </nav>
+
+
+
+
+
+            <div class="table-responsive tableFixHead">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Document Type </th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dl of documenttypeList">
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(dl)">
+                                </div>
+                            </td>
+                            <td>{{dl.docName}}</td>
+                            <td>{{dl.description}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </app-card>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<!-- <div class="col-sm-12">
+    <div id="tree"></div>
+</div> -->
+
+<!-- ===================== -->
+
+
+<div class="row">
+
+    <div class="col-sm-12">
+        <div *ngIf="companyList" id="styleSelector" [class]="isshow ? 'menu-styler ng-star-inserted open' : 'menu-styler ng-star-inserted'">
+            <div class="style-toggler">
+                <a href="javascript:" (click)="hideShowFun()"></a>
+            </div>
+            <div class="style-block">
+                <h5 class="mb-2">Company</h5>
+                <hr class="my-0">
+                <div class="m-style-scroller">
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <select class="form-control" [(ngModel)]="defaultCompany" (change)="getCompanyDetails(defaultCompany)">
+                                     <option *ngFor="let dl of companyList" value="{{dl.companyId}}">{{dl.companyName}}</option>
+                                </select>
+
+                        </div>
+
+                        <!-- <div class="col-md-6 mb-3"> -->
+                        <div class="form-group text-left mt-2">
+                            <label for="validationCustom01">.</label>
+                            <div class="checkbox checkbox-primary d-inline">
+                                <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" [(ngModel)]="isDefCompany" (click)="setDefaultCompany()">
+                                <label for="checkbox-fill-a1" class="cr"> Set as default company</label>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="col-sm-12">
+        <div id="tree"></div>
+    </div>
+
+
+</div>

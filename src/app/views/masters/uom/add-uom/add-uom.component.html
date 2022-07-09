@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col-sm-12">
+      <div>
+        <app-card cardTitle="{{uomForm.value.xunitmeasureId ? 'Edit Unit of Measure':'Add Unit of Measure'}}" [options]="false">
+          <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+            <ul _ngcontent-epm-c40="" class="nav">
+            </ul>
+            <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+              <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateUom()"
+                *ngIf="!isView">{{uomForm.value.xunitmeasureId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+              <button type="button" class="btn btn-danger" ngbTooltip="btn-danger"
+                (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+            </div>
+          </nav>
+  
+          <form action="javascript:" class="needs-validation" novalidate [formGroup]="uomForm">
+            <div class="form-row">
+  
+              <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Holding</label>
+                <select class="form-control validation_border" disabled formControlName="gHoldingId"
+                  (change)="selectHolding(uomForm.value.gHoldingId)"
+                  [ngClass]="{ 'is-invalid': submitted && f.gHoldingId.errors }">
+                  <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+                </select>
+                <div *ngIf="submitted && f.gHoldingId.errors" class="invalid-feedback">
+                  <div *ngIf="f.gHoldingId.errors.required">Holding is required</div>
+                </div>
+              </div>
+  
+              <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Company</label>
+                <select class="form-control validation_border" formControlName="gCompanyId"
+                  [ngClass]="{ 'is-invalid': submitted && f.gCompanyId.errors }">
+                  <option *ngFor="let cl of companyList" value="{{cl.gCompanyId}}">{{cl.name}}</option>
+                </select>
+                <div *ngIf="submitted && f.gCompanyId.errors" class="invalid-feedback">
+                  <div *ngIf="f.gCompanyId.errors.required">Company is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+  
+              <div class="col-md-6 mb-3">
+                <label for="validationCustom01">UOM Name </label>
+                <input type="text" formControlName="uomName" class="form-control validation_border"
+                  [ngClass]="{ 'is-invalid': submitted && f.uomName.errors }">
+                <div *ngIf="submitted && f.uomName.errors" class="invalid-feedback">
+                  <div *ngIf="f.uomName.errors.required">Unit of Measure is required</div>
+                </div>
+              </div>
+  
+              <!-- <div class="col-md-6 mb-3">
+                <label for="validationCustom02">UOM Symbol</label>
+                <input type="text" formControlName="uomSymbol" class="form-control validation_border"
+                  [ngClass]="{ 'is-invalid': submitted && f.uomSymbol.errors }">
+                <div *ngIf="submitted && f.uomSymbol.errors" class="invalid-feedback">
+                  <div *ngIf="f.uomSymbol.errors.required">Unit of Measure Symbol is required</div>
+                </div>
+              </div> -->
+
+              <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Code</label>
+                <input type="text" formControlName="code" class="form-control">
+            </div>
+  
+  
+            </div>
+            <div class="form-row">
+           
+              <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Description</label>
+                <input type="text" formControlName="description" class="form-control "
+                  [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+                <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                  <div *ngIf="f.description.errors.required">Description is required</div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Status</label>
+                <select class="form-control validation_border" formControlName="status"
+                  [ngClass]="{ 'is-invalid': submitted && f.isActive.errors }">
+                  <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                </select>
+                <div *ngIf="submitted && f.isActive.errors" class="invalid-feedback">
+                  <div *ngIf="f.isActive.errors.required">Statusis required</div>
+                </div>
+              </div>
+             
+            </div>
+        
+          </form>
+        </app-card>
+      </div>
+    </div>
+  </div>

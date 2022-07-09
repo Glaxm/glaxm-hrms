@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{currencyForm.value.currencyId ? 'Edit Currency':'Add Currency'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateCurrency()" *ngIf="!isView">{{currencyForm.value.currencyId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="currencyForm">
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" disabled formControlName="holdingId" (change)="selectHolding(currencyForm.value.holdingId)" [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }">
+                <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+              </select>
+                            <div *ngIf="submitted && f.holdingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.holdingId.errors.required">Holding is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <!-- <select class="form-control validation_border" formControlName="companyId"
+                [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
+                <option *ngFor="let cl of companyList" value="{{cl.gCompanyId}}">{{cl.name}}</option>
+              </select>
+              <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+                <div *ngIf="f.companyId.errors.required">Company is required</div>
+              </div> -->
+                            <ng-multiselect-dropdown [placeholder]="" [data]="companyList" name="company" formControlName="company" [(ngModel)]="selectedCompanyList" [settings]="dropdownSettings" (onSelect)="onCompnaySelect($event)" (onDeSelect)="onCompanyDeSelect($event)" (onSelectAll)="onSelectAllCompnay($event)"
+                                [ngClass]="{ 'is-invalid': submitted && f.company.errors }">
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="submitted && f.company.errors" class="invalid-feedback">
+                                <div *ngIf="f.company.errors.required">Company is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Currency Code</label>
+                            <input type="text" formControlName="isoCode" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.isoCode.errors }">
+                            <div *ngIf="submitted && f.isoCode.errors" class="invalid-feedback">
+                                <div *ngIf="f.isoCode.errors.required">Currency Code is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Currency Symbol</label>
+                            <input type="text" formControlName="curSymbol" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.curSymbol.errors }">
+                            <div *ngIf="submitted && f.curSymbol.errors" class="invalid-feedback">
+                                <div *ngIf="f.curSymbol.errors.required">Currency Symbol is required</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Code</label>
+                            <input type="text" formControlName="code" class="form-control" disabled>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Description</label>
+                            <input type="text" formControlName="desc" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.desc.errors }">
+                            <div *ngIf="submitted && f.desc.errors" class="invalid-feedback">
+                                <div *ngIf="f.desc.errors.required">Description is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control validation_border" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.isActive.errors }">
+                <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+              </select>
+                            <div *ngIf="submitted && f.isActive.errors" class="invalid-feedback">
+                                <div *ngIf="f.isActive.errors.required">Statusis required</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </form>
+            </app-card>
+        </div>
+    </div>
+</div>

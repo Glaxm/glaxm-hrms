@@ -1,0 +1,199 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="Loan/Advance History Report" [options]="false">
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="loanhistoryform">
+                    <div class="form-row">
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <ng-multiselect-dropdown [placeholder]="" formControlName="company" [data]="companyList" name="companyName" [(ngModel)]="selectecdCompanyList" [settings]="dropdownSettingscompany" (onSelect)="onCompanySelect($event)" (onDeSelect)="onCompanyDeSelect($event)"
+                                (onDeSelectAll)="onDeSelectAllCompany($event)" (onSelectAll)="onSelectAllCompany($event)">
+                            </ng-multiselect-dropdown>
+
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Employee </label>
+                            <ng-multiselect-dropdown [placeholder]="" formControlName="employee" [data]="empList" name="employeeName" [(ngModel)]="selectedEmpList" [settings]="dropdownSettings" (onSelect)="onEmployeeSelect($event)" (onDeSelect)="onEmployeeDeSelect($event)" (onSelectAll)="onSelectAllEmployee($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Pay Items</label>
+                            <select class="form-control" formControlName="payitem">
+                                <option *ngFor="let dl of payitemList" value="{{dl.payItemId}}">{{dl.name}}
+                                </option>
+                            </select>
+                        </div>
+
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom02">Loan Date From </label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsstartDate" [options]="myDatePickerOptions" formControlName="startDate1" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event)"
+                                    (click)="dp1.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom02">Loan Date To </label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Select a date" angular-mydatepicker name="reactiveFormsendDate" [options]="myDatePickerOptions" formControlName="endDate1" #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)"
+                                    (click)="dp2.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-1 mb-3">
+
+                            <label for="validationCustom02"><br></label>
+                            <div class="input-group">
+
+                                <button type="button" (click)="filterTable()" class="btn btn-success" [disabled]="this.btnLoader" ngbTooltip="btn-success" data-toggle="tooltip" data-placement="top" title="Go">
+                                    <span *ngIf="this.btnLoader" class="spinner-border spinner-border-sm"
+                                        role="status"></span>
+                                    <span *ngIf="this.btnLoader" class="load-text">Go</span>
+                                    <span *ngIf="!this.btnLoader" class="btn-text">Go</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1 mb-3">
+                            <label for="validationCustom01"><br> </label>
+                            <div class="input-group" role="group" ngbDropdown>
+                                <button type="button" class="btn btn-primary" ngbDropdownToggle>
+                                    More
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu style="right: 0;
+                          left: auto;">
+                                    <a class="dropdown-item" href="javascript:" (click)="exportReport()">Export Data
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <br>
+
+                <hr>
+                <app-card>
+                    <div [ngClass]="(filtered?.length>10)?'table-responsive tableFixHead':'table-responsive'">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Company</th>
+                                    <th>Emp ID</th>
+                                    <th>Emp Code</th>
+                                    <th>Employee</th>
+                                    <th>Document No.</th>
+                                    <th>Loan Date</th>
+                                    <th>Loan Amount</th>
+                                    <th>Total Amount Repaid</th>
+                                    <th>Remaining Amount</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dl of filtered" [style.color]="dl.rowColor">
+
+                                    <td>{{dl.companyName}}</td>
+                                    <td>{{dl.oldEmpId}}</td>
+                                    <td>{{dl.empcode}}</td>
+                                    <td>{{dl.empname}}</td>
+                                    <td>{{dl.documentno}}</td>
+                                    <td>{{dl.loandate}}</td>
+                                    <td>{{dl.loanamount}}</td>
+                                    <td>{{dl.repaidamount}}</td>
+                                    <td>{{dl.balance}}</td>
+
+                                    <td>
+                                        <button class="btn btn-outline-primary" type="button" (click)="detailsPopup.show();getSummaryDetails(dl)" data-toggle="tooltip" data-placement="top" title="Details">
+                                              Details
+                                            </button>
+                                    </td>
+
+                                </tr>
+                                <tr *ngIf="loanReportSummaryList?.length==0">
+                                    <td colspan="12" style="text-align:center;">No records</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </app-card>
+
+            </app-card>
+        </div>
+
+    </div>
+</div>
+
+<!-- ========================== -->
+
+<div class="col-xl-8 col-md-6">
+    <app-ui-modal #detailsPopup dialogClass="modal-dialog-centered">
+        <div class="app-modal-header">
+            <h5 class="modal-title text-center">Loan Installments Details</h5>
+        </div>
+        <div class="app-modal-body">
+            <!-- <app-card cardTitle="Loan Installments Summary" [options]="false"> -->
+
+
+
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Payment Date</th>
+                            <th>Installment Paid Date</th>
+                            <th>Monthly Installment Amount</th>
+                            <th>Monthly Installment Amount Paid</th>
+                            <th>Remaining Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dl of loanLineList" [style.background-color]="dl.isActive=='N' ? '#FF8A8A' : null">
+                            <td>{{dl.loandate}}</td>
+                            <td>{{dl.ipaidDate}}</td>
+                            <td>{{dl.installmentamount}}</td>
+                            <td>{{dl.paidinstallmentamt}}</td>
+                            <td>{{dl.balance}}</td>
+                        </tr>
+
+                        <tr *ngIf="loanLineList?.length===0">
+                            <td colspan="8" style="text-align:center;">No records</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- </app-card> -->
+        </div>
+
+        <div class="app-modal-footer">
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" data-dismiss="modal" (click)="detailsPopup.hide()">Close</button>
+        </div>
+    </app-ui-modal>
+</div>
+
+<!-- =========================== -->

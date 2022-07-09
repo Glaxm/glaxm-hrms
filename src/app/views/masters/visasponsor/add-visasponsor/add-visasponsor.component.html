@@ -1,0 +1,108 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{visasponsorForm.value.xvisasponsorId ? 'Edit Visa Sponsor':'Add Visa Sponsor'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success"
+                            (click)="addUpdateVisasponsor()"
+                            *ngIf="!isView">{{visasponsorForm.value.xvisasponsorId ? 'Update':'Add'}}</button>
+                        &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger"
+                            (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="visasponsorForm">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" disabled formControlName="holdingId"
+                               
+                               >
+                                <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.holdingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.holdingId.errors.required">Holding is required</div>
+                            </div>
+
+                        </div>
+
+ 
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <!-- <select class="form-control validation_border" formControlName="companyId"
+                              >
+                                <option></option>
+                                <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
+                            </select> -->
+                            <ng-multiselect-dropdown 
+                            [placeholder]="" [data]="companyList" 
+                            name="company"
+                            formControlName="company" 
+                            [(ngModel)]="selectedCompanyList" 
+                            [settings]="dropdownSettings"
+                             (onSelect)="onCompnaySelect($event)" 
+                             (onDeSelect)="onCompanyDeSelect($event)"
+                              (onSelectAll)="onSelectAllCompnay($event)"
+                              [ngClass]="{ 'is-invalid': submitted && f.company.errors }">
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="submitted && f.company.errors" class="invalid-feedback">
+                                <div *ngIf="f.company.errors.required">Company is required</div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Visa Sponsor</label>
+                            <input type="text" formControlName="companyName" 
+                            class="form-control validation_border"
+                            [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }">
+                            <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
+                                <div *ngIf="f.companyName.errors.required">Visa Sponsor is required</div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Description</label>
+                            <input type="text" formControlName="companyDisc" class="form-control">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="form-row" *ngIf="">
+                        <!-- <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Level No.</label>
+                            <input type="text" formControlName="levelNo" class="form-control">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div> -->
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control" formControlName="status">
+                                <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Code</label>
+                            <input type="text" formControlName="CODE" class="form-control">
+                        </div>
+                    </div>
+
+      
+                </form>
+
+            </app-card>
+        </div>
+    </div>
+</div>

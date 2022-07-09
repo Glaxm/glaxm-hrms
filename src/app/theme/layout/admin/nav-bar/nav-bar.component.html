@@ -1,0 +1,37 @@
+<div class="container" *ngIf="this.nextConfig.layout === 'horizontal' && this.nextConfig.subLayout === 'horizontal-2'; else mainHeader">
+    <ng-container *ngTemplateOutlet="mainHeader"></ng-container>
+</div>
+<ng-template #mainHeader>
+    <div class="m-header">
+        <a href="javascript:" class="mobile-menu" id="mobile-collapse" (click)="navCollapse()"><span></span></a>
+        <!-- <div class="input-group">
+          <input type="text" id="m-search" class="form-control" placeholder="Search . . ." [style.width]="'130px'">
+          <span class="input-group-append search-btn btn btn-primary">
+        <i class="feather icon-search input-group-text"></i>
+      </span>
+      </div> -->
+        <a [routerLink]="" class="b-brand">
+            <!-- <img id="main-logo" src="assets/images/logo.png" alt="" class="logo" *ngIf="this.nextConfig.navBrandColor !== 'brand-default' || this.nextConfig.headerBackColor !== 'header-default'">
+      <img src="assets/images/logo-dark.png" alt="" class="logo" *ngIf="this.nextConfig.navBrandColor === 'brand-default' && this.nextConfig.headerBackColor === 'header-default'">
+      <img src="assets/images/logo-icon.png" alt="" class="logo-thumb"> -->
+            <!-- <div class="input-group"> -->
+            <!-- <ng-select [options]="menubarList" [style.width]="'200px'" [(ngModel)]="inputText" (selected)="onSelected($event)" placeholder="Search . . .">
+            </ng-select>  -->
+
+            <!-- <select class="form-control" [(ngModel)]="inputText" (change)="searchText(inputText)" [style.width]="'200px'">
+            <option *ngFor="let dl of companyList" value="{{dl.value}}">{{dl.label}}</option>
+        </select> -->
+
+            <!-- <input type="text" id="m-search" class="form-control" placeholder="Search . . ." [style.width]="'200px'" [(ngModel)]="inputText" (keyup)="searchText(inputText)"> -->
+            <!-- <span class="input-group-append search-btn btn btn-primary">
+      <i class="feather icon-search input-group-text"></i>
+    </span> -->
+            <!-- </div> -->
+        </a>
+        <a class="mob-toggler" [ngClass]="{'on' : this.menuClass}" href="javascript:" (click)="toggleMobOption()"><i class="feather icon-more-vertical"></i></a>
+    </div>
+    <div class="collapse navbar-collapse" [style.display]="this.collapseStyle">
+        <app-nav-left class="mr-auto"></app-nav-left>
+        <app-nav-right class="ml-auto"></app-nav-right>
+    </div>
+</ng-template>

@@ -1,0 +1,216 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{generallistForm.value.lListcodeId  ? 'Edit General List':'Add General List'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" [disabled]="submitted" (click)="addUpdateGenerallist()" *ngIf="!isView">{{generallistForm.value.lListcodeId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{generallistForm.value.lListcodeId ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="generallistForm">
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" disabled formControlName="gHoldingId" [ngClass]="{ 'is-invalid': submitted && f.gHoldingId.errors }">
+                  <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+              </select>
+                            <div *ngIf="submitted && f.gHoldingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.gHoldingId.errors.required">Holding is required</div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-md-6 mb-3">
+            <label for="validationCustom01">Company</label>
+            <select class="form-control validation_border" formControlName="gCompanyId" 
+            [ngClass]="{ 'is-invalid': submitted && f.gCompanyId.errors }">
+                <option *ngFor="let cl of companyList" value="{{cl.gCompanyId}}">{{cl.name}}</option>
+            </select>
+            <div *ngIf="submitted && f.gCompanyId.errors" class="invalid-feedback">
+              <div *ngIf="f.gCompanyId.errors.required">Company is required</div>
+            </div>
+        </div> -->
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Code</label>
+                            <input type="text" formControlName="value" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.value.errors }">
+                            <div *ngIf="submitted && f.value.errors" class="invalid-feedback">
+                                <div *ngIf="f.value.errors.required">Value is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">List Name</label>
+                            <input type="text" formControlName="name" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required">List Name is required</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control validation_border" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                  <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+              </select>
+                            <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                                <div *ngIf="f.status.errors.required">Status is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </app-card>
+        </div>
+
+        <!-- -------------------------------- -->
+
+        <div *ngIf="!isGeneralListValue && generallistForm.value.lListcodeId">
+            <app-card cardTitle="General List Value Summary" [options]="false">
+
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+
+                        <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="addGeneralListValue();isGeneralListValue=true" *ngIf="!isView" data-toggle="tooltip" data-placement="top" title="Add">
+            <i class="fa fa-plus"></i>
+            </button>&nbsp;&nbsp;
+                        <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="editGeneralListValue();isGeneralListValue=true" *ngIf="!isView" data-toggle="tooltip" data-placement="top" title="Edit">
+           <i class="fas fa-pencil-alt"></i>
+           </button>&nbsp;&nbsp;
+                        <!-- <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+           type="button" (click)="editGeneralListValue();isGeneralListValue=true" data-toggle="tooltip" data-placement="top"
+           title="View">
+          <i class="fa fa-eye"></i>
+          </button>&nbsp;&nbsp;
+          <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+          type="button" (click)="deleteGeneralListValue()" *ngIf="!isView" data-toggle="tooltip" data-placement="top"
+          title="Delete">
+         <i class="fa fa-trash"></i>
+         </button>&nbsp;&nbsp;
+            <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button"
+            (click)="enableFilter = !enableFilter;"
+            [ngClass]="{'filterClass': enableFilter}" data-toggle="tooltip" data-placement="top"
+            title="Filter">
+            <i class="fa fa-filter"></i>
+            </button> -->
+                    </div>
+                </nav>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Group Code</th>
+
+                                <th>Name</th>
+
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let l of generalListValueList">
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(l)">
+                                    </div>
+                                </td>
+                                <td>{{l.groupcode}}</td>
+
+                                <td>{{l.name}}</td>
+                                <td>{{l.isActive=='Y' ? 'Active' : 'Inactive' }}</td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </app-card>
+        </div>
+        <div *ngIf="isGeneralListValue">
+            <app-card cardTitle="Add General List Value" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="saveGeneralListValue()" *ngIf="!isView">{{generalListValueForm.value.lListitemId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="isGeneralListValue=false">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="generalListValueForm">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Group Code</label>
+                            <input type="text" formControlName="groupcode" class="form-control validation_border" [ngClass]="{ 'is-invalid': submittedValue && f1.groupcode.errors }" disabled>
+                            <div *ngIf="submittedValue && f1.groupcode.errors" class="invalid-feedback">
+                                <div *ngIf="f1.groupcode.errors.required">Group Code is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control validation_border" formControlName="valuestatus" [ngClass]="{ 'is-invalid': submittedValue && f1.valuestatus.errors }">
+                  <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+              </select>
+                            <div *ngIf="submittedValue && f1.valuestatus.errors" class="invalid-feedback">
+                                <div *ngIf="f1.valuestatus.errors.required">Status is required</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3" hidden>
+                            <label for="validationCustom01">Code</label>
+                            <input type="text" formControlName="listvalue" class="form-control validation_border" [ngClass]="{ 'is-invalid': submittedValue && f1.listvalue.errors }">
+                            <div *ngIf="submittedValue && f1.listvalue.errors" class="invalid-feedback">
+                                <div *ngIf="f1.listvalue.errors.required">Value is required</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Name</label>
+                            <input type="text" formControlName="listValueName" class="form-control validation_border" [ngClass]="{ 'is-invalid': submittedValue && f1.listValueName.errors }">
+                            <div *ngIf="submittedValue && f1.listValueName.errors" class="invalid-feedback">
+                                <div *ngIf="f1.listValueName.errors.required">Name is required</div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Code</label>
+              <input type="text" formControlName="code" class="form-control">
+          </div> -->
+
+                    </div>
+
+                    <!-- <div class="form-row"> 
+
+           
+                <div class="col-md-6 mb-3">
+                  <label for="validationCustom01">Status</label>
+                  <select class="form-control validation_border" formControlName="valuestatus" 
+                   [ngClass]="{ 'is-invalid': submittedValue && f1.valuestatus.errors }">
+                      <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                  </select>
+                  <div *ngIf="submittedValue && f1.valuestatus.errors" class="invalid-feedback">
+                      <div *ngIf="f1.valuestatus.errors.required">Status is required</div>
+                    </div>
+              </div>
+          </div> -->
+
+                </form>
+
+            </app-card>
+        </div>
+
+
+        <!-- --------------------------------- -->
+    </div>
+</div>

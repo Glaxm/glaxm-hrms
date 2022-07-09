@@ -1,0 +1,169 @@
+<div>
+    <app-card cardTitle="Employee Profile Update" [options]="false">
+        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+            <ul _ngcontent-epm-c40="" class="nav">
+            </ul>
+            <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                <button type="button" class="btn btn-success" ngbTooltip="btn-success">Update</button> &nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="cancel()">Cancel</button>
+            </div>
+        </nav>
+        <form action="javascript:" class="needs-validation" novalidate [formGroup]="employeeupdateForm">
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <app-card cardTitle="Old Data" [options]="false">
+
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Company</label>
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <select class="form-control" formControlName="companyId" disabled>
+                                    <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
+                                  </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Emp ID</label>
+                            </div>
+
+                            <div class="col-md-8 mb-3">
+                                <input class="form-control " type="text" name="empId" formControlName="employeeId" disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Bio ID</label>
+                            </div>
+
+                            <div class="col-md-8 mb-3">
+                                <input class="form-control " type="text" name="maxleave" disabled formControlName="bioId">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Old Emp ID</label>
+                            </div>
+
+                            <div class="col-md-8 mb-3">
+                                <input class="form-control " type="text" name="maxleave" disabled formControlName="oldEmpId">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Name</label>
+                            </div>
+
+                            <div class="col-md-8 mb-3">
+                                <input class="form-control " type="text" name="maxleave" disabled formControlName="firstName">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Date of Joining</label>
+                            </div>
+
+                            <div class="col-md-8 mb-3">
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="Select a date" type="text" disabled angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="dateOfJoin1" #dp3="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeDateOfJoin($event)"
+                                        (click)="dp3.toggleCalendar()" />
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-secondary" disabled (click)="dp3.toggleCalendar()">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </app-card>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <app-card cardTitle="New Data" [options]="false">
+
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Company</label>
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <select class="form-control" formControlName="companyId">
+                                    <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
+                                  </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Emp ID</label>
+                            </div>
+
+                            <div class="col-md-8 mb-3">
+                                <input class="form-control " type="number" name="maxleave">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Bio ID</label>
+                            </div>
+
+                            <div class="col-md-8 mb-3">
+                                <input class="form-control " type="number" name="maxleave">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Old Emp ID</label>
+                            </div>
+
+                            <div class="col-md-8 mb-3">
+                                <input class="form-control " type="number" name="maxleave">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Name</label>
+                            </div>
+
+                            <div class="col-md-8 mb-3">
+                                <input class="form-control " type="number" name="maxleave">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Date of Joining</label>
+                            </div>
+
+                            <div class="col-md-8 mb-3">
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="dateOfJoin1" #dp3="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeDateOfJoin($event)"
+                                        (click)="dp3.toggleCalendar()" />
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-secondary" (click)="dp3.toggleCalendar()">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    </app-card>
+                </div>
+            </div>
+
+        </form>
+
+
+    </app-card>
+</div>

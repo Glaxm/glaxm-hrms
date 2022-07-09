@@ -1,0 +1,138 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{approvestatusForm.value.empapprovestatusId ? 'Edit Approval Action':'Add Approval Action'}}"
+                [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success"
+                            (click)="addUpdateAirSector()"
+                            *ngIf="!isView">{{approvestatusForm.value.empapprovestatusId ? 'Update':'Add'}}</button>
+                        &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger"
+                            (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="approvestatusForm">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" disabled formControlName="holdingId">
+                                <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+                            </select>
+                            <!-- <div *ngIf="submitted && f.holdingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.holdingId.errors.required">Holding is required</div>
+                            </div> -->
+
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <select class="form-control validation_border" formControlName="companyId">
+                                <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
+                            </select>
+                            <!-- <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+                                <div *ngIf="f.companyId.errors.required">Company is required</div>
+                            </div> -->
+
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Approval Action ID</label>
+                            <input type="text" formControlName=" G_APPROVALSTATUS_ID" class="form-control">
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Request id</label>
+                            <input type="text" formControlName="G_APPROVALREQ_ID" class="form-control"
+                                >
+                        
+                        </div>
+
+
+                     
+
+                      
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Workflow</label>
+                            <input type="text" formControlName="workflow" class="form-control">
+
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Remark</label>
+                            <input type="text" formControlName="name" class="form-control">
+                        </div>
+
+                      
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            
+                            <label for="validationCustom01">Description</label>
+                            <input type="text" formControlName="description" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02"> Date</label>
+                           <div class="input-group">
+                             <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker 
+                             name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="DATEREQUEST"
+                             [ngClass]="{ 'is-invalid': submitted && pi.DATEREQUEST.errors }"
+                              #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEffectiveDate($event)" (click)="dp1.toggleCalendar()"/>
+                             <div class="input-group-append">
+                               <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                                 <i class="fa fa-search" aria-hidden="true"></i>
+                               </button>
+                             </div>
+                           
+                           </div>
+                         </div>
+
+                    </div>
+
+                   <div class="form-row">
+
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Approval Status</label>
+                        <select class="form-control validation_border" formControlName="APPROVALSTATUS">
+                            <option *ngFor="let dl of approvalList" value="{{dl.valueCode}}">{{dl.valueName}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Status</label>
+                        <select class="form-control validation_border" formControlName="status">
+                            <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                        </select>
+                    </div>
+
+                   </div>
+
+
+                </form>
+
+            </app-card>
+        </div>
+    </div>
+</div>

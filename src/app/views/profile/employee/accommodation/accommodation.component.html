@@ -1,0 +1,188 @@
+
+<div class="row">
+    <div class="col-sm-12" *ngIf="!isOpenAccomod">
+        <app-card cardTitle="Accommodation Summary" [options]="false">
+          
+
+            <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                <ul _ngcontent-epm-c40="" class="nav">
+                </ul>
+                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                  
+                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+                 type="button" (click)="add()" data-toggle="tooltip" data-placement="top"
+                 title="Add">
+                <i class="fa fa-plus"></i>
+                </button>&nbsp;
+                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+                type="button" (click)="edit()" data-toggle="tooltip" data-placement="top"
+                title="Edit">
+               <i class="fas fa-pencil-alt"></i>
+               </button>&nbsp;
+               <!-- <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+               type="button" (click)="view()" data-toggle="tooltip" data-placement="top"
+               title="View">
+              <i class="fa fa-eye"></i>
+              </button>&nbsp;
+              <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+              type="button" (click)="delete()" data-toggle="tooltip" data-placement="top"
+              title="Delete">
+             <i class="fa fa-trash"></i>
+             </button>&nbsp;
+                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button"
+                (click)="enableFilter = !enableFilter;"
+                [ngClass]="{'filterClass': enableFilter}" data-toggle="tooltip" data-placement="top"
+                title="Filter">
+                <i class="fa fa-filter"></i>
+                </button> -->
+                </div>
+            </nav>
+           
+            
+            <div class="table-responsive">
+               
+                <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Flat No./ Room Number</th>
+                   
+                
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let dl of accommodationList">
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(dl)">
+                        </div>
+                    </td>
+                    <td>{{dl.flatnumber}}</td>
+                    
+                </tr>
+               
+                </tbody>
+                </table>
+            </div>
+            <!-- ---------------------------------------------------------------- -->
+
+         
+            <!-- ---------------------------------------------------------------- -->
+        </app-card>
+    </div>
+
+    <div class="col-sm-12" *ngIf="isOpenAccomod">
+        <app-card cardTitle="{{false ? 'Edit Accommodation':'Add Accommodation'}}"  [options]="false">
+ 
+   
+        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+          <ul _ngcontent-epm-c40="" class="nav">
+          </ul>
+          <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateaccommodation()">{{accommodationId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger"  (click)="isOpenAccomod=false;accommodationId=undefined;">{{false ? 'Back':'Cancel'}}</button>
+          </div>
+      </nav>
+
+      <form action="javascript:" class="needs-validation" novalidate [formGroup]="accommodationForm">
+           
+        <div class="form-row">
+
+          <div class="col-md-6 mb-3">
+            <label for="validationCustom01">Employee</label>
+            <input type="text" formControlName="value" disabled class="form-control">
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+
+         
+          <div class="col-md-6 mb-3">
+            <label for="validationCustom01">Area</label>
+            <select class="form-control" formControlName="lsAccoareaId">
+                <option *ngFor="let dl of areaList" value="{{dl.value}}">{{dl.name}}
+                </option>
+                
+            </select>
+        </div>
+
+        
+        </div>
+         
+     
+<div class="form-row">
+    <div class="col-md-6 mb-3">
+        <label for="validationCustom01">Emirates</label>
+        <select class="form-control" formControlName="lsAccoemirtId">
+          <option *ngFor="let dl of emirateList" value="{{dl.lListitemId}}">{{dl.name}}</option>
+        </select>
+        
+      </div> 
+    <div class="col-md-6 mb-3">
+        <label for="validationCustom01">Building Name/No.</label>
+        <!-- <input type="number" formControlName="lsBuildnmnoId" class="form-control"> -->
+        <select class="form-control" formControlName="lsBuildnmnoId">
+          <option *ngFor="let dl of buildingNoList" value="{{dl.lListitemId}}">{{dl.name}}</option>
+        </select>
+    </div>
+</div>
+
+   
+
+ <div class="form-row">
+    <div class="col-md-6 mb-3">
+        <label for="validationCustom01">Type of Unit</label>
+        <select class="form-control" formControlName="lsRoomtypeId">
+            <option *ngFor="let dl of typeofunitList" value="{{dl.lListitemId}}">{{dl.name}}
+            </option>
+        </select>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="validationCustom01">Room Status</label>
+        <select class="form-control" formControlName="lsRoomstatusId">
+            <option *ngFor="let dl of status1List" value="{{dl.lListitemId}}">{{dl.name}}
+            </option>
+        </select>
+    </div>
+ </div> 
+
+ <div class="form-row">
+
+
+ <div class="col-md-6 mb-3">
+    <label for="validationCustom01">Flat No./ Room Number</label>
+    <input type="text" formControlName="flatnumber" class="form-control">
+</div>
+<!-- <div class="col-md-6 mb-3">
+    <label for="validationCustom01">Floor</label>
+    <input type="text" formControlName="floor" class="form-control">
+</div> -->
+<div class="col-md-6 mb-3">
+    <label for="validationCustom01">Floor</label>
+    <select class="form-control" formControlName="lsFloorId">
+      <option *ngFor="let dl of floorList" value="{{dl.lListitemId}}">{{dl.name}}</option>
+    </select>
+    
+  </div> 
+
+</div>
+        <div class="form-row">
+      
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Status</label>
+                <select class="form-control" formControlName="status">
+                  <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                </select>
+                
+              </div> 
+        </div>
+       
+
+      </form>
+
+        
+        <!-- ////////////////////////////////////////////////////////// -->
+        </app-card>
+    </div>
+</div>
+   

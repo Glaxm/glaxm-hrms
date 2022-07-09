@@ -1,0 +1,106 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{empGradeForm.value.empGradeId ? 'Edit Employee Grade':'Add Employee Grade'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateEmpGrade()" *ngIf="!isView">{{empGradeForm.value.empGradeId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="empGradeForm">
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" disabled formControlName="holdingId" (change)="selectHolding(empGradeForm.value.holdingId)" [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }">
+                  <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+              </select>
+                            <div *ngIf="submitted && f.holdingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.holdingId.errors.required">Holding is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <!-- <select class="form-control validation_border" formControlName="companyId"  [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
+                <option *ngFor="let cl of companyList" value="{{cl.gCompanyId}}">{{cl.name}}</option>
+            </select>
+            <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+              <div *ngIf="f.companyId.errors.required">Company is required</div>
+            </div> -->
+                            <ng-multiselect-dropdown [placeholder]="" [data]="companyList" name="company" formControlName="company" [(ngModel)]="selectedCompanyList" [settings]="dropdownSettings" (onSelect)="onCompnaySelect($event)" (onDeSelect)="onCompanyDeSelect($event)" (onSelectAll)="onSelectAllCompnay($event)"
+                                [ngClass]="{ 'is-invalid': submitted && f.company.errors }">
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="submitted && f.company.errors" class="invalid-feedback">
+                                <div *ngIf="f.company.errors.required">Company is required</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Employee Grade </label>
+                            <input type="text" formControlName="name" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required">Employee grade is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Description</label>
+                            <input type="text" formControlName="description" class="form-control">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+
+                        <!-- <div class="col-md-6 mb-3">
+                <label for="validationCustom02">Description</label>
+                <textarea   class="form-control input-borderless" formControlName="description" name="desc" rows="3"></textarea>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div> -->
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Code</label>
+                            <input type="text" formControlName="code" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <!-- <div class="custom-control custom-checkbox">
+                  <label for="validationCustom01"></label><br>
+                  <input type="checkbox" class="custom-control-input" formControlName="status" id="customCheck1">
+                  <label class="custom-control-label" for="customCheck1">Is Active</label>
+                </div> -->
+                            <label for="validationCustom01">status</label>
+                            <select class="form-control validation_border" formControlName="status">
+                  <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+              </select>
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+
+                    <!-- <hr>
+          <div class="text-center">
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateEmpGrade()" *ngIf="!isView">{{empGradeForm.value.empGradeId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+          </div> -->
+                </form>
+            </app-card>
+        </div>
+    </div>
+</div>

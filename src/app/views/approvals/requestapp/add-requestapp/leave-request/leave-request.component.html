@@ -1,0 +1,501 @@
+<app-card cardTitle="{{empleaveForm.value.lEmpleaveId ? ' Employee Leave':' Employee Leave'}}" [options]="false">
+
+    <form action="javascript:" class="needs-validation" novalidate [formGroup]="empleaveForm">
+
+        <div class="form-row">
+
+
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom01">Leave Type</label>
+            </div>
+            <div class="col-md-4 mb-3">
+                <select class="form-control validation_border" formControlName="xLeaveitemId" [ngClass]="{ 'is-invalid': submitted && f.xLeaveitemId.errors }" (change)="selectLeave(empleaveForm.value.xLeaveitemId);leaveRequestEvent()">
+          <option *ngFor="let dl of leaveList" value="{{dl.xLeaveitemId}}">{{dl.name}}
+          </option>
+        </select>
+                <div *ngIf="submitted && f.xLeaveitemId.errors" class="invalid-feedback">
+                    <div *ngIf="f.xLeaveitemId.errors.required">Leave is required</div>
+                </div>
+            </div>
+
+
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom01">Leave Balance</label>
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="text" disabled class="form-control" formControlName="baldays">
+
+            </div>
+
+
+
+        </div>
+
+        <div class="form-row">
+
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom02">Transaction Date</label>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="input-group">
+                    <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="datetrx1" [options]="myDatePickerOptions" formControlName="datetrx1" [ngClass]="{ 'is-invalid': submitted && f.datetrx1.errors }" #dp3="angular-mydatepicker"
+                        autocomplete="off" (ngModelChange)="changeTransDate($event);leaveRequestEvent()" (click)="dp3.toggleCalendar()" />
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="dp3.toggleCalendar()">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+                    </div>
+                    <div *ngIf="submitted && f.datetrx1.errors" class="invalid-feedback">
+                        <div *ngIf="f.datetrx1.errors.required">Transaction Date is required</div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-2 mb-3" *ngIf="isHalfdayAllowed">
+                <label for="validationCustom01"></label>
+            </div>
+            <div class="col-md-4 mb-3" *ngIf="isHalfdayAllowed">
+                <div class="form-group text-left mt-2">
+                    <label for="validationCustom01"></label>
+                    <div class="checkbox checkbox-primary d-inline">
+                        <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" formControlName="isHalfday1">
+                        <label for="checkbox-fill-a1" class="cr"> Halfday</label>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="form-row">
+
+
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom02">Start Date</label>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="input-group">
+                    <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="startdate1" [options]="myDatePickerOptions" formControlName="startdate1" [ngClass]="{ 'is-invalid': submitted && f.startdate1.errors }" #dp1="angular-mydatepicker"
+                        autocomplete="off" (ngModelChange)="changeStartDate($event);leaveRequestEvent()" (click)="dp1.toggleCalendar()" />
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+                    </div>
+                    <div *ngIf="submitted && f.startdate1.errors" class="invalid-feedback">
+                        <div *ngIf="f.startdate1.errors.required">Start Date is required</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom02">End Date</label>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="input-group">
+                    <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="enddate1" [options]="myDatePickerOptions" formControlName="enddate1" [ngClass]="{ 'is-invalid': submitted && f.enddate1.errors }" #dp2="angular-mydatepicker"
+                        autocomplete="off" (ngModelChange)="changeEndDate($event);leaveRequestEvent()" (click)="dp2.toggleCalendar()" />
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+                    </div>
+                    <div *ngIf="submitted && f.enddate1.errors" class="invalid-feedback">
+                        <div *ngIf="f.enddate1.errors.required">End Date is required</div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+        <div class="form-row">
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom01">Total leave days</label>
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="number" formControlName="leavedays" readonly class="form-control">
+            </div>
+
+
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom01">Unpaid Days</label>
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="number" formControlName="unpaidLeaveDays" class="form-control" [readonly]="!isdays" (keyup)="leaveRequestEvent()">
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom01">Paid Days</label>
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="number" formControlName="paidLeaveDays" class="form-control" [readonly]="!isdays" (keyup)="leaveRequestEvent()">
+            </div>
+
+
+
+
+            <div class="col-md-2 mb-3" *ngIf="leaveCode=='ENCASH'">
+                <label for="validationCustom01">Encashment Days</label>
+            </div>
+            <div class="col-md-4 mb-3" *ngIf="leaveCode=='ENCASH'">
+                <input type="number" formControlName="encashDays" class="form-control" (keyup)="getLeaveBal(empleaveForm.value.xLeaveitemId)">
+            </div>
+        </div>
+
+        <div class="form-row">
+
+            <div class="col-md-2 mb-3" *ngIf="requestId">
+                <label for="validationCustom01">Description</label>
+            </div>
+            <div class="col-md-4 mb-3" *ngIf="requestId">
+                <!-- <input type="text" formControlName="description" class="form-control" (change)="leaveRequestEvent()"> -->
+                <textarea name="" id="" cols="30" rows="10" formControlName="description" class="form-control" (change)="leaveRequestEvent()"></textarea>
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom01">Leave Purpose</label>
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="text" formControlName="leavePurpose" class="form-control" (change)="leaveRequestEvent()">
+            </div>
+        </div>
+
+        <div class="form-row">
+
+
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom01">Contact Details</label>
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="text" formControlName="contactDetails" class="form-control" (change)="leaveRequestEvent()">
+            </div>
+
+            <div class="col-md-2 mb-3" *ngIf="!requestId">
+
+                <label for="validationCustom01">Attachment</label>
+            </div>
+            <div class="col-md-4 mb-3" *ngIf="!requestId">
+                <div class="input-group">
+
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" multiple formControlName="fileName" id="importFile" (change)="onFileChange($event.target.files)">
+                        <label class="custom-file-label" #labelImport for="importFile"><i class="fas fa-search"></i> Choose
+              file</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--  -->
+            <div class="col-md-2 mb-3" *ngIf="requestId">
+                <label for="validationCustom01">Attachment</label>
+            </div>
+            <div class="col-md-4 mb-3" *ngIf="requestId">
+                <div class="input-group mb-3">
+                    <input _ngcontent-wdr-c114="" type="text" formControlName="fileName" aria-label="Recipient's username" aria-describedby="basic-addon2" class="form-control">
+                    <div class="input-group-append">
+                        <button type="button" (click)="openAttachment()" class="btn btn-primary">View</button></div>
+                </div>
+
+            </div>
+            <!-- / -->
+
+
+        </div>
+
+
+        <!-- ------------------------- -->
+
+        <div class="form-row" *ngIf="empleaveForm.value.leaveitemcode == 'AL' || empleaveForm.value.leaveitemcode == 'ALWD'">
+
+            <div class="col-md-2 mb-3" *ngIf="flags.forSelfFlag !='Y'">
+                <label for="validationCustom01">Airport</label>
+            </div>
+            <div class="col-md-4 mb-3" *ngIf="flags.forSelfFlag !='Y'">
+                <select class="form-control" formControlName="fromAirsectorId" (change)="leaveRequestEvent()">
+          <option *ngFor="let dl of fromAirportList" value="{{dl.lListitemId}}">{{dl.name}}
+          </option>
+        </select>
+            </div>
+
+            <div class="col-md-2 mb-3" *ngIf="flags.forSelfFlag !='Y'">
+                <label for="validationCustom01">Airport (Point of Hire) </label>
+            </div>
+            <div class="col-md-4 mb-3" *ngIf="flags.forSelfFlag !='Y'">
+                <select class="form-control" formControlName="toAirsectorId" (change)="leaveRequestEvent()">
+          <option *ngFor="let dl of toList" value="{{dl.airsectorId}}">{{dl.name}}
+          </option>
+        </select>
+            </div>
+
+        </div>
+        <div class="form-row" *ngIf="empleaveForm.value.leaveitemcode == 'AL' || empleaveForm.value.leaveitemcode == 'ALWD'">
+
+
+            <div class="col-md-2 mb-3" *ngIf="flags.forSelfFlag !='Y'">
+                <label for="validationCustom01">Air Ticket Entitlement </label>
+            </div>
+            <div class="col-md-4 mb-3" *ngIf="flags.forSelfFlag !='Y'">
+                <select class="form-control" formControlName="airtktEntitled" (change)="leaveRequestEvent()">
+          <option *ngFor="let dl of airTktEntitlementList" value="{{dl.value}}">{{dl.name}}
+          </option>
+        </select>
+            </div>
+
+
+            <div class="col-md-2 mb-3" *ngIf="flags.forSelfFlag !='Y'">
+                <label for="validationCustom01">Air Ticket Class</label>
+            </div>
+            <div class="col-md-4 mb-3" *ngIf="flags.forSelfFlag !='Y'">
+                <select class="form-control" formControlName="airtktClass" (change)="leaveRequestEvent()">
+          <option *ngFor="let dl of airTktClassList" value="{{dl.value}}">{{dl.name}}
+          </option>
+        </select>
+            </div>
+
+        </div>
+
+        <div class="form-row" *ngIf="empleaveForm.value.leaveitemcode == 'AL' || empleaveForm.value.leaveitemcode == 'ALWD'">
+            <div class="col-md-4 mb-3">
+                <div class="radio radio-primary d-inline">
+                    <input class="form-check-input" type="radio" name="ticket" formControlName="ticket" (change)="leaveRequestEvent()" id="With Company Purchased Ticket - Both Side" value="With Company Purchased Ticket - Both Side">
+                    <label class="cr" for="With Company Purchased Ticket - Both Side">With Company Purchased Ticket - Both
+            Side</label>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <div class="radio radio-primary d-inline">
+                    <input class="form-check-input" type="radio" name="ticket" formControlName="ticket" (change)="leaveRequestEvent()" id="With Company Purchased Ticket - One Side" value="With Company Purchased Ticket - One Side">
+                    <label class="cr" for="With Company Purchased Ticket - One Side">With Company Purchased Ticket - One
+            Side</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row" *ngIf="empleaveForm.value.leaveitemcode == 'AL' || empleaveForm.value.leaveitemcode == 'ALWD'">
+            <div class="col-md-4 mb-3">
+                <div class="radio radio-primary d-inline">
+                    <input class="form-check-input" type="radio" name="ticket" formControlName="ticket" (change)="leaveRequestEvent()" id="With Ticket Encashment Claim - Both Side" value="With Ticket Encashment Claim - Both Side">
+                    <label class="cr" for="With Ticket Encashment Claim - Both Side">With Ticket Encashment Claim - Both
+            Side</label>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <div class="radio radio-primary d-inline">
+                    <input class="form-check-input" type="radio" name="ticket" formControlName="ticket" (change)="leaveRequestEvent()" id="With Ticket Encashment Claim - One Side" value="With Ticket Encashment Claim - One Side">
+                    <label class="cr" for="With Ticket Encashment Claim - One Side">With Ticket Encashment Claim - One
+            Side</label>
+                </div>
+            </div>
+
+            <div class="form-row" *ngIf="isTicketAmt">
+                <div class="col-md-5 mb-3">
+                    <label for="validationCustom01">Ticket Amount :</label>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <input type="text" min="0" formControlName="ticketAmount" class="form-control" (change)="leaveRequestEvent()">
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="form-row" *ngIf="empleaveForm.value.leaveitemcode == 'AL' || empleaveForm.value.leaveitemcode == 'ALWD'">
+            <div class="col-md-4 mb-3">
+                <div class="radio radio-primary d-inline">
+                    <input class="form-check-input" type="radio" name="ticket" (change)="leaveRequestEvent()" formControlName="ticket" id="With Yourself Ticket Arrangements" value="With Yourself Ticket Arrangements">
+                    <label class="cr" for="With Yourself Ticket Arrangements">With Yourself Ticket Arrangements</label>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ------------------------- -->
+
+        <div class="form-row" *ngIf="empleaveForm.value.leaveitemcode == 'AL' || empleaveForm.value.leaveitemcode == 'ALWD'">
+
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom02">Last leave settled up to</label>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="input-group">
+                    <input class="form-control" disabled placeholder="Select a date" type="text" angular-mydatepicker name="lastleavesettledupto1" [options]="myDatePickerOptions" formControlName="lastleavesettledupto1" #dp4="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeLastLeaveSettledUpTo($event)"
+                        (click)="dp4.toggleCalendar()" />
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="dp4.toggleCalendar()">
+    <i class="fa fa-search" aria-hidden="true"></i>
+  </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom02">Current leave settled up to</label>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="input-group">
+                    <input class="form-control" disabled placeholder="Select a date" type="text" angular-mydatepicker name="curleavesettledupto1" [options]="myDatePickerOptions" formControlName="curleavesettledupto1" #dp5="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeCurrentLeaveSettledUpTo($event)"
+                        (click)="dp5.toggleCalendar()" />
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="dp5.toggleCalendar()">
+    <i class="fa fa-search" aria-hidden="true"></i>
+  </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-row" *ngIf="empleaveForm.value.leaveitemcode == 'AL' || empleaveForm.value.leaveitemcode == 'ALWD'">
+
+
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom02">Last air ticket up to</label>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="input-group">
+                    <input class="form-control" disabled placeholder="Select a date" type="text" angular-mydatepicker name="lastticketsettledupto1" [options]="myDatePickerOptions" formControlName="lastticketsettledupto1" #dp6="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeLastAirTicketUpTo($event)"
+                        (click)="dp6.toggleCalendar()" />
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="dp6.toggleCalendar()">
+  <i class="fa fa-search" aria-hidden="true"></i>
+</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom02">Current air ticket settled up to</label>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="input-group">
+                    <input class="form-control" disabled placeholder="Select a date" type="text" angular-mydatepicker name="curticketsettledupto1" [options]="myDatePickerOptions" formControlName="curticketsettledupto1" #dp7="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeCurrentAirTicketSettledUpTo($event)"
+                        (click)="dp7.toggleCalendar()" />
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="dp7.toggleCalendar()">
+  <i class="fa fa-search" aria-hidden="true"></i>
+</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="form-row" *ngIf="empleaveForm.value.leaveitemcode == 'AL' || empleaveForm.value.leaveitemcode == 'ALWD'">
+
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom02"> To resume duty on </label>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="input-group">
+                    <input class="form-control" disabled placeholder="Select a date" type="text" angular-mydatepicker name="toresumedutyon1" [options]="myDatePickerOptions" formControlName="toresumedutyon1" #dp8="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeToResumeDutyOn($event)"
+                        (click)="dp8.toggleCalendar()" />
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="dp8.toggleCalendar()">
+<i class="fa fa-search" aria-hidden="true"></i>
+</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- -------------------------- -->
+        <div class="form-row">
+            <div class="col-md-2 mb-3" *ngIf="requestId">
+                <label for="validationCustom01">Replaced By : </label>
+            </div>
+            <div class="col-md-4 mb-3" *ngIf="requestId">
+                <input type="text" formControlName="replacedBy" disabled class="form-control">
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom01">Status</label>
+            </div>
+            <div class="col-md-4 mb-3">
+                <select class="form-control" formControlName="checkstatus" (change)="changeStatusFun(empleaveForm.value.checkstatus)">
+          <option *ngFor="let dl of statusList1" value="{{dl.valueCode}}">{{dl.valueName}}
+          </option>
+        </select>
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom01"></label>
+            </div>
+            <div class="col-md-10 mb-3">
+                <div class="form-group text-left mt-2">
+                    <label for="validationCustom01"></label>
+                    <div class="checkbox checkbox-primary d-inline">
+                        <input type="checkbox" name="checkbox-fill-12" id="checkbox-fill-a12" formControlName="isagree">
+                        <label for="checkbox-fill-a12" class="cr"> I understand that i have to return to duty  after the approved annual leave, any delay in resuming duty will lead to disciplinary action and up to termination of employment.</label>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        <!--  -->
+
+    </form>
+</app-card>
+
+<div *ngIf="requestId">
+    <app-card cardTitle="Leave History" [options]="false">
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <!-- <th>#</th> -->
+                        <th>Leave</th>
+                        <th>From Date</th>
+                        <th>To Date</th>
+                        <th>Days</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let rm of leaveHistoryList">
+
+                        <td>{{rm.leaveitemname}}</td>
+                        <td>{{rm.startdate | date: 'dd-MMM-yyyy'}}</td>
+                        <td>{{rm.enddate | date: 'dd-MMM-yyyy'}}</td>
+                        <td>{{rm.leavedays}}</td>
+
+                    </tr>
+                    <tr *ngIf="leaveHistoryList?.length===0">
+                        <td colspan="9" style="text-align:center;">No records</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </app-card>
+
+    <br>
+</div>

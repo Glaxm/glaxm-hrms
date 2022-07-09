@@ -1,0 +1,232 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{payItemForm.value.payItemId ? 'Edit Pay Elements':'Add Pay Elements'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdatePayItem()" *ngIf="!isView">{{payItemForm.value.payItemId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="payItemForm">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" disabled formControlName="holdingId" [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }">
+                                <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.holdingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.holdingId.errors.required">Holding is required</div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <select class="form-control validation_border" formControlName="companyId" [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
+                                <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+                                <div *ngIf="f.companyId.errors.required">Company is required</div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Code</label>
+                            <input type="text" formControlName="code" class="form-control">
+                        </div>
+
+
+                        <!-- </div>
+                    <div class="form-row"> -->
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Sr. No.</label>
+                            <input type="text" formControlName="srno" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.srno.errors }">
+                            <div *ngIf="submitted && f.srno.errors" class="invalid-feedback">
+                                <div *ngIf="f.srno.errors.required">Sr. No. is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Value</label>
+                            <input type="text" formControlName="value" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Type</label>
+                            <select class="form-control validation_border" formControlName="payType" [ngClass]="{ 'is-invalid': submitted && f.payType.errors }">
+                                <option *ngFor="let dl of payTypeList" value="{{dl.valueCode}}">{{dl.valueName}}
+                                </option>
+                            </select>
+                            <div *ngIf="submitted && f.payType.errors" class="invalid-feedback">
+                                <div *ngIf="f.payType.errors.required">Type is required</div>
+                            </div>
+                        </div>
+
+
+                        <!-- </div>
+
+                    <div class="form-row"> -->
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Pay Item</label>
+                            <input type="text" formControlName="name" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required">Pay Item is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Effective Date</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" type="text" placeholder="Select a date" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" [ngClass]="{ 'is-invalid': submitted && f.effectiveDate1.errors }" formControlName="effectiveDate1"
+                                    #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event)" (click)="dp1.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <div *ngIf="submitted && f.effectiveDate1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.effectiveDate1.errors.required">Effective Date is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- </div>
+
+                    <div class="form-row"> -->
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Description</label>
+                            <input type="text" formControlName="name" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom03"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="isPayItem1" id="customCheck2">
+                                <label class="custom-control-label" for="customCheck2">Pay Slip Item</label>
+                            </div>
+                        </div>
+
+                        <!-- </div>
+
+                    <div class="form-row"> -->
+
+                        <div class="col-md-6 mb-3" *ngIf="false">
+                            <label for="validationCustom01">Dependency</label>
+                            <select class="form-control validation_border" formControlName="dependency" [ngClass]="{ 'is-invalid': submitted && f.dependency.errors }" (change)="selectDependancyAsGroup($event)">
+                                <option *ngFor="let dl of dependencyList" value="{{dl.valueCode}}">{{dl.valueName}}
+                                </option>
+                            </select>
+                            <div *ngIf="submitted && f.dependency.errors" class="invalid-feedback">
+                                <div *ngIf="f.dependency.errors.required">Dependency is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Pay Unit</label>
+                            <select class="form-control validation_border" formControlName="units" [ngClass]="{ 'is-invalid': submitted && f.units.errors }">
+                                <option *ngFor="let dl of payUnitList" value="{{dl.valueCode}}">{{dl.valueName}}
+                                </option>
+                            </select>
+                            <div *ngIf="submitted && f.units.errors" class="invalid-feedback">
+                                <div *ngIf="f.units.errors.required">Pay Unit is required</div>
+                            </div>
+                        </div>
+
+
+                        <!-- </div>
+
+
+
+                    <div class="form-row"> -->
+                        <div class="col-md-6 mb-3" *ngIf="payItemForm.value.dependency=='O'">
+                            <label for="validationCustom01">Pay Item Group</label>
+                            <select class="form-control" formControlName="payItemGroupId">
+                                <option *ngFor="let dl of payItemGroupList" value="{{dl.valueCode}}">{{dl.valueName}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3" *ngIf="payItemForm.value.dependency=='O'">
+                            <label for="validationCustom01">Percentage</label>
+                            <input type="text" formControlName="percentage" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.percentage.errors }">
+                            <div *ngIf="submitted && f.percentage.errors" class="invalid-feedback">
+                                <div *ngIf="f.percentage.errors.required">Percentage is required</div>
+                            </div>
+                        </div>
+                        <!-- </div>
+
+                    <div class="form-row"> -->
+                        <div class="col-md-6 mb-3" *ngIf="payItemForm.value.dependency=='N'">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom03"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="isFixedAmount1" id="customCheck3">
+                                <label class="custom-control-label" for="customCheck3">Fixed Amount</label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 mb-3" *ngIf="payItemForm.value.isFixedAmount1">
+                            <label for="validationCustom01">Amount</label>
+                            <input type="number" min="0" formControlName="amount" class="form-control">
+                        </div>
+                        <!-- </div>
+
+                    <div class="form-row"> -->
+
+                        <div class="col-md-6 mb-3" *ngIf="false">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom03"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="isBasicPay1" id="customCheck4">
+                                <label class="custom-control-label" for="customCheck4">Basic Pay</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3" *ngIf="false">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom03"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="isProrated1" id="customCheck5">
+                                <label class="custom-control-label" for="customCheck5">Pro Rate</label>
+                            </div>
+                        </div>
+                        <!-- </div>
+
+
+                    <div class="form-row"> -->
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Mol Pay Code</label>
+                            <input type="text" formControlName="molPayCode" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom03"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="tobeenteredbyUser1" id="ISENCASH">
+                                <label class="custom-control-label" for="ISENCASH">Pay Transaction Report
+                                    </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control validation_border" formControlName="status">
+                                <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+
+                </form>
+
+            </app-card>
+        </div>
+    </div>
+</div>

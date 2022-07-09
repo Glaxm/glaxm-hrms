@@ -1,0 +1,553 @@
+<div class="row">
+    <div class="col-sm-12">
+        <!-- <app-card cardTitle="Benefits Summary" [options]="false">
+        
+
+          <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+              <ul _ngcontent-epm-c40="" class="nav">
+              </ul>
+              <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                
+              <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+               type="button" (click)="add()" data-toggle="tooltip" data-placement="top"
+               title="Add" *ngIf="isview=='N' && empBenifitList?.length<1">
+              <i class="fa fa-plus"></i>
+              </button>&nbsp;
+              <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+              type="button" (click)="edit()" data-toggle="tooltip" data-placement="top" *ngIf="isview=='N'"
+              title="Edit">
+             <i class="fas fa-pencil-alt"></i>
+             </button>&nbsp;
+              </div>
+          </nav>
+         
+          
+          <div class="table-responsive">
+             
+              <table class="table table-bordered">
+              <thead>
+              <tr>
+                  <th>#</th>
+                  <th>Air Ticket Entitlement</th>
+                  <th>Annual Leave Entitlement Days</th>
+                  <th>Vehicle</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let dl of empBenifitList">
+                  <td>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(dl)">
+                      </div>
+                  </td>
+                  <td>{{dl.vehibrand}}</td>
+                  <td>{{dl.vehimodel}}</td>
+                  <td>{{dl.vehivalue}}</td>
+              </tr>
+             
+              </tbody>
+              </table>
+          </div>
+      </app-card> -->
+    </div>
+
+    <div class="col-sm-12">
+        <app-card cardTitle="{{false ? 'Edit Benefits':'Add Benefits'}}" [options]="false">
+
+
+            <!-- <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+        <ul _ngcontent-epm-c40="" class="nav">
+        </ul>
+        <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+          <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateBenifitsData()">{{benefitsForm.value.lEmpbenefitsId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+        </div>
+    </nav> -->
+            <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                <ul _ngcontent-epm-c40="" class="nav">
+                </ul>
+                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                    <button type="button" class="btn btn-success" ngbTooltip="btn-success" *ngIf="isview=='N'" (click)="addUpdateBenifitsData()">{{benefitsId ? 'Update':'Save'}}</button> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" data-toggle="tooltip" data-placement="top" (click)="nextFun($event)" title="Next">
+          <i class="fa fa-arrow-right"></i>
+        </button>
+                </div>
+            </nav>
+
+            <form action="javascript:" class="needs-validation" novalidate [formGroup]="benefitsForm">
+
+                <app-card cardTitle="Annual Leave" [options]="false">
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Employee</label>
+                            <input type="text" formControlName="value" disabled class="form-control">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+
+                        <!-- <div class="col-md-6 mb-3">
+          <label for="validationCustom01">Point of Hire</label>
+          <select class="form-control validation_border" formControlName="L_AIRTKTENTL_ID">
+              <option *ngFor="let dl of pointofhireList" value="{{dl.valueCode}}">{{dl.valueName}}
+              </option>
+          </select>
+      </div> -->
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Annual Leave Entitlement Type</label>
+                            <select class="form-control" formControlName="xEmpleaveId">
+              <option *ngFor="let dl of aleaveentitelmenttypeList" value="{{dl.value}}">{{dl.name}}
+              </option>
+          </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Annual Leave Entitlement Days</label>
+                            <select class="form-control" formControlName="lentldays">
+          <option *ngFor="let dl of aleaveentitelmentdaysList" value="{{dl.value}}">{{dl.name}}
+          </option>
+      </select>
+                        </div>
+                        <!-- <div class="col-md-6 mb-3">
+      <label for="validationCustom01">Annual Leave Balance Days</label>
+      <input type="text" formControlName="annualbaldays" class="form-control">
+  </div> -->
+                    </div>
+
+                </app-card>
+                <app-card cardTitle="Vehicle" [options]="false">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Vehicle</label>
+                            <select class="form-control" formControlName="hasvehicle">
+          <option *ngFor="let dl of vehiclesList" value="{{dl.value}}">{{dl.name}}
+          </option>
+      </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Vehicle Brand </label>
+                            <input type="text" formControlName="vehibrand" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Vehicle Model</label>
+                            <input type="text" formControlName="vehimodel" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Value of The Vehicle</label>
+                            <input type="text" formControlName="vehivalue" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Vehicle Monthly Fuel Cost Limit</label>
+                            <input type="text" formControlName="fuelcostlimit" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Vehicle Monthly Actual Fuel Expenses</label>
+                            <select class="form-control" formControlName="fuelactualcost">
+          <option *ngFor="let dl of fuelactualcostList" value="{{dl.value}}">{{dl.name}}
+          </option>
+      </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Vehicle Monthly Maintenance Average Expenses</label>
+                            <select class="form-control" formControlName="mntsavgexps">
+          <option *ngFor="let dl of vMMaitainanceAygExpList" value="{{dl.value}}">{{dl.name}}
+          </option>
+      </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Vehicle Monthly Average Salik Expenses</label>
+                            <select class="form-control" formControlName="saltkavgexps">
+          <option *ngFor="let dl of vMAvgSalikExpensesList" value="{{dl.value}}">{{dl.name}}
+          </option>
+      </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Vehicle Monthly Aveage Parking Expenses</label>
+                            <select class="form-control" formControlName="parkavgexps">
+          <option *ngFor="let dl of vMAvgParkingExpList" value="{{dl.value}}">{{dl.name}}
+          </option>
+      </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Family Benefits Entitlement</label>
+                            <select class="form-control" formControlName="famibeneentl">
+          <option *ngFor="let dl of familybenefitentitList" value="{{dl.value}}">{{dl.name}}
+          </option>
+      </select>
+                        </div>
+                    </div>
+                </app-card>
+                <app-card cardTitle="Air Ticket" [options]="false">
+                    <!-- <div class="form-row"> -->
+
+                    <!-- <div class="form-row">
+  <div class="col-md-6 mb-3">
+      <label for="validationCustom01">Point of Hire</label>
+      <select class="form-control" formControlName="lAirtktentlId">
+          <option *ngFor="let dl of pointofhireList" value="{{dl.airsectorId}}">{{dl.name}}
+          </option>
+      </select>
+  </div>
+  
+  <div class="col-md-6 mb-3">
+    <label for="validationCustom01">Number of Dependents Entitlement For Air Ticket</label>
+    <select class="form-control" formControlName="noofairtkts">
+        <option *ngFor="let dl of noDepeEntitlementForAirTktList" value="{{dl.value}}">{{dl.name}}
+        </option>
+    </select>
+</div>
+
+</div> -->
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Airport</label>
+                            <select class="form-control" formControlName="fromAirsectorId">
+        <option *ngFor="let dl of fromAirportList" value="{{dl.lListitemId}}">{{dl.name}}
+        </option>
+    </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Airport (Point of Hire) </label>
+                            <select class="form-control" formControlName="toAirsectorId">
+        <option *ngFor="let dl of toList" value="{{dl.airsectorId}}">{{dl.name}}
+        </option>
+    </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Air Ticket Entitlement </label>
+                            <select class="form-control" formControlName="airtikentId">
+        <option *ngFor="let dl of airTktEntitlementList"  value="{{dl.value}}">{{dl.name}}
+        </option>
+    </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Air Ticket Class</label>
+                            <select class="form-control" formControlName="airtktclsId">
+        <option *ngFor="let dl of airTktClassList"  value="{{dl.value}}">{{dl.name}}
+        </option>
+    </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Air Ticket Eligibility </label>
+                            <select class="form-control" formControlName="airtktelgId">
+        <option *ngFor="let dl of airtktEligibiltyList" value="{{dl.value}}">{{dl.name}}
+        </option>
+    </select>
+                        </div>
+
+                        <!-- <div class="col-md-6 mb-3">
+  <label for="validationCustom01">Air Ticket Entitlement For Family</label>
+  <select class="form-control" formControlName="airtktfamentl">
+      <option *ngFor="let dl of airentitlmentfamilyList" value="{{dl.value}}">{{dl.name}}
+      </option>
+  </select>
+</div> -->
+
+                    </div>
+
+                    <!-- <div class="form-row">
+ 
+  <div class="col-md-6 mb-3">
+    <label for="validationCustom02">Current Air Ticket Date</label>
+   <div class="input-group">
+     <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker 
+     name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="currairtktDate1"
+      #dp4="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeCurrairtktDate($event)" (click)="dp4.toggleCalendar()"/>
+     <div class="input-group-append">
+       <button type="button" class="btn btn-secondary" (click)="dp4.toggleCalendar()">
+         <i class="fa fa-search" aria-hidden="true"></i>
+       </button>
+     </div>
+     
+   </div>
+ </div>
+ <div class="col-md-6 mb-3">
+  <label for="validationCustom02">Last Air Ticket Date </label>
+ <div class="input-group">
+   <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker 
+   name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="lastairtktDate1"
+    #dp3="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeLastairtktDate($event)" (click)="dp3.toggleCalendar()"/>
+   <div class="input-group-append">
+     <button type="button" class="btn btn-secondary" (click)="dp3.toggleCalendar()">
+       <i class="fa fa-search" aria-hidden="true"></i>
+     </button>
+   </div>
+   
+ </div>
+</div>
+
+</div> -->
+                </app-card>
+
+
+
+                <!-- <div class="form-row">
+  <div class="col-md-6 mb-3">
+      <label for="validationCustom01">Air Ticket Class</label>
+      <select class="form-control validation_border" formControlName="airclass">
+          <option *ngFor="let dl of airclassList" value="{{dl.valueCode}}">{{dl.valueName}}
+          </option>
+      </select>
+  </div>
+  <div class="col-md-6 mb-3">
+      <label for="validationCustom01">Eligibility</label>
+      <select class="form-control validation_border" formControlName="eligibility">
+          <option *ngFor="let dl of eligibilityList" value="{{dl.valueCode}}">{{dl.valueName}}
+          </option>
+      </select>
+  </div>
+</div>  -->
+
+                <!-- <div class="form-row">
+  <div class="col-md-6 mb-3">
+      <label for="validationCustom02">Last air ticket settlement date</label>
+     <div class="input-group">
+       <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker 
+       name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="lastsettlementdate"
+       [ngClass]="{ 'is-invalid': benefitssubmitted && pi.lastsettlementdate.errors }"
+        #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEffectiveDate($event)" (click)="dp1.toggleCalendar()"/>
+       <div class="input-group-append">
+         <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+           <i class="fa fa-search" aria-hidden="true"></i>
+         </button>
+       </div>
+       
+     </div>
+   </div>
+   <div class="col-md-6 mb-3">
+      <label for="validationCustom02">Current air ticket settlement date</label>
+     <div class="input-group">
+       <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker 
+       name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="currentsettlementdate"
+       [ngClass]="{ 'is-invalid': benefitssubmitted && pi.currentsettlementdate.errors }"
+        #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEffectiveDate($event)" (click)="dp1.toggleCalendar()"/>
+       <div class="input-group-append">
+         <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+           <i class="fa fa-search" aria-hidden="true"></i>
+         </button>
+       </div>
+       
+     </div>
+   </div>
+ </div> -->
+                <app-card cardTitle="Family" [options]="false">
+
+                    <div *ngIf="!isOpenRelation">
+                        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                            <ul _ngcontent-epm-c40="" class="nav">
+                            </ul>
+                            <div _ngcontent-epm-c40="" class="nav-item nav-grid" *ngIf="isview=='N'">
+
+                                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="addFamily()" data-toggle="tooltip" data-placement="top" title="Add">
+    <i class="fa fa-plus"></i>
+    </button>&nbsp;
+                                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="editFamily()" data-toggle="tooltip" data-placement="top" title="Edit">
+   <i class="fas fa-pencil-alt"></i>
+   </button>&nbsp;
+                            </div>
+                        </nav>
+
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Relation</th>
+                                        <th> Date of Birth</th>
+                                        <th>Eligible for Medical</th>
+                                        <th>Eligible for Visa</th>
+                                        <th>Eligible for Air ticket</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let dl of empFamilyList">
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn1(dl)">
+                                            </div>
+                                        </td>
+                                        <td>{{dl.nameofFamily}}</td>
+                                        <td>{{dl.relation}}</td>
+                                        <td>{{dl.dob| date: 'dd-MMM-yyyy'}}</td>
+                                        <td>{{dl.medical}}</td>
+                                        <td>{{dl.visa}}</td>
+                                        <td>{{dl.airticket}}</td>
+                                    </tr>
+                                    <!-- <tr *ngIf="empFamilyList?.length<1">
+      <td>No Record</td>
+    <tr> -->
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-sm-12" *ngIf="isOpenRelation">
+                        <app-card cardTitle="{{false ? 'Edit Relation':'Add Relation'}}" [options]="false">
+
+
+                            <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                                <ul _ngcontent-epm-c40="" class="nav">
+                                </ul>
+                                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                                    <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateRelation()">{{relationId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                                    <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="isOpenRelation=false;relationId=undefined;">{{false ? 'Back':'Cancel'}}</button>
+                                </div>
+                            </nav>
+
+                            <form action="javascript:" class="needs-validation" novalidate [formGroup]="relationform">
+
+                                <div class="form-row">
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom01">Name</label>
+                                        <input type="text" formControlName="nameofFamily" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom01">Relation</label>
+                                        <select class="form-control " formControlName="lsEmprelationId">
+        <option></option>
+        <option *ngFor="let dl of relationList" value="{{dl.lListitemId}}">{{dl.name}}</option>
+      </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom02">Date of Birth</label>
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="dob1" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeDOB($event)"
+                                                (click)="dp1.toggleCalendar()" />
+                                            <div class="input-group-append">
+                                                <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+           <i class="fa fa-search" aria-hidden="true"></i>
+         </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom01">Eligible For Medical </label>
+                                        <select class="form-control " formControlName="lselgbmedi">
+      <option></option>
+      <option *ngFor="let dl of yesNoList" value="{{dl.lListitemId}}">{{dl.name}}</option>
+    </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom01">Eligible For Visa</label>
+                                        <select class="form-control " formControlName="lselgbvisa">
+      <option></option>
+      <option *ngFor="let dl of yesNoList" value="{{dl.lListitemId}}">{{dl.name}}</option>
+    </select>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom01">Eligible For Air Ticket</label>
+                                        <select class="form-control " formControlName="lselgbairtk">
+      <option></option>
+      <option *ngFor="let dl of yesNoList" value="{{dl.lListitemId}}">{{dl.name}}</option>
+    </select>
+                                    </div>
+
+                                </div>
+
+                            </form>
+
+                        </app-card>
+                    </div>
+                </app-card>
+
+
+
+                <app-card cardTitle="Life Insurance Information" [options]="false">
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Life Insurance Beneficiary's Name-1</label>
+                            <input type="text" formControlName="licbenename1" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Life Insurance Beneficiary-2's Name</label>
+                            <input type="text" formControlName="licbenename2" class="form-control">
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Life Insurance Beneficiary-1's Contact No.</label>
+                            <input type="text" formControlName="licbenetel1" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Life Insurance Beneficiary-2's Contact No.</label>
+                            <input type="text" formControlName="licbenetel2" class="form-control">
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Life Insurance Beneficiary-1's Percentage </label>
+                            <input type="number" formControlName="licbeneper1" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Life Insurance Beneficiary-2's Percentage </label>
+                            <input type="number" formControlName="licbeneper2" class="form-control">
+                        </div>
+
+                    </div>
+
+                </app-card>
+
+
+
+
+
+            </form>
+
+
+            <!-- ////////////////////////////////////////////////////////// -->
+        </app-card>
+    </div>
+</div>

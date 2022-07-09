@@ -1,0 +1,84 @@
+<!-- <i class="fa fa-spinner fa-spin spin-big" *ngIf="hideLoader" id="preloader"></i> -->
+
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="Calendar View" [options]="false">
+
+
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <div class="btn-group">
+                            <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
+                                Previous
+                            </div>
+                            <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate" (click)="listEvents(viewDate)">
+                                Today
+                            </div>
+                            <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
+                                Next
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <!-- <h4>{{ viewDate }}</h4> -->
+                        <!-- <h4>{{ viewDate }}</h4> -->
+                        <!-- <h4>{{ view}}</h4> -->
+                        <!-- <h4>{{ 'ViewTitle' }}</h4> -->
+                        <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+                    </div>
+                </div>
+                <br />
+                <div [ngSwitch]="view">
+                    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [cellTemplate]="customCellTemplate" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+                    </mwl-calendar-month-view>
+                    <!-- <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+                    </mwl-calendar-week-view>
+                    <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+                    </mwl-calendar-day-view> -->
+                </div>
+
+                <!-- Everything you see below is just for the demo, you don't need to include it in your app -->
+
+            </app-card>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #customCellTemplate let-day="day" let-locale="locale" let-tooltipPlacement="tooltipPlacement" let-highlightDay="highlightDay" let-unhighlightDay="unhighlightDay" let-eventClicked="eventClicked" let-tooltipTemplate="tooltipTemplate" let-tooltipAppendToBody="tooltipAppendToBody"
+    let-tooltipDelay="tooltipDelay">
+
+    <div class="cal-cell-top">
+        <div *ngFor="let l of events">
+
+            <span class="cal-day-badge" *ngIf="(l.start | date:'E MMM d y h:mm:ss a zzzz') == (day.date | date:'E MMM d y h:mm:ss a zzzz')" [style.color]="l.color.primary" [style.background]="l.color.secondary">
+                {{ l.meta}}
+            </span>
+        </div>
+        <!-- <span class="cal-day-badge">{{events}}</span> -->
+        <span class="cal-day-number">
+        {{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+    </div>
+    <!-- <div *ngIf="day.events.length > 0">
+        <div *ngFor="let event of day.events; index as i">
+
+
+            <ng-template>
+                <div class="cal-events" [ngStyle]="{ backgroundColor: event.color?.primary }" [ngClass]="event?.cssClass" (mwlClick)="eventClicked.emit({event: event})" [mwlCalendarTooltip]="event.title | calendarEventTitle: 'monthTooltip':event" [tooltipPlacement]="tooltipPlacement"
+                    [tooltipEvent]="event" [tooltipTemplate]="tooltipTemplate" [tooltipAppendToBody]="tooltipAppendToBody" [tooltipDelay]="tooltipDelay">
+                    {{event.title}}
+                </div>
+            </ng-template>
+            <ng-template>
+                <ng-container>
+
+                    <div class="cal-events">
+                        <a class="showmore"> {{day.events.length}} more</a>
+                    </div>
+                </ng-container>
+            </ng-template>
+        </div>
+    </div> -->
+
+</ng-template>

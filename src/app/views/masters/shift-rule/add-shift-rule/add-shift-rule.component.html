@@ -1,0 +1,383 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{shiftRuleForm.value.shiftRuleId ? 'Edit Shift Rule':'Add Shift Rule'}}"
+                [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success"
+                            (click)="addUpdateShiftRule()" *ngIf="!isView">{{shiftRuleForm.value.shiftRuleId ?
+                            'Update':'Add'}}</button>
+                        &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ?
+                            'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="shiftRuleForm">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" disabled formControlName="holdingId"
+                                [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }"
+                                (change)="getCompanyListByHoldingId(shiftRuleForm.value.holdingId)">
+                                <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.holdingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.holdingId.errors.required">Holding is required</div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <select class="form-control validation_border" formControlName="companyId"
+                                [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
+                                <option></option>
+                                <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+                                <div *ngIf="f.companyId.errors.required">Company is required</div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <app-card cardTitle="" [options]="false">
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom01">Shift Name</label>
+                                    <input type="text" formControlName="name" class="form-control validation_border"
+                                        [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                        <div *ngIf="f.name.errors.required">Shift Rule is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3" *ngIf="false">
+                                    <label for="validationCustom01">Sequence</label>
+                                    <input type="text" formControlName="seqNo" class="form-control">
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom01">Shift Type</label>
+                                    <select class="form-control validation_border" formControlName="lshifttypeId"
+                                        [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
+                                        <option></option>
+                                        <option *ngFor="let dl of shiftTypeList" value="{{dl.lListitemId}}">{{dl.name}}
+                                        </option>
+                                    </select>
+
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom01">Shift Code</label>
+                                    <input type="text" formControlName="code" class="form-control">
+                                </div>
+
+
+
+
+                            </app-card>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <app-card cardTitle="" [options]="false">
+
+
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom02">Total Working Hrs (HH) </label>
+                                    <input type="text" formControlName="totalworkinghrs" class="form-control">
+                                </div>
+
+
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom02">Total Working Hrs Per Week (HH) </label>
+                                    <input type="text" formControlName="totalworkinghrsperweek" class="form-control">
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom02">Total Working Hrs Per Month (HH) </label>
+                                    <input type="text" formControlName="totalworkinghrspermonth" class="form-control">
+                                </div>
+
+                            </app-card>
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <app-card cardTitle="" [options]="false">
+
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom02">IN Time</label>
+
+
+                                    <input type="time" formControlName="startTime"
+                                        class="form-control validation_border"
+                                        [ngClass]="{ 'is-invalid': submitted && f.startTime.errors }">
+                                    <div *ngIf="submitted && f.startTime.errors" class="invalid-feedback">
+                                        <div *ngIf="f.startTime.errors.required">Start Time is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom02">OUT Time</label>
+
+                                    <input type="time" formControlName="endTime" class="form-control validation_border"
+                                        [ngClass]="{ 'is-invalid': submitted && f.endTime.errors }">
+                                    <div *ngIf="submitted && f.endTime.errors" class="invalid-feedback">
+                                        <div *ngIf="f.endTime.errors.required">End Time is required</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom02">Total Shift Hrs (HH:mm) </label>
+                                    <input type="text" formControlName="totalshifthrs" class="form-control">
+                                </div>
+
+
+                            </app-card>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <app-card cardTitle="" [options]="false">
+
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom02">Break Start</label>
+
+                                    <input type="time" formControlName="breakStart"
+                                        class="form-control validation_border"
+                                        [ngClass]="{ 'is-invalid': submitted && f.breakStart.errors }">
+                                    <div *ngIf="submitted && f.breakStart.errors" class="invalid-feedback">
+                                        <div *ngIf="f.breakStart.errors.required">Break Start is required</div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom02">Break End</label>
+
+                                    <input type="time" formControlName="breakEnd" class="form-control validation_border"
+                                        [ngClass]="{ 'is-invalid': submitted && f.breakEnd.errors }">
+                                    <div *ngIf="submitted && f.breakEnd.errors" class="invalid-feedback">
+                                        <div *ngIf="f.breakEnd.errors.required">Break End is required</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom02">Total Break Time (HH:mm) </label>
+                                    <input type="text" formControlName="totalbreaktime" class="form-control">
+                                </div>
+
+
+                            </app-card>
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Remark</label>
+                            <input type="text" formControlName="description" class="form-control">
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control validation_border" formControlName="status">
+                                <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Break Notification Time (HH:mm) </label>
+                            <input type="text" formControlName="breaknotifyAfter" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Shift Notification Time (HH:mm) </label>
+                            <input type="text" formControlName="shiftnotifyBefore" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-4 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom03"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="considerBreak1"
+                                    id="customCheck3" (click)="setFlag()">
+                                <label class="custom-control-label" for="customCheck3">Consider Break Punches in Total
+                                    Hrs.</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom03"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="autodeductBreak1"
+                                    id="customCheck4" (click)="setFlag1()">
+                                <label class="custom-control-label" for="customCheck4">Auto break deduction From Total
+                                    Hrs.</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom03"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="updatebrkPunch1"
+                                    id="customCheck5">
+                                <label class="custom-control-label" for="customCheck5">Update Break Punch</label>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">IN - Time Round Off Limit in Minutes (mm)</label>
+                            <input type="text" formControlName="timeroundoffLimit" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">OUT - Time Round Off Limit in Minutes (mm) </label>
+                            <input type="text" formControlName="exittimeroundoffLimit" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Buffer Time in Minutes (mm)</label>
+                            <input type="text" formControlName="bufferTime" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Half Day in Hrs (HH)</label>
+                            <input type="text" formControlName="halfdayHrs" class="form-control">
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Rotate to shift</label>
+                            <select class="form-control " formControlName="rotateTo">
+                                <option></option>
+                                <option *ngFor="let dl of shiftRuleList" value="{{dl.shiftRuleId}}">{{dl.name}}</option>
+                            </select>
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Rotation on day</label>
+                            <select class="form-control " formControlName="rotateonDay">
+                                <option></option>
+                                <option *ngFor="let dl of daysList" value="{{dl.code}}">{{dl.value}}
+                                </option>
+                            </select>
+
+                        </div>
+                    </div>
+
+
+
+                    <!--  -->
+                    <div class="form-row">
+
+                        <!-- <div class="col-md-6 mb-3">
+                            <div class="col-md-12 mb-3">
+                                <label for="validationCustom02">Is Ramdan Shift</label>
+                                <input type="text" formControlName="isramdanShift1" class="form-control">
+                            </div>
+                        </div> -->
+
+                        <div class="col-md-4 mb-3">
+                            <!-- <div class="custom-control custom-checkbox">
+                                <label for="validationCustom03"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="isramdanShift1"
+                                    id="customCheck5">
+                                <label class="custom-control-label" for="customCheck5">Is Ramdan Shift</label>
+                            </div> -->
+                            <!-- <div class="col-md-1.5 mb-3"> -->
+                                <label for="validationCustom01"> </label>
+                                <div class="form-group text-left mt-2">
+                                    <div class="checkbox checkbox-primary d-inline">
+                                      <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1"
+                                       formControlName="isramdanShift1">
+                                      <label for="checkbox-fill-a1" class="cr">Is Ramdan Shift</label>
+                                    </div>
+                                  </div>
+                            <!-- </div> -->
+    
+                        </div>
+
+                    </div>
+
+                    <!--  -->
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <app-card cardTitle="Extra Pay Settings" [options]="false">
+                                <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom02">Normal Days Overtime Hrs (HH:mm)</label>
+                                        <input type="text" formControlName="normaldayothrsforEp" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom02">Amount(Extra Pay) </label>
+                                        <input type="text" formControlName="dailyExtrapay" class="form-control">
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-row">
+
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom02">Friday Overtime Hrs (HH:mm)</label>
+                                        <input type="text" formControlName="fridayothrsforEp" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom02">Amount(Extra Pay) </label>
+                                        <input type="text" formControlName="woExtrapay" class="form-control">
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom02">National Holiday Hrs (HH:mm)</label>
+                                        <input type="text" formControlName="holidayothrsforEp" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom02">Amount(Extra Pay) </label>
+                                        <input type="text" formControlName="holidayExtrapay" class="form-control">
+                                    </div>
+
+                                </div>
+                            </app-card>
+                        </div>
+
+
+                    </div>
+
+                </form>
+
+            </app-card>
+        </div>
+    </div>
+</div>

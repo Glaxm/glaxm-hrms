@@ -1,0 +1,411 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{emploanForm.value.lEmploanId ? 'Edit Loan':'Add Loan'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateEmploan()" *ngIf="!isView">{{emploanForm.value.lEmploanId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ?
+              'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="emploanForm">
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" disabled formControlName="holdingId" [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }">
+                <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+              </select>
+                            <div *ngIf="submitted && f.holdingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.holdingId.errors.required">Holding is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <select class="form-control validation_border" formControlName="companyId" (change)="selectcompany(emploanForm.value.companyId)" [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
+                <option *ngFor="let cl of companyList" value="{{cl.gCompanyId}}">{{cl.name}}</option>
+              </select>
+                            <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+                                <div *ngIf="f.companyId.errors.required">Company is required</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Employee</label>
+                            <!-- <select class="form-control validation_border" formControlName="xEmployeeId">
+                <option *ngFor="let dl of employeeList" value="{{dl.employeeId}}">{{dl.displayName}}
+                </option>
+              </select> -->
+                            <ng-multiselect-dropdown name="city" [placeholder]="'Select Employee'" [data]="employeeList" [disabled]="emploanForm.value.lEmploanId ? true: false" formControlName="employee" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Loan/Pay item</label>
+                            <select class="form-control validation_border" formControlName="xPayitemId">
+                <option *ngFor="let dl of payitemList" value="{{dl.payItemId}}">{{dl.name}}
+                </option>
+              </select>
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Loan Amount</label>
+                            <input type="text" formControlName="loanamount" class="form-control validation_border" (change)="calInstallAmt()" [ngClass]="{ 'is-invalid': submitted && f.loanamount.errors }">
+
+                            <div *ngIf="submitted && f.loanamount.errors" class="invalid-feedback">
+                                <div *ngIf="f.loanamount.errors.required">Loan Amount is required</div>
+                                <div *ngIf="f.loanamount.errors.minLength">Loan Amount should be greater than 0</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Interest Rate</label>
+                            <input type="text" formControlName="interestrate" class="form-control" disabled>
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Installment Amount</label>
+                            <input type="text" formControlName="installmentamount" class="form-control" readonly>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">No. of Installments</label>
+                            <input type="number" formControlName="installments" class="form-control" (change)="calInstallAmt()">
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Loan Date</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="loandate1" [ngClass]="{ 'is-invalid': submitted && f.loandate1.errors }"
+                                    #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeloanDate($event)" (click)="dp1.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                                </div>
+                                <div *ngIf="submitted && f.loandate1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.loandate1.errors.required">Loan Date is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Balance</label>
+                            <input type="text" formControlName="balance" class="form-control" disabled>
+                        </div>
+                        <!-- <div class="col-md-6 mb-3">
+              <label for="validationCustom02">Payment Date</label>
+              <div class="input-group">
+                <input class="form-control validation_border" placeholder="Select a date" type="text"
+                  angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions"
+                  formControlName="paymentdate1" [ngClass]="{ 'is-invalid': submitted && f.paymentdate1.errors }"
+                  #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changePaymenyDate($event)"
+                  (click)="dp2.toggleCalendar()" />
+                <div class="input-group-append">
+                  <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div *ngIf="submitted && f.paymentdate1.errors" class="invalid-feedback">
+                  <div *ngIf="f.paymentdate1.errors.required">Payment Date is required</div>
+                </div>
+              </div>
+            </div> -->
+
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Start Date</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="startdate1" [ngClass]="{ 'is-invalid': submitted && f.startdate1.errors }"
+                                    #dp3="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event)" (click)="dp3.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp3.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                                </div>
+                                <div *ngIf="submitted && f.startdate1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.startdate1.errors.required">Loan Date is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">End Date</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="enddate1" [ngClass]="{ 'is-invalid': submitted && f.enddate1.errors }"
+                                    #dp4="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)" (click)="dp4.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp4.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                                </div>
+                                <div *ngIf="submitted && f.enddate1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.enddate1.errors.required">Payment Date is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <!-- <div class="col-md-6 mb-3">
+              <label for="validationCustom02">Last Date</label>
+              <div class="input-group">
+                <input class="form-control validation_border" placeholder="Select a date" type="text"
+                  angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions"
+                  formControlName="lastdate1" [ngClass]="{ 'is-invalid': submitted && f.lastdate1.errors }"
+                  #dp5="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeLastDate($event)"
+                  (click)="dp5.toggleCalendar()" />
+                <div class="input-group-append">
+                  <button type="button" class="btn btn-secondary" (click)="dp5.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div *ngIf="submitted && f.lastdate1.errors" class="invalid-feedback">
+                  <div *ngIf="f.lastdate1.errors.required">Last Date is required</div>
+                </div>
+              </div>
+            </div> -->
+
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Remarks</label>
+                            <input type="text" formControlName="remarks" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Description</label>
+                            <input type="text" formControlName="description" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+                            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                                <div *ngIf="f.description.errors.required">Description is required</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control validation_border" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+              </select>
+                            <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                                <div *ngIf="f.status.errors.required">Status is required</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Document No.</label>
+                            <input type="text" formControlName="documentno" class="form-control" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Request ID</label>
+                            <input type="text" formControlName="g_APPROVALREQ_ID" class="form-control" readonly>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Approval Status</label>
+                            <input type="text" formControlName="approvalstatus" class="form-control" readonly>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom02"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="addAsEarning1" id="customCheck3">
+                                <label class="custom-control-label" for="customCheck3">Earning in pay slip</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+
+
+
+
+            </app-card>
+
+            <!--  -->
+            <div *ngIf="emploanForm.value.lEmploanId">
+                <app-card cardTitle="Loan Installments Summary" [options]="false">
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Payment Date</th>
+                                    <th>Installment Paid Date</th>
+                                    <th>Amount Repaid</th>
+                                    <th>Total Amount Repaid</th>
+                                    <th>Remaining Amount</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dl of loanLineList" [style.background-color]="dl.isActive=='N' ? '#FF8A8A' : null">
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1">
+                                        </div>
+                                    </td>
+                                    <td>{{dl.loandate}}</td>
+                                    <td>{{dl.ipaidDate}}</td>
+                                    <td>{{dl.installmentamount}}</td>
+                                    <td>{{dl.paidinstallmentamt}}</td>
+                                    <td>{{dl.balance}}</td>
+                                    <td>
+                                        <button *ngIf="!(dl.lspaymentModeId!=null)" class="btn btn-outline-primary" type="button" [disabled]="submitted" (click)="pauseline.show();openPauseForm(dl);" data-toggle="tooltip" data-placement="top" title="Pause">{{dl.isActive=='Y' ? 'Pause Inst.' : 'Unpause Inst.'}}
+                    </button>
+                                    </td>
+                                    <td>
+                                        <button *ngIf="dl.isActive=='N' ? false : dl.paidinstallmentamt==0 || dl.lspaymentModeId!=null" class="btn btn-outline-primary" type="button" [disabled]="submitted" (click)="openAdvPayForm(dl,repayment);" data-toggle="tooltip" data-placement="top" title="Repayment">{{dl.lspaymentModeId!=null ? 'Edit Refund':'Refund Inst.'}}
+                    </button>
+                                    </td>
+                                </tr>
+
+                                <tr *ngIf="loanLineList?.length===0">
+                                    <td colspan="8" style="text-align:center;">No records</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </app-card>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-xl-4 col-md-6">
+    <app-ui-modal #pauseline dialogClass="modal-dialog-centered">
+        <div class="app-modal-header">
+            <h5 class="modal-title text-center">{{pausetext}} Loan Installment</h5>
+        </div>
+        <div class="app-modal-body">
+            <form action="javascript:" class="needs-validation" [formGroup]="pauseform">
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="staticEmail">Month</label>
+                    <div class="col-sm-9">
+                        <input type="text" formControlName="month" class="form-control" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="staticEmail">Remark</label>
+                    <div class="col-sm-9">
+                        <textarea name="" id="" cols="50" rows="2" formControlName="remarks"></textarea>
+
+                    </div>
+                </div>
+
+
+            </form>
+
+
+        </div>
+        <div class="app-modal-footer">
+
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="pauseInstallment();pauseline.hide()">{{pausetext}}</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" data-dismiss="modal" (click)="pauseline.hide()">Cancel</button>
+
+        </div>
+    </app-ui-modal>
+</div>
+
+<div class="col-xl-4 col-md-6">
+    <app-ui-modal #repayment dialogClass="modal-dialog-centered">
+        <div class="app-modal-header">
+            <h5 class="modal-title text-center">Record Repayment</h5>
+        </div>
+        <div class="app-modal-body">
+            <form action="javascript:" class="needs-validation" [formGroup]="advPaymentform">
+                <div class="form-row">
+
+
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Repayment Date</label>
+
+                        <div class="input-group">
+                            <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="ipaymentdate1" #dp6="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeRepaymentDate($event)"
+                                (click)="dp6.toggleCalendar()" />
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-secondary" (click)="dp6.toggleCalendar()">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Repayment Amount</label>
+                        <input type="text" formControlName="paidinstallmentamt" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Payment Mode</label>
+                        <select class="form-control" formControlName="lspaymentModeId">
+              <option *ngFor="let dl of payModeList" value="{{dl.lListitemId}}">{{dl.name}}</option>
+            </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Reference No.</label>
+                        <input type="text" formControlName="paymentrefNo" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                        <label for="validationCustom01">Remark</label>
+                        <input type="text" formControlName="remarks" class="form-control">
+                    </div>
+
+                </div>
+            </form>
+
+
+        </div>
+        <div class="app-modal-footer">
+
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="repaymentAmt();repayment.hide()">Pay</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" data-dismiss="modal" (click)="repayment.hide()">Cancel</button>
+
+        </div>
+    </app-ui-modal>
+</div>

@@ -1,0 +1,362 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="Generate Salary Register" [options]="false">
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="payrollSlipForm">
+                    <div class="form-row">
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <select class="form-control validation_border" formControlName="companyId" (change)="selectcompany(payrollSlipForm.value.companyId)" [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
+
+                                <option *ngFor="let sl of companyList" value="{{sl.gCompanyId}}">{{sl.name}}
+                                </option>
+                            </select>
+                            <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+                                <div *ngIf="f.companyId.errors.required">Company is required</div>
+                            </div>
+                        </div>
+
+
+                        <!-- <div class="col-md-1.5 mb-3">
+                            <label for="validationCustom01">Emp Code</label>
+                            <select class="form-control" formControlName="oldEmpId"
+                                (change)="selectOldEmpId(payrollSlipForm.value.oldEmpId)">
+                                <option></option>
+                                <option *ngFor="let sl of codeList" value="{{sl.oldEmpId}}">{{sl.oldEmpId}}
+                                </option>
+                            </select>
+                        </div> -->
+
+                        <!-- <div class="col-md-1.5 mb-3">
+                            <label for="validationCustom01">Bio.ID</label>
+                            <select class="form-control" formControlName="employeeCode"
+                                (change)="selectEmpCode(payrollSlipForm.value.employeeCode)">
+                                <option></option>
+                                <option *ngFor="let sl of codeList" value="{{sl.value}}">{{sl.value}}
+                                </option>
+                            </select>
+                        </div> -->
+
+                        <!-- </div>
+                        <div class="form-row"> -->
+
+
+                        <div class="col-md-1 mb-3">
+                            <label for="validationCustom01">Month </label>
+                            <select class="form-control validation_border" formControlName="monthId" (change)="getMonthById(payrollSlipForm.value.monthId)" [ngClass]="{ 'is-invalid': submitted && f.monthId.errors }">
+                                <option></option>
+                                <option *ngFor="let sl of monthList" value="{{sl.monthId}}">{{sl.name}}
+                                </option>
+                            </select>
+
+                            <div *ngIf="submitted && f.monthId.errors" class="invalid-feedback">
+                                <div *ngIf="f.monthId.errors.required">Month is required</div>
+                            </div>
+                        </div>
+                        <!-- </div>
+<div class="form-row"> -->
+
+                        <div class="col-md-1 mb-3">
+                            <label for="validationCustom01">Department </label>
+                            <select class="form-control" formControlName="departmentid">
+                                <option></option>
+                                <option *ngFor="let sl of deptList" value="{{sl.deptId}}">{{sl.name}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-1.5 mb-3">
+                            <label for="validationCustom01">Sponsor Type </label>
+                            <select class="form-control" formControlName="sponsortypeid" (change)="selecteSponsorType(payrollSlipForm.value.sponsortypeid)">
+                                <option></option>
+                                <option *ngFor="let sl of sponsorTypeList" value="{{sl.xvisasponsorId}}">
+                                    {{sl.companyName}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Employee </label>
+                            <!-- <select class="form-control" formControlName="employeeId"
+                                (change)="selectEmpId(payrollSlipForm.value.employeeId)">
+                                <option></option>
+                                <option *ngFor="let sl of empList" value="{{sl.employeeId}}">{{sl.displayName}}
+                                </option>
+                            </select> -->
+                            <ng-multiselect-dropdown [placeholder]="" [data]="empList" name="employeeName" formControlName="employeeId" [(ngModel)]="selectedEmpList" [settings]="dropdownSettings" (onSelect)="onEmployeeSelect($event)" (onDeSelect)="onEmployeeDeSelect($event)" (onSelectAll)="onSelectAllEmployee($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+                        <div class="col-md-1.5 mb-3" hidden>
+                            <label for="validationCustom02">From Date</label>
+                            <div class="input-group">
+
+                                <input class="form-control " placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="startDate1" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event)"
+                                    (click)="dp1.toggleCalendar()" />
+                                <!-- <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" disabled (click)="dp1.toggleCalendar()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div> -->
+                                <!-- <div *ngIf="submitted && f.startDate1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.startDate1.errors.required">From Date is required</div>
+                                </div> -->
+                            </div>
+                        </div>
+
+                        <div class="col-md-1.5 mb-3" hidden>
+                            <label for="validationCustom02">To Date</label>
+                            <div class="input-group">
+
+                                <input class="form-control " type="text" placeholder="Select a date" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="endDate1" #dp2="angular-mydatepicker" autocomplete="off" hidden (ngModelChange)="changeEndDate($event)"
+                                    (click)="dp2.toggleCalendar()" />
+                                <!-- <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" disabled (click)="dp2.toggleCalendar()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <div *ngIf="submitted && f.endDate1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.endDate1.errors.required">TO Date is required</div>
+                                </div> -->
+                            </div>
+                        </div>
+
+                        <div class="col-md-1 mb-3">
+                            <label for="validationCustom01">WPS </label>
+                            <select class="form-control" formControlName="wps">
+                                <option></option>
+                                <option *ngFor="let sl of wpsList" value="{{sl.value}}">{{sl.name}}
+                                </option>
+                            </select>
+                        </div>
+
+
+                        <div class="col-md-1 mb-3">
+
+                            <label for="validationCustom02"><br></label>
+                            <div class="input-group">
+
+                                <button type="button" (click)="payrollProcessing()" class="btn btn-success" [disabled]="this.btnLoader" ngbTooltip="btn-success" data-toggle="tooltip" data-placement="top" title="Filter">
+                                    <span *ngIf="this.btnLoader" class="spinner-border spinner-border-sm"
+                                        role="status"></span>
+                                    <span *ngIf="this.btnLoader" class="load-text"></span>
+                                    <span *ngIf="!this.btnLoader" class="btn-text">
+                                        Generate</span>
+                                </button>
+
+                            </div>
+
+                        </div>
+                        &nbsp;&nbsp; &nbsp;
+                        <div class="col-md-1 mb-3">
+                            <label for="validationCustom02"><br></label>
+                            <div class="input-group">
+                                <button type="button" class="btn btn-info" ngbTooltip="btn-success" data-toggle="tooltip" data-placement="top" title="Filter" (click)="publishFun('P')">
+                                   Publish
+                                </button>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-1 mb-3">
+                            <label for="validationCustom02"><br></label>
+                            <div class="input-group">
+                                <button type="button" class="btn btn-warning" ngbTooltip="btn-success" data-toggle="tooltip" data-placement="top" title="Filter" (click)="publishFun('U')">
+                                   Unpublish
+                                </button>
+
+                            </div>
+                        </div>
+
+
+                        <!-- <div class="col-md-1 mb-1">
+                            <label for="validationCustom02"><br></label>
+                            <div class="input-group">
+
+                                <button type="button" (click)="delete()" class="btn btn-danger"
+                                     ngbTooltip="btn-success" data-toggle="tooltip"
+                                    data-placement="top" title="Filter">
+                                    <span class="btn-text"><i class="fa fa-trash"></i></span>
+                                </button>
+                            </div>
+                        </div> -->
+
+                        <!-- <div class="col-md-1 mb-3">
+                            <label for="validationCustom02"><br></label>
+                            <div class="input-group">
+                                <button class="btn btn-outline-primary" type="button" (click)="downloadRegister()" data-toggle="tooltip" data-placement="top" title="Generate Salary Register">
+                                    <i class="fa fa-download"></i>
+                                </button>
+                            </div>
+                        </div> -->
+                        <div class="col-md-1 mb-3">
+                            <label for="validationCustom02"><br></label>
+                            <div class="input-group" role="group" ngbDropdown *ngIf="(flags.importFlag=='Y' && flags.exportFlag=='Y') || (flags.importFlag=='Y' && flags.exportFlag=='N') || (flags.importFlag=='N' && flags.exportFlag=='Y')">
+                                <button type="button" class="btn btn-primary" ngbDropdownToggle>
+                        More
+                      </button>
+                                <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+                                    <a class="dropdown-item" href="javascript:" *ngIf="flags.exportFlag=='Y'" (click)="downloadRegister()">Export Data </a>
+                                    <a class="dropdown-item" href="javascript:" *ngIf="flags.exportFlag=='Y'" (click)="downloadRegisterDSS()">Export Data (DSS) </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+
+                <div *ngIf="payrollSummaryList.summary?.length>0">
+                    <div class="form-row" style="float: right;">
+                        <div class="col-md-12 mb-3">
+                            <input [(ngModel)]="filterString" (ngModelChange)="onFilterChange()" class="form-control" placeholder="Search" />
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+                    <div class="table-responsive tableFixHead">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>WPS</th>
+                                    <th>Emp.Code</th>
+                                    <th>Emp.ID</th>
+                                    <th>Employee Name</th>
+                                    <th>Category</th>
+                                    <th>Department</th>
+                                    <th>Job Title</th>
+                                    <th>Monthly Basic</th>
+                                    <th>HRA</th>
+                                    <th>Transportation Allowance</th>
+                                    <th>Fuel Allowance</th>
+                                    <th>Other Allowance</th>
+                                    <th>Food Allowance</th>
+                                    <th>Fixed OT Allowance</th>
+                                    <th>Telephone Allowance</th>
+                                    <th>Total Salary</th>
+
+                                    <th>Actual Basic</th>
+                                    <th>Actual HRA</th>
+                                    <th>Actual Transportation Allowance</th>
+                                    <th>Actual Fuel Allowance</th>
+
+                                    <th>Actual Other Allowance</th>
+                                    <th>Actual Food Allowance</th>
+                                    <th>Actual Fixed OT Allowance</th>
+                                    <th>Actual Telephone Allowance</th>
+                                    <th>Total Salary Without Overtime</th>
+
+                                    <th>Total Normal Overtime Amount</th>
+                                    <th>Total Friday Overtime Amount</th>
+                                    <th>Total Holiday Overtime Amount</th>
+                                    <th>Total Overtime Amount</th>
+                                    <th>Gross Salary with Overtime</th>
+
+                                    <th>Less Deduction & Advances/Loan</th>
+                                    <th>ADD Misc. (Extra Pay)</th>
+                                    <th>Leave Settlement</th>
+                                    <th>Net Salary (Rounded)</th>
+                                    <th>Payment in WPS / BANK</th>
+                                    <th>Payment In Cash</th>
+
+                                    <th>Pay Days</th>
+                                    <th>Paid Leave (Sick Leave)</th>
+                                    <th>LWP Days (Unpaid)</th>
+                                    <th>Month Days</th>
+
+                                    <th>Total Normal OT Hrs</th>
+                                    <th>Total Friday OT Hrs</th>
+                                    <th>Total Holiday OT Hrs</th>
+                                    <th>Active/InActive</th>
+                                    <th>Date of Joining</th>
+                                    <th>Current Status</th>
+                                    <th>Period</th>
+                                    <th>Cash/Bank Details</th>
+                                    <th>Pay Mode</th>
+                                    <th>Bank/Exchange-House Details</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dl of filtered">
+                                    <td>
+                                        <button class="btn btn-danger" *ngIf="dl.tPayrolljournalId" type="button" (click)="deletePayslip(dl)" data-toggle="tooltip" data-placement="top" title="Payslip Delete">
+                                        <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                    <td>{{dl.wps}}</td>
+                                    <td>{{dl.employeeCode}}</td>
+                                    <td>{{dl.employeeoldId}}</td>
+                                    <td>{{dl.employeeName}}</td>
+                                    <td>{{dl.category}}</td>
+                                    <td>{{dl.department}}</td>
+                                    <td>{{dl.designation}}</td>
+                                    <td>{{dl.monthlyBasic}}</td>
+                                    <td>{{dl.monthlyHra}}</td>
+                                    <td>{{dl.monthlyTrva}}</td>
+                                    <td>{{dl.monthlyFua}}</td>
+                                    <td>{{dl.monthlyOthera}}</td>
+                                    <td>{{dl.monthlyFooda}}</td>
+                                    <td>{{dl.monthlyFixota}}</td>
+                                    <td>{{dl.monthlyTelea}}</td>
+                                    <td>{{dl.monthlyTotsal}}</td>
+
+
+                                    <td>{{dl.paidBasic | number : '.2-2'}}</td>
+                                    <td>{{dl.paidHra | number : '.2-2' }}</td>
+                                    <td>{{dl.paidTrva | number : '.2-2'}}</td>
+                                    <td>{{dl.paidFua}}</td>
+
+                                    <td>{{dl.paidOthera | number : '.2-2'}}</td>
+                                    <td>{{dl.paidFooda | number : '.2-2'}}</td>
+                                    <td>{{dl.paidFixota | number : '.2-2'}}</td>
+                                    <td>{{dl.paidTelea | number : '.2-2'}}</td>
+                                    <td>{{dl.paidtotsalarynoOT | number : '.2-2'}}</td>
+
+                                    <td>{{dl.totalNormalOverTimeAmount | number : '.2-2'}}</td>
+                                    <td>{{dl.totalFridayOverTimeAmount | number : '.2-2'}}</td>
+                                    <td>{{dl.totalHolidayOverTimeAmount | number : '.2-2'}}</td>
+                                    <td>{{dl.totalotAmount | number : '.2-2'}}</td>
+                                    <td>{{dl.paidtotalsalarywithOT | number : '.2-2'}}</td>
+
+                                    <td>{{dl.lessdeductionadvanceloan}}</td>
+                                    <td>{{dl.addMiscExtraPay}}</td>
+                                    <td>{{dl.leavesettlmentAmt}}</td>
+                                    <td>{{dl.netSalaryRoundedOff | number : '.0-0'}}</td>
+                                    <td>{{dl.netSalaryRoundedOff | number : '.0-0'}}</td>
+                                    <td>{{dl.cash | number : '.0-0'}}</td>
+
+                                    <td>{{dl.payDays}}</td>
+                                    <td>{{dl.paidLeave}}</td>
+                                    <td>{{dl.lwp_UnpaidDays}}</td>
+                                    <td>{{dl.monthDays}}</td>
+
+                                    <td>{{dl.totalNormalOverTimeHours}}</td>
+                                    <td>{{dl.totalFridayOverTimeHours}}</td>
+                                    <td>{{dl.totalHolidayOverTimeHours}}</td>
+
+                                    <td>{{dl.isActive}}</td>
+                                    <td>{{dl.doj | date: 'dd-MMM-yyyy'}}</td>
+                                    <td>{{dl.curStatus}}</td>
+                                    <td>{{dl.period}}</td>
+                                    <td>{{dl.bankName}}</td>
+                                    <td>{{dl.paY_MODE}}</td>
+                                    <td>{{dl.transfeR_BRANCH}}</td>
+                                    <td>{{dl.leavesettlmentAmt}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </app-card>
+        </div>
+
+
+    </div>
+</div>

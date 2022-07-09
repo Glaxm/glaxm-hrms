@@ -1,0 +1,252 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{empAttenForm.value.empAttnId ? 'Shift Roster':'Shift Roster'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="empAttenForm.value.empAttnId ? updateEmpAttendance() : addEmpAttendance()" [disabled]="submitted">{{empAttenForm.value.empAttnId ? 'Update' : 'Add'}}</button>                        &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{empAttenForm.value.empAttnId ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="empAttenForm">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control " formControlName="holdingId" [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }" disabled>
+                                <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.holdingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.holdingId.errors.required">Holding is required</div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <select class="form-control validation_border" formControlName="companyId" (change)="selectcompany(empAttenForm.value.companyId)" [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
+                                <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+                                <div *ngIf="f.companyId.errors.required">Company is required</div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Attendance From</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="dateFrom1" [ngClass]="{ 'is-invalid': submitted && f.dateFrom1.errors }"
+                                    #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeFromDate($event)" (click)="dp1.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                                 <i class="fa fa-search" aria-hidden="true"></i>
+                               </button>
+                                </div>
+                                <div *ngIf="submitted && f.dateFrom1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.dateFrom1.errors.required">Attendance From is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Attendance To</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="dateTo1" [ngClass]="{ 'is-invalid': submitted && f.dateTo1.errors }" #dp2="angular-mydatepicker"
+                                    autocomplete="off" (ngModelChange)="changeToDate($event)" (click)="dp2.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                                 <i class="fa fa-search" aria-hidden="true"></i>
+                               </button>
+                                </div>
+                                <div *ngIf="submitted && f.dateTo1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.dateTo1.errors.required">Attendance To is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Employee</label>
+                            <!-- <select class="form-control validation_border" formControlName="employeeId"  
+                            [ngClass]="{ 'is-invalid': submitted && f.employeeId.errors }">
+                                <option *ngFor="let dl of empList" value="{{dl .employeeId}}">{{dl.displayName}}({{dl.value}})</option>
+                            </select> -->
+                            <ng-multiselect-dropdown name="city" [placeholder]="'Select Employee'" [data]="empList" formControlName="employee" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)">
+                            </ng-multiselect-dropdown>
+
+                            <div *ngIf="submitted && f.employeeId.errors" class="invalid-feedback">
+                                <div *ngIf="f.employeeId.errors.required">Employee To is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Description</label>
+                            <input type="text" formControlName="remark" class="form-control">
+
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control" formControlName="status">
+                                <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Shift Name</label>
+                            <select class="form-control" formControlName="xShiftruleId" [ngClass]="{ 'is-invalid': submitted && f.xShiftruleId.errors }" (change)="selectShiftRule(empAttenForm.value.xShiftruleId)">
+                                <option *ngFor="let dl of shiftRuleList" value="{{dl.shiftRuleId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.xShiftruleId.errors" class="invalid-feedback">
+                                <div *ngIf="f.xShiftruleId.errors.required">Shift Rule is required</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Start Time</label>
+                            <input type="time" formControlName="startTime" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.startTime.errors }">
+                            <div *ngIf="submitted && f.startTime.errors" class="invalid-feedback">
+                                <div *ngIf="f.startTime.errors.required">Start Time is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">End Time</label>
+                            <input type="time" formControlName="endTime" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.endTime.errors }">
+                            <div *ngIf="submitted && f.endTime.errors" class="invalid-feedback">
+                                <div *ngIf="f.endTime.errors.required">End Time is required</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Break Start</label>
+                            <input type="time" formControlName="breakStart" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Break End</label>
+                            <input type="time" formControlName="breakEnd" class="form-control">
+                        </div>
+
+                    </div>
+
+
+                </form>
+
+
+
+            </app-card>
+
+            <!-- ------------------------------------------------------------------------------------------ -->
+            <div *ngIf="empAttenForm.value.empAttnId">
+                <app-card [hidHeader]="true" [options]="false">
+
+
+                    <!-- //////////////////////// -->
+                    <form [formGroup]="form">
+                        <div class="col-sm-12">
+                            <div class="row">
+
+                                <div class="col-xl-3" *ngFor="let al of empAttnLinesList; let i=index">
+                                    <app-card [hidHeader]="true">
+
+
+                                        <div class="row mt-2">
+                                            <div class="col-sm-6">
+                                                <time datetime="2014-09-20" class="icon">
+                                            <em>{{al.dateAttn | date:'EEEE'}}</em>
+                                            <strong>{{al.dateAttn | date: 'MMMM'}}</strong>
+                                            <span>{{al.dateAttn | date: 'dd'}}</span>
+                                        </time>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <span class="d-block">
+                                        <div class="custom-control custom-checkbox">
+                                           
+                                            <input type="checkbox" class="custom-control-input" 
+                                            id="presentCheck{{i}}" [checked]="al.isPresent=='Y'? true:false" (change)="changeAtten(al,'P')">
+                                            <label class="custom-control-label" for="presentCheck{{i}}">Present</label>
+                                          </div>
+                                      </span>
+                                                <br>
+                                                <span class="d-block">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" 
+                                            id="halfdayCheck{{i}}" [disabled]="'Friday'==getDay(al.dateAttn | date:'EEEE')"
+                                            [checked]="al.processed=='Y'? true:false" (change)="changeAtten(al,'H')">
+                                            <label class="custom-control-label" for="halfdayCheck{{i}}">Halfday</label>
+                                          </div>
+                                      </span>
+                                            </div>
+
+                                        </div>
+
+
+                                    </app-card>
+
+
+
+                                </div>
+
+                                <!-- <div class="col-xl-3">
+                            <app-card [hidHeader]="true">
+                                <time datetime="2014-09-20" class="icon">
+                                    <em>Monday</em>
+                                    <strong>September</strong>
+                                    <span>02</span>
+                                </time>
+                            </app-card>
+
+                        </div>
+
+
+                        <div class="col-xl-3">
+                            <app-card [hidHeader]="true">
+                                <time datetime="2014-09-20" class="icon">
+                                    <em>Tuesday</em>
+                                    <strong>September</strong>
+                                    <span>03</span>
+                                </time>
+                            </app-card>
+                        </div>
+
+                        <div class="col-xl-3">
+                            <app-card [hidHeader]="true">
+                                <time datetime="2014-09-20" class="icon">
+                                    <em>Wednesday</em>
+                                    <strong>September</strong>
+                                    <span>04</span>
+                                </time>
+                            </app-card>
+                        </div> -->
+
+                            </div>
+                        </div>
+                    </form>
+
+                </app-card>
+            </div>
+
+        </div>
+    </div>
+</div>

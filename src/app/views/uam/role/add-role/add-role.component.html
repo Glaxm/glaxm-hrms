@@ -1,0 +1,317 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{roleForm.value.roleId ? 'Edit Role':'Add Role'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addRole()" *ngIf="!isView">{{roleForm.value.roleId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="roleForm">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Name</label>
+                            <input type="text" formControlName="roleName" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.roleName.errors }">
+                            <div *ngIf="submitted && f.roleName.errors" class="invalid-feedback">
+                                <div *ngIf="f.roleName.errors.required">Name is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control validation_border" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                <option *ngFor="let sl of statusList" value="{{sl.valueCode}}">{{sl.valueName}}</option>
+                <!-- <option>Inactive</option> -->
+              </select>
+                            <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                                <div *ngIf="f.status.errors.required">Status is required</div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Start Date</label>
+                            <div class="input-group">
+
+                                <input class="form-control" type="text" placeholder="Select a date" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="startDate1" [ngClass]="{ 'is-invalid': submitted && f.startDate1.errors }" #dp1="angular-mydatepicker"
+                                    autocomplete="off" (ngModelChange)="changeStartDate($event)" (click)="dp1.toggleCalendar()" />
+                          
+                                <div *ngIf="submitted && f.startDate1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.startDate1.errors.required">Startdate is required</div>
+                                </div>
+                            </div>
+                        </div> -->
+
+
+                        <!-- <div class="col-md-4 mb-3">
+              <label for="validationCustom02">End Date</label>
+              <input type="text" class="form-control">
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div> -->
+
+                    </div>
+
+                    <div class="form-row">
+                        <!-- <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">End Date</label>
+                            <div class="input-group">
+
+                                <input class="form-control" placeholder="Select a date" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" type="text" formControlName="endDate1" #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)"
+                                    (click)="dp2.toggleCalendar()" />
+                         
+                            </div>
+                        </div> -->
+
+
+                        <!-- <div class="col-md-4 mb-3">
+              <label for="validationCustom02">Description</label>
+              <textarea class="form-control" formControlName="roleDesc" id="exampleFormControlTextarea1" rows="3"></textarea>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+            -->
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Description</label>
+                            <input type="text" formControlName="roleDesc" class="form-control">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-md-3 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom03"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="viewallRecords1" id="customCheck7">
+                                <label class="custom-control-label" for="customCheck7">View All Records</label>
+                            </div>
+                        </div> -->
+
+                    </div>
+                    <!-- <hr>
+          <div class="text-center">
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addRole()"  *ngIf="!isView">{{roleForm.value.roleId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+          </div> -->
+
+                </form>
+
+                <!-- ////////////////////////////////////////////////////////// -->
+            </app-card>
+        </div>
+        <div *ngIf="!isrolemodule && roleForm.value.roleId">
+            <app-card cardTitle="Role Module Summary" [options]="false">
+                <!--  -->
+
+                <!-- <div class="col-md-6 " style="position: absolute;left: 75%;top: 5%;">
+                <button type="button" class="btn btn-primary btn-sm" (click)="addRoleModule();isrolemodule=true" *ngIf="!isView">Add</button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-primary btn-sm" (click)="editRoleModule();isrolemodule=true" *ngIf="!isView">Edit</button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-primary btn-sm" (click)="editRoleModule();isrolemodule=true">View</button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-primary btn-sm" (click)="deleteRoleModule()" *ngIf="!isView">Delete</button>
+            </div> -->
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+
+                        <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="addRoleModule();isrolemodule=true" *ngIf="!isView" data-toggle="tooltip" data-placement="top" title="Add">
+              <i class="fa fa-plus"></i>
+              </button>&nbsp;&nbsp;
+                        <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="editRoleModule();isrolemodule=true" *ngIf="!isView" data-toggle="tooltip" data-placement="top" title="Edit">
+             <i class="fas fa-pencil-alt"></i>
+             </button>&nbsp;&nbsp;
+                        <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="editRoleModule();isrolemodule=true" data-toggle="tooltip" data-placement="top" title="View">
+            <i class="fa fa-eye"></i>
+            </button>&nbsp;&nbsp;
+                        <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="deleteRoleModule()" *ngIf="!isView" data-toggle="tooltip" data-placement="top" title="Delete">
+           <i class="fa fa-trash"></i>
+           </button>&nbsp;&nbsp;
+                        <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="enableFilter = !enableFilter;" [ngClass]="{'filterClass': enableFilter}" data-toggle="tooltip" data-placement="top" title="Filter">
+              <i class="fa fa-filter"></i>
+              </button>
+                    </div>
+                </nav>
+
+                <div class="table-responsive tableFixHead">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Module</th>
+                                <th>Add</th>
+                                <th>Edit</th>
+                                <th>View</th>
+                                <th>Import</th>
+                                <th>Export</th>
+                                <th>For Self</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let rm of roleModuleList">
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(rm)">
+                                    </div>
+                                </td>
+                                <td>{{rm.moduleName}}</td>
+                                <td>{{rm.add}}</td>
+                                <td>{{rm.edit}}</td>
+                                <td>{{rm.view}}</td>
+                                <td>{{rm.import}}</td>
+                                <td>{{rm.export}}</td>
+                                <td>{{rm.forself}}</td>
+                            </tr>
+                            <!-- <tr>
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+                <!--  -->
+            </app-card>
+        </div>
+        <div *ngIf="isrolemodule">
+            <app-card cardTitle="Add Role Module" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="saveRoleModule()" *ngIf="!isView">{{roleModuleForm.value.userRoleModuleId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="backrolemodule()">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="roleModuleForm">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Module</label>
+                            <select class="form-control" formControlName="moduleId" [ngClass]="{ 'is-invalid': submitted1 && f1.moduleId.errors }">
+                  <option *ngFor="let ml of moduleList" value="{{ml.moduleId}}">{{ml.moduleName}}</option>
+                </select>
+                            <div *ngIf="submitted1 && f1.moduleId.errors" class="invalid-feedback">
+                                <div *ngIf="f1.moduleId.errors.required">Module is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                <option *ngFor="let sl of statusList" value="{{sl.valueCode}}">{{sl.valueName}}</option>
+              </select>
+                            <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                                <div *ngIf="f.status.errors.required">Status is required</div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Start Date</label>
+                            <div class="input-group">
+
+                                <input class="form-control" placeholder="Select a date" angular-mydatepicker name="startDate11" [options]="myDatePickerOptions" type="text" formControlName="startDate11" [ngClass]="{ 'is-invalid': submitted1 && f.startDate11.errors }" #dp3="angular-mydatepicker"
+                                    autocomplete="off" (ngModelChange)="changeStartDate1($event)" (click)="dp3.toggleCalendar()" />
+                               
+                                <div *ngIf="submitted1 && f1.startDate11.errors" class="invalid-feedback">
+                                    <div *ngIf="f1.startDate11.errors.required">Startdate is required</div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                    </div>
+
+                    <div class="form-row">
+                        <!-- <div class="col-md-4 mb-3">
+                            <label for="validationCustom02">End Date</label>
+                            <div class="input-group">
+
+                                <input class="form-control" placeholder="Select a date" angular-mydatepicker name="endDate11" [options]="myDatePickerOptions" type="text" formControlName="endDate11" #dp4="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate1($event)"
+                                    (click)="dp4.toggleCalendar()" />
+                            
+                            </div>
+                        </div> -->
+
+
+
+                        <div class="col-md-1 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom01"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="createFlag1" id="customCheck1">
+                                <label class="custom-control-label" for="customCheck1">Add</label>
+                            </div>
+                        </div>
+                        <div class="col-md-1 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom02"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="editFlag1" id="customCheck2">
+                                <label class="custom-control-label" for="customCheck2">Edit</label>
+                            </div>
+                        </div>
+                        <div class="col-md-1 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom03"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="readFlag1" id="customCheck3">
+                                <label class="custom-control-label" for="customCheck3">View</label>
+                            </div>
+                        </div>
+                        <div class="col-md-1 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom04"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="deleteFlag1" id="customCheck4">
+                                <label class="custom-control-label" for="customCheck4">Delete</label>
+                            </div>
+                        </div>
+
+                        <!-- ========================== -->
+
+                        <div class="col-md-1 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom03"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="importFlag1" id="customCheck5">
+                                <label class="custom-control-label" for="customCheck5">Import</label>
+                            </div>
+                        </div>
+                        <div class="col-md-1 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom04"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="exportFlag1" id="customCheck6">
+                                <label class="custom-control-label" for="customCheck6">Export</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom04"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="forSelf1" id="customCheck8">
+                                <label class="custom-control-label" for="customCheck8">For Self</label>
+                            </div>
+                        </div>
+
+                        <!-- ============================ -->
+                        <!--  -->
+                    </div>
+
+
+                    <div class="form-row">
+
+
+                    </div>
+                </form>
+
+            </app-card>
+        </div>
+
+    </div>
+</div>

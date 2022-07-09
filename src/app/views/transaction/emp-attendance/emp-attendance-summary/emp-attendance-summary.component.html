@@ -1,0 +1,192 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="Shift Roster Summary" [options]="false">
+            <!--  -->
+            <!-- <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -5%;">
+                <ul _ngcontent-epm-c40="" class="nav">
+                </ul>
+                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                    <button type="button" class="btn btn-primary btn-sm" (click)="add()">Add</button>&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary btn-sm" (click)="edit()">Edit</button>&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary btn-sm" (click)="view()">View</button>&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary btn-sm" (click)="delete()">Delete</button>
+                </div>
+            </nav> -->
+
+            <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                <ul _ngcontent-epm-c40="" class="nav">
+                </ul>
+                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                    <!-- <button type="button" class="btn btn-primary btn-sm" (click)="add()">Add</button>&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary btn-sm" (click)="edit()">Edit</button>&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary btn-sm" (click)="view()">View</button>&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary btn-sm" (click)="delete()">Delete</button>&nbsp;&nbsp; -->
+
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="add()" data-toggle="tooltip" data-placement="top" *ngIf="flags.createFlag=='Y'" title="Add">
+            <i class="fa fa-plus"></i>
+          </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="edit()" data-toggle="tooltip" data-placement="top" *ngIf="flags.editFlag=='Y'" title="Edit">
+            <i class="fas fa-pencil-alt"></i>
+          </button>&nbsp;
+                    <!-- <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+               type="button" (click)="fileUploadPopup.show();fileUploadForm.reset()" data-toggle="tooltip" data-placement="top"
+               title="Upload">
+              <i class="fa fa-upload"></i>
+              </button>&nbsp; -->
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="delete()" data-toggle="tooltip" data-placement="top" *ngIf="flags.deleteFlag=='Y'" title="Delete">
+            <i class="fa fa-trash"></i>
+          </button>&nbsp;
+                    <button class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="enableFilter = !enableFilter;" [ngClass]="{'filterClass': enableFilter}" data-toggle="tooltip" data-placement="top" title="Filter">
+                <i class="fa fa-filter"></i>
+                </button>&nbsp;
+
+                    <div class="btn-group" role="group" ngbDropdown *ngIf="(flags.importFlag=='Y' && flags.exportFlag=='Y') || (flags.importFlag=='Y' && flags.exportFlag=='N') || (flags.importFlag=='N' && flags.exportFlag=='Y')">
+                        <button type="button" class="btn btn-primary" ngbDropdownToggle>
+              More
+            </button>
+                        <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu style="right: 0;
+                    left: auto;">
+                            <a class="dropdown-item" *ngIf="flags.importFlag=='Y'" href="javascript:" (click)="fileUpload.show();fileUploadFormAssignShift.reset()">Upload Data - Shift </a>
+                            <a class="dropdown-item" href="javascript:" (click)="sampleFileFormat()">Download Excel File Format - Shift </a>
+
+                        </div>
+                    </div>
+
+                </div>
+            </nav>
+
+            <div class="col-md-12 mb-3">
+
+                <div style="float: left;">
+                    <span style="font-size: large;">
+            {{weekList[0].date | date: 'dd-MMM-yyyy'}} to {{weekList[6].date | date: 'dd-MMM-yyyy'}}
+          </span>
+                </div>
+
+                <div style="float: right;">
+
+                    <div _ngcontent-dde-c114="" role="group" aria-label="button groups" class="btn-group"><button _ngcontent-dde-c114="" type="button" class="btn btn-primary" (click)="previousWeek(weekList)">Previous</button><button _ngcontent-dde-c114="" type="button" class="btn btn-secondary" (click)="currentWeek()">Today</button>
+                        <button _ngcontent-dde-c114="" type="button" class="btn btn-primary" (click)="nextWeek(weekList)">Next</button>
+                    </div>
+                </div>
+                <br>
+
+            </div>
+
+
+            <!-- <div class="table-responsive tableFixHead">
+
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr style="font-size: medium;text-align: center;">
+                            <th style="width: 5%;">Name</th>
+                            <th>{{weekList[0].day}}<br>{{weekList[0].date | date: 'dd-MMM-yyyy'}}</th>
+                            <th>{{weekList[1].day}}<br>{{weekList[1].date | date: 'dd-MMM-yyyy'}}</th>
+                            <th>{{weekList[2].day}}<br>{{weekList[2].date | date: 'dd-MMM-yyyy'}}</th>
+                            <th>{{weekList[3].day}}<br>{{weekList[3].date | date: 'dd-MMM-yyyy'}}</th>
+                            <th>{{weekList[4].day}}<br>{{weekList[4].date | date: 'dd-MMM-yyyy'}}</th>
+                            <th>{{weekList[5].day}}<br>{{weekList[5].date | date: 'dd-MMM-yyyy'}}</th>
+                            <th>{{weekList[6].day}}<br>{{weekList[6].date | date: 'dd-MMM-yyyy'}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dl of attenSummaryList" (click)="selectTableRow(dl)">
+                            <td>{{dl.empname}}</td>
+                            <td>
+                                {{dl.weekwisedata[0].shiftname}}<br>
+
+                            </td>
+                            <td>
+                                {{dl.weekwisedata[1].shiftname}}<br>
+
+                            </td>
+                            <td>
+                                {{dl.weekwisedata[2].shiftname}}<br>
+                            </td>
+                            <td>
+                                {{dl.weekwisedata[3].shiftname}}<br>
+                            </td>
+                            <td>
+                                {{dl.weekwisedata[4].shiftname}}<br>
+                            </td>
+                            <td>
+                                {{dl.weekwisedata[5].shiftname}}<br>
+                            </td>
+                            <td>
+                                {{dl.weekwisedata[6].shiftname}}<br>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div> -->
+
+            <datatable1 [dataset]=data [enableFilter]="enableFilter" (searchEvent)="search($event)" (aTagEvent)="getRows($event)" [id]="'airsectorId'">
+                <column1 [width1]=2 [value]="'empAttnId'" [header]="''" [type]="'radio'" [sortVal]="'ASC'"></column1>
+                <column1 [width1]=10 [value]="'empname'" [header]="'Name'" [sortVal]=""></column1>
+                <column1 [width1]=10 [value]="'shiftname_1'" [header]="weekList[0].date | date: 'dd-MMM-yyyy'" [sortVal]=""></column1>
+                <column1 [width1]=10 [value]="'shiftname_2'" [header]="weekList[1].date | date: 'dd-MMM-yyyy'" [sortVal]=""></column1>
+                <column1 [width1]=10 [value]="'shiftname_3'" [header]="weekList[2].date | date: 'dd-MMM-yyyy'" [sortVal]=""></column1>
+                <column1 [width1]=10 [value]="'shiftname_4'" [header]="weekList[3].date | date: 'dd-MMM-yyyy'" [sortVal]=""></column1>
+                <column1 [width1]=10 [value]="'shiftname_5'" [header]="weekList[4].date | date: 'dd-MMM-yyyy'" [sortVal]=""></column1>
+                <column1 [width1]=10 [value]="'shiftname_6'" [header]="weekList[5].date | date: 'dd-MMM-yyyy'" [sortVal]=""></column1>
+                <column1 [width1]=10 [value]="'shiftname_7'" [header]="weekList[6].date | date: 'dd-MMM-yyyy'" [sortVal]=""></column1>
+
+            </datatable1>
+
+        </app-card>
+    </div>
+</div>
+
+
+<!--  -->
+
+<div class="col-xl-4 col-md-6">
+    <app-ui-modal #fileUploadPopup dialogClass="modal-dialog-centered">
+        <div class="app-modal-header">
+            <h5 class="modal-title text-center">File Upload</h5>
+        </div>
+        <div class="app-modal-body">
+            <form action="javascript:" class="needs-validation" [formGroup]="fileUploadForm">
+
+                <div class="form-group">
+                    <input type="file" autocomplete="off" formControlName="fileName" class="form-control" (change)="fileChange($event)" name="imagePath" id="file" placeholder="Upload File" style="border: none;">
+                </div>
+
+            </form>
+
+
+        </div>
+        <div class="app-modal-footer">
+
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="fileUploadFun($event);fileUploadPopup.hide()">Upload</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" data-dismiss="modal" (click)="fileUploadPopup.hide()">Close</button>
+
+        </div>
+    </app-ui-modal>
+</div>
+
+<div class="col-xl-4 col-md-6">
+    <app-ui-modal #fileUpload dialogClass="modal-dialog-centered">
+        <div class="app-modal-header">
+            <h5 class="modal-title text-center">Assign Shift</h5>
+        </div>
+        <div class="app-modal-body">
+            <form action="javascript:" class="needs-validation" [formGroup]="fileUploadFormAssignShift">
+
+                <div class="form-group">
+                    <input type="file" autocomplete="off" formControlName="fileName" class="form-control" (change)="fileChange($event)" name="imagePath" id="file" placeholder="Upload File" style="border: none;">
+                </div>
+
+            </form>
+
+
+        </div>
+        <div class="app-modal-footer">
+
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="fileUpload1($event,'ASSIGNSHFIT');fileUpload.hide()">Upload</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" data-dismiss="modal" (click)="fileUpload.hide()">Close</button>
+
+        </div>
+    </app-ui-modal>
+</div>

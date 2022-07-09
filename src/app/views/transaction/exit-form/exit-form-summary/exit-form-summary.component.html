@@ -1,0 +1,116 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="End of Service" [options]="false">
+
+            <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                <ul _ngcontent-epm-c40="" class="nav">
+                </ul>
+                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" *ngIf="flags.createFlag=='Y'" (click)="add()" data-toggle="tooltip" data-placement="top" title="Add">
+                <i class="fa fa-plus"></i>
+                </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" *ngIf="flags.editFlag=='Y'" (click)="edit()" data-toggle="tooltip" data-placement="top" title="Edit">
+               <i class="fas fa-pencil-alt"></i>
+               </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" *ngIf="flags.readFlag=='Y'" (click)="view()" data-toggle="tooltip" data-placement="top" title="View">
+              <i class="fa fa-eye"></i>
+              </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" *ngIf="flags.deleteFlag=='Y'" (click)="delete()" data-toggle="tooltip" data-placement="top" title="Delete">
+             <i class="fa fa-trash"></i>
+             </button>&nbsp;
+
+                    <div class="btn-group" role="group" ngbDropdown *ngIf="(flags.importFlag=='Y' && flags.exportFlag=='Y') || (flags.importFlag=='Y' && flags.exportFlag=='N') || (flags.importFlag=='N' && flags.exportFlag=='Y')">
+                        <button type="button" class="btn btn-primary" ngbDropdownToggle>
+                      More
+                    </button>
+                        <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu style="right: 0;
+                    left: auto;">
+
+                            <a class="dropdown-item" href="javascript:" *ngIf="flags.importFlag=='Y'" (click)="fileUploadPopup.show();fileUploadForm.reset()">Upload Data</a>
+                            <a class="dropdown-item" href="javascript:" *ngIf="flags.exportFlag=='Y'" (click)="exporttoexcel()">Export Data</a>
+                            <a class="dropdown-item" href="javascript:" (click)="exportLeaveFormat()">Download Excel File Format</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="form-row" style="float: right;">
+                <div class="col-md-12 mb-3">
+                    <input [(ngModel)]="filterString" (ngModelChange)="onFilterChange()" class="form-control" placeholder="Search" />
+                </div>
+            </div>
+
+
+
+            <div class="table-responsive tableFixHead">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Form No.</th>
+                            <th>Emp ID</th>
+                            <th>Emp Code</th>
+                            <th>Employee</th>
+                            <th>Department</th>
+                            <th>Designation</th>
+                            <th>Date of Joining</th>
+                            <th>Last Working Date</th>
+                            <!-- <th>View/Print</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dl of filtered" (click)="selectTableRow(dl)">
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="selectRadioBtn=true;getDataUsingRedioBtn(dl)">
+                                </div>
+                            </td>
+                            <td>{{dl.documentno}}</td>
+                            <td>{{dl.oldEmpId}}</td>
+                            <td>{{dl.empcode}}</td>
+                            <td>{{dl.empname}}</td>
+                            <td>{{dl.department}}</td>
+                            <td>{{dl.designation}}</td>
+                            <td>{{dl.joiningDt | date: 'dd-MMM-yyyy'}}</td>
+                            <td>{{dl.lastworkDay | date: 'dd-MMM-yyyy'}}</td>
+                            <!-- <td>
+                                <button class="btn btn-white btn-icon btn-outline-success btn-sm" type="button" (click)="selectRadioBtn=true;opeForm(dl,'EOSB')">EOSB Form</button> &nbsp;&nbsp;
+                                <button class="btn btn-white btn-icon btn-outline-success btn-sm" type="button" (click)="selectRadioBtn=true;opeForm(dl,'RESIGN')">Resignation</button>
+                            </td> -->
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <!--  -->
+        </app-card>
+    </div>
+</div>
+
+
+<div class="col-xl-4 col-md-6">
+    <app-ui-modal #fileUploadPopup dialogClass="modal-dialog-centered">
+        <div class="app-modal-header">
+            <h5 class="modal-title text-center">Exit Employee</h5>
+        </div>
+        <div class="app-modal-body">
+            <form action="javascript:" class="needs-validation" [formGroup]="fileUploadForm">
+
+                <div class="form-group">
+                    <input type="file" autocomplete="off" formControlName="fileName" class="form-control" (change)="fileChange($event)" name="imagePath" id="file" placeholder="Upload File" style="border: none;">
+                </div>
+
+            </form>
+
+
+        </div>
+        <div class="app-modal-footer">
+
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="fileUploadFun($event,'EMPINFO');fileUploadPopup.hide()">Upload</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" data-dismiss="modal" (click)="fileUploadPopup.hide()">Close</button>
+
+        </div>
+    </app-ui-modal>
+</div>

@@ -1,0 +1,190 @@
+
+<div class="row">
+    <div class="col-sm-12" *ngIf="!isOpen">
+        <app-card cardTitle="Leave Summary" [options]="false">
+          
+
+            <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                <ul _ngcontent-epm-c40="" class="nav">
+                </ul>
+                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                  
+                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+                 type="button" (click)="add()" data-toggle="tooltip" data-placement="top"
+                 title="Add">
+                <i class="fa fa-plus"></i>
+                </button>&nbsp;
+                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+                type="button" (click)="edit()" data-toggle="tooltip" data-placement="top"
+                title="Edit">
+               <i class="fas fa-pencil-alt"></i>
+               </button>&nbsp;
+               <!-- <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+               type="button" (click)="view()" data-toggle="tooltip" data-placement="top"
+               title="View">
+              <i class="fa fa-eye"></i>
+              </button>&nbsp;
+              <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+              type="button" (click)="delete()" data-toggle="tooltip" data-placement="top"
+              title="Delete">
+             <i class="fa fa-trash"></i>
+             </button>&nbsp;
+                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button"
+                (click)="enableFilter = !enableFilter;"
+                [ngClass]="{'filterClass': enableFilter}" data-toggle="tooltip" data-placement="top"
+                title="Filter">
+                <i class="fa fa-filter"></i>
+                </button> -->
+                </div>
+            </nav>
+           
+            
+            <div class="table-responsive">
+               
+                <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Leave Item</th>
+                    <th>Days</th>
+                  
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let dl of empleaveList">
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(dl)">
+                        </div>
+                    </td>
+                    <td>{{dl.X_LEAVEITEM_ID}}</td>
+                    <td>{{dl.DAYS}}</td>
+                   
+                </tr>
+               
+                </tbody>
+                </table>
+            </div>
+            <!-- ---------------------------------------------------------------- -->
+
+         
+            <!-- ---------------------------------------------------------------- -->
+        </app-card>
+    </div>
+
+    <div class="col-sm-12" *ngIf="isOpen">
+        <app-card cardTitle="{{false ? 'Edit Pay Items':'Add Pay Items'}}"  [options]="false">
+ 
+   
+        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+          <ul _ngcontent-epm-c40="" class="nav">
+          </ul>
+          <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdatePayItem()">{{itemId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger"  (click)="isOpen=false;itemId=undefined;">{{false ? 'Back':'Cancel'}}</button>
+          </div>
+      </nav>
+
+      <form action="javascript:" class="needs-validation" novalidate [formGroup]="empleaveForm">
+           
+        <div class="form-row">
+
+          <div class="col-md-6 mb-3">
+            <label for="validationCustom01">Employee</label>
+            <input type="text" formControlName="empName" disabled class="form-control">
+           
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="validationCustom01">Leave item</label>
+            <select class="form-control validation_border" formControlName="X_LEAVEITEM_ID  " [ngClass]="{ 'is-invalid': payItemsubmitted && pi.units.errors }">
+              <option *ngFor="let dl of leaveitemList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+            </select>
+            <div *ngIf="payItemsubmitted && pi.X_LEAVEITEM_ID  .errors" class="invalid-feedback">
+              <div *ngIf="pi.X_LEAVEITEM_ID  .errors.required">Leave item is required</div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="validationCustom02">Effective Date</label>
+           <div class="input-group">
+             <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker 
+             name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="EFFECTIVEDATE"
+             [ngClass]="{ 'is-invalid': payItemsubmitted && pi.EFFECTIVEDATE.errors }"
+              #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEffectiveDate($event)" (click)="dp1.toggleCalendar()"/>
+             <div class="input-group-append">
+               <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                 <i class="fa fa-search" aria-hidden="true"></i>
+               </button>
+             </div>
+             <div *ngIf="payItemsubmitted && pi.EFFECTIVEDATE.errors" class="invalid-feedback">
+              <div *ngIf="pi.EFFECTIVEDATE.errors.required">Effective Date is required</div>
+            </div>
+           </div>
+         </div>
+         <div class="col-md-6 mb-3">
+          <label for="validationCustom01">Per Units</label>
+          <select class="form-control validation_border" formControlName="UNITS">
+              <option *ngFor="let dl of unitList" value="{{dl.valueCode}}">{{dl.valueName}}
+              </option>
+          </select>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="validationCustom01">Max. Accumulated Days</label>
+        <input type="text" formControlName="MAXIMUMDAYS" class="form-control">
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="custom-control custom-checkbox">
+          <label for="validationCustom03"></label><br>
+          <input type="checkbox" class="custom-control-input"
+              formControlName="ISENCASH" id="ISENCASH">
+          <label class="custom-control-label" for="ISENCASH">Encash
+              </label>
+      </div>
+  </div>
+  <div class="col-md-6 mb-3">
+    <div class="custom-control custom-checkbox">
+        <label for="validationCustom03"></label><br>
+        <input type="checkbox" class="custom-control-input"
+            formControlName="MAKEPROVISION" id="MAKEPROVISION">
+        <label class="custom-control-label" for="MAKEPROVISION">Make Provision
+            </label>
+    </div>
+</div>
+<div class="col-md-6 mb-3">
+  <label for="validationCustom01">Pay Item</label>
+  <select class="form-control validation_border" formControlName="X_PAYITEM_ID">
+      <option *ngFor="let dl of payitemList" value="{{dl.valueCode}}">{{dl.valueName}}
+      </option>
+  </select>
+</div>
+
+<div class="col-md-6 mb-3">
+  <label for="validationCustom02">Date Last Run</label>
+ <div class="input-group">
+   <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker 
+   name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="DATELASTRUN"
+   [ngClass]="{ 'is-invalid': payItemsubmitted && pi.DATELASTRUN.errors }"
+    #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEffectiveDate($event)" (click)="dp1.toggleCalendar()"/>
+   <div class="input-group-append">
+     <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+       <i class="fa fa-search" aria-hidden="true"></i>
+     </button>
+   </div>
+ 
+ </div>
+</div>
+        </div>
+         
+  
+
+        
+
+      </form>
+
+        
+        <!-- ////////////////////////////////////////////////////////// -->
+        </app-card>
+    </div>
+</div>
+   

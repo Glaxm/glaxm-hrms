@@ -1,0 +1,33 @@
+export class PreApproval{
+            lEmpabcenceId:any;
+            companyId: any;
+            holdingId: any;
+            isActive:any;
+            createdBy: any;
+            updatedBy:any;
+            created: any;
+            updated: any;
+            xEmployeeId: any;
+            datetrx: any;
+            lsAbsencetypeId: any;
+            lsAbsenceRsnId: any;
+            startdate: any;
+            enddate: any;
+            startTime:any;
+            endTime: any;
+            totalTime: any;
+            description: any;
+            path: any;
+            documentno: any;
+            g_APPROVALREQ_ID: any;
+            empname: any;
+            approvalstatus: any;
+            trxdt:any;
+            endate:any;
+            stdate:any;
+            file:any;
+            preapprovallatecome:any;
+            punchin:any;
+            punchout:any;
+            isValidate:any;
+}

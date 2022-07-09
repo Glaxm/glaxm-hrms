@@ -1,0 +1,143 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{monthyearForm.value.monthId ? 'Edit Financial Year':'Add Financial Year'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateMonthyear()" *ngIf="!isView">{{monthyearForm.value.monthId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="monthyearForm">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" disabled formControlName="holdingId" [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }">
+                    <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+                </select>
+                            <div *ngIf="submitted && f.holdingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.holdingId.errors.required">Holding is required</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Close for Processing</label>
+                            <ng-multiselect-dropdown [placeholder]="" [data]="companyList" name="company" formControlName="company" [(ngModel)]="selectedCompanyList" [settings]="dropdownSettings" (onSelect)="onCompnaySelect($event)" (onDeSelect)="onCompanyDeSelect($event)" (onSelectAll)="onSelectAllCompnay($event)"
+                                [ngClass]="{ 'is-invalid': submitted && f.company.errors }">
+                            </ng-multiselect-dropdown>
+                            <!-- <div *ngIf="submitted && f.company.errors" class="invalid-feedback">
+                                <div *ngIf="f.company.errors.required">Company is required</div>
+                            </div> -->
+                            <!-- <select class="form-control validation_border" formControlName="companyId" 
+                [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
+                    <option *ngFor="let cl of companyList" value="{{cl.gCompanyId}}">{{cl.name}}</option>
+                </select>
+                <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+                  <div *ngIf="f.companyId.errors.required">Company is required</div>
+                </div> -->
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Month Year</label>
+                            <input type="text" formControlName="name" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required">Month Year is required</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Month</label>
+                            <input type="number" formControlName="monthNo" min="0" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.monthNo.errors }">
+                            <div *ngIf="submitted && f.monthNo.errors" class="invalid-feedback">
+                                <div *ngIf="f.monthNo.errors.required">Month is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Year</label>
+                            <input type="number" min="0" formControlName="yearId" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.yearId.errors }">
+                            <div *ngIf="submitted && f.yearId.errors" class="invalid-feedback">
+                                <div *ngIf="f.yearId.errors.required">year is required</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Description</label>
+                            <input type="text" formControlName="description" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Start Date</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="startdate1" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event)"
+                                    (click)="dp1.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                   <i class="fa fa-search" aria-hidden="true"></i>
+                 </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">End Date</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="enddate1" #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)"
+                                    (click)="dp2.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+               <i class="fa fa-search" aria-hidden="true"></i>
+             </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Financial Year</label>
+                            <input type="text" formControlName="financialYear" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.financialYear.errors }">
+                            <div *ngIf="submitted && f.financialYear.errors" class="invalid-feedback">
+                                <div *ngIf="f.financialYear.errors.required">Financial Year is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Code</label>
+                            <input type="text" formControlName="code" class="form-control" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control validation_border" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.isActive.errors }">
+                        <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                    </select>
+                            <div *ngIf="submitted && f.isActive.errors" class="invalid-feedback">
+                                <div *ngIf="f.isActive.errors.required">Status is required</div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Active for Processing</label>
+                            <select class="form-control validation_border" formControlName="activeforprocess">
+                      <option *ngFor="let dl of yesnoList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                  </select>
+
+                        </div> -->
+
+                    </div>
+
+
+                </form>
+            </app-card>
+        </div>
+    </div>
+</div>

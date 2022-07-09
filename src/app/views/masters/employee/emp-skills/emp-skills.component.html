@@ -1,0 +1,72 @@
+<app-card cardTitle="Skills" [options]="false">
+
+    <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+      <ul _ngcontent-epm-c40="" class="nav">
+      </ul>
+      <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+        <button type="button" class="btn btn-success" ngbTooltip="btn-success" 
+        (click)="saveEmpSkillsDetails()">{{skillsForm.value.X_EMPSKILL_ID ? 'Update':'Save'}}</button> &nbsp;&nbsp;&nbsp;
+             
+        <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button"
+          data-toggle="tooltip" data-placement="top" (click)="nextFun($event)" title="Next">
+          <i class="fa fa-arrow-right"></i>
+        </button>
+      </div>
+    </nav>
+
+    <form action="javascript:" class="needs-validation" novalidate [formGroup]="skillsForm">
+
+
+      <div class="form-row">
+    
+        <div class="col-md-6 mb-3">
+          <label for="validationCustom01">Employee</label>
+          <input type="text" formControlName="empName" disabled class="form-control">
+         
+        </div>
+    
+  
+      <div class="col-md-6 mb-3">
+        <label for="validationCustom01">Skills</label>
+        <select class="form-control validation_border" formControlName="skills">
+            <option *ngFor="let dl of skillsList" value="{{dl.empskillId}}">{{dl.name}}
+            </option>
+        </select>
+    </div>
+  
+    
+
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom01">Expertise Level</label>
+            <select class="form-control validation_border" formControlName="expertiselevel">
+                <option *ngFor="let dl of expertiselevelList" value="{{dl.valueCode}}">{{dl.valueName}}
+                </option>
+            </select>
+        </div>
+        
+      
+        <div class="col-md-6 mb-3">
+          <label for="validationCustom01">Description</label>
+          <input type="text" formControlName="description" class="form-control">
+       
+        </div>
+   
+        <div class="col-md-6 mb-3">
+          <label for="validationCustom01">Status</label>
+          <select class="form-control validation_border" formControlName="status"  [ngClass]="{ 'is-invalid': skillsFormSubmitted && es.status.errors }">
+            <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+          </select>
+          <div *ngIf="skillsFormSubmitted && es.status.errors" class="invalid-feedback">
+            <div *ngIf="es.status.errors.required">Status is required</div>
+          </div>
+        </div>
+    
+    
+      </div>
+    
+    
+    
+    </form>
+
+ 
+  </app-card>

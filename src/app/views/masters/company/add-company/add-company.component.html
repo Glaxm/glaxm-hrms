@@ -1,0 +1,183 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{companyForm.value.companyId ? 'Edit Company':'Add Company'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateCompany()" *ngIf="!isView">{{companyForm.value.companyId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="companyForm">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" formControlName="holdingId" [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }">
+                <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+              </select>
+                            <div *ngIf="submitted && f.holdingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.holdingId.errors.required">Holding is required</div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <input type="text" formControlName="companyName" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }">
+                            <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
+                                <div *ngIf="f.companyName.errors.required">Company is required</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Search Key</label>
+                            <input type="text" formControlName="value" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.value.errors }">
+                            <div *ngIf="submitted && f.value.errors" class="invalid-feedback">
+                                <div *ngIf="f.value.errors.required">Search Key is required</div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Description</label>
+                            <input type="text" formControlName="companyDisc" class="form-control">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">MOL Card</label>
+                            <input type="text" formControlName="molCard" class="form-control">
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">VAT Registration No.</label>
+                            <input type="text" formControlName="vatRegNo" class="form-control">
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Phone No.</label>
+                            <input type="text" formControlName="phoneNo" class="form-control">
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Fax No.</label>
+                            <input type="text" formControlName="faxno" class="form-control">
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">P.O. Box No.</label>
+                            <input type="text" formControlName="poBoxNo" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Address</label>
+                            <input type="text" formControlName="address" class="form-control">
+
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Email</label>
+                            <input type="email" formControlName="email" class="form-control">
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Website</label>
+                            <input type="text" formControlName="website" class="form-control">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Code</label>
+                            <input type="text" formControlName="code" class="form-control" disabled>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">status</label>
+                            <select class="form-control validation_border" formControlName="status">
+            <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+          </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom02"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="weeklyshiftRotation1" id="customCheck2">
+                                <label class="custom-control-label" for="customCheck2">Weekly Shift Rotation</label>
+                            </div>
+                        </div>
+
+
+                        <!-- <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Trade Licence</label>
+                            <input type="file" class="form-control" style="border-width:0px;border:none;">
+                        </div> -->
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Logo</label>
+                            <div class="input-group">
+
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" multiple name="file" formcontrolname="fileName" id="importFile" (change)="onFileChange($event.target.files)">
+                                    <label class="custom-file-label" #labelImport for="importFile"><i class="fas fa-search"></i> Choose
+                  file</label>
+
+                                </div>
+                                &nbsp;
+                                <div *ngIf="filePath">
+                                    <button type="button" (click)="openAttachment()" class="btn btn-primary">View</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom02"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="punchmissTrigger1" id="customCheck3">
+                                <label class="custom-control-label" for="customCheck3">Trigger Auto-Mail on Missing Punch</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+
+                <!-- ////////////////////////////////////////////////////////// -->
+            </app-card>
+        </div>
+    </div>
+</div>

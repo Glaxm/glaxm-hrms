@@ -1,0 +1,121 @@
+<ul class="navbar-nav ml-auto">
+    <li>
+        <span style="font-size: large;color: white;">{{empObj.data.firstName}} Profile</span>
+        <!-- <div id="main-search" class="main-search open">
+      <div class="input-group">
+        <input type="text"  class="form-control" placeholder="Enter Remark" [style.width]="'200px'" [style.height]="'40px'">
+      
+        <button type="button" class="btn btn-primary btn-sm" (click)="remark()"> Remark</button>
+      </div>
+  
+    </div> -->
+    </li>
+    <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   -->
+    <!-- <li>
+    <div class="dropdown" ngbDropdown placement="auto">
+      <a ngbDropdownToggle href="javascript:" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
+      <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right notification">
+        <div class="noti-head">
+          <h6 class="d-inline-block m-b-0">Notifications</h6>
+          <div class="float-right">
+            <a href="javascript:" class="m-r-10">mark as read</a>
+            <a href="javascript:">clear all</a>
+          </div>
+        </div>
+        <ul class="noti-body">
+          <li class="n-title">
+            <p class="m-b-0">NEW</p>
+          </li>
+          <li class="notification">
+            <div class="media">
+              <img class="img-radius" src="assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
+              <div class="media-body">
+                <p><strong>John Doe</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>30 min</span></p>
+                <p>New ticket Added</p>
+              </div>
+            </div>
+          </li>
+          <li class="n-title">
+            <p class="m-b-0">EARLIER</p>
+          </li>
+          <li class="notification">
+            <div class="media">
+              <img class="img-radius" src="assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
+              <div class="media-body">
+                <p><strong>Joseph William</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>30 min</span></p>
+                <p>Prchace New Theme and make payment</p>
+              </div>
+            </div>
+          </li>
+          <li class="notification">
+            <div class="media">
+              <img class="img-radius" src="assets/images/user/avatar-3.jpg" alt="Generic placeholder image">
+              <div class="media-body">
+                <p><strong>Sara Soudein</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>30 min</span></p>
+                <p>currently login</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="noti-footer">
+          <a href="javascript:">show all</a>
+        </div>
+      </div>
+    </div>
+  </li> -->
+    <li>
+
+        <div class="dropdown drp-user" ngbDropdown placement="auto">
+            <a href="javascript:" ngbDropdownToggle data-toggle="dropdown">
+                <i class="icon feather icon-user"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right profile-notification" ngbDropdownMenu>
+                <!-- <div class="pro-head">
+          <img src="assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
+          <span>{{userName}}</span>
+          <a href="javascript:" class="dud-logout" title="Logout">
+            <i class="feather icon-log-out"></i>
+          </a>
+        </div> -->
+
+                <ul class="pro-body">
+                    <!-- <li><a href="javascript:" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li> -->
+                    <li><a href="javascript:" class="dropdown-item" (click)="exampleModalCenter.show();changePasswordForm.reset();callApi()"><i class="feather icon-mail"></i> Change Password</a></li>
+                    <li><a href="javascript:" class="dropdown-item" (click)="logout()"><i class="feather icon-lock"></i>Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </li>
+</ul>
+
+
+<div class="col-xl-4 col-md-6">
+    <app-ui-modal #exampleModalCenter dialogClass="modal-dialog-centered">
+        <div class="app-modal-header">
+            <h5 class="modal-title text-center">Change Password</h5>
+        </div>
+        <div class="app-modal-body">
+            <form action="javascript:" class="needs-validation" [formGroup]="changePasswordForm">
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1" style="color: black;">New Password</label>
+                    <input type="password" autocomplete="off" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="New Password">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1" style="color: black;">Confirm Password</label>
+                    <input type="password" autocomplete="off" class="form-control" formControlName="confirmPassword" id="exampleInputPassword1" placeholder="Confirm Password">
+                </div>
+            </form>
+
+
+        </div>
+        <div class="app-modal-footer">
+
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="changePassword();exampleModalCenter.hide()">Change Password</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" data-dismiss="modal" (click)="exampleModalCenter.hide()">Close</button>
+
+        </div>
+    </app-ui-modal>
+</div>

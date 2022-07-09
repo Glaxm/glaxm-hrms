@@ -1,0 +1,205 @@
+<form action="javascript:" class="needs-validation" novalidate [formGroup]="entitlementForm">
+  <div class="form-row">
+    <div class="col-md-2 mb-3">
+      <label for="validationCustom01">Effective After</label>
+    </div>
+    <div class="col-md-1 mb-3">
+      <input type="text" formControlName="effectafterCount" class="form-control"  (change)="entitlementEvent()">
+    </div>
+    <div class="col-md-2 mb-3">
+      <select class="form-control " formControlName="effectafterCycle" (change)="entitlementEvent()">
+        <option *ngFor="let dl of Effectiveafteryears" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+      </select>
+    </div>
+
+    <div class="col-md-0.5 mb-3">
+      <label for="validationCustom01">From</label>
+
+    </div>
+    <div class="col-md-2 mb-3">
+      <select class="form-control " formControlName="effectafterFrom"  (change)="entitlementEvent()">
+        <option *ngFor="let dl of Dateofjoining" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+
+    <div class="col-md-2 mb-3">
+      <!-- <div class="custom-control custom-checkbox">
+      <label for="validationCustom04"></label><br>
+      <input type="checkbox" class="custom-control-input" formControlName="Accrual" id="customCheck4">
+      <label class="custom-control-label" for="customCheck4">Accrual</label>
+    </div>  -->
+      <div _ngcontent-slt-c139="" class="checkbox checkbox-primary d-inline">
+        <input _ngcontent-slt-c139="" type="checkbox" name="accrual1" formControlName="accrual1" id="checkbox-p-2">
+        <label _ngcontent-slt-c139="" for="checkbox-p-2" class="cr">Accrual</label>
+      </div>
+
+     
+
+      <!-- <div class="custom-control custom-checkbox">
+      <label for="validationCustom03"></label><br>
+      <input type="checkbox" class="custom-control-input" formControlName="Accrual"
+          id="customCheck3">
+      <label class="custom-control-label" for="customCheck3">Accrual</label>
+  </div> -->
+    </div>
+
+    <div class="col-md-2 mb-3" *ngIf="entitlementForm.value.accrual1">
+      <select class="form-control " formControlName="accrualonCycle"  (change)="entitlementEvent()">
+        <option *ngFor="let dl of Accrualyear" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+      </select>
+    </div>
+
+    <div class="col-md-0.5 mb-3" *ngIf="entitlementForm.value.accrual1">
+      <label for="validationCustom01">On</label>
+    </div>
+
+    <div class="col-md-2 mb-3" *ngIf="entitlementForm.value.accrual1">
+      <select class="form-control " formControlName="accrualonDate" (change)="entitlementEvent()">
+        <option *ngFor="let dl of AccrualDays" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+      </select>
+    </div>
+
+    <div class="col-md-2 mb-3" *ngIf="entitlementForm.value.accrual1">
+      <select class="form-control " formControlName="accrualonMonth" (change)="entitlementEvent()">
+        <option *ngFor="let dl of AccrualMonth" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+      </select>
+    </div>
+
+    <div class="col-md-1 mb-3" *ngIf="entitlementForm.value.accrual1">
+      <label for="validationCustom01">No. of Days</label>
+    </div>
+
+    <div class="col-md-1 mb-3" *ngIf="entitlementForm.value.accrual1">
+      <input type="text" formControlName="accrualDays" class="form-control" (change)="entitlementEvent()">
+    </div>
+
+    <!-- <div class="col-md-0.5 mb-3">
+        <label for="validationCustom01">In</label>
+    </div>
+
+    <div class="col-md-1 mb-3">
+        <select class="form-control " formControlName="CurrentAccrual">
+        </select>
+      </div> -->
+
+  </div>
+
+
+  <div class="form-row">
+    <div class="col-md-2 mb-3">
+      <!-- <div class="custom-control custom-checkbox">
+          <label for="validationCustom04"></label><br>
+          <input type="checkbox" class="custom-control-input" formControlName="Accrual" id="customCheck4">
+          <label class="custom-control-label" for="customCheck4">Reset</label>
+        </div> -->
+      <div _ngcontent-slt-c139="" class="checkbox checkbox-primary d-inline">
+        <input _ngcontent-slt-c139="" type="checkbox" name="reset1" formControlName="reset1" id="checkbox-p-3">
+        <label _ngcontent-slt-c139="" for="checkbox-p-3" class="cr">Reset</label>
+      </div>
+    </div>
+
+    <div class="col-md-2 mb-3" *ngIf="entitlementForm.value.reset1">
+      <select class="form-control " formControlName="resetonCycle" (change)="entitlementEvent()">
+        <option *ngFor="let dl of Resetyear" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+      </select>
+    </div>
+
+    <div class="col-md-0.5 mb-3" *ngIf="entitlementForm.value.reset1">
+      <label for="validationCustom01">On</label>
+    </div>
+
+    <div class="col-md-2 mb-3" *ngIf="entitlementForm.value.reset1">
+      <select class="form-control " formControlName="resetonDate" (change)="entitlementEvent()">
+        <option *ngFor="let dl of ResetDays" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+      </select>
+    </div>
+
+    <div class="col-md-2 mb-3" *ngIf="entitlementForm.value.reset1">
+      <select class="form-control " formControlName="resetonMonth" (change)="entitlementEvent()">
+        <option *ngFor="let dl of ResetMonth" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+
+    <div class="col-md-2 mb-3">
+      <!-- <div class="custom-control custom-checkbox">
+            <label for="validationCustom04"></label><br>
+            <input type="checkbox" class="custom-control-input" formControlName="Carryforword" id="customCheck4">
+            <label class="custom-control-label" for="customCheck4">Carry Forword</label>
+          </div> -->
+      <div _ngcontent-slt-c139="" class="checkbox checkbox-primary d-inline">
+        <input _ngcontent-slt-c139="" type="checkbox" name="carryforward1" formControlName="carryforward1"
+          id="checkbox-p-4">
+        <label _ngcontent-slt-c139="" for="checkbox-p-4" class="cr">Carry Forword</label>
+      </div>
+    </div>
+    <!-- <div class="col-md-2 mb-3" *ngIf="entitlementForm.value.carryforward1">
+      <select class="form-control " formControlName="carryforword1" (change)="entitlementEvent()">
+        <option *ngFor="let dl of CarryForword" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+      </select>
+    </div> -->
+
+    <div class="col-md-1 mb-3" *ngIf="entitlementForm.value.carryforward1">
+      <input type="text" formControlName="carryforwardCount" class="form-control" (change)="entitlementEvent()">
+    </div>
+
+    <div class="col-md-2 mb-3" *ngIf="entitlementForm.value.carryforward1">
+      <select class="form-control " formControlName="carryforwardUnit" (change)="entitlementEvent()">
+        <option *ngFor="let dl of CarryForwordpercentage" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+      </select>
+    </div>
+
+    <div class="col-md-1 mb-3" *ngIf="entitlementForm.value.carryforward1">
+      <label for="validationCustom01">Max Limit</label>
+    </div>
+
+    <div class="col-md-1 mb-3" *ngIf="entitlementForm.value.carryforward1">
+      <input type="text" formControlName="carryforwardmaxDays" class="form-control" (change)="entitlementEvent()">
+    </div>
+
+  </div>
+
+  <div class="form-row">
+
+    <div class="col-md-2 mb-3">
+      <div _ngcontent-slt-c139="" class="checkbox checkbox-primary d-inline">
+        <input _ngcontent-slt-c139="" type="checkbox" name="checkbox-p-4" formControlName="encashment1"
+          id="checkbox-p-5">
+        <label _ngcontent-slt-c139="" for="checkbox-p-5" class="cr">Encashment</label>
+      </div>
+      <!-- <div _ngcontent-slt-c139="" class="checkbox checkbox-primary d-inline"><input _ngcontent-slt-c139="" type="checkbox" name="checkbox-p-1" id="checkbox-p-1" checked=""><label _ngcontent-slt-c139="" for="checkbox-p-1" class="cr">Encashment</label></div> -->
+      <!-- <div class="custom-control custom-checkbox">
+            <label for="validationCustom04"></label><br>
+            <input type="checkbox" class="custom-control-input" formControlName="Encashment" id="customCheck4">
+            <label class="custom-control-label" for="customCheck4">Encashment</label>
+          </div> -->
+    </div>
+    <!-- <div class="col-md-2 mb-3"> -->
+      <!-- <label for="validationCustom01">Encashment</label> -->
+    <!-- </div> -->
+
+    <div class="col-md-1 mb-3" *ngIf="entitlementForm.value.encashment1">
+      <input type="text" formControlName="encashCount" class="form-control" (change)="entitlementEvent()">
+    </div>
+
+    <div class="col-md-2 mb-3" *ngIf="entitlementForm.value.encashment1">
+      <select class="form-control " formControlName="encashUnit" (change)="entitlementEvent()">
+        <option *ngFor="let dl of Encashmentpercentage" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+      </select>
+    </div>
+
+    <div class="col-md-1 mb-3" *ngIf="entitlementForm.value.encashment1">
+      <label for="validationCustom01">Max Limit</label>
+    </div>
+
+    <div class="col-md-1 mb-3" *ngIf="entitlementForm.value.encashment1">
+      <input type="text" formControlName="encashmaxDays" class="form-control" (change)="entitlementEvent()">
+    </div>
+
+  </div>
+</form>

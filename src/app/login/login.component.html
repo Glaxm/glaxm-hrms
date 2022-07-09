@@ -1,0 +1,162 @@
+<!-- <div class="auth-wrapper">
+    <div class="auth-content">
+        <div class="card">
+            <div class="row align-items-center text-center">
+                <div class="col-md-12">
+                    <div class="card-body">
+                        <h4 class="mb-3 f-w-400">Sign In</h4>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="feather icon-mail"></i></span>
+                            </div>
+                            <input type="email" class="form-control" placeholder="Email address" [(ngModel)]="username">
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="feather icon-lock"></i></span>
+                            </div>
+                            <input [type]="password" class="form-control" placeholder="Password" [(ngModel)]="password1">
+                            <button (click)="onClick()" class=" glaxm_border_class">
+                <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
+                <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
+              </button>
+                        </div>
+                        <div class="form-group text-left mt-2">
+                            <div class="checkbox checkbox-primary d-inline">
+                                <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" checked="">
+                                <label for="checkbox-fill-a1" class="cr"> Save credentials</label>
+                            </div>
+                        </div>
+                        <button type="button" (click)="login()" class="btn btn-block btn-primary mb-4" [disabled]="this.btnLoader" title="Filter">Sign In&nbsp;&nbsp;
+              <span *ngIf="this.btnLoader" class="spinner-border spinner-border-sm" role="status"></span>
+            </button>
+
+
+                        <div  class="text-center">
+                            <p  class="mb-2 text-muted">Forgot password? <a  class="f-w-400" (click)="resetPassword()">Reset</a></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="auth-wrapper align-items-stretch aut-bg-img">
+
+    <!-- <div class="col-xl-8 col-md-8 carousalSection">
+        <div class="content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+            <swiper class="swiper-container" fxFlex="auto" [config]="config" [disabled]="disabled">
+                <div *ngFor="let slide of slides" class="swiper-slide">
+                    <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+                        <img [src]="slide.image" class="slide-item swiper-lazy" />
+                    </div>
+                </div>
+            </swiper>
+            <div class="swiper-scrollbar" [hidden]="config.scrollbar === false"></div>
+            <div class="swiper-pagination" [hidden]="config.pagination === false"></div>
+           
+        </div>
+    </div> -->
+
+
+    <div class="flex-grow-1">
+        <div class="h-100 d-md-flex align-items-center auth-side-img">
+            <div class="col-sm-10 auth-content w-auto">
+                <!-- <img src="assets/images/auth/auth-logo.png" alt="" class="img-fluid"> -->
+                <!-- <h1 class="text-white my-4">Welcome Back!</h1>
+                <h4 class="text-white font-weight-normal">Signin to your account and get explore the Next Dashboard Template.<br>Do not forget to play with live customizer</h4> -->
+            </div>
+        </div>
+
+        <div class="auth-side-form">
+            <div class="auth-content" *ngIf="isLoginScreen"><img src="assets/images/auth/auth-logo-dark.png" alt="" class="img-fluid mb-4 d-block d-xl-none d-lg-none">
+                <h3 class="mb-4 f-w-400">Sign In</h3>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i  class="feather icon-mail" ></i></span></div>
+                    <input type="email" class="form-control" placeholder="Email address" [(ngModel)]="username">
+                </div>
+                <div class="input-group mb-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i  class="feather icon-lock"></i></span></div>
+                    <input [type]="password" class="form-control" placeholder="Password" [(ngModel)]="password1">
+                    <button (click)="onClick()" class=" glaxm_border_class">
+                <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
+                <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
+              </button>
+                </div>
+                <div class="form-group text-left mt-2">
+                    <div class="checkbox checkbox-primary d-inline">
+                        <input type="checkbox" name="checkbox-p-1" id="checkbox-p-1" checked=""><label for="checkbox-p-1" class="cr">Save credentials</label></div>
+                </div>
+                <button type="button" (click)="login()" class="btn btn-block btn-primary mb-4" [disabled]="this.btnLoader" title="Filter">Sign In&nbsp;&nbsp;
+                    <span *ngIf="this.btnLoader" class="spinner-border spinner-border-sm" role="status"></span>
+                  </button>
+                <div class="text-center">
+                    <!-- <div class="saprator my-4"><span>OR</span></div><button class="btn text-white bg-facebook mb-2 mr-2 wid-40 px-0 hei-40 rounded-circle"><i  class="fab fa-facebook-f"></i></button><button class="btn text-white bg-googleplus mb-2 mr-2 wid-40 px-0 hei-40 rounded-circle"><i  class="fab fa-google-plus-g"></i></button>
+                    <button class="btn text-white bg-twitter mb-2 wid-40 px-0 hei-40 rounded-circle"><i class="fab fa-twitter"></i></button> -->
+                    <p class="mb-2 text-muted">Forgot password? <a class="f-w-400 cursorAction" (click)="forgotPassword()">Reset</a></p>
+                    <!-- <p class="mb-0 text-muted">Don’t have an account? <a class="f-w-400" href="/demos/admin-templates/next/angular/default/auth/signup-v2">Signup</a></p> -->
+                </div>
+            </div>
+            <div *ngIf="isForgotScreen" class="auth-content forgotScreen">
+                <div>
+                    <img class="forgotImg" src="assets/images/Forgot password.jpg" style="height: 35vh;">
+                </div>
+                <h2 class="mb-3 f-w-400 signin-heading forgetPwd">Forgot Password?</h2>
+                <span class="message">
+                    Enter your e-mail address below to reset your password.
+                </span>
+                <div class="emailInput">
+                    <div class="input-group mb-3">
+                        <span class="iconField">
+                            <i class="feather icon-mail" style="margin-right: 1em;"></i>
+                            <input class="input100" type="email" name="email" [(ngModel)]="email" placeholder="Email address"/>
+                        </span>
+                    </div>
+                </div>
+                <div class="btnGroup forgotBtns">
+                    <button type="button" class="backBtn" (click)="back()">
+                        Back
+                    </button>
+                    <button type="button" class="submitBtn" (click)="submit()">
+                        Submit
+                    </button>
+                    <!-- <button type="button" (click)="back()" class="btn btn-block btn-primary mb-4"
+                    [disabled]="this.btnLoader" title="Filter">
+                    Back&nbsp;&nbsp;
+                    <span *ngIf="this.btnLoader" class="spinner-border spinner-border-sm" role="status"></span>
+                    </button>
+                    <button type="button" (click)="submit()" class="btn btn-block btn-primary mb-4 login"
+                    [disabled]="this.btnLoader" title="Filter">
+                    Submit&nbsp;&nbsp;
+                    <span *ngIf="this.btnLoader" class="spinner-border spinner-border-sm" role="status"></span>
+                    </button> -->
+                </div>
+
+            </div>
+            <div *ngIf="!isForgotScreen && !isLoginScreen" class="auth-content CheckYourMail">
+                <div>
+                    <img class="mailImg" src="assets/images/New message.jpg" style="height: 35vh;">
+                </div>
+                <div class="check-msg">
+                    <h2 class="mb-3 f-w-400 signin-heading forgetPwd">Check your mail</h2>
+                    <span class="checkMessage">
+                        We have sent a password reset link to your email.
+                    </span>
+                </div>
+                <div class="trySection">
+                    <span class="message">
+                        Did not receive the email? Check your spam filter or <span class="try-another" (click)="forgotPassword()">try another email address</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

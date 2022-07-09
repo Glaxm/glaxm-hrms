@@ -1,0 +1,145 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="Expiry Report" [options]="false">
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="expiryreportform">
+                    <div class="form-row">
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <ng-multiselect-dropdown [placeholder]="" formControlName="company" [data]="companyList" name="companyName" [(ngModel)]="selectecdCompanyList" [settings]="dropdownSettingscompany" (onSelect)="onCompanySelect($event)" (onDeSelect)="onCompanyDeSelect($event)"
+                                (onDeSelectAll)="onDeSelectAllCompany($event)" (onSelectAll)="onSelectAllCompany($event)">
+                            </ng-multiselect-dropdown>
+
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Employee </label>
+                            <ng-multiselect-dropdown [placeholder]="" formControlName="employee" [data]="empList" name="employeeName" [(ngModel)]="selectedEmpList" [settings]="dropdownSettings" (onSelect)="onEmployeeSelect($event)" (onDeSelect)="onEmployeeDeSelect($event)" (onSelectAll)="onSelectAllEmployee($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Document Type</label>
+                            <ng-multiselect-dropdown [placeholder]="" formControlName="dtype" [data]="documentTypeList" name="documenttype" [(ngModel)]="selectecdDocumentTypeList" [settings]="dropdownSettingsdocumenttype" (onSelect)="ondocumentTypeSelect($event)" (onDeSelect)="ondocumentTypeDeSelect($event)"
+                                (onSelectAll)="onSelectAllDocumentType($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom02">From Date</label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsstartDate" [options]="myDatePickerOptions" formControlName="startDate1" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event)"
+                                    (click)="dp1.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom02">To Date</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Select a date" angular-mydatepicker name="reactiveFormsendDate" [options]="myDatePickerOptions" formControlName="endDate1" #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)"
+                                    (click)="dp2.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-1 mb-3">
+
+                            <label for="validationCustom02"><br></label>
+                            <div class="input-group">
+
+                                <button type="button" (click)="filterTable()" class="btn btn-success" [disabled]="this.btnLoader" ngbTooltip="btn-success" data-toggle="tooltip" data-placement="top" title="Go">
+                    <span *ngIf="this.btnLoader" class="spinner-border spinner-border-sm" role="status"></span>
+                    <span *ngIf="this.btnLoader" class="load-text">Go</span>
+                    <span *ngIf="!this.btnLoader" class="btn-text">Go</span>
+                  </button>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="col-md-1 mb-3">
+                            <label for="validationCustom01"><br> </label>
+                            <div class="input-group" role="group" ngbDropdown>
+                                <button type="button" class="btn btn-primary" ngbDropdownToggle>
+                    More
+                  </button>
+                                <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu style="right: 0;
+                          left: auto;">
+                                    <a class="dropdown-item" href="javascript:" (click)="exportReport()">Export Data </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- <div class="form-row" style="float: right;">
+            <div class="col-md-12 mb-3">
+              <input [(ngModel)]="filterString" (ngModelChange)="onFilterChange()" class="form-control"
+                placeholder="Search" />
+            </div>
+          </div> -->
+
+                <br>
+
+                <hr>
+                <app-card>
+                    <div [ngClass]="(filtered?.length>10)?'table-responsive tableFixHead':'table-responsive'">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Company</th>
+                                    <th>Emp ID</th>
+                                    <th>Emp Code</th>
+                                    <th>Employee</th>
+                                    <th>Document Type</th>
+                                    <th>Start Date</th>
+                                    <th>Expiry Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dl of filtered">
+
+                                    <td>{{dl.companyName}}</td>
+                                    <td>{{dl.oldEmpId}}</td>
+                                    <td>{{dl.empcode}}</td>
+                                    <td>{{dl.empname}}</td>
+                                    <td>{{dl.doctypename}}</td>
+                                    <td>{{dl.issuedate}}</td>
+                                    <td>{{dl.expirydate}}</td>
+                                </tr>
+                                <tr *ngIf="filtered?.length==0">
+                                    <td colspan="8" style="text-align:center;">No records</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </app-card>
+
+
+
+            </app-card>
+        </div>
+
+
+    </div>
+</div>

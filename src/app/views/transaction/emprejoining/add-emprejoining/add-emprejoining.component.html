@@ -1,0 +1,186 @@
+<div class="row">
+    <div class="col-sm-12">
+      <div>
+      <app-card cardTitle="{{emprejoiningForm.value.lEmpleaverejoinId   ? ' Employee Rejoining':' Employee Rejoining'}}"  [options]="false">
+        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+          <ul _ngcontent-epm-c40="" class="nav">
+          </ul>
+          <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateEmprejoining()" *ngIf="!isView">{{emprejoiningForm.value.lEmpleaverejoinId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+          </div>
+      </nav>
+    
+        <form action="javascript:" class="needs-validation" novalidate [formGroup]="emprejoiningForm">
+          <div class="form-row">
+            
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Holding</label>
+              <select class="form-control validation_border" disabled formControlName="holdingId"
+              [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }">
+                  <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+              </select>
+              <div *ngIf="submitted && f.holdingId.errors" class="invalid-feedback">
+                <div *ngIf="f.holdingId.errors.required">Holding is required</div>
+              </div>
+            </div>
+            
+          <div class="col-md-6 mb-3">
+            <label for="validationCustom01">Company</label>
+            <select class="form-control validation_border" formControlName="companyId" 
+            [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
+                <option *ngFor="let cl of companyList" value="{{cl.gCompanyId}}">{{cl.name}}</option>
+            </select>
+            <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+              <div *ngIf="f.companyId.errors.required">Company is required</div>
+            </div>
+        </div>
+
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Document No.</label>
+              <input type="text" formControlName="documentno" class="form-control" disabled>
+          </div>
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom02">Transaction Date</label>
+             <div class="input-group">
+               <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker 
+               name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="datetrx1"
+               [ngClass]="{ 'is-invalid': submitted && f.datetrx1.errors }"
+                #dp4="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeTrxDate($event)" (click)="dp4.toggleCalendar()"/>
+               <div class="input-group-append">
+                 <button type="button" class="btn btn-secondary" (click)="dp4.toggleCalendar()">
+                   <i class="fa fa-search" aria-hidden="true"></i>
+                 </button>
+               </div>
+               <div *ngIf="submitted && f.datetrx1.errors" class="invalid-feedback">
+                <div *ngIf="f.datetrx1.errors.required">Rejoining Date is required</div>
+              </div>
+             </div>
+           </div>
+          </div>
+
+
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Leave Id</label>
+                <select class="form-control validation_border" formControlName="lEmpleaveId">
+                    <option *ngFor="let dl of empLeaveList" value="{{dl.lEmpleaveId}}">{{dl.lEmpleaveId}}
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Employee</label>
+                <select class="form-control validation_border" formControlName="xEmployeeId">
+                    <option *ngFor="let dl of employeeList" value="{{dl.empId}}">{{dl.displayName}}
+                    </option>
+                </select>
+            </div>
+          </div>
+          <div class="form-row">
+
+          
+
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Leave</label>
+                <select class="form-control validation_border" formControlName="xLeaveitemId">
+                    <option *ngFor="let dl of leaveList" value="{{dl.valueCode}}">{{dl.valueName}}
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom02">Rejoining Date</label>
+               <div class="input-group">
+                 <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker 
+                 name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="rejoindate1"
+                 [ngClass]="{ 'is-invalid': submitted && f.rejoindate.errors }"
+                  #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEffectiveDate($event)" (click)="dp1.toggleCalendar()"/>
+                 <div class="input-group-append">
+                   <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                     <i class="fa fa-search" aria-hidden="true"></i>
+                   </button>
+                 </div>
+                 <div *ngIf="submitted && f.rejoindate.errors" class="invalid-feedback">
+                  <div *ngIf="f.rejoindate.errors.required">Rejoining Date is required</div>
+                </div>
+               </div>
+             </div>
+           
+          </div>
+          <div class="form-row">
+
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom02">Start Date</label>
+               <div class="input-group">
+                 <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker 
+                 name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="startdate1"
+                 [ngClass]="{ 'is-invalid': submitted && f.startdate.errors }"
+                  #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event)" (click)="dp2.toggleCalendar()"/>
+                 <div class="input-group-append">
+                   <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                     <i class="fa fa-search" aria-hidden="true"></i>
+                   </button>
+                 </div>
+                 <div *ngIf="submitted && f.startdate.errors" class="invalid-feedback">
+                  <div *ngIf="f.startdate.errors.required">Start Date is required</div>
+                </div>
+               </div>
+             </div>
+
+             <div class="col-md-6 mb-3">
+                <label for="validationCustom02">End Date</label>
+               <div class="input-group">
+                 <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker 
+                 name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="enddate1"
+                 [ngClass]="{ 'is-invalid': submitted && f.enddate.errors }"
+                  #dp3="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)" (click)="dp3.toggleCalendar()"/>
+                 <div class="input-group-append">
+                   <button type="button" class="btn btn-secondary" (click)="dp3.toggleCalendar()">
+                     <i class="fa fa-search" aria-hidden="true"></i>
+                   </button>
+                 </div>
+                 <div *ngIf="submitted && f.enddate.errors" class="invalid-feedback">
+                  <div *ngIf="f.enddate.errors.required">End Date is required</div>
+                </div>
+               </div>
+             </div>
+
+
+           
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Days</label>
+                <input type="number" formControlName="leavedays" class="form-control">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Description</label>
+                <input type="text" formControlName="descriptioon" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.descriptioon.errors }">
+                <div *ngIf="submitted && f.descriptioon.errors" class="invalid-feedback">
+                    <div *ngIf="f.descriptioon.errors.required">Description is required</div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Status</label>
+                <select class="form-control validation_border" formControlName="status" 
+                 [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                    <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                </select>
+                <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                    <div *ngIf="f.status.errors.required">Status is required</div>
+                  </div>
+            </div>
+           
+          </div>
+        </form>
+    </app-card>
+  </div>
+  </div>
+  </div>
+  

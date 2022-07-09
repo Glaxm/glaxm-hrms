@@ -1,0 +1,146 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{emppaytransactionForm.value.lPaytransactionId ? 'Edit Employee Pay Transaction':'Add Employee Pay Transaction'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateEmpPayTransaction()" *ngIf="!isView">{{emppaytransactionForm.value.lPaytransactionId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="emppaytransactionForm">
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" disabled formControlName="gHoldingId" [ngClass]="{ 'is-invalid': submitted && f.gHoldingId.errors }">
+                                <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.gHoldingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.gHoldingId.errors.required">Holding is required</div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <select class="form-control validation_border" formControlName="gCompanyId" (change)="selectcompany(emppaytransactionForm.value.gCompanyId)" [ngClass]="{ 'is-invalid': submitted && f.gCompanyId.errors }">
+                                <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.gCompanyId.errors" class="invalid-feedback">
+                                <div *ngIf="f.gCompanyId.errors.required">Company is required</div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Document No.</label>
+                            <input type="text" formControlName="documentno" disabled class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Transaction Date</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="transactionDate1" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event)"
+                                    (click)="dp1.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Employee</label>
+                            <!-- <select class="form-control" formControlName="xEmployeeId">
+                              <option *ngFor="let sl of employeeList" value="{{sl.employeeId}}">{{sl.displayName}}</option>
+                           </select> -->
+                            <ng-multiselect-dropdown name="city" [placeholder]="'Select Employee'" [data]="employeeList" formControlName="employee" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Effective Date</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="effectiveDate1" #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)"
+                                    (click)="dp2.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Pay Item</label>
+                            <select class="form-control validation_border" formControlName="xPayitemId" (change)="changePayitem(emppaytransactionForm.value.xPayitemId)">
+                                <option *ngFor="let dl of payitemList" value="{{dl.payItemId}}">{{dl.name}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Amount</label>
+                            <input type="text" formControlName="amount" class="form-control">
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">OT Hours</label>
+                            <input type="text" formControlName="otHrs" class="form-control">
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Description</label>
+                            <input type="text" formControlName="description" class="form-control">
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control validation_border" formControlName="isActive">
+                                <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </app-card>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,190 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="Employee Loan" [options]="false">
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="emploanForm">
+                    <!-- <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Loan Amount</label>
+                <input type="text" formControlName="loanamount" class="form-control" (change)="loanRequestEvent()">
+            </div>  
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Remarks</label>
+              <input type="text" formControlName="remarks" class="form-control" (change)="loanRequestEvent()">
+          </div>  
+          </div> -->
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Loan Date</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="datetrx1" #dp3="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeTransDate($event);loanRequestEvent()"
+                                    (click)="dp3.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp3.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Employee</label>
+              <ng-multiselect-dropdown name="city" [disabled]="viewform" [placeholder]="'Select Employee'"
+                [data]="employeeList" formControlName="employee" [(ngModel)]="selectedItems"
+                [settings]="dropdownSettings" (onDeSelect)="onEmployeeDeSelect($event);loanRequestEvent()"
+                (onSelect)="onItemSelect($event);loanRequestEvent()">
+              </ng-multiselect-dropdown>
+            </div> -->
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Start Date</label>
+                            <div class="input-group">
+                                <input class="form-control  validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="startdate1" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event);loanRequestEvent()"
+                                    (click)="dp1.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">End Date</label>
+                            <div class="input-group">
+                                <input class="form-control  validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="enddate1" #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event);loanRequestEvent()"
+                                    (click)="dp2.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Loan Amount</label>
+                            <input type="text" formControlName="loanamount" class="form-control validation_border" (change)="calInstallAmt()">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Interest Rate</label>
+                            <input type="text" formControlName="interestrate" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Installment Amount</label>
+                            <input type="text" formControlName="installmentamount" class="form-control" readonly>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">No. of Installments</label>
+                            <input type="number" formControlName="installments" class="form-control" (change)="calInstallAmt()">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Loan/Pay item</label>
+                            <select class="form-control validation_border" formControlName="xPayitemId" (change)="loanRequestEvent()">
+                <option *ngFor="let dl of payitemList" value="{{dl.payItemId}}">{{dl.name}}
+                </option>
+              </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Description</label>
+                            <input type="text" formControlName="description" class="form-control" (change)="loanRequestEvent()">
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3" *ngIf="!requestId">
+
+                            <label for="validationCustom01">Attachment</label>
+                            <div class="input-group">
+
+                                <div class="custom-file">
+
+                                    <input type="file" class="custom-file-input" multiple formControlName="fileName" id="importFile" (change)="onFileChange($event.target.files)">
+                                    <label class="custom-file-label" #labelImport for="importFile"><i class="fas fa-search"></i> Choose
+                    file</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3" *ngIf="requestId">
+                            <label for="validationCustom01">Attachment</label>
+                            <div class="input-group mb-3">
+                                <input _ngcontent-wdr-c114="" type="text" formControlName="fileName" aria-label="Recipient's username" aria-describedby="basic-addon2" class="form-control">
+                                <div class="input-group-append">
+                                    <button type="button" (click)="openAttachment()" class="btn btn-primary">View</button></div>
+                            </div>
+
+                        </div>
+                        <!-- / -->
+
+
+                    </div>
+
+
+
+                </form>
+            </app-card>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div *ngIf="requestId">
+    <app-card cardTitle="Loan History" [options]="false">
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Document No.</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Loan Amount</th>
+                        <th>Installment Amount</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let rm of loanHistoryList">
+                        <td>{{rm.documentno}}</td>
+                        <td>{{rm.startdate | date: 'dd-MMM-yyyy'}}</td>
+                        <td>{{rm.enddate | date: 'dd-MMM-yyyy'}}</td>
+                        <td>{{rm.loanamount}}</td>
+                        <td>{{rm.installmentamount}}</td>
+                        <td>{{rm.balance}}</td>
+                    </tr>
+                    <tr *ngIf="loanHistoryList?.length===0">
+                        <td colspan="9" style="text-align:center;">No records</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </app-card>
+
+
+    <br>
+</div>

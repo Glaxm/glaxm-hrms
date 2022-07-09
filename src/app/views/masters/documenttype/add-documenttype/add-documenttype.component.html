@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col-sm-12">
+      <div>
+      <app-card cardTitle="{{documenttypeForm.value.xdoctypeId ? 'Edit Document Type':'Add Document Type'}}"  [options]="false">
+        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+          <ul _ngcontent-epm-c40="" class="nav">
+          </ul>
+          <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateDocumenttype()" *ngIf="!isView">{{documenttypeForm.value.xdoctypeId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+          </div>
+      </nav>
+        
+       <!-- /////////////////////////////////////////////////////////// -->
+       
+        <form action="javascript:" class="needs-validation" novalidate [formGroup]="documenttypeForm">
+          <div class="form-row">
+            
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Holding</label>
+              <select class="form-control validation_border" disabled formControlName="gHoldingId" (change)="selectHolding(documenttypeForm.value.holdingId)"
+              >
+                  <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+              </select>
+            
+          </div>
+            
+          <div class="col-md-6 mb-3">
+            <label for="validationCustom01">Company</label>
+            <!-- <select class="form-control validation_border" formControlName="gCompanyId" 
+              [ngClass]="{ 'is-invalid': submitted && f.gCompanyId.errors }">
+                <option *ngFor="let cl of companyList" value="{{cl.gCompanyId}}">{{cl.name}}</option>
+            </select>
+            <div *ngIf="submitted && f.gCompanyId.errors" class="invalid-feedback">
+              <div *ngIf="f.gCompanyId.errors.required">Company is required</div>
+            </div> -->
+
+            <ng-multiselect-dropdown [placeholder]="" [data]="companyList" 
+            name="company" formControlName="company" 
+            [(ngModel)]="selectedCompanyList" 
+            [settings]="dropdownSettings" 
+            (onSelect)="onCompnaySelect($event)" 
+            (onDeSelect)="onCompanyDeSelect($event)" 
+            (onSelectAll)="onSelectAllCompnay($event)"
+            [ngClass]="{ 'is-invalid': submitted && f.company.errors }">
+        </ng-multiselect-dropdown>
+        <div *ngIf="submitted && f.company.errors" class="invalid-feedback">
+            <div *ngIf="f.company.errors.required">Company is required</div>
+        </div>
+        
+        </div>
+      </div>
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Document Type </label>
+              <input type="text" formControlName="docName" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+              <div *ngIf="submitted && f.docName.errors" class="invalid-feedback">
+                <div *ngIf="f.docName.errors.required">Document type is required</div>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Description</label>
+              <input type="text" formControlName="description" class="form-control">
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+
+          </div>
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Code</label>
+              <input type="text" formControlName="code" class="form-control">
+          </div>
+            <div class="col-md-6 mb-3">
+            
+              <label for="validationCustom01">Status</label>
+              <select class="form-control validation_border" formControlName="status">
+                  <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+              </select>
+            </div>
+          </div>
+
+          
+        
+        </form>
+        
+   
+    </app-card>
+
+
+  </div>
+  </div>
+  </div>
+  

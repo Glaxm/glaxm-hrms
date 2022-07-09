@@ -1,0 +1,296 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="Attendance Regularization Form" [options]="false">
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="preApprovalForm">
+
+
+                    <!-- ===================== -->
+
+                    <div class="form-row">
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Function</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="function" class="form-control " disabled>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Employment Status</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="employmentStatus" class="form-control" disabled>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Department</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="department" class="form-control " disabled>
+                        </div>
+
+
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Work Location</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="worklocation" class="form-control" disabled>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Designation</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="designation" class="form-control " disabled>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Employee Name & ID</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="empName" class="form-control" disabled>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Company Name</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="companyName" class="form-control" disabled>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <app-card cardTitle="" [options]="false">
+                        <div class="form-row">
+
+                            <div class="col-md-2 mb-3">
+                                <label for="validationCustom02">Submission Date</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="input-group">
+                                    <input class="form-control " placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="datetrx1" #dp3="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeTransDate($event);preApprovalRequestEvent()"
+                                        (click)="dp3.toggleCalendar()" />
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-secondary" (click)="dp3.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-2 mb-3">
+                                <label for="validationCustom01">Punch-In</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" formControlName="punchin" class="form-control " disabled>
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <label for="validationCustom01">Punch-Out</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" formControlName="punchout" class="form-control" disabled>
+                            </div>
+                        </div>
+
+
+
+
+                        <!-- ///////////////////// -->
+                        <div class="form-row">
+
+                            <div class="col-md-2 mb-3">
+                                <label for="validationCustom01">Type of Absence:</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <select class="form-control " formControlName="lsAbsencetypeId" (change)="selectTypeOfAbsecnce(preApprovalForm.value.lsAbsencetypeId);preApprovalRequestEvent()">
+                <option *ngFor="let dl of typeOfAbsenceList" value="{{dl.lListitemId}}">{{dl.name}}
+                </option>
+              </select>
+                            </div>
+
+                            <div class="col-md-2 mb-3">
+                                <label for="validationCustom01">Absence Reason:</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <select class="form-control" formControlName="lsAbsenceRsnId" (change)="preApprovalRequestEvent()">
+                <option *ngFor="let dl of absenceReasonList" value="{{dl.lListitemId}}">{{dl.name}}
+                </option>
+              </select>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="col-md-2 mb-3">
+                                <label for="validationCustom02">Start Date</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="input-group">
+                                    <input class="form-control  " placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="startdate1" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event);preApprovalRequestEvent()"
+                                        (click)="dp1.toggleCalendar()" />
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 mb-3">
+                                <label for="validationCustom02">End Date</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="input-group">
+                                    <input class="form-control  " placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="enddate1" #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event);preApprovalRequestEvent()"
+                                        (click)="dp2.toggleCalendar()" />
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="form-row">
+                            <div class="col-md-2 mb-3">
+                                <label for="validationCustom01">Start time</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="time" formControlName="startTime" class="form-control" (change)="calTime();preApprovalRequestEvent()" [ngClass]="{ 'is-invalid': submitted && f.startTime.errors }">
+                                <div *ngIf="submitted && f.startTime.errors" class="invalid-feedback">
+                                    <div *ngIf="f.startTime.errors.required">Start time is required</div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <label for="validationCustom01">End time</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="time" formControlName="endTime" class="form-control" (change)="calTime();preApprovalRequestEvent()" [ngClass]="{ 'is-invalid': submitted && f.endTime.errors }">
+                                <div *ngIf="submitted && f.endTime.errors" class="invalid-feedback">
+                                    <div *ngIf="f.endTime.errors.required">End time is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-row">
+                            <div class="col-md-2 mb-3">
+                                <label for="validationCustom01">Total</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input type="text" formControlName="totalTime" class="form-control" disabled>
+                            </div>
+
+                            <div class="col-md-2 mb-3" *ngIf="!requestId">
+
+                                <label for="validationCustom01">Attachment</label>
+                            </div>
+                            <div class="col-md-4 mb-3" *ngIf="!requestId">
+                                <div class="input-group">
+
+                                    <div class="custom-file">
+
+                                        <input type="file" class="custom-file-input" multiple formControlName="fileName" id="importFile" (change)="onFileChange($event.target.files)">
+                                        <label class="custom-file-label" #labelImport for="importFile"><i class="fas fa-search"></i> Choose
+                        file</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 mb-3" *ngIf="requestId">
+                                <label for="validationCustom01">Attachment</label>
+                            </div>
+                            <div class="col-md-4 mb-3" *ngIf="requestId">
+                                <div class="input-group mb-3">
+                                    <input _ngcontent-wdr-c114="" type="text" formControlName="fileName" aria-label="Recipient's username" aria-describedby="basic-addon2" class="form-control">
+                                    <div class="input-group-append">
+                                        <button type="button" (click)="openAttachment()" class="btn btn-primary">View</button></div>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="col-md-2 mb-3">
+                                <label for="validationCustom01">Explanation</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <textarea type="text" formControlName="description" class="form-control" (change)="preApprovalRequestEvent()"></textarea>
+                            </div>
+
+                        </div>
+
+                    </app-card>
+
+                    <!-- <div class="form-row">
+                        <div class="col-md-6 mb-3" *ngIf="!requestId">
+
+                            <label for="validationCustom01">Attachment</label>
+                            <div class="input-group">
+
+                                <div class="custom-file">
+
+                                    <input type="file" class="custom-file-input" multiple formControlName="fileName" id="importFile" (change)="onFileChange($event.target.files)">
+                                    <label class="custom-file-label" #labelImport for="importFile"><i class="fas fa-search"></i> Choose
+                    file</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3" *ngIf="requestId">
+                            <label for="validationCustom01">Attachment</label>
+                            <div class="input-group mb-3">
+                                <input _ngcontent-wdr-c114="" type="text" formControlName="fileName" aria-label="Recipient's username" aria-describedby="basic-addon2" class="form-control">
+                                <div class="input-group-append">
+                                    <button type="button" (click)="openAttachment()" class="btn btn-primary">View</button></div>
+                            </div>
+
+                        </div>
+
+
+                    </div> -->
+
+
+
+                </form>
+
+            </app-card>
+        </div>
+    </div>
+
+
+
+</div>

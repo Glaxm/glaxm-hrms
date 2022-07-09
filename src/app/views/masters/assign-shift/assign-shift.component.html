@@ -1,0 +1,258 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div>
+      <app-card cardTitle="Shift Allocation " [options]="false">
+
+
+        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+          <ul _ngcontent-epm-c40="" class="nav">
+          </ul>
+          <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+            <!-- <button type="button" class="btn btn-danger" ngbTooltip="btn-success"
+              (click)="fileUpload.show();fileUploadFormAssignShift.reset()">Upload</button> &nbsp;&nbsp;&nbsp; -->
+            <!-- <button type="button" class="btn btn-success" ngbTooltip="btn-success" [disabled]="submitted"
+              (click)="addModule()">Submit</button> &nbsp;&nbsp;&nbsp; -->
+
+            <div class="btn-group" role="group" ngbDropdown>
+              <button type="button" class="btn btn-primary" ngbDropdownToggle>
+                More
+              </button>
+              <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu style="right: 0;
+                  left: auto;">
+                <a class="dropdown-item" href="javascript:"
+                  (click)="fileUpload.show();fileUploadFormAssignShift.reset()">Upload</a>
+                <a class="dropdown-item" href="javascript:" (click)="sampleFileFormat()">Employee Shift Allocation
+                  Import Format </a>
+
+              </div>
+            </div>
+
+          </div>
+        </nav>
+
+        <!-- <form action="javascript:" class="needs-validation" novalidate [formGroup]="moduleForm">
+
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <app-card cardTitle="" [options]="false">
+                <div class="form-row">
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Division</label>
+                    <select class="form-control" formControlName="divisionId">
+                      <option *ngFor="let dl of divList" value="{{dl.xdivId}}">{{dl.name}}</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Category</label>
+                    <select class="form-control" formControlName="shiftType">
+                      <option *ngFor="let sl of empCatList" value="{{sl.empCatId}}">{{sl.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Section</label>
+                    <select class="form-control" formControlName="sectionId">
+                      <option *ngFor="let dl of sectionList" value="{{dl.xsectionId}}">{{dl.name}}</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Department</label>
+                    <select class="form-control" formControlName="deptId">
+                      <option *ngFor="let dl of deptList" value="{{dl.deptId}}">{{dl.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Existing Shift Selection</label>
+                    <select class="form-control" formControlName="existShiftId">
+                      <option *ngFor="let dl of existingShiftSelectionList" value="{{dl.lListitemId}}">{{dl.name}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </app-card>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <app-card cardTitle="Employee List" [options]="false">
+
+                <div class="table-responsive tableFixHead">
+
+                  <table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>
+
+                          All <input class="form-check-input" style="zoom: 1.5;" type="checkbox" name="gridRadios"
+                            id="gridRadios1" value="option1">
+
+                        </th>
+                        <th>Name</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let dl of emplist">
+                        <td>
+                          <div class="form-check">
+                            <input class="form-check-input" style="zoom: 1.5;" type="checkbox" name="gridRadios"
+                              id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(dl)">
+                          </div>
+                        </td>
+                        <td>{{dl.displayName}}</td>
+
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </app-card>
+            </div>
+
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+
+              <label for="validationCustom01">Employee Category</label>
+
+              <div class="input-group">
+                <select class="form-control" formControlName="empCategory"
+                  (change)="getEmpListByCat(moduleForm.value.empCategory)">
+                  <option *ngFor="let sl of empCatList" value="{{sl.empCatId}}">{{sl.name}}</option>
+                </select>
+              </div>
+
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Shift Name</label>
+              <select class="form-control" formControlName="moduleGroup">
+                <option *ngFor="let sl of shiftList" value="{{sl.shiftRuleId}}">{{sl.name}}</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="form-row">
+
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom02">From Date</label>
+              <div class="input-group">
+
+                <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker
+                  name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="startDate1"
+                  [ngClass]="{ 'is-invalid': submitted && f.startDate1.errors }" #dp1="angular-mydatepicker"
+                  autocomplete="off" (ngModelChange)="changeStartDate($event)" (click)="dp1.toggleCalendar()" />
+
+                <div class="input-group-append">
+                  <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom02">To Date</label>
+              <div class="input-group">
+
+                <input class="form-control" type="text" placeholder="Select a date" angular-mydatepicker
+                  name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="endDate1"
+                  #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)"
+                  (click)="dp2.toggleCalendar()" />
+                <div class="input-group-append">
+                  <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </form> -->
+</app-card>
+    </div>
+  </div>
+</div>
+
+<div class="col-xl-12 col-md-12">
+  <app-ui-modal #employeelist dialogClass="modal-dialog-centered">
+    <div class="app-modal-header">
+      <h5 class="modal-title text-center">Category wise employee list</h5>
+    </div>
+    <div class="app-modal-body">
+      <form action="javascript:" class="needs-validation" [formGroup]="emplistform">
+
+        <div class="table-responsive tableFixHead">
+
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>
+                  <input type="checkbox" name="gridRadios" id="gridRadios1" value="option1">
+                </th>
+                <th>Name</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let dl of emplist">
+                <td>
+                  <div class="form-check">
+                    <input class="form-check-input" style="zoom: 1.5;" type="checkbox" name="gridRadios"
+                      id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(dl)">
+                  </div>
+                </td>
+                <td>{{dl.displayName}}</td>
+
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+      </form>
+
+
+    </div>
+    <div class="app-modal-footer">
+
+      <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" data-dismiss="modal"
+        (click)="employeelist.hide()">Close</button>
+
+    </div>
+  </app-ui-modal>
+</div>
+
+<div class="col-xl-4 col-md-6">
+  <app-ui-modal #fileUpload dialogClass="modal-dialog-centered">
+    <div class="app-modal-header">
+      <h5 class="modal-title text-center">Assign Shift</h5>
+    </div>
+    <div class="app-modal-body">
+      <form action="javascript:" class="needs-validation" [formGroup]="fileUploadFormAssignShift">
+
+        <div class="form-group">
+          <input type="file" autocomplete="off" formControlName="fileName" class="form-control"
+            (change)="fileChange($event,'ASSIGNSHFIT')" name="imagePath" id="file" placeholder="Upload File"
+            style="border: none;">
+        </div>
+
+      </form>
+
+
+    </div>
+    <div class="app-modal-footer">
+
+      <button type="button" class="btn btn-success" ngbTooltip="btn-success"
+        (click)="fileUpload1($event,'ASSIGNSHFIT');fileUpload.hide()">Upload</button> &nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" data-dismiss="modal"
+        (click)="fileUpload.hide()">Close</button>
+
+    </div>
+  </app-ui-modal>
+</div>

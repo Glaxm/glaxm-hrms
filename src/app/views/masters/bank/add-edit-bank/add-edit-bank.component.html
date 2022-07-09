@@ -1,0 +1,106 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{bankForm.value.bankId ? 'Edit bank':'Add bank'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateBank()" *ngIf="!isView">{{bankForm.value.bankId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="bankForm">
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" disabled formControlName="holdingId" [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }">
+                  <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+              </select>
+                            <div *ngIf="submitted && f.holdingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.holdingId.errors.required">Holding is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <!-- <select class="form-control validation_border" formControlName="companyId" 
+            [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
+                <option *ngFor="let cl of companyList" value="{{cl.gCompanyId}}">{{cl.name}}</option>
+            </select>
+            <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+              <div *ngIf="f.companyId.errors.required">Company is required</div>
+            </div> -->
+                            <ng-multiselect-dropdown [placeholder]="" [data]="companyList" name="company" formControlName="company" [(ngModel)]="selectedCompanyList" [settings]="dropdownSettings" (onSelect)="onCompnaySelect($event)" (onDeSelect)="onCompanyDeSelect($event)" (onSelectAll)="onSelectAllCompnay($event)"
+                                [ngClass]="{ 'is-invalid': submitted && f.company.errors }" class="set-border-color">
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="submitted && f.company.errors" class="invalid-feedback">
+                                <div *ngIf="f.company.errors.required">Company is required</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Bank</label>
+                            <input type="text" formControlName="name" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required">Bank is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Swift Code</label>
+                            <input type="text" formControlName="swiftCode" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.swiftCode.errors }">
+                            <div *ngIf="submitted && f.swiftCode.errors" class="invalid-feedback">
+                                <div *ngIf="f.swiftCode.errors.required">Swift Code is required</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Routing Number</label>
+                            <input type="text" formControlName="routingNo" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.routingNo.errors }">
+                            <div *ngIf="submitted && f.routingNo.errors" class="invalid-feedback">
+                                <div *ngIf="f.routingNo.errors.required">Routing Number is required</div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Description</label>
+                            <input type="text" formControlName="desc" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.desc.errors }">
+                            <div *ngIf="submitted && f.desc.errors" class="invalid-feedback">
+                                <div *ngIf="f.desc.errors.required">Description is required</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Code</label>
+                            <input type="text" formControlName="code" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control validation_border" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.isActive.errors }">
+                    <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                </select>
+                            <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                                <div *ngIf="f.isActive.errors.required">Status is required</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </app-card>
+        </div>
+    </div>
+</div>

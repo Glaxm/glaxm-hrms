@@ -1,0 +1,43 @@
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <app-card  [options]="false">
+          
+            <div class="table-responsive">
+               
+                <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Document Type</th>
+                    <th>Document No.</th>
+                    <th>Card No.</th>
+                    <th>Date of Issue</th>
+                    <th>Date of Expiry</th>
+                    <th></th>
+              </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let dl of empDocList">
+                    <td>{{dl.docname}}</td>
+                    <td>{{dl.docno}}</td>
+                    <td>{{dl.doccardno}}</td>
+                    <td>{{dl.issuedate   | date: 'dd-MMM-yyyy'}}</td>
+                    <td>{{dl.expirydate   | date: 'dd-MMM-yyyy'}}</td>
+                    <td>
+                        <button *ngIf="dl.path" class="btn btn-outline-primary" type="button" (click)="view(dl)" data-toggle="tooltip"
+                      data-placement="top" title="View">
+                      <i _ngcontent-kms-c118="" class="fas fa-eye"></i>
+                    </button>
+                    </td>
+                </tr>
+               
+                </tbody>
+                </table>
+            </div>
+        </app-card>
+    </div>
+
+  
+</div>
+   

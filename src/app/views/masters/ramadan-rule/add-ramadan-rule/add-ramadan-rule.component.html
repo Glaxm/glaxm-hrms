@@ -1,0 +1,178 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{ramadanRuleForm.value.ramadanRuleId ? 'Edit Ramadan Rule':'Add Ramadan Rule'}}"
+                [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success"
+                            (click)="addUpdateRamdanRules()"
+                            *ngIf="!isView">{{ramadanRuleForm.value.ramadanRuleId ? 'Update':'Add'}}</button>
+                        &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger"
+                            (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="ramadanRuleForm">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" disabled formControlName="holdingId"
+                                [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }"
+                               >
+                                <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.holdingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.holdingId.errors.required">Holding is required</div>
+                            </div>
+  
+                        </div>
+  
+  
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <select class="form-control validation_border" formControlName="companyId"
+                                [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
+                                <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+                                <div *ngIf="f.companyId.errors.required">Company is required</div>
+                            </div>
+  
+                        </div>
+  
+  
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                           <label for="validationCustom02">Start Date</label>
+                          <div class="input-group">
+                           <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker 
+                            name="reactiveFormsDate"  [options]="myDatePickerOptions" formControlName="startDate1"
+                            [ngClass]="{ 'is-invalid': submitted && f.startDate1.errors }"
+                             #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event)" (click)="dp1.toggleCalendar()"/>
+                            <div class="input-group-append">
+                              <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                              </button>
+                            </div>
+                            <div *ngIf="submitted && f.startDate1.errors" class="invalid-feedback">
+                             <div *ngIf="f.startDate1.errors.required">Startdate is required</div>
+                           </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                           <label for="validationCustom02">End Date</label>
+                          <div class="input-group">
+                           <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker 
+                            name="reactiveFormsDate"  [options]="myDatePickerOptions" formControlName="endDate1"
+                            [ngClass]="{ 'is-invalid': submitted && f.endDate1.errors }"
+                             #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)" (click)="dp2.toggleCalendar()"/>
+                            <div class="input-group-append">
+                              <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                              </button>
+                            </div>
+                            <div *ngIf="submitted && f.endDate1.errors" class="invalid-feedback">
+                             <div *ngIf="f.endDate1.errors.required">Enddate is required</div>
+                           </div>
+                          </div>
+                        </div>
+
+                   </div>
+                    <div class="form-row">
+  
+                        <!-- <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Name</label>
+                            <input type="text" formControlName="name" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required">Name is required</div>
+                            </div>
+                        </div> -->
+
+                        <!-- <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Employee Category</label>
+                            <select class="form-control validation_border" formControlName="empCategoryId"
+                                [ngClass]="{ 'is-invalid': submitted && f.empCategoryId.errors }">
+                                <option *ngFor="let dl of empCatList" value="{{dl.empCatId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.empCategoryId.errors" class="invalid-feedback">
+                                <div *ngIf="f.empCategoryId.errors.required">Employee Category is required</div>
+                            </div>
+  
+                        </div> -->
+  
+                        <!-- <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holiday Date</label>
+                            <div class="input-group">
+                
+                              <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker 
+                              name="reactiveFormsDate" disabled [options]="myDatePickerOptions" formControlName="stDate"
+                               #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event)" (click)="dp1.toggleCalendar()"/>
+                              <div class="input-group-append">
+                                <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                                  <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                              </div>
+                            </div>
+  
+                        </div> -->
+                        
+              
+                         <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Paid off Hrs. : (HH:mm)</label>
+                            <input type="text" formControlName="paidOffHrs" class="form-control validation_border"
+                                [ngClass]="{ 'is-invalid': submitted && f.paidOffHrs.errors }">
+                            <div *ngIf="submitted && f.paidOffHrs.errors" class="invalid-feedback">
+                                <div *ngIf="f.paidOffHrs.errors.required">Paid off Hrs. is required</div>
+                            </div>
+                        </div>
+  
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Remark</label>
+                            <input type="text" formControlName="remarks" class="form-control">
+                           
+                        </div>
+  
+                    </div>
+               
+                    <div class="form-row">
+
+                        <!-- <div class="col-md-6 mb-3">
+                            <div class="custom-control custom-checkbox">
+                              <label for="validationCustom01"></label><br>
+                              <input type="checkbox" class="custom-control-input" formControlName="isPaidProRate" id="customCheck1">
+                              <label class="custom-control-label" for="customCheck1">Paid Pro-Rate</label>
+                            </div>
+                          </div> -->
+
+                         
+                    </div>
+                    <div class="form-row">
+
+                        <!-- <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Code</label>
+                            <input type="text" formControlName="code" class="form-control">
+                        </div> -->
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control validation_border" formControlName="status">
+                                <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                            </select>
+                        </div>
+  
+                    </div>
+  
+  
+                </form>
+  
+            </app-card>
+        </div>
+    </div>
+  </div>

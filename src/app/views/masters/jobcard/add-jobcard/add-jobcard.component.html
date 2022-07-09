@@ -1,0 +1,388 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{jobcardid ? 'Edit Job card':'Add Job card'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdatejobcard()" *ngIf="!isView">{{jobcardid ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ?
+              'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+
+
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="jobcardForm">
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" disabled formControlName="gHoldingId" (change)="selectHolding(jobcardForm.value.gHoldingId)" [ngClass]="{ 'is-invalid': submitted && f.gHoldingId.errors }">
+                <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+              </select>
+                            <div *ngIf="submitted && f.gHoldingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.gHoldingId.errors.required">Holding is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <!-- <select class="form-control validation_border" formControlName="gCompanyId"
+                [ngClass]="{ 'is-invalid': submitted && f.gCompanyId.errors }">
+                <option *ngFor="let cl of companyList" value="{{cl.gCompanyId}}">{{cl.name}}</option>
+              </select> -->
+                            <ng-select formControlName="gCompanyId" [options]="companyList" class="validation_border" [ngClass]="{ 'is-invalid': submitted && f.gCompanyId.errors }">
+                            </ng-select>
+                            <div *ngIf="submitted && f.gCompanyId.errors" class="invalid-feedback">
+                                <div *ngIf="f.gCompanyId.errors.required">Company is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Job Card No</label>
+                            <input type="text" formControlName="jobcardNo" class="form-control" disabled>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <label for="validationCustom01">Job</label>
+                            <select class="form-control" formControlName="jobdefinationId" (change)="selectJObDef(jobcardForm.value.jobdefinationId)">
+                <option *ngFor="let dl of jobDefinitionList" value="{{dl.jobdefinationId}}">{{dl.name}}</option>
+              </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Job Function</label>
+                            <select class="form-control" formControlName="jobfunctionId" disabled>
+                <option *ngFor="let dl of jobFuntionList" value="{{dl.jobfunctionId}}">{{dl.name}}</option>
+              </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">UOM</label>
+                            <select class="form-control" formControlName="xunitmeasureId" disabled>
+                <option *ngFor="let dl of uomList" value="{{dl.xunitmeasureId}}">{{dl.uomName}}</option>
+              </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Transaction Date</label>
+                            <div class="input-group">
+                                <input class="form-control " placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" formControlName="trxDate1" [options]="myDatePickerOptions" [ngClass]="{ 'is-invalid': submitted && f.trxDate1.errors }" #dp2="angular-mydatepicker"
+                                    autocomplete="off" (ngModelChange)="changeTrxDate($event)" (click)="dp2.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control validation_border" formControlName="status">
+                <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+              </select>
+                        </div>
+                    </div>
+
+                    <div *ngIf="jobcardid && !isempjobcard">
+
+
+
+
+
+                        <!--  -->
+                        <app-card cardTitle=" Job Card Line Summary" [options]="false">
+
+
+                            <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                                <ul _ngcontent-epm-c40="" class="nav">
+                                </ul>
+                                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+
+                                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="addEmpJobCard();isempjobcard=true" data-toggle="tooltip" data-placement="top" title="Add">
+                    <i class="fa fa-plus"></i>
+                  </button>&nbsp;&nbsp;
+                                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="editEmpJobCard()" *ngIf="!isView" data-toggle="tooltip" data-placement="top" title="Edit">
+                    <i class="fas fa-pencil-alt"></i>
+                  </button>&nbsp;&nbsp;
+                                </div>
+                            </nav>
+
+                            <div class="table-responsive">
+
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Employee</th>
+                                            <th>Shift</th>
+                                            <th>Planned Qty</th>
+                                            <th>Actual Qty</th>
+
+                                            <th>Rate</th>
+                                            <th>Bonus Amt</th>
+                                            <th>Total Amount</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let dl of jobcardlinelist">
+                                            <td>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" (click)="selectRadioBtn=true;getDataUsingRedioBtn(dl)" value="option1">
+                                                </div>
+                                            </td>
+                                            <td>{{dl.empname}}</td>
+                                            <td>{{dl.shiftName}}</td>
+                                            <td>{{dl.plannedQnty}}</td>
+                                            <td>{{dl.actQnty}}</td>
+
+                                            <td>{{dl.rate}}</td>
+                                            <td>{{dl.bonusAmount}}</td>
+                                            <td>{{dl.amount}}</td>
+
+                                        </tr>
+
+                                        <tr *ngIf="jobcardlinelist?.length==0">
+                                            <td colspan="9" style="text-align:center;">No records</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </app-card>
+                        <!--  -->
+
+
+                    </div>
+
+
+                    <!--  -->
+
+                    <div *ngIf="isempjobcard">
+
+                        <app-card cardTitle="Job Card Line" [options]="false">
+                            <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                                <ul _ngcontent-epm-c40="" class="nav">
+                                </ul>
+                                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                                    <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="saveEmployeeJob()">{{jobcardlineid ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                                    <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="isempjobcard=false;jobcardlineid=null">Back</button>
+                                </div>
+                            </nav>
+                            <form action="javascript:" class="needs-validation" novalidate [formGroup]="empjobcardForm">
+
+                                <!--  -->
+
+
+                                <div class="form-row">
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom01">Employee</label>
+
+                                        <ng-multiselect-dropdown name="city" [placeholder]="'Select Employee'" [data]="employeeList" formControlName="employee" [(ngModel)]="selectedItemsemp" [settings]="dropdownSettingsemp" (onSelect)="onItemSelectemp($event)">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+
+                                        <label for="validationCustom01">Shift</label>
+                                        <select class="form-control" formControlName="xshiftruleId" disabled>
+                    <option></option>
+                    <option *ngFor="let dl of shiftRuleList" value="{{dl.shiftRuleId}}">{{dl.name}}</option>
+                  </select>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row">
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom01">Actual Qty</label>
+                                        <input type="number" formControlName="actQnty" class="form-control" (keyup)="calAmt()">
+
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom01">Planned Qty</label>
+                                        <input type="number" formControlName="plannedQnty" class="form-control" disabled>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row">
+
+                                    <div class="col-md-6 mb-3" *ngIf="false">
+                                        <label for="validationCustom01">Qty Achieved</label>
+                                        <input type="number" formControlName="achievedQnty" class="form-control">
+
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom01">Rate</label>
+                                        <input type="text" formControlName="rate" class="form-control" disabled>
+
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom01">Bonus Amount</label>
+                                        <input type="text" formControlName="bonusAmount" class="form-control" (keyup)="calAmt()">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row">
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom01">Amount</label>
+                                        <input type="text" formControlName="amount" class="form-control" disabled>
+
+                                    </div>
+
+                                </div>
+
+                            </form>
+                        </app-card>
+
+
+                    </div>
+
+
+
+                    <!--  -->
+
+
+                    <!-- <app-card cardTitle="Employee Job" >
+
+            <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Employee</label> 
+               <ng-multiselect-dropdown
+               name="city"
+               [placeholder]="'Select Employee'"
+               [data]="employeeList"
+               formControlName="employee" [(ngModel)]="selectedItems"
+               [settings]="dropdownSettings"
+               (onSelect)="onItemSelect($event)">
+           </ng-multiselect-dropdown>
+            </div>
+
+            <div class="col-md-6 mb-3">
+               
+                <label for="validationCustom01">Shift</label>
+                <select class="form-control" formControlName="Shift"  >
+                </select>
+            
+        </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Planned Qty</label>
+                    <input type="text" formControlName="Plannedqty" class="form-control">
+                 
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Actual Qty</label>
+                    <input type="text" formControlName="actualqty" class="form-control">
+                 
+                </div>
+            </div>
+
+            <div class="form-row">
+
+                <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Qty Achieved</label>
+                    <input type="text" formControlName="qtyachieved" class="form-control">
+                 
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Rate</label>
+                    <input type="text" formControlName="rate" class="form-control">
+                 
+                </div>
+            </div>
+
+            <div class="form-row">
+
+                <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Amount</label>
+                    <input type="text" formControlName="amount" class="form-control">
+                 
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Bonus Amount</label>
+                    <input type="text" formControlName="bonusamount" class="form-control">
+                 
+                </div>
+            </div>
+
+            <div class="table-responsive tableFixHead">
+               
+                <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Employee</th>
+                    <th>Shift</th>
+                    <th>Planned Qty</th>
+                    <th>Actual Qty</th>
+                    <th>Qty Achieved</th>
+                    <th>Rate</th>
+                    <th>Amount</th>
+                    <th>BonusAmt</th> 
+                
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let dl of jobcardList">
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" >
+                        </div>
+                    </td>
+                    <td>{{dl.name}}</td>
+                    <td>{{dl.description}}</td>
+                    <td>{{dl.description}}</td>
+                    <td>{{dl.description}}</td>
+                    <td>{{dl.description}}</td>
+                    <td>{{dl.description}}</td>
+                    <td>{{dl.description}}</td>
+                    <td>{{dl.description}}</td>
+
+                </tr>
+               
+                </tbody>
+                </table>
+            </div>
+
+          </app-card> -->
+
+                </form>
+
+
+            </app-card>
+
+        </div>
+    </div>
+</div>

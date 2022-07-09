@@ -1,0 +1,202 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{requestForm.value.G_APPROVALREQ_ID ? 'View Request':'Add Request'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" [disabled]="!issubmit" (click)="addUpdateWorkflowRequest()" *ngIf="requestForm.value.G_APPROVALREQ_ID==null">Submit</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{requestForm.value.G_APPROVALREQ_ID ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="requestForm">
+                    <div *ngIf="requestForm.value.G_APPROVALREQ_ID">
+                        <div class="form-row" *ngIf="statuscode=='P'">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Remark </label>
+                                <input type="text" formControlName="remark" class="form-control">
+                            </div>
+                            <div class="col-md-4 mb-3" *ngIf="moduleCode=='EMPLOYEELEAVE'">
+                                <label for="validationCustom01">Replaced By </label>
+
+                                <ng-multiselect-dropdown name="city" [placeholder]="'Select Employee'" [data]="employeeList" formControlName="employee" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)">
+                                </ng-multiselect-dropdown>
+                            </div>
+
+
+                            <div class="col-md-3 mb-3" style="top:27px;">
+                                <div *ngIf="true">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="requestUpdate('A')">Approve</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button class="btn btn-white btn-icon btn-outline-danger" type="button" (click)="requestUpdate('R')">Reject</button>
+
+                                </div>
+                            </div>
+                        </div>
+                        <h3 *ngIf="statuscode=='A'">Request already Approved.</h3>
+                        <h3 *ngIf="statuscode=='R'">Request already Rejected</h3>
+                        <hr>
+                    </div>
+
+                    <div *ngIf="moduleCode=='EMPLOYEELEAVE' && approvalHistoryList?.length>0">
+                        <app-card cardTitle="Eligibility / Leave Balance" [options]="false">
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <!-- <th>#</th> -->
+                                            <th>Date of Joining</th>
+                                            <th>Date of Resumption</th>
+                                            <th>Leave Settlement Date</th>
+                                            <th>Leave Balance</th>
+                                            <th>Leave Applied</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let rm of leavebalanceList">
+                                            <td>{{rm.doj}}</td>
+                                            <td>{{rm.resumeDate}}</td>
+                                            <td>{{rm.settleDate}}</td>
+                                            <td>{{rm.leaveBal}}</td>
+                                            <td>{{rm.leaveApplied}}</td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </app-card>
+                        <br>
+                    </div>
+
+                    <div *ngIf="approvalHistoryList?.length>0">
+                        <app-card cardTitle="Approval History" [options]="false">
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <!-- <th>#</th> -->
+                                            <th>Approved By</th>
+                                            <th>Request No.</th>
+                                            <th>Approval Level</th>
+                                            <th>Remark</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let rm of approvalHistoryList">
+                                            <td>{{rm.approver}}</td>
+                                            <td>{{rm.req_id}}</td>
+                                            <td>{{rm.level_no}}</td>
+                                            <td>{{rm.remark}}</td>
+                                            <td>{{rm.approvalstatus}}</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </app-card>
+                        <br>
+                    </div>
+                    <hr>
+                    <div class="form-row">
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <select class="form-control validation_border" disabled formControlName="G_HOLDING_ID">
+                                <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Request ID</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="G_APPROVALREQ_ID" class="form-control" disabled>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom02"> Date</label>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="DATEREQUEST1" disabled #dp1="angular-mydatepicker" autocomplete="off"
+                                    (ngModelChange)="changeEffectiveDate($event)" (click)="dp1.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()" disabled>
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Company</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <select class="form-control validation_border" formControlName="G_COMPANY_ID" (change)="selectCompany(requestForm.value.G_COMPANY_ID)">
+                                <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Employee</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <ng-multiselect-dropdown name="employee" [placeholder]="'Select Employee'" [data]="employeeList1" formControlName="employee1" [(ngModel)]="selectedItems1" [settings]="dropdownSettings" (onDeSelect)="onEmployeeDeSelect1($event)" [ngClass]="{ 'is-invalid': submitted && pi.employee1.errors }"
+                                [disabled]="isview" (onSelect)="onItemSelect1($event)">
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="submitted && pi.employee1.errors" class="invalid-feedback">
+                                <div *ngIf="pi.employee1.errors.required">Employee is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Request Type</label></div>
+                        <div class="col-md-4 mb-3">
+                            <select class="form-control validation_border" formControlName="G_APPROVALWF_ID" (change)="selectWorkflowRequest(requestForm.value.G_APPROVALWF_ID)">
+                                <option *ngFor="let dl of workflowList" value="{{dl.gApprovalwfId}}">{{dl.name}}
+                                </option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </form>
+                <br>
+
+                <app-leave-request (leaveRequest)="leaveRequestFunction($event)" *ngIf="moduleCode=='EMPLOYEELEAVE'" [companyId]="requestForm.value.G_COMPANY_ID" [holdingId]="requestForm.value.G_HOLDING_ID" [employeeId]="requestForm.value.xEmployeeId" [requestId]="requestForm.value.G_APPROVALREQ_ID"
+                    [statuscode]="statuscode">
+                </app-leave-request>
+
+                <app-loan-request (loanRequest)="loanRequestFunction($event)" *ngIf="moduleCode=='EMPLOAN' && iselegibility==='Y'" [employeeId]="requestForm.value.xEmployeeId" [companyId]="requestForm.value.G_COMPANY_ID" [holdingId]="requestForm.value.G_HOLDING_ID" [statuscode]="statuscode"
+                    [requestId]="requestForm.value.G_APPROVALREQ_ID">
+                </app-loan-request>
+
+                <app-exit-request (exitRequest)="exitRequestFunction($event)" *ngIf="moduleCode=='EXITFORM'" [companyId]="requestForm.value.G_COMPANY_ID" [employeeId]="requestForm.value.xEmployeeId" [holdingId]="requestForm.value.G_HOLDING_ID" [requestId]="requestForm.value.G_APPROVALREQ_ID">
+                </app-exit-request>
+
+                <app-pre-approval (preApprovalRequest)="preApprovalFunction($event)" *ngIf="moduleCode=='EMPABSENCE'" [companyId]="requestForm.value.G_COMPANY_ID" [employeeId]="requestForm.value.xEmployeeId" [holdingId]="requestForm.value.G_HOLDING_ID" [requestId]="requestForm.value.G_APPROVALREQ_ID"
+                    [stdate]="preApproval.startdate" [punchin]="preApproval.punchin" [punchout]="preApproval.punchout">
+                </app-pre-approval>
+
+            </app-card>
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,183 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="Leave History Report" [options]="false">
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="leavehistoryform">
+                    <div class="form-row">
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <ng-multiselect-dropdown [placeholder]="" formControlName="company" [data]="companyList" name="companyName" [(ngModel)]="selectecdCompanyList" [settings]="dropdownSettingscompany" (onSelect)="onCompanySelect($event)" (onDeSelect)="onCompanyDeSelect($event)"
+                                (onDeSelectAll)="onDeSelectAllCompany($event)" (onSelectAll)="onSelectAllCompany($event)">
+                            </ng-multiselect-dropdown>
+
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Employee </label>
+                            <ng-multiselect-dropdown [placeholder]="" formControlName="employee" [data]="empList" name="employeeName" [(ngModel)]="selectedEmpList" [settings]="dropdownSettings" (onSelect)="onEmployeeSelect($event)" (onDeSelect)="onEmployeeDeSelect($event)" (onSelectAll)="onSelectAllEmployee($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Leave Type</label>
+                            <ng-multiselect-dropdown [placeholder]="" formControlName="ltype" [data]="leaveTypeList" name="leavetype" [(ngModel)]="selectecdLeaveTypeList" [settings]="dropdownSettingsleavetype" (onSelect)="onLeaveTypeSelect($event)" (onDeSelect)="onLeaveTypeDeSelect($event)"
+                                (onSelectAll)="onSelectAllLeaveType($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom02">From Date</label>
+                            <div class="input-group">
+                                <input class="form-control " placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsstartDate" [options]="myDatePickerOptions" formControlName="startDate1" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event)"
+                                    (click)="dp1.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                                </div>
+                                <!-- <div *ngIf="submitted && f.startDate1.errors" class="invalid-feedback">
+                    <div *ngIf="f.startDate1.errors.required">From Date is required</div>
+                </div> -->
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom02">To Date</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Select a date" angular-mydatepicker name="reactiveFormsendDate" [options]="myDatePickerOptions" formControlName="endDate1" #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)"
+                                    (click)="dp2.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                                </div>
+                                <!-- <div *ngIf="submitted && f.endDate1.errors" class="invalid-feedback">
+                    <div *ngIf="f.endDate1.errors.required">To Date is required</div>
+                </div> -->
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-1 mb-3">
+
+                            <label for="validationCustom02"><br></label>
+                            <div class="input-group">
+
+                                <button type="button" (click)="filterTable()" class="btn btn-success" [disabled]="this.btnLoader" ngbTooltip="btn-success" data-toggle="tooltip" data-placement="top" title="Go">
+                    <span *ngIf="this.btnLoader" class="spinner-border spinner-border-sm" role="status"></span>
+                    <span *ngIf="this.btnLoader" class="load-text">Go</span>
+                    <span *ngIf="!this.btnLoader" class="btn-text">Go</span>
+                  </button>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="col-md-1 mb-3" *ngIf="(flags.importFlag=='Y' && flags.exportFlag=='Y') || (flags.importFlag=='Y' && flags.exportFlag=='N') || (flags.importFlag=='N' && flags.exportFlag=='Y')">
+                            <label for="validationCustom01"><br> </label>
+                            <div class="input-group" role="group" ngbDropdown>
+                                <button type="button" class="btn btn-primary" ngbDropdownToggle>
+                    More
+                  </button>
+                                <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu style="right: 0;
+                          left: auto;">
+                                    <a class="dropdown-item" href="javascript:" (click)="exportReport()" *ngIf="flags.exportFlag=='Y'">Export Data </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- <div class="form-row" style="float: right;">
+            <div class="col-md-12 mb-3">
+              <input [(ngModel)]="filterString" (ngModelChange)="onFilterChange()" class="form-control"
+                placeholder="Search" />
+            </div>
+          </div> -->
+
+                <br>
+
+                <hr>
+                <app-card>
+                    <div [ngClass]="(filtered?.length>10)?'table-responsive tableFixHead':'table-responsive'">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Company</th>
+                                    <th>Old Emp ID</th>
+                                    <th>Emp Code</th>
+                                    <th>Employee</th>
+                                    <th>Leave Category</th>
+                                    <th>Leave Type</th>
+                                    <th>Last Leave Balance</th>
+                                    <th>Leave Start Date</th>
+                                    <th>Leave End Date</th>
+                                    <th>Total No. of Leave Days</th>
+                                    <th>Total No. of paid Annual Leave Days</th>
+                                    <th>Leave Encashment</th>
+                                    <th>Unpaid Leave</th>
+                                    <th>Sunday during leave</th>
+                                    <th>Saturday during leave</th>
+                                    <th>Public Holidays</th>
+                                    <th>Last Leave Settlement Date</th>
+                                    <th>Current leave settlement date upto</th>
+                                    <th>Leave carryforwarded from previous year</th>
+                                    <th>Opening leave balance for current year</th>
+                                    <th>Current leave balance</th>
+                                    <th>Rejoining date</th>
+                                    <th>Excess Days than approved leave</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dl of filtered" [style.color]="dl.rowColor">
+
+                                    <td>{{dl.companyName}}</td>
+                                    <td>{{dl.oldEmpId}}</td>
+                                    <td>{{dl.empcode}}</td>
+                                    <td>{{dl.empname}}</td>
+                                    <td>{{dl.leaveitemname}}</td>
+                                    <td></td>
+                                    <td>{{dl.balanceleaves}}</td>
+                                    <td>{{dl.startdate}}</td>
+                                    <td>{{dl.enddate}}</td>
+                                    <td>{{dl.leavedays}}</td>
+                                    <td>{{dl.paidLeaveDays}}</td>
+                                    <td>{{dl.encashment}}</td>
+                                    <td>{{dl.unpaidLeaveDays}}</td>
+                                    <td>{{dl.sundaysinLeave}}</td>
+                                    <td>{{dl.saturdaysinLeave}}</td>
+                                    <td>{{dl.holidaysinLeave}}</td>
+                                    <td>{{dl.lastleavesettledupto}}</td>
+                                    <td>{{dl.curleavesettledupto}}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>{{dl.curLeaveBal}}</td>
+                                    <td>{{dl.resumptionDt}}</td>
+                                    <td>{{dl.lateDays}}</td>
+                                    <td>{{dl.description}}</td>
+                                </tr>
+                                <tr *ngIf="filtered?.length==0">
+                                    <td colspan="24" style="text-align:center;">No records</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </app-card>
+
+
+
+            </app-card>
+        </div>
+
+
+    </div>
+</div>

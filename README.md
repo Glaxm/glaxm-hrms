@@ -1,1 +1,1 @@
-# glaxm-hrms
+# hrms-frontend

@@ -1,0 +1,201 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{assettranForm.value.assettranId ? 'Edit Asset Transaction':'Add Asset Transaction'}}"
+                [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success"
+                            (click)="addUpdateAirSector()" *ngIf="!isView">{{assettranForm.value.assettranId ?
+                            'Update':'Add'}}</button>
+                        &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ?
+                            'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="assettranForm">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" disabled formControlName="holdingId"
+                                [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }">
+                                <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.holdingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.holdingId.errors.required">Holding is required</div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <select class="form-control validation_border" formControlName="companyId"
+                            (change)="selectcompany(assettranForm.value.companyId)"
+                                [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }" 
+                                (change)="getEmployeeByCompany(assettranForm.value.companyId)">
+                                <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+                                <div *ngIf="f.companyId.errors.required">Company is required</div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Document No</label>
+                            <input type="text" formControlName="DOCUMENTNO" class="form-control" disabled>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Transaction Date</label>
+                            <div class="input-group">
+                                <input class="form-control " placeholder="Select a date" type="text"
+                                    angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions"
+                                    formControlName="daterx1"
+                                    [ngClass]="{ 'is-invalid': submitted && f.daterx1.errors }"
+                                    #dp1="angular-mydatepicker" autocomplete="off"
+                                    (ngModelChange)="changeTransactionDate($event)" (click)="dp1.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--  -->
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Asset Group</label>
+                            <select class="form-control validation_border" formControlName="x_asset_group_id" (change)="getAssetTypeListByGroup(assettranForm.value.x_asset_group_id)">
+                                <option *ngFor="let dl of assetGroupList" value="{{dl.x_ASSET_GROUP_ID}}">{{dl.name}}</option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Asset Type</label>
+                            <select class="form-control validation_border" formControlName="x_asset_type_id" (change)="getAssetItemListByType(assettranForm.value.x_asset_type_id)">
+                                <option *ngFor="let dl of assetTypeList" value="{{dl.x_asset_type_id}}">{{dl.name}}</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Asset Item</label>
+                            <select class="form-control validation_border" formControlName="x_asset_item_id">
+                                <option *ngFor="let dl of assetItemList" value="{{dl.x_asset_item_id}}">{{dl.name}}</option>
+                            </select>
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Request No.</label>
+                            <input type="text" formControlName="G_APPROVALREQ_ID" class="form-control" disabled>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Quantity</label>
+                            <input type="text" formControlName="qty" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Amount</label>
+                            <input type="text" formControlName="amount" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">From Date</label>
+                            <div class="input-group">
+                                <input class="form-control " placeholder="Select a date" type="text"
+                                    angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions"
+                                    formControlName="datefrom1"
+                                    [ngClass]="{ 'is-invalid': submitted && f.datefrom1.errors }"
+                                    #dp2="angular-mydatepicker" autocomplete="off"
+                                    (ngModelChange)="changeStartDate($event)" (click)="dp2.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">To Date</label>
+                            <div class="input-group">
+                                <input class="form-control " placeholder="Select a date" type="text"
+                                    angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions"
+                                    formControlName="dateto1" [ngClass]="{ 'is-invalid': submitted && f.dateto1.errors }"
+                                    #dp3="angular-mydatepicker" autocomplete="off"
+                                    (ngModelChange)="changeEndDate($event)" (click)="dp3.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp3.toggleCalendar()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <!-- <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Employee</label>
+                            <select class="form-control validation_border" formControlName="employeeId">
+                                <option></option>
+                                <option *ngFor="let dl of empList" value="{{dl.employeeId}}">{{dl.name}}
+                                </option>
+                            </select>
+                        </div> -->
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Employee</label>
+                            <!-- <select class="form-control" formControlName="xEmployeeId">
+                              <option *ngFor="let sl of employeeList" value="{{sl.employeeId}}">{{sl.displayName}}</option>
+                           </select> --> 
+                           <ng-multiselect-dropdown
+                           name="city"
+                           [placeholder]="'Select Employee'"
+                           [data]="employeeList"
+                           formControlName="employee" [(ngModel)]="selectedItems"
+                           [settings]="dropdownSettings"
+                           (onSelect)="onItemSelect($event)">
+                       </ng-multiselect-dropdown>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control validation_border" formControlName="status">
+                                <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                </form>
+
+            </app-card>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+<form action="javascript:" class="needs-validation" novalidate [formGroup]="applicbleForm">
+    <div class="form-row">
+        <div class="col-md-2 mb-3">
+            <label for="validationCustom01">Gender</label>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <select class="form-control " formControlName="applicablegender" (change)="applicableEvent()">
+                <option></option>
+                <option *ngFor="let dl of genderList" value="{{dl.id}}">{{dl.value}}</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-2 mb-3">
+            <label for="validationCustom01">Marital Status</label>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <select class="form-control " formControlName="maritalstatus" (change)="applicableEvent()">
+                <option></option>
+                <option *ngFor="let dl of maritalstatusList" value="{{dl.id}}">{{dl.value}}</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-2 mb-3">
+            <label for="validationCustom01">Employee Religion</label>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <select class="form-control " formControlName="applicableReligion" (change)="applicableEvent()">
+                <option></option>
+                <option *ngFor="let dl of religionList" value="{{dl.religionId}}">{{dl.name}}</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-2 mb-3">
+            <label for="validationCustom01">Employee Category</label>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <select class="form-control" formControlName="applicablecategory" (change)="applicableEvent()">
+                <option></option>
+                <option *ngFor="let sl of empCatList" value="{{sl.empCatId}}">{{sl.name}}
+                </option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-2 mb-3">
+            <label for="validationCustom01">Weekly Off</label>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <select class="form-control " formControlName="weeklyoffType" (change)="applicableEvent()">
+                <option></option>
+                <option *ngFor="let dl of weeklyOffList" value="{{dl.id}}">{{dl.value}}</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-2 mb-3">
+            <label for="validationCustom01">Annual Leave Entitlement Type</label>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <select class="form-control" formControlName="applEntitledtype" (change)="applicableEvent()">
+                <option></option>
+                <option *ngFor="let dl of aleaveentitelmenttypeList" value="{{dl.value}}">{{dl.name}}
+                </option>
+                </select>
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-2 mb-3">
+            <label for="validationCustom01">Employee Grade</label>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <ng-multiselect-dropdown [placeholder]="" [data]="empGradeList" name="empgrade" formControlName="empgrade" [(ngModel)]="selectedEmpgrade" [settings]="dropdownSettings" (onSelect)="onEmpGradeSelect($event)" (onDeSelect)="onEmpGradeDeSelect($event)" (onSelectAll)="onSelectAllEmpGrade($event)">
+            </ng-multiselect-dropdown>
+        </div>
+
+    </div>
+
+    <!-- <ng-multiselect-dropdown [placeholder]="" [data]="companyList" name="company" formControlName="company" [(ngModel)]="selectedCompanyList" [settings]="dropdownSettings" (onSelect)="onCompnaySelect($event)" (onDeSelect)="onCompanyDeSelect($event)" (onSelectAll)="onSelectAllCompnay($event)"
+                                [ngClass]="{ 'is-invalid': submitted && f.company.errors }" class="set-border-color">
+                            </ng-multiselect-dropdown> -->
+
+
+
+</form>

@@ -1,0 +1,8 @@
+// .multiselect-dropdown[_ngcontent-c5] .dropdown-btn[_ngcontent-c5] {
+//     border-left: 2px solid red;
+//     padding-left: 2px;
+// }
+:host ::ng-deep .multiselect-dropdown .dropdown-btn {
+    border-left: 2px solid red;
+    padding-left: 2px;
+}

@@ -1,0 +1,127 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{holdingForm.value.gHoldingId ? 'Edit Holding':'Add Holding'}}" [options]="false">
+
+
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateHolding()" *ngIf="!isView">{{holdingForm.value.gHoldingId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="holdingForm">
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding </label>
+                            <input type="text" formControlName="name" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required">Holding is required</div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Company</label>
+                <select class="form-control validation_border" formControlName="gCompanyId" (change)="changeCompany($event.target.value)"
+                [ngClass]="{ 'is-invalid': submitted && f.gCompanyId.errors }">
+                  <option *ngIf="companyList.length==0" value="">Add Comapny</option>
+                  <option *ngFor="let dl of companyList" value="{{dl.companyId}}">{{dl.companyName}}</option>
+                </select>
+                <div *ngIf="submitted && f.gCompanyId.errors" class="invalid-feedback">
+                  <div *ngIf="f.gCompanyId.errors.required">Company is required</div>
+                </div>
+            </div> -->
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Search Key</label>
+                            <input type="text" formControlName="value" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.value.errors }">
+                            <div *ngIf="submitted && f.value.errors" class="invalid-feedback">
+                                <div *ngIf="f.value.errors.required">Search Key is required</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+
+
+                        <!-- <div class="form-row"> -->
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Code</label>
+                            <input type="text" formControlName="code" class="form-control">
+                        </div>
+                        <!-- </div> -->
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Description</label>
+                            <input type="text" formControlName="description" class="form-control">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+
+
+                        <!-- <div class="col-md-4 mb-3">
+                <label for="validationCustom02">Description</label>
+                <textarea class="form-control" formControlName="description" name="disc" rows="3"></textarea>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div> -->
+
+
+                    </div>
+
+                    <div class="form-row">
+
+
+                        <div class="col-md-6 mb-3">
+                            <!-- <div class="custom-control custom-checkbox">
+                <label for="validationCustom01"></label><br>
+                <input type="checkbox" class="custom-control-input" formControlName="status" id="customCheck1">
+                <label class="custom-control-label" for="customCheck1">Is Active</label>
+              </div> -->
+                            <label for="validationCustom01">status</label>
+                            <select class="form-control validation_border" formControlName="status">
+                <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Logo</label>
+                            <div class="input-group">
+
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" multiple name="file" formcontrolname="fileName" id="importFile" (change)="onFileChange($event.target.files)">
+                                    <label class="custom-file-label" #labelImport for="importFile"><i class="fas fa-search"></i> Choose
+                  file</label>
+
+                                </div>
+                                &nbsp;
+                                <div *ngIf="filePath">
+                                    <button type="button" (click)="openAttachment()" class="btn btn-primary">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <hr>
+          <div class="text-center">
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateHolding()" *ngIf="!isView">{{holdingForm.value.gHoldingId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+          
+          </div> -->
+
+                </form>
+
+                <!-- ////////////////////////////////////////////////////////// -->
+            </app-card>
+        </div>
+    </div>
+</div>

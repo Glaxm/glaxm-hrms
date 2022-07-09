@@ -1,0 +1,777 @@
+<div class="row">
+    <div class="col-sm-12">
+        <!-- <div>
+      <app-card cardTitle="Employee"  [options]="false"> -->
+        <ng-wizard [config]="config" (stepChanged)="stepChanged($event)">
+            <!-- -------------------------------------------Employee Details----------------------- -->
+            <ng-wizard-step [title]="'Employee Info'" [description]="'&nbsp;'">
+
+                <app-card cardTitle="Employee Info - {{empdetailsForm.value.displayName}}" [options]="false">
+                    <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                        <ul _ngcontent-epm-c40="" class="nav">
+                        </ul>
+                        <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                            <button type="button" class="btn btn-success" ngbTooltip="btn-success" *ngIf="isview=='N'" (click)="saveEmpDetails()">{{empdetailsForm.value.xEmployeeId ? 'Update':'Save'}}</button> &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-success" ngbTooltip="btn btn-primary" *ngIf="isview=='N'" (click)="openUpdatedForm()">Employee Update</button> &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isview=='Y' ? 'Back':'Cancel'}}</button> &nbsp;&nbsp;&nbsp;
+
+                            <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" *ngIf="empdetailsForm.value.xEmployeeId" (click)="showNextStep($event)" data-toggle="tooltip" data-placement="top" title="Next">
+                <i class="fa fa-arrow-right"></i>
+              </button>
+                        </div>
+                    </nav>
+
+                    <form action="javascript:" class="needs-validation" novalidate [formGroup]="empdetailsForm">
+
+                        <div class="form-row">
+
+                            <div class="col-md-6 mb-3">
+                                <!-- <div class="container"> -->
+                                <div class="row">
+                                    <div class="col-sm-6 imgUp" style="margin:auto;">
+                                        <div class="">
+                                            <img [src]="url ? url : 'assets/images/viratk.jpg'" alt="no-img" class="img-fluid mb-4 imagePreview">
+                                        </div>
+
+                                        <label class="btn btn-primary" *ngIf="isview=='N'">
+                      <br>
+                      Upload<input type="file" class="uploadFile img" value="Upload Photo"
+                        (change)="onSelectFile($event)" style="width: 0px;height: 0px;overflow: hidden;">
+                    </label>
+
+                                    </div>
+                                    <!-- <div class="col-sm-6"> -->
+                                    <!-- <label class="btn btn-primary">
+                    <br>
+                    Upload<input type="file" class="uploadFile img" value="Upload Photo"
+                      style="width: 0px;height: 0px;overflow: hidden;">
+                  </label> -->
+                                    <!-- </div> -->
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <!-- <label for="validationCustom01">Holding</label>
+                <select class="form-control validation_border" formControlName="holdingId" disabled
+                  [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.holdingId.errors }"
+                  (change)="getCompanyListByHoldingId(empdetailsForm.value.holdingId)">
+                  <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+                </select>
+                <div *ngIf="empdetailesubmitted && ed.holdingId.errors" class="invalid-feedback">
+                  <div *ngIf="ed.holdingId.errors.required">Holding is required</div>
+                </div> -->
+                                <label for="validationCustom01">Company</label>
+                                <select class="form-control validation_border" formControlName="companyId" (change)="selectCompany(empdetailsForm.value.companyId)" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.companyId.errors }">
+                  <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
+                </select>
+                                <div *ngIf="empdetailesubmitted && ed.companyId.errors" class="invalid-feedback">
+                                    <div *ngIf="ed.companyId.errors.required">Comapny is required</div>
+                                </div>
+
+                                <label for="validationCustom01">Employee ID</label>
+                                <input type="text" formControlName="oldEmpId" class="form-control validation_border" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.oldEmpId.errors }">
+                                <div *ngIf="empdetailesubmitted && ed.oldEmpId.errors" class="invalid-feedback">
+                                    <div *ngIf="ed.oldEmpId.errors.required">Employee ID is required</div>
+                                </div>
+                                <label for="validationCustom01">Biometrics ID</label>
+                                <input type="text" formControlName="bioId" class="form-control validation_border" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.bioId.errors }">
+                                <div *ngIf="empdetailesubmitted && ed.bioId.errors" class="invalid-feedback">
+                                    <div *ngIf="ed.bioId.errors.required">Biometrics ID is required</div>
+                                </div>
+
+
+                                <label for="validationCustom01">Employee Code</label>
+                                <input type="text" formControlName="value" class="form-control validation_border" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.value.errors }">
+                                <div *ngIf="empdetailesubmitted && ed.value.errors" class="invalid-feedback">
+                                    <div *ngIf="ed.value.errors.required">Employee ID is required</div>
+                                </div>
+
+                                <label for="validationCustom01">Emirates ID</label>
+                                <input type="text" formControlName="emiratesId" class="form-control">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <app-card cardTitle="Personal Information" [options]="false" (click)="openTab(1)">
+                            <!-- <div *ngIf="selectedIndex === 1"> -->
+                            <div class="form-row">
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Greeting</label>
+                                    <select class="form-control validation_border" formControlName="greetingId" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.greetingId.errors }">
+                      <option *ngFor="let dl of greetingList" value="{{dl.value}}">{{dl.name}}</option>
+                    </select>
+                                    <div *ngIf="empdetailesubmitted && ed.greetingId.errors" class="invalid-feedback">
+                                        <div *ngIf="ed.greetingId.errors.required">Greeting is required</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">First Name</label>
+                                    <input type="text" formControlName="firstName" (keyup)="fullNameFun()" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.firstName.errors }" class="form-control validation_border">
+                                    <div *ngIf="empdetailesubmitted && ed.firstName.errors" class="invalid-feedback">
+                                        <div *ngIf="ed.firstName.errors.required">First Name is required</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Middle Name</label>
+                                    <input type="text" formControlName="middleName" class="form-control" (keyup)="fullNameFun()">
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Last Name</label>
+                                    <input type="text" formControlName="lastName" (keyup)="fullNameFun()" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.lastName.errors }" class="form-control validation_border">
+                                    <div *ngIf="empdetailesubmitted && ed.lastName.errors" class="invalid-feedback">
+                                        <div *ngIf="ed.lastName.errors.required">Last Name is required</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Employee Full Name</label>
+                                    <input type="text" formControlName="fullName" class="form-control" disabled>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Display Name</label>
+                                    <input type="text" formControlName="displayName" class="form-control validation_border" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.displayName.errors }">
+                                    <div *ngIf="empdetailesubmitted && ed.displayName.errors" class="invalid-feedback">
+                                        <div *ngIf="ed.displayName.errors.required">Display Name is required</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+
+
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Gender</label>
+                                    <select class="form-control validation_border" formControlName="empGender" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.empGender.errors }">
+                      <option *ngFor="let dl of genderList" value="{{dl.value}}">{{dl.name}}</option>
+                    </select>
+                                    <div *ngIf="empdetailesubmitted && ed.empGender.errors" class="invalid-feedback">
+                                        <div *ngIf="ed.empGender.errors.required">Gender is required</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom02">Date of Birth</label>
+                                    <div class="input-group">
+                                        <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="dateOfBirth1" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.dateOfBirth1.errors }"
+                                            #dp4="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeDateOfBirth($event)" (click)="dp4.toggleCalendar()" />
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-secondary" (click)="dp4.toggleCalendar()">
+                          <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                                        </div>
+                                        <div *ngIf="empdetailesubmitted && ed.dateOfBirth1.errors" class="invalid-feedback">
+                                            <div *ngIf="ed.dateOfBirth1.errors.required">Date of Birth is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Age</label>
+                                    <input type="text" formControlName="age" class="form-control" disabled>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Education</label>
+                                    <select class="form-control" formControlName="education">
+                                        <option></option>
+                                        <option *ngFor="let dl of educationCategoryList" value="{{dl.eduCategoryId}}">{{dl.name}}</option>
+                  </select>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                            </div>
+                        </app-card>
+
+
+                        <app-card cardTitle="Function Information" [options]="false" (click)="openTab(2)">
+                            <!-- <div *ngIf="selectedIndex === 2"> -->
+                            <div class="form-row">
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Function</label>
+                                    <select class="form-control" formControlName="divisionId">
+                                        <option></option>
+                                        <option *ngFor="let dl of divisionList" value="{{dl.xdivId}}">{{dl.name}}</option>
+                    </select>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Department</label>
+                                    <select class="form-control validation_border" formControlName="departmentId" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.departmentId.errors }">
+                                       
+                                        <option *ngFor="let dl of deptList" value="{{dl.deptId}}">{{dl.name}}</option>
+                    </select>
+                                    <div *ngIf="empdetailesubmitted && ed.departmentId.errors" class="invalid-feedback">
+                                        <div *ngIf="ed.departmentId.errors.required">Department is required</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Section</label>
+                                    <select class="form-control" formControlName="sectionId">
+                                        <option></option>
+                      <option *ngFor="let dl of sectionList" value="{{dl.xsectionId}}">{{dl.name}}</option>
+                    </select>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Sub-Section</label>
+                                    <select class="form-control" formControlName="subSectionId">
+                                        <option></option>
+                                        <option *ngFor="let dl of subsectionList" value="{{dl.xsubsectionId}}">{{dl.name}}</option>
+                    </select>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Work Location</label>
+                                    <select class="form-control" formControlName="locationId">
+                                        <option></option>
+                                        <option *ngFor="let dl of locationList" value="{{dl.value}}">{{dl.name}}</option>
+                    </select>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- </div> -->
+                        </app-card>
+
+                        <app-card cardTitle="Work Information" [options]="false" (click)="openTab(3)">
+                            <!-- <div *ngIf="selectedIndex === 3"> -->
+                            <div class="form-row">
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Visa Sponsor Company</label>
+                                    <select class="form-control" formControlName="visaCompanyId">
+                                        <option></option>
+                                        <option *ngFor="let dl of visacompanyList" value="{{dl.xvisasponsorId}}">{{dl.companyName}}</option>
+                    </select>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom02">Date of Joining</label>
+                                    <div class="input-group">
+                                        <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="dateOfJoin1" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.dateOfJoin1.errors }"
+                                            #dp3="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeDateOfJoin($event)" (click)="dp3.toggleCalendar()" />
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-secondary" (click)="dp3.toggleCalendar()">
+                          <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                                        </div>
+                                        <div *ngIf="empdetailesubmitted && ed.dateOfJoin1.errors" class="invalid-feedback">
+                                            <div *ngIf="ed.dateOfJoin1.errors.required">Joining Date is required</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">MOL ID</label>
+                                    <input type="text" formControlName="molEmployeeId" class="form-control">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Employee Category</label>
+                                    <select class="form-control validation_border" formControlName="empCategoryId" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.empCategoryId.errors }">
+                                       
+                                        <option *ngFor="let dl of categoryList" value="{{dl.empCatId}}">{{dl.name}}</option>
+                    </select>
+                                    <div *ngIf="empdetailesubmitted && ed.empCategoryId.errors" class="invalid-feedback">
+                                        <div *ngIf="ed.empCategoryId.errors.required">Employee Category is required</div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-row">
+
+                                <!-- <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Job Role</label>
+                    <select class="form-control validation_border" formControlName="jobFunctionId"
+                      [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.jobFunctionId.errors }">
+                      <option *ngFor="let dl of jobFunList" value="{{dl.jobfunctionId}}">{{dl.name}}</option>
+                    </select>
+                    <div *ngIf="empdetailesubmitted && ed.jobFunctionId.errors" class="invalid-feedback">
+                      <div *ngIf="ed.jobFunctionId.errors.required">Job Function is required</div>
+                    </div>
+                  </div> -->
+
+
+
+
+
+                            </div>
+
+                            <div class="form-row">
+                                <!-- <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Employee Grade</label>
+                    <input type="text" formControlName="jobGrade" class="form-control">
+                  </div> -->
+
+                                <!-- <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Job Role</label>
+                    <select class="form-control validation_border" formControlName="jobFunctionId"
+                      [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.jobFunctionId.errors }">
+                      <option *ngFor="let dl of jobFunList" value="{{dl.jobfunctionId}}">{{dl.name}}</option>
+                    </select>
+                    <div *ngIf="empdetailesubmitted && ed.jobFunctionId.errors" class="invalid-feedback">
+                      <div *ngIf="ed.jobFunctionId.errors.required">Job Function is required</div>
+                    </div>
+                  </div> -->
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Employee Grade</label>
+                                    <select class="form-control validation_border" formControlName="empGradeId" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.empGradeId.errors }">
+                                        
+                                        <option *ngFor="let dl of empGradeList" value="{{dl.empGradeId}}">{{dl.name}}</option>
+                    </select>
+                                    <div *ngIf="empdetailesubmitted && ed.empGradeId.errors" class="invalid-feedback">
+                                        <div *ngIf="ed.empGradeId.errors.required">Employee Grade is required</div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Employee Designation</label>
+                                    <select class="form-control validation_border" formControlName="empDesignationId" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.empDesignationId.errors }">
+                                       
+                                        <option *ngFor="let dl of empDesignationList" value="{{dl.empDesignationId}}">{{dl.name}}</option>
+                    </select>
+                                    <div *ngIf="empdetailesubmitted && ed.empDesignationId.errors" class="invalid-feedback">
+                                        <div *ngIf="ed.empDesignationId.errors.required">Designation is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+
+                        </app-card>
+
+
+                        <app-card cardTitle="Other Information" [options]="false" (click)="openTab(4)">
+                            <!-- <div *ngIf="selectedIndex === 4"> -->
+                            <div class="form-row">
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Email ID</label>
+                                    <input type="text" formControlName="emailId" class="form-control">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">User ID</label>
+                                    <input type="text" formControlName="userId" class="form-control validation_border" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.userId.errors }">
+                                    <div *ngIf="empdetailesubmitted && ed.userId.errors" class="invalid-feedback">
+                                        <div *ngIf="ed.userId.errors.required">User ID is required</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Manager - Email ID</label>
+                                    <input type="text" formControlName="mngrmailId" class="form-control">
+
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Manager ID</label>
+                                    <input type="text" formControlName="mngrName" class="form-control">
+                                </div>
+
+                            </div>
+
+                            <div class="form-row" * ngIf="">
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Domain Name</label>
+                                    <input type="text" formControlName="userDomain" class="form-control">
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Manager Name</label>
+                                    <select class="form-control" formControlName="managerId">
+                      <option></option>
+                                        <option *ngFor="let dl of manageruseridList" value="{{dl.value}}">{{dl.name}}</option>
+                    </select>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Office telephone number</label>
+                                    <input type="text" formControlName="oTelephone" class="form-control">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Office extension number</label>
+                                    <input type="text" formControlName="oExtensionNum" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Shift Rule</label>
+                                    <select class="form-control validation_border" formControlName="xShiftruleId" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.xShiftruleId.errors }">
+                                       
+                                        <option *ngFor="let dl of shiftRuleList" value="{{dl.shiftRuleId}}">{{dl.name}}</option>
+                    </select>
+                                    <div *ngIf="empdetailesubmitted && ed.xShiftruleId.errors" class="invalid-feedback">
+                                        <div *ngIf="ed.xShiftruleId.errors.required">Shift Rule is required</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Air Sector</label>
+                                    <select class="form-control" formControlName="xAirsectorId">
+                                        <option></option>
+                                        <option *ngFor="let dl of airsectorlist" value="{{dl.airsectorId}}">{{dl.name}}</option>
+                    </select>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Shift Supervisor</label>
+                                    <select class="form-control" formControlName="supervisorId">
+                                        <option></option>
+                                        <option *ngFor="let dl of supervisorList" value="{{dl.employeeId}}">{{dl.displayName}}</option>
+                    </select>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Superior </label>
+                                    <ng-multiselect-dropdown [placeholder]="" [data]="superiorList" name="superior" formControlName="superior" [(ngModel)]="selectedSuperiorList" [settings]="dropdownSettings" (onSelect)="onSuperiorSelect($event)" (onDeSelect)="onSuperiorDeSelect($event)"
+                                        (onSelectAll)="onSelectAllSuperior($event)">
+                                    </ng-multiselect-dropdown>
+
+                                </div>
+
+
+
+                            </div>
+                            <!-- </div> -->
+                        </app-card>
+
+                        <app-card cardTitle="Probation Information" [options]="false" (click)="openTab(5)">
+                            <!-- <div *ngIf="selectedIndex === 5"> -->
+                            <div class="form-row">
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Probation period</label>
+                                    <!-- <input type="text" formControlName="probationPeriod" class="form-control"> -->
+                                    <select class="form-control" formControlName="probationPeriod" (change)="setProbationDateByPeriod(empdetailsForm.value.probationPeriod)">
+                                        <option></option>
+                                        <option *ngFor="let dl of probationPeriodList" value="{{dl.lListitemId}}">{{dl.name}}</option>
+                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom02">Probation completion date</label>
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="probationCompletionDate1" #dp9="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeProbCompDate($event)"
+                                            (click)="dp9.toggleCalendar()" />
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-secondary" (click)="dp9.toggleCalendar()">
+                          <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- </div> -->
+                        </app-card>
+
+
+                        <app-card cardTitle="Status Information" [options]="false" (click)="openTab(6)">
+                            <!-- <div *ngIf="selectedIndex === 6"> -->
+                            <div class="form-row">
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Employement Status</label>
+                                    <select class="form-control validation_border" formControlName="lscurstatusId" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.lscurstatusId.errors }" (change)="changeEmpStatus(empdetailsForm.value.lscurstatusId)">
+                                        
+                                        <option *ngFor="let dl of employeeStatusList" value="{{dl.lListitemId}}">{{dl.name}}</option>
+                    </select>
+                                    <div *ngIf="empdetailesubmitted && ed.lscurstatusId.errors" class="invalid-feedback">
+                                        <div *ngIf="ed.lscurstatusId.errors.required">Current Status is required</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Service period</label>
+                                    <input type="text" formControlName="servicePeriod" class="form-control" disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom02">Leaving Date</label>
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" disabled="employementStatus != 'Left'" [options]="myDatePickerOptions" formControlName="effectiveDate1" #dp5="angular-mydatepicker" autocomplete="off"
+                                            (ngModelChange)="changeEffectiveDate1($event)" (click)="dp5.toggleCalendar()" />
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-secondary" (click)="dp5.toggleCalendar()" [disabled]="employementStatus != 'Left'">
+                          <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Status</label>
+                                    <select class="form-control validation_border" formControlName="status" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.status.errors }">
+                      <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                    </select>
+                                    <div *ngIf="empdetailesubmitted && ed.status.errors" class="invalid-feedback">
+                                        <div *ngIf="ed.status.errors.required">Status is required</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- </div> -->
+                        </app-card>
+
+                    </form>
+
+                </app-card>
+            </ng-wizard-step>
+
+
+            <ng-wizard-step [title]="'Salary'" [description]="'&nbsp;'">
+                <app-emp-salary (parentFun)="showNextStep($event)" *ngIf="next==1" [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId" [displayName]="empdetailsForm.value.displayName">
+                </app-emp-salary>
+            </ng-wizard-step>
+
+
+            <ng-wizard-step [title]="'Pay Elements'" [description]="'&nbsp;'">
+                <app-card cardTitle="Pay Elements" [options]="false">
+
+                    <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                        <ul _ngcontent-epm-c40="" class="nav">
+                        </ul>
+                        <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+
+                            <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="showNextStep($event)" data-toggle="tooltip" data-placement="top" title="Next">
+                <i class="fa fa-arrow-right"></i>
+              </button>
+                        </div>
+                    </nav>
+
+                    <div *ngIf="empdetailsForm.value.xEmployeeId !=undefined">
+                        <app-pay-item [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId" [displayName]="empdetailsForm.value.displayName">
+                        </app-pay-item>
+
+                    </div>
+
+                </app-card>
+            </ng-wizard-step>
+
+            <!--  -->
+
+            <ng-wizard-step [title]="'Leave Balance'" [description]="'&nbsp;'">
+                <app-card cardTitle="Leave Balance" [options]="false">
+
+                    <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                        <ul _ngcontent-epm-c40="" class="nav">
+                        </ul>
+                        <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+
+                            <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="showNextStep($event)" data-toggle="tooltip" data-placement="top" title="Next">
+                <i class="fa fa-arrow-right"></i>
+              </button>
+                        </div>
+                    </nav>
+
+                    <div *ngIf="empdetailsForm.value.xEmployeeId !=undefined">
+                        <!-- <app-pay-item [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId"
+              [holdingId]="empdetailsForm.value.holdingId" [displayName]="empdetailsForm.value.displayName">
+            </app-pay-item> -->
+
+                        <app-leave-bal (parentFun)="showNextStep($event)" *ngIf="next==3" [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId" [displayName]="empdetailsForm.value.displayName">
+                        </app-leave-bal>
+
+
+                    </div>
+
+                </app-card>
+            </ng-wizard-step>
+
+            <!--  -->
+
+
+            <ng-wizard-step [title]="'Personal Info'" [description]="'&nbsp;'">
+                <app-card cardTitle="Personal Info" [options]="false">
+
+                    <!-- <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+            <ul _ngcontent-epm-c40="" class="nav">
+            </ul>
+            <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+              <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button"
+                (click)="showNextStep($event)" data-toggle="tooltip" data-placement="top" title="Next">
+                <i class="fa fa-arrow-right"></i>
+              </button>
+            </div>
+          </nav> -->
+
+                    <app-personalinfo (parentFun)="showNextStep($event)" *ngIf="next==4" [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId" [dob]="dofb" [displayName]="empdetailsForm.value.displayName">
+                    </app-personalinfo>
+
+                </app-card>
+            </ng-wizard-step>
+
+
+            <ng-wizard-step [title]="'Benefits'" [description]="'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'">
+                <app-card cardTitle="Benefits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" [options]="false">
+
+                    <!-- <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+            <ul _ngcontent-epm-c40="" class="nav">
+            </ul>
+            <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+              <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button"
+                (click)="showNextStep($event)" data-toggle="tooltip" data-placement="top" title="Next">
+                <i class="fa fa-arrow-right"></i>
+              </button>
+            </div>
+          </nav> -->
+                    <app-emp-benefits (parentFun)="showNextStep($event)" *ngIf="next==5" [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId" [displayName]="empdetailsForm.value.displayName"></app-emp-benefits>
+                </app-card>
+            </ng-wizard-step>
+
+            <!-- <ng-wizard-step [title]="'Vehicle Information'" [description]="'&nbsp;'">
+        <app-card cardTitle="Vehicle Information" [options]="false">
+
+          <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+            <ul _ngcontent-epm-c40="" class="nav">
+            </ul>
+            <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+              <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button"
+                (click)="showNextStep($event)" data-toggle="tooltip" data-placement="top" title="Next">
+                <i class="fa fa-arrow-right"></i>
+              </button>
+            </div>
+          </nav>
+
+          <app-vehicle (parentFun)="showNextStep($event)" [empId]="empdetailsForm.value.xEmployeeId"
+            [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId"
+            [displayName]="empdetailsForm.value.displayName"></app-vehicle>
+        </app-card>
+      </ng-wizard-step> -->
+
+            <!-- <ng-wizard-step [title]="'Accommodation'" [description]="'&nbsp;'">
+        <app-card cardTitle="Accommodation" [options]="false">
+
+          <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+            <ul _ngcontent-epm-c40="" class="nav">
+            </ul>
+            <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+              <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button"
+                (click)="showNextStep($event)" data-toggle="tooltip" data-placement="top" title="Next">
+                <i class="fa fa-arrow-right"></i>
+              </button>
+            </div>
+          </nav>
+          <app-accommodation (parentFun)="showNextStep($event)" [empId]="empdetailsForm.value.xEmployeeId"
+            [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId"
+            [displayName]="empdetailsForm.value.displayName"></app-accommodation>
+        </app-card>
+      </ng-wizard-step> -->
+
+            <ng-wizard-step [title]="'Personal Docs'" [description]="'&nbsp;'">
+                <app-card cardTitle="Personal Docs" [options]="false">
+
+                    <!-- <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+            <ul _ngcontent-epm-c40="" class="nav">
+            </ul>
+            <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+              <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button"
+                (click)="showNextStep($event)" data-toggle="tooltip" data-placement="top" title="Next">
+                <i class="fa fa-arrow-right"></i>
+              </button>
+            </div>
+          </nav> -->
+
+                    <app-personal-docs (parentFun)="showNextStep($event)" *ngIf="next==6" [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId" [displayName]="empdetailsForm.value.displayName">
+                    </app-personal-docs>
+
+                </app-card>
+            </ng-wizard-step>
+
+            <ng-wizard-step [title]="'Employee Attachments'" [description]="'&nbsp;'">
+                <app-card cardTitle="Employee Attachments" [options]="false">
+
+                    <app-emp-docs (parentFun)="showNextStep($event)" *ngIf="next==7" [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId" [displayName]="empdetailsForm.value.displayName">
+                    </app-emp-docs>
+
+                </app-card>
+            </ng-wizard-step>
+
+        </ng-wizard>
+
+    </div>
+</div>

@@ -1,0 +1,376 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="Employee Attendance Report" [options]="false">
+
+                <form action="javascript:" class="needs-validation" novalidate>
+                    <div class="form-row">
+
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <!-- <select class="form-control" [(ngModel)]="filterObj.companyId" name="companyId" (change)="changeCompany(filterObj.companyId)">
+            
+                <option *ngFor="let sl of companyList" value="{{sl.companyId}}">{{sl.companyName}}
+                </option>
+              </select> -->
+
+                            <ng-multiselect-dropdown [placeholder]="" [data]="companyList" name="companyName" [(ngModel)]="selectecdCompanyList" [settings]="dropdownSettingscompany" (onSelect)="onCompanySelect($event)" (onDeSelect)="onCompanyDeSelect($event)" (onDeSelectAll)="onDeSelectAllCompany($event)"
+                                (onSelectAll)="onSelectAllCompany($event)">
+                            </ng-multiselect-dropdown>
+
+                        </div>
+
+
+                        <!-- <div class="col-md-3 mb-3">
+              <label for="validationCustom01">Emp.ID</label>
+            
+              <ng-multiselect-dropdown [placeholder]="" [data]="codeList" name="oldEmpId"
+                [disabled]="selectedcodeList?.length==0 && selectedEmpList?.length==0 ? false:true"
+                [(ngModel)]="selectedEmpIdList" [settings]="empIdListSettings" (onSelect)="onEmpIdSelect($event)"
+                (onDeSelect)="onEmpIdDeSelect($event)" (onSelectAll)="onSelectAllEmpId($event)">
+              </ng-multiselect-dropdown>
+            </div> -->
+
+                        <!-- <div class="col-md-3 mb-3">
+              <label for="validationCustom01">Old Emp.ID</label>
+             
+
+              <ng-multiselect-dropdown [placeholder]="" [data]="codeList" name="empCode" [(ngModel)]="selectedcodeList"
+                [disabled]="selectedEmpIdList?.length==0 && selectedEmpList?.length==0 ? false:true"
+                [settings]="codeListSettings" (onSelect)="onEmpCodeSelect($event)"
+                (onDeSelect)="onEmpCodeDeSelect($event)" (onSelectAll)="onEmpCodeSelectAll($event)">
+              </ng-multiselect-dropdown>
+            </div> -->
+
+
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom01">Employee </label>
+
+                            <ng-multiselect-dropdown [placeholder]="" [data]="empList" name="employeeName" [(ngModel)]="selectedEmpList" [settings]="dropdownSettings" (onSelect)="onEmployeeSelect($event)" (onDeSelect)="onEmployeeDeSelect($event)" (onSelectAll)="onSelectAllEmployee($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom01">Shift </label>
+
+                            <ng-multiselect-dropdown [placeholder]="" [data]="shiftRuleList" name="shiftrule" [(ngModel)]="selectedShiftRuleList" [settings]="dropdownSettingsShiftRule" (onSelect)="onSelectShiftRule($event)" (onDeSelect)="onDeSelectShiftRule($event)" (onSelectAll)="onSelectAllShiftRule($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+
+
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom01">Department</label>
+                            <select class="form-control" [(ngModel)]="filterObj.deptId" name="deptId" (change)="selectDept(filterObj.deptId)">
+                <option></option>
+                <option *ngFor="let sl of dptList" value="{{sl.deptId}}">{{sl.name}}
+                </option>
+              </select>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom01">Sponsor Type </label>
+                            <select class="form-control" [(ngModel)]="filterObj.sponsortype" name="sponsortype" (change)="selecteSponsorType(filterObj.sponsortype)">
+                <option></option>
+                <option *ngFor="let sl of sponsorTypeList" value="{{sl.xvisasponsorId}}">{{sl.companyName}}
+                </option>
+              </select>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom02">From Date</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsstartDate" [options]="myDatePickerOptions" [(ngModel)]="filterObj.startDate1" #dp1="angular-mydatepicker" autocomplete="off"
+                                    (ngModelChange)="changeStartDate($event)" (click)="dp1.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom02">To Date</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" type="text" placeholder="Select a date" angular-mydatepicker name="reactiveFormsendDate" [options]="myDatePickerOptions" [(ngModel)]="filterObj.endDate1" #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)"
+                                    (click)="dp2.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control" [(ngModel)]="filterObj.status" name="status">
+                <option></option>
+                <option *ngFor="let sl of statusList" value="{{sl}}">{{sl}}
+                </option>
+              </select>
+                        </div>
+
+                        <div class="col-md-1 mb-3">
+
+                            <label for="validationCustom02"><br></label>
+                            <div class="input-group">
+
+                                <button type="button" (click)="filterTable()" class="btn btn-success" [disabled]="this.btnLoader" ngbTooltip="btn-success" data-toggle="tooltip" data-placement="top" title="Go">
+                  <span *ngIf="this.btnLoader" class="spinner-border spinner-border-sm" role="status"></span>
+                  <span *ngIf="this.btnLoader" class="load-text">Go</span>
+                  <span *ngIf="!this.btnLoader" class="btn-text">Go</span>
+                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3mb-3">
+                            <label for="validationCustom01"></label>
+                            <div class="form-group text-left mt-3">
+                                <div class="checkbox checkbox-primary d-inline">
+                                    <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" [(ngModel)]="ismanual" checked="">
+                                    <label for="checkbox-fill-a1" class="cr"> ReCalculate Manual Entries</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1.5 mb-3">
+
+                            <label for="validationCustom02"><br></label>
+                            <div class="input-group">
+
+                                <button type="button" (click)="recallFun()" class="btn btn-danger" [disabled]="this.btnLoader" ngbTooltip="btn-success" data-toggle="tooltip" data-placement="top" title="Filter" *ngIf="flags.createFlag=='Y' ? true : (flags.readFlag=='Y' ? false : true)">
+                  <!-- <span *ngIf="this.btnLoader" class="spinner-border spinner-border-sm" role="status"></span>
+                  <span *ngIf="this.btnLoader" class="load-text"></span> -->
+                  <span class="btn-text">ReCalculate</span>
+                </button>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-1.5 mb-3">
+
+                            <label for="validationCustom02"><br></label>
+                            <div class="input-group">
+                                <button type="button" (click)="calendarView()" class="btn btn-success" [disabled]="this.btnLoader" ngbTooltip="btn-success" data-toggle="tooltip" data-placement="top" title="Filter">
+                                    <span class="btn-text">Calendar View</span>
+                                </button>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-1 mb-3" *ngIf="(flags.importFlag=='Y' && flags.exportFlag=='Y') || (flags.importFlag=='Y' && flags.exportFlag=='N') || (flags.importFlag=='N' && flags.exportFlag=='Y')">
+                            <label for="validationCustom01"><br> </label>
+                            <div class="input-group" role="group" ngbDropdown>
+                                <button type="button" class="btn btn-primary" ngbDropdownToggle>
+                  More
+                </button>
+                                <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu style="right: 0;
+                        left: auto;">
+                                    <a class="dropdown-item" href="javascript:" *ngIf="flags.importFlag=='Y'" (click)="fileUploadPopup.show();fileUploadForm.reset()">Upload Data - Attendance </a>
+                                    <a class="dropdown-item" href="javascript:" (click)="sampleFileFormatAttendance()" *ngIf="flags.importFlag=='Y'">Download Excel File Format - Attendance </a>
+                                    <a class="dropdown-item" href="javascript:" (click)="exportReport()" *ngIf="flags.exportFlag=='Y'">Export Data </a>
+                                    <!-- <a class="dropdown-item" href="javascript:" (click)="downloadAttnReportFun()">Download attendance report with summary </a> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="form-row" style="float: right;" *ngIf="filtered?.length>0">
+                    <div class="col-md-12 mb-3">
+                        <input [(ngModel)]="filterString" (ngModelChange)="onFilterChange()" class="form-control" placeholder="Search" />
+                    </div>
+                </div>
+
+                <br>
+
+                <hr>
+                <app-card>
+                    <div [ngClass]="(filtered?.length>10)?'table-responsive tableFixHead':'table-responsive'">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Emp.ID</th>
+                                    <th>Old EMP Code</th>
+                                    <th>Name</th>
+                                    <th>OT</th>
+                                    <th>Shift</th>
+                                    <th>Shift Hours</th>
+                                    <th>Date</th>
+                                    <th>Time IN</th>
+                                    <th>Break Start</th>
+                                    <th>Break End</th>
+                                    <th>Break Time ({{totalBreakTime}})</th>
+                                    <th>Time OUT</th>
+                                    <th>Total Time ({{totalTime}})</th>
+                                    <th>Over Time ({{totalOverTime}})</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dl of filtered" [style.color]="dl.rowColor">
+
+                                    <td>{{dl.oldEmpId}}</td>
+                                    <td>{{dl.empcode}}</td>
+                                    <td>{{dl.name}}</td>
+                                    <td>{{dl.oTapplicable}}</td>
+                                    <td>{{dl.shiftName}}</td>
+                                    <td>{{dl.workingHrs}}</td>
+                                    <td>{{dl.dateAttendance | date: 'dd-MMM-yyyy, EEEE'}}</td>
+                                    <td>{{dl.startTime}}</td>
+                                    <td>{{dl.breakStart}}</td>
+                                    <td>{{dl.breakEnd}}</td>
+                                    <td>{{dl.totbrkTime}}</td>
+                                    <td>{{dl.endTime}}</td>
+                                    <td>{{dl.tottimewithoutBrk}}</td>
+                                    <td>{{dl.overTime}}</td>
+                                    <td>{{dl.status}}</td>
+
+                                    <td>
+                                        <button class="btn btn-outline-primary" type="button" (click)="edit(dl)" data-toggle="tooltip" data-placement="top" title="Edit" *ngIf="flags.createFlag=='Y' ? true : (flags.readFlag=='Y' ? false : true)">
+                      <i _ngcontent-kms-c118="" class="fas fa-pen"></i>
+                    </button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-outline-primary" type="button" (click)="empAbsenceReport(dl)" data-toggle="tooltip" data-placement="top">
+                                            ARF
+                    </button>
+                                    </td>
+
+
+                                </tr>
+                                <tr *ngIf="attenList?.length===0">
+                                    <td colspan="18" style="text-align:center;">No records</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </app-card>
+
+                <!--  -->
+                <app-card>
+                    <div [ngClass]="(reportSummaryList?.length>10)?'table-responsive tableFixHead':'table-responsive'">
+
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Emp.ID</th>
+                                    <th>Old EMP Code</th>
+                                    <th>Name</th>
+                                    <th>No. of days present</th>
+                                    <th>ABSENT</th>
+                                    <th>HOLIDAY</th>
+                                    <th>Normal OT Hours</th>
+                                    <th>Friday OT Hours</th>
+                                    <th>Holiday OT Hours</th>
+                                    <th>COMPENSATORY OFF</th>
+                                    <th>ANNUAL LEAVE</th>
+                                    <th>HALF DAY LEAVE</th>
+                                    <th>SICK LEAVE</th>
+                                    <th>NATIONAL HOLIDAY</th>
+                                    <th>WORKED ON FRIDAY/HOLIDAY</th>
+                                    <th>UNPAID LEAVE</th>
+                                    <th>ALTERNATE WEEKLY OFF</th>
+                                    <th>TRAINING ABSENCE</th>
+                                    <th>Business Absence</th>
+                                    <th>SITE</th>
+                                    <th>Manriage Leave</th>
+                                    <th>Maternity Leave</th>
+                                    <th>Paternity Leave</th>
+
+                                    <th> Employment Accident Leave</th>
+                                    <th>Compassionate Leave</th>
+                                    <th>Hajj Leave</th>
+                                    <th>Relocation Leave</th>
+                                    <th>Pandemic Leave</th>
+
+                                    <th>Salary to be paid for "Pay Days"</th>
+                                    <th>Extra Earning</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dl of reportSummaryList">
+                                    <td>{{dl.oldEmpId}}</td>
+                                    <td>{{dl.empcode}}</td>
+                                    <td>{{dl.name}}</td>
+                                    <td>{{dl.present_days}}</td>
+                                    <td>{{dl.absent_days}}</td>
+                                    <td>{{dl.noofHoliday}}</td>
+                                    <td>{{dl.normalOThrs}}</td>
+                                    <td>{{dl.fridayOThrs}}</td>
+                                    <td>{{dl.holidayOThrs}}</td>
+                                    <td>{{dl.compOff}}</td>
+                                    <td>{{dl.anualLeave}}</td>
+                                    <td>{{dl.halfdayLeave}}</td>
+                                    <td>{{dl.sickLeave}}</td>
+                                    <td>{{dl.nationalHoliday}}</td>
+                                    <td>{{dl.noofFriorHolidayworked}}</td>
+                                    <td>{{dl.unpaidLeave}}</td>
+                                    <td>{{dl.alternateweeklyOff}}</td>
+                                    <td>{{dl.trainingAbs}}</td>
+                                    <td>{{dl.businessAbs}}</td>
+                                    <td>{{dl.site}}</td>
+                                    <td>{{dl.marriageLeave}}</td>
+                                    <td>{{dl.maternityLeave}}</td>
+                                    <td>{{dl.paternityLeave}}</td>
+                                    <td>{{dl.accidentLeave}}</td>
+                                    <td>{{dl.comppassionateLeave}}</td>
+                                    <td>{{dl.hajjleave}}</td>
+                                    <td>{{dl.reLocationLeave}}</td>
+                                    <td>{{dl.pandemicLeave}}</td>
+                                    <td>{{dl.salarytobePaidFor}}</td>
+                                    <td>{{dl.totalExtraearning}}</td>
+                                </tr>
+                                <tr *ngIf="reportSummaryList?.length==0">
+                                    <td colspan="30" style="text-align:center;">No records</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </app-card>
+                <!--  -->
+
+            </app-card>
+        </div>
+
+
+    </div>
+</div>
+
+<!--  -->
+
+<div class="col-xl-4 col-md-6">
+    <app-ui-modal #fileUploadPopup dialogClass="modal-dialog-centered">
+        <div class="app-modal-header">
+            <h5 class="modal-title text-center">File Upload</h5>
+        </div>
+        <div class="app-modal-body">
+            <form action="javascript:" class="needs-validation" [formGroup]="fileUploadForm">
+
+                <div class="form-group">
+                    <input type="file" autocomplete="off" formControlName="fileName" class="form-control" (change)="fileChange($event)" name="imagePath" id="file" placeholder="Upload File" style="border: none;">
+                </div>
+
+            </form>
+
+
+        </div>
+        <div class="app-modal-footer">
+
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="fileUploadFun($event);fileUploadPopup.hide()">Upload</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" data-dismiss="modal" (click)="fileUploadPopup.hide()">Close</button>
+
+        </div>
+    </app-ui-modal>
+</div>

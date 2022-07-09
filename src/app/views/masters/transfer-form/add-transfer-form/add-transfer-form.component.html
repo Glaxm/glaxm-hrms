@@ -1,0 +1,212 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{transferForm.value.xupdatetrackrId ? 'Edit Transfer':'Add Transfer'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateTransferForm()" *ngIf="!isView">{{transferForm.value.xupdatetrackrId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+
+
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="transferForm">
+
+                    <div class="form-row">
+
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" disabled formControlName="gHoldingId" [ngClass]="{ 'is-invalid': submitted && f.gHoldingId.errors }">
+                  <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+              </select>
+                            <div *ngIf="submitted && f.gHoldingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.gHoldingId.errors.required">Holding is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom01">Company</label>
+
+                            <ng-multiselect-dropdown [placeholder]="" [data]="companyList" name="gCompanyId" formControlName="company" [(ngModel)]="selectedCompanyList" [settings]="dropdownSettings" (onSelect)="onCompnaySelect($event)" (onDeSelect)="onCompanyDeSelect($event)" (onSelectAll)="onSelectAllCompnay($event)"
+                                [ngClass]="{ 'is-invalid': submitted && f.company.errors }" class="set-border-color">
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="submitted && f.company.errors" class="invalid-feedback">
+                                <div *ngIf="f.company.errors.required">Company is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom01">Document no. </label>
+                            <input type="text" formControlName="documentno" class="form-control">
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row">
+
+
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom02">Transaction date</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="transactiondate1" [options]="myDatePickerOptions" formControlName="transactiondate1" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changetransactionDate($event)"
+                                    (click)="dp1.toggleCalendar()" [ngClass]="{ 'is-invalid': submitted && f.transactiondate1.errors }" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                                 <i class="fa fa-search" aria-hidden="true"></i>
+                               </button>
+                                </div>
+                                <div *ngIf="submitted && f.transactiondate1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.transactiondate1.errors.required">Transaction Date is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom01">User Employee</label>
+                            <ng-multiselect-dropdown name="employee" [placeholder]="'Select Employee'" [data]="employeeList" formControlName="employee" [(ngModel)]="selectedItemsemp" [settings]="dropdownSettingsemp" (onSelect)="onItemSelectemp($event)">
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="submitted && f.employee.errors" class="invalid-feedback">
+                                <div *ngIf="f.employee.errors.required">User Employee is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom01">Transfer Type</label>
+                            <select class="form-control validation_border" formControlName="currentPosition" (change)="selCurPosition(transferForm.value.currentPosition)" [ngClass]="{ 'is-invalid': submitted && f.currentPosition.errors }">
+                            <option></option>
+                                <option *ngFor="let dl of currentPositionList" value="{{dl.lListitemId}}">{{dl.name}}</option>
+                        </select>
+                            <div *ngIf="submitted && f.currentPosition.errors" class="invalid-feedback">
+                                <div *ngIf="f.currentPosition.errors.required">Transfer Type is required</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom01"> Existing </label>
+                            <input type="text" formControlName="previousId" disabled class="form-control">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom01">New </label>
+                            <select class="form-control validation_border" formControlName="newIdName" (change)="selectNewPosition(transferForm.value.newIdName)" [ngClass]="{ 'is-invalid': submitted && f.newIdName.errors }">
+                                <option></option>
+                            <option *ngFor="let dl of dataList" value="{{dl.name}}">{{dl.name}}</option>
+                        </select>
+                            <div *ngIf="submitted && f.newIdName.errors" class="invalid-feedback">
+                                <div *ngIf="f.newIdName.errors.required">New Position is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom02">Effective Date</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="effectivedate1" [options]="myDatePickerOptions" formControlName="effectivedate1" #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeeffectivedate($event)"
+                                    (click)="dp2.toggleCalendar()" [ngClass]="{ 'is-invalid': submitted && f.effectivedate1.errors }" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                             <i class="fa fa-search" aria-hidden="true"></i>
+                           </button>
+                                </div>
+                                <div *ngIf="submitted && f.effectivedate1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.effectivedate1.errors.required">Effective Date is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom01">Remark</label>
+                            <input type="text" formControlName="remark" class="form-control">
+                        </div>
+
+                        <!-- <div class="col-md-4 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control validation_border" formControlName="status">
+                                <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                            </select>
+                        </div> -->
+
+
+                        <div class="col-md-4 mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <label for="validationCustom02"></label><br>
+                                <input type="checkbox" class="custom-control-input" formControlName="eosbSettlement1" id="customCheck2">
+                                <label class="custom-control-label" for="customCheck2">EOSB Settlement</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+
+
+            </app-card>
+
+        </div>
+
+        <!-- ==== -->
+
+
+        <!-- <div class="col-sm-12"> -->
+        <app-card cardTitle="Data Tracking Summary" [options]="false">
+
+
+            <div class="table-responsive tableFixHead">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+
+                            <th>Transaction date </th>
+                            <th>Existing </th>
+                            <th>New</th>
+                            <th>Effective date</th>
+                            <th>Transfer type</th>
+                            <!-- <th>Status</th> -->
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let rm of dateTrackingList">
+                            <!-- <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(rm)">
+                                </div>
+                            </td> -->
+                            <td>{{rm.transDt}}</td>
+                            <td>{{rm.prevName}}</td>
+                            <td>{{rm.newName}}</td>
+                            <td>{{rm.effDt}}</td>
+                            <td>{{rm.moduleName}}</td>
+                            <!-- <td>{{rm.isActive=='Y' ? 'Active' : 'Inactive'}}</td> -->
+                            <td>
+                                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="edit(rm)" data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <i class="fas fa-pencil-alt"></i>
+                            </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </app-card>
+        <!-- </div> -->
+
+
+
+        <!-- ==== -->
+
+    </div>
+</div>

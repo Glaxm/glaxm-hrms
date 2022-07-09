@@ -1,0 +1,117 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="Salary Revision Summary" [options]="false">
+
+            <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                <ul _ngcontent-epm-c40="" class="nav">
+                </ul>
+                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="add()" data-toggle="tooltip" data-placement="top" *ngIf="flags.createFlag=='Y'" title="Add">
+                <i class="fa fa-plus"></i>
+                </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="edit()" data-toggle="tooltip" data-placement="top" *ngIf="flags.editFlag=='Y'" title="Edit">
+               <i class="fas fa-pencil-alt"></i>
+               </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="view()" data-toggle="tooltip" data-placement="top" *ngIf="flags.readFlag=='Y'" title="View">
+              <i class="fa fa-eye"></i>
+              </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="delete()" data-toggle="tooltip" data-placement="top" *ngIf="flags.deleteFlag=='Y'" title="Delete">
+             <i class="fa fa-trash"></i>
+             </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="enableFilter = !enableFilter;" [ngClass]="{'filterClass': enableFilter}" data-toggle="tooltip" data-placement="top" title="Filter">
+                <i class="fa fa-filter"></i>
+                </button>&nbsp;
+                    <div class="btn-group" role="group" ngbDropdown *ngIf="(flags.importFlag=='Y' && flags.exportFlag=='Y') || (flags.importFlag=='Y' && flags.exportFlag=='N') || (flags.importFlag=='N' && flags.exportFlag=='Y')">
+                        <button type="button" class="btn btn-primary" ngbDropdownToggle>
+                      More
+                    </button>
+                        <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu style="right: 0;
+                    left: auto;">
+
+                            <a class="dropdown-item" href="javascript:" *ngIf="flags.exportFlag=='Y'" (click)="exporttoexcel()">Export Data</a>
+                            <a class="dropdown-item" href="javascript:" *ngIf="flags.importFlag=='Y'" (click)="fileUploadPopup.show();fileUploadForm.reset()">Upload Data</a>
+                            <a class="dropdown-item" href="javascript:" (click)="sampleFormatedFile()">Download Excel File Format </a>
+
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+
+            <!-- <div class="table-responsive tableFixHead">
+               
+                <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                   
+                    <th>Transaction Date</th>
+                    <th>Effective Date</th>
+                    <th>Employee</th>
+                    <th>Current Grade</th>
+                    <th>New Grade</th>
+                    <th>Current Designation</th>
+                    <th>New Designation</th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let dl of empIncrementList">
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(dl)">
+                        </div>
+                    </td>
+                   
+                    <td>{{dl.transDate | date: 'dd-MMM-yyyy'}}</td>
+                    <td>{{dl.effectiveDate | date: 'dd-MMM-yyyy'}}</td>
+                    <td>{{dl.empname}}</td>
+                    <td>{{dl.empgrade}}</td>
+                    <td>{{dl.newempgrade}}</td>
+                    <td>{{dl.empdesignation}}</td>
+                    <td>{{dl.newempdesignation}}</td>
+                </tr>
+               
+                </tbody>
+                </table>
+            </div> -->
+            <!--  -->
+            <datatable1 [dataset]=data [enableFilter]="enableFilter" (searchEvent)="search($event)" (aTagEvent)="getRows($event)" [id]="'empIncrementId'">
+                <column1 [width1]=2 [value]="'empIncrementId'" [header]="''" [type]="'radio'" [sortVal]="'ASC'"></column1>
+                <column1 [width1]=7 [value]="'transDate'" [header]="'Transaction Date'" [sortVal]=""></column1>
+                <column1 [width1]=7 [value]="'effectiveDate'" [header]="'Effective Date'" [sortVal]=""></column1>
+                <column1 [width1]=15 [value]="'empname'" [header]="'Employee'" [type]="''" [sortVal]="''"></column1>
+                <column1 [width1]=10 [value]="'empgrade'" [header]="'Current Grade'" [sortVal]=""></column1>
+                <column1 [width1]=10 [value]="'newempgrade'" [header]="'New Grade'" [type]="''" [sortVal]="''"></column1>
+                <column1 [width1]=10 [value]="'empdesignation'" [header]="'Current Designation'" [sortVal]=""></column1>
+                <column1 [width1]=10 [value]="'newempdesignation'" [header]="'New Designation'" [type]="''" [sortVal]="''"></column1>
+            </datatable1>
+        </app-card>
+    </div>
+</div>
+
+<div class="col-xl-4 col-md-6">
+    <app-ui-modal #fileUploadPopup dialogClass="modal-dialog-centered">
+        <div class="app-modal-header">
+            <h5 class="modal-title text-center">Salary Revision</h5>
+        </div>
+        <div class="app-modal-body">
+            <form action="javascript:" class="needs-validation" [formGroup]="fileUploadForm">
+
+                <div class="form-group">
+                    <input type="file" autocomplete="off" formControlName="fileName" class="form-control" (change)="fileChange($event)" name="imagePath" id="file" placeholder="Upload File" style="border: none;">
+                </div>
+
+            </form>
+
+
+        </div>
+        <div class="app-modal-footer">
+
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="fileUploadFun($event);fileUploadPopup.hide()">Upload</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" data-dismiss="modal" (click)="fileUploadPopup.hide()">Close</button>
+
+        </div>
+    </app-ui-modal>
+</div>

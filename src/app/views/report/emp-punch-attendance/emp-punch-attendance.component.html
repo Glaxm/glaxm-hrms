@@ -1,0 +1,116 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="Employee Attendance Details" [options]="false">
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="punchForm">
+                    <div class="form-row">
+
+                        <div class="col-md-1 mb-3">
+                            <label for="validationCustom01">Emp. ID</label>
+                            <input type="text" formControlName="empcode" disabled class="form-control ">
+                        </div>
+                        <div class="col-md-1.5 mb-3">
+                            <label for="validationCustom01">Start Time</label>
+                            <input type="time" formControlName="startTime" class="form-control ">
+                        </div>
+
+                        <div class="col-md-1.5 mb-3">
+                            <label for="validationCustom01">Break Start</label>
+                            <input type="time" formControlName="breakStart" class="form-control ">
+                        </div>
+
+                        <div class="col-md-1.5 mb-3">
+                            <label for="validationCustom01">Break End </label>
+                            <input type="time" formControlName="breakEnd" class="form-control ">
+                        </div>
+
+                        <div class="col-md-1.5 mb-3">
+                            <label for="validationCustom01">End Time </label>
+                            <input type="time" formControlName="endTime" class="form-control ">
+                        </div>
+
+                        <div class="col-md-1.5 mb-3">
+                            <label for="validationCustom01"> </label>
+                            <div class="form-group text-left mt-2">
+                                <div class="checkbox checkbox-primary d-inline">
+                                  <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1"
+                                   formControlName="ishalfday1" checked="">
+                                  <label for="checkbox-fill-a1" class="cr"> Half Day</label>
+                                </div>
+                              </div>
+                        </div>
+
+                        
+
+                        <div class="col-md-3 mb-3">
+
+                            <label for="validationCustom02" style="color: #4680ff;">{{dateattendance | date: 'dd-MMM-yyyy'}}&nbsp;&nbsp;&nbsp;&nbsp;{{shiftname}}</label>
+                            <div class="input-group">
+
+                                <button type="button" (click)="updateTime()" class="btn btn-success"
+                                    [disabled]="this.btnLoader || enableupdate=='N'" ngbTooltip="btn-success">
+                                    <span *ngIf="this.btnLoader" class="spinner-border spinner-border-sm"
+                                        role="status"></span>
+                                    <span *ngIf="this.btnLoader" class="load-text">Loading...</span>
+                                    <span *ngIf="!this.btnLoader" class="btn-text">Update</span>
+                                </button>
+
+                                <!-- <button type="button" (click)="updateTime()" class="btn btn-success"
+                                [disabled]="this.btnLoader" ngbTooltip="btn-success">
+                                <span *ngIf="this.btnLoader" class="spinner-border spinner-border-sm"
+                                    role="status"></span>
+                                <span *ngIf="this.btnLoader" class="load-text">Loading...</span>
+                                <span *ngIf="!this.btnLoader" class="btn-text">Shift Timining</span>
+                            </button> -->
+                            &nbsp;<button type="button" class="btn btn-success" ngbTooltip="btn-danger" (click)="getShiftTiming()"
+                            data-toggle="tooltip" data-placement="top"
+                            >Shift Timing</button>
+
+                                &nbsp;<button type="button" class="btn btn-danger" ngbTooltip="btn-danger"
+                                data-toggle="tooltip" data-placement="top"
+                                title="Back"
+                                (click)="back()"><i class="fa fa-chevron-left"></i></button>
+                               
+                            </div>
+                        </div>
+                        
+                    </div>
+                </form>
+
+
+                <hr>
+                <div class="table-responsive tableFixHead">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Employee ID</th>
+                                <th>Employee Name</th>
+                                <th>Device Sr. No.</th>
+                                <th>Punch Date</th>
+                                <th>Punch Time</th>
+                                <th>Check Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dl of punchDataList">
+                                <td>{{dl.emp_id}}</td>
+                                <td>{{dl.emp_name}}</td>
+                                <td>{{dl.device_srno}}</td>
+                                <td [ngStyle]="setColorOnDate(dl.eve_date)">{{dl.eve_date | date: 'dd-MMM-yyyy'}}</td>
+                                <td>{{dl.eve_time ? dl.eve_time.substring(0, 8) : ''}}</td>
+                                <td>{{dl.checktype}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </app-card>
+        </div>
+
+
+    </div>
+</div>

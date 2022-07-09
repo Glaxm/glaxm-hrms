@@ -1,0 +1,158 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="Asset Expiry Report" [options]="false">
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="expiryreportform">
+                    <div class="form-row">
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <ng-multiselect-dropdown [placeholder]="" formControlName="company" [data]="companyList" name="companyName" [(ngModel)]="selectecdCompanyList" [settings]="dropdownSettingscompany" (onSelect)="onCompanySelect($event)" (onDeSelect)="onCompanyDeSelect($event)"
+                                (onDeSelectAll)="onDeSelectAllCompany($event)" (onSelectAll)="onSelectAllCompany($event)">
+                            </ng-multiselect-dropdown>
+
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Asset Item </label>
+                            <select class="form-control" formControlName="x_asset_item_id" (change)="selectedAssetItem(expiryreportform.value.x_asset_item_id)">
+                                <option *ngFor="let dl of assetItemList" value="{{dl.x_asset_item_id}}">{{dl.name}}</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-1 mb-3">
+                            <label for="validationCustom01">Quantity</label>
+                            <input type="text" class="form-control" formControlName="qty" disabled>
+                        </div>
+
+                        <div class="col-md-1 mb-3">
+                            <label for="validationCustom01">Price</label>
+                            <input type="text" class="form-control" formControlName="amount" disabled>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Date of purchase</label>
+                            <input type="text" class="form-control" formControlName="purchaseDt" disabled>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Date of expiry</label>
+                            <input type="text" class="form-control" formControlName="expiryDt" disabled>
+                        </div>
+
+
+
+                        <!-- 
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom02">Date of purchase</label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsstartDate" [options]="myDatePickerOptions" formControlName="startDate1" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event)"
+                                    (click)="dp1.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom02">Date of expiry</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Select a date" angular-mydatepicker name="reactiveFormsendDate" [options]="myDatePickerOptions" formControlName="endDate1" #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)"
+                                    (click)="dp2.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                                </div>
+
+                            </div>
+                        </div> -->
+
+
+                        <div class="col-md-1 mb-3">
+
+                            <label for="validationCustom02"><br></label>
+                            <div class="input-group">
+
+                                <button type="button" (click)="filterTable()" class="btn btn-success" [disabled]="this.btnLoader" ngbTooltip="btn-success" data-toggle="tooltip" data-placement="top" title="Go">
+                    <span *ngIf="this.btnLoader" class="spinner-border spinner-border-sm" role="status"></span>
+                    <span *ngIf="this.btnLoader" class="load-text">Go</span>
+                    <span *ngIf="!this.btnLoader" class="btn-text">Go</span>
+                  </button>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="col-md-1 mb-3">
+                            <label for="validationCustom01"><br> </label>
+                            <div class="input-group" role="group" ngbDropdown>
+                                <button type="button" class="btn btn-primary" ngbDropdownToggle>
+                    More
+                  </button>
+                                <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu style="right: 0;
+                          left: auto;">
+                                    <a class="dropdown-item" href="javascript:" (click)="exportReport()">Export Data </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- <div class="form-row" style="float: right;">
+            <div class="col-md-12 mb-3">
+              <input [(ngModel)]="filterString" (ngModelChange)="onFilterChange()" class="form-control"
+                placeholder="Search" />
+            </div>
+          </div> -->
+
+                <br>
+
+                <hr>
+                <app-card>
+                    <div [ngClass]="(filtered?.length>10)?'table-responsive tableFixHead':'table-responsive'">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Company</th>
+                                    <th>Asset Item</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Date of Purchase</th>
+                                    <th>Date of Expiry</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dl of filtered">
+
+                                    <td>{{dl.companyName}}</td>
+                                    <td>{{dl.oldEmpId}}</td>
+                                    <td>{{dl.qty}}</td>
+                                    <td>{{dl.amount}}</td>
+                                    <td>{{dl.purchaseDt}}</td>
+                                    <td>{{dl.expiryDt}}</td>
+                                </tr>
+                                <tr *ngIf="filtered?.length==0">
+                                    <td colspan="8" style="text-align:center;">No records</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </app-card>
+
+
+
+            </app-card>
+        </div>
+
+
+    </div>
+</div>

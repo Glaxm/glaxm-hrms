@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="Request Summary" [options]="false">
+
+
+            <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                <ul _ngcontent-epm-c40="" class="nav">
+                </ul>
+                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+
+                    <!-- <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="fileUploadPopup.show();getLeaveBalList()" data-toggle="tooltip" data-placement="top" title="Leave Balance">
+                        Leave Balance
+             </button>&nbsp; -->
+
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" *ngIf="flags.createFlag=='Y'" (click)="add()" data-toggle="tooltip" data-placement="top" title="Add">
+                <i class="fa fa-plus"></i>
+                </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" *ngIf="flags.readFlag=='Y'" (click)="view()" data-toggle="tooltip" data-placement="top" title="View">
+              <i class="fa fa-eye"></i>
+              </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="enableFilter = !enableFilter;" [ngClass]="{'filterClass': enableFilter}" data-toggle="tooltip" data-placement="top" title="Filter">
+                <i class="fa fa-filter"></i>
+                </button>
+                </div>
+            </nav>
+
+
+            <datatable1 [dataset]=data [enableFilter]="enableFilter" (searchEvent)="search($event)" (aTagEvent)="getRows($event)" [id]="'appReqId'" (getNavigate)="navigate($event)">
+
+
+                <column1 [width1]=2 [value]="'appReqId'" [header]="''" [type]="'radio'" [sortVal]="'ASC'"></column1>
+                <column1 [width1]=5 [value]="'req_no'" [header]="'Request No'" [sortVal]=""></column1>
+                <column1 [width1]=20 [value]="'req_type'" [header]="'Request Type'" [type]="''" [sortVal]="''"></column1>
+                <column1 [width1]=15 [value]="'empname'" [header]="'Employee'" [sortVal]=""></column1>
+                <column1 [width1]=10 [value]="'req_date'" [header]="'Request Date'" [sortVal]=""></column1>
+                <column1 [width1]=5 [value]="'current_level'" [header]="'Level'" [sortVal]=""></column1>
+                <column1 [width1]=12 [value]="'current_status'" [header]="'Status'" [sortVal]=""></column1>
+                <column1 [width1]=5 [value]="'leaveitemname'" [header]="'Leave Type'" [sortVal]=""></column1>
+                <column1 [width1]=12 [value]="'leavedays'" [header]="'No. of Days'" [sortVal]=""></column1>
+                <column1 [width1]=12 [value]="''" [header]="'Form'" [sortVal]="" [type]="'button'" [buttonName]="'Application'"></column1>
+
+            </datatable1>
+        </app-card>
+    </div>
+</div>
+
+<div class="col-xl-12 col-md-12">
+    <app-ui-modal #fileUploadPopup dialogClass="modal-dialog-centered">
+        <div class="app-modal-header">
+            <h5 class="modal-title text-center">Leave Balance </h5>
+        </div>
+        <div class="app-modal-body">
+            <div class="table-responsive">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Leave Item</th>
+                            <th>Leave alloted</th>
+                            <th>Leave Taken</th>
+                            <th>Leave Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dl of leaveballist">
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1">
+                                </div>
+                            </td>
+                            <td>{{dl.leaveitemName}}</td>
+                            <td>{{dl.allocleaves}}</td>
+                            <td>{{dl.takenleaves}}</td>
+                            <td>{{dl.balanceleaves}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="app-modal-footer">
+
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" data-dismiss="modal" (click)="fileUploadPopup.hide()">Close</button>
+
+        </div>
+    </app-ui-modal>
+</div>

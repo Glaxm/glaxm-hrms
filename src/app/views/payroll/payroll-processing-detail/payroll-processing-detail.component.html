@@ -1,0 +1,357 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="Payslip Preview" [options]="false">
+
+
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="downloadPayslip()">
+                            Print</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger"
+                            (click)="back()">Back</button>
+                    </div>
+                </nav>
+
+
+                <div class="salary-slip"  >
+                    <table class="empDetail" id="contentToConvert"> 
+                        <tr height="100px" style='background-color: #c2d69b'>
+                            <td colspan='4'>
+                                <img height="90px" src='assets/images/KHKSS-Logo.png'></td> 
+                                <!-- <img src="assets/images/glaxm_infotech.jpg" alt="" height="90px"></td> -->
+                               <td colspan='4' class="companyName"> <span style="float: left;">Payslip</span>{{compName}}</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <td>
+                                {{empName}}
+                            </td>
+
+                            <td></td>
+                            <th>
+                                Payment Mode
+                            </th>
+                            <td>
+                                {{payMode}}
+                            </td>
+                            <td></td>
+                            <th>
+                                Date
+                            </th>
+                            <td>
+                                {{date | date: 'dd-MMM-yyyy'}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Employee Code
+                            </th>
+                            <td>
+                                {{empCode}}
+                            </td>
+
+                            <td></td>
+                            <th>
+                                Bank/Exchange House Details
+                            </th>
+                            <td>
+                                {{bankName}}
+                            </td>
+                            <td></td>
+                            <th>
+                                Payslip no.
+                            </th>
+                            <td>
+                                {{payslipNo}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- <th>
+                              Cost Centre
+                          </th>
+                          <td>
+                              
+                          </td> -->
+
+                            <th>
+                                Department:
+                            </th>
+                            <td>
+                                {{deptName}}
+                            </td>
+                            <td></td>
+                            <th>
+                                Bank / Exchange Account No.
+                            </th>
+                            <td>
+                                {{bankAccNo}}
+                            </td>
+                            <td></td>
+                            <th>
+                                Pay Period
+                            </th>
+                            <td>
+                                {{month}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Job Title:
+                            </th>
+                            <td>
+                                {{jobFunction}}
+                            </td>
+                            <td></td>
+                            <th>
+                                
+                            </th>
+                            <td>
+                               
+                            </td>
+                            <td></td>
+                            <th>
+                                Status
+                            </th>
+                            <td>
+                                {{'Confirmed'}}
+                            </td>
+                        </tr>
+
+                        <!--  -->
+                        <tr>
+                            <th>
+                                <!-- Employee Code -->
+                            </th>
+                            <td>
+                                <!-- {{empCode}} -->
+                            </td>
+
+                            <td></td>
+                            <th>
+                                <!-- Bank Name -->
+                            </th>
+                            <td>
+                            </td>
+                            <td></td>
+                            <!-- <th>
+                                Payment Mode
+                            </th>
+                            <td>
+                                {{payMode}}
+                            </td> -->
+                        </tr>
+                        <!--  -->
+                        <tr class="myBackground">
+                            <th colspan="2">
+                                Fix Emoluments
+                            </th>
+                            <th>
+
+                            </th>
+                            <th class="table-border-right">
+                                Amount
+                            </th>
+                            
+                            <th>
+                                Days
+                            </th>
+                            <th class="table-border-right">
+                                No
+                            </th>
+                            <th>
+                                Over Time
+                            </th>
+                            <th class="table-border-right">
+                                Hours
+                            </th>
+                        </tr>
+                        <tr *ngFor="let li of lines">
+                            <th colspan="2">
+                                {{li.payitemname}}
+                            </th>
+                            <td></td>
+                            <td class="table-border-right">
+                                {{(li.amount).toFixed(2)}}
+                            </td>
+                            <th>
+                                 <!-- Month<br>Paid Leave<br>LWP  -->
+                            </th>
+                            <td class="table-border-right">
+                                <!-- {{header.workedDays}}<br> {{header.paidleaveDays}}<br>{{header.lwpDays}}  -->
+                            </td>
+                            <th>
+                                 <!-- Normal OT <br> Friday OT <br>Holiday OT  -->
+                            </th>
+                            <td class="table-border-right">
+                             <!-- {{(normalOTHrs)}}<br> {{fridayOTHrs}}<br>{{holidayOTHrs}}  -->
+                            </td>
+
+                        </tr>
+                        
+
+                        <tr>
+                            <th colspan="2">
+                                
+                            </th>
+                            <td></td>
+                            <td class="table-border-right">
+                                
+                            </td>
+                            <th>
+                                Month<br>Paid Leave<br>LWP
+                            </th>
+                            <td class="table-border-right">
+                             {{header.workedDays}}<br> {{header.paidleaveDays}}<br>{{header.lwpDays}}
+                            </td>
+                            <th>
+                                Normal OT <br> Friday OT <br>Holiday OT 
+                            </th>
+                            <td class="table-border-right">
+                                {{(normalOTHrs)}}<br> {{fridayOTHrs}}<br>{{holidayOTHrs}} 
+                            </td>
+
+                        </tr>
+
+                        
+
+                        
+                        <tr class="myBackground">
+                            <th colspan="3">
+                                Total
+                            </th>
+                            <td class="table-border-right">
+                                {{payslipObj.header.paidAmount}}
+                            </td>
+                            <th>
+                                Pay Days
+                            </th>
+
+                            <td class="table-border-right">
+                            {{header.payDays}}   
+                            </td>
+                            <th>
+                                Over Time Hrs
+                            </th>
+
+                            <td class="table-border-right">
+                            {{totalOTHrs}}    
+                            </td>
+                        </tr>
+
+                        <tr class="myBackground">
+
+                            <th colspan="2">
+                                Details
+                            </th>
+                            <th>
+                                <!-- Particular -->
+                            </th>
+                            <th class="table-border-right">
+                                Amount
+                            </th>
+                            <th colspan="2">
+                                Deductions
+                            </th>
+                            <th>
+                                <!-- Particular -->
+                            </th>
+                            <th>
+                                Amount 
+                            </th>
+                        </tr>
+                        <tr *ngFor="let l of lines">
+                            <th colspan="2">
+                                {{l.payitemname}}
+                            </th>
+                            <td></td>
+                            <td class="table-border-right">
+                                <!-- {{li.amount/payslipObj.header.workedDays * payslipObj.header.payDays | number : 2}} -->
+                                {{(l.calPayitem).toFixed(2)}}
+                                <!-- parseFloat(Math.round(58.8965896589*10^2)/10^2) -->
+                            </td>
+                            <th colspan="2">
+                               
+                            </th>
+                            <td></td>
+
+                            <td class="myAlign">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">
+                                {{"Normal   OT"}} <br>{{"Friday      OT"}} <br>{{"Holiday OT"}} <br>Misc Earnings
+                            </th>
+                            <td></td>
+                            <td class="table-border-right">
+                                 {{(normalOT).toFixed(2)}} <br> {{(weeklyOffOT).toFixed(2)}}<br> {{(holidayOT).toFixed(2)}} <br>{{payslipObj.totalMiscEarningAmt}}  
+                            </td>
+                            
+                            <th colspan="2">
+                                Loan Installment <br> Advance <br>Misc. Deductions
+                            </th>
+                            <td></td>
+
+                            <td>
+                                {{payslipObj.loan}}<br>{{payslipObj.totalAdvanceAmt}}<br>{{payslipObj.totalMiscdeductionAmt}}
+                            </td>
+                            
+                        </tr>
+                        <tr class="myBackground">
+                            <th colspan="3">
+                                Total Monthly Salary (A)
+                            </th>
+                            <td class="table-border-right">
+                                {{payslipObj.header.totalEarnings}}
+                            </td>
+                            <th colspan="3">
+                                Total Deductions (B)
+                            </th>
+                            <td>
+                                {{payslipObj.header.totalDeductions}}
+                            </td>
+                        </tr>
+                        <tr class="myBackground">
+                            <th colspan="3">
+                                Net Salary (A-B)
+                            </th>
+                            <td class="table-border-right">
+                                {{payslipObj.header.netSalary}}
+                            </td>
+                            <th colspan="3">
+                                Net Salary(Round Off)
+                            </th>
+                            <td>
+                                {{payslipObj.header.roundAmount}}
+                            </td>
+                        </tr>
+
+                        <tr class="myBackground">
+                            <th colspan="3" style="text-align: center;">
+                                <br>
+                                Accepted 
+                            </th>
+                            <td>
+                            </td>
+                            <th colspan="3" style="text-align: center;">
+                                <br>
+                                Approved
+                            </th>
+                            <td>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+                <!--  -->
+            </app-card>
+        </div>
+    </div>
+</div>

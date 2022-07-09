@@ -1,0 +1,255 @@
+<div class="row">
+    <div class="col-sm-12">
+      <div>
+      <app-card cardTitle="{{approvalForm.value.gApprovalwfId  ? 'Edit Approval Workfolw':'Add Approval Workfolw'}}"  [options]="false">
+        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+          <ul _ngcontent-epm-c40="" class="nav">
+          </ul>
+          <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" [disabled]="submitted" (click)="addUpdateApproval()" *ngIf="!isView">{{approvalForm.value.gApprovalwfId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{approvalForm.value.gApprovalwfId ? 'Back':'Cancel'}}</button>
+          </div>
+      </nav>
+    
+        <form action="javascript:" class="needs-validation" novalidate [formGroup]="approvalForm">
+          <div class="form-row">
+            
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Holding</label>
+              <select class="form-control validation_border" disabled formControlName="gHoldingId"
+              [ngClass]="{ 'is-invalid': submitted && f.gHoldingId.errors }">
+                  <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+              </select>
+              <div *ngIf="submitted && f.gHoldingId.errors" class="invalid-feedback">
+                <div *ngIf="f.gHoldingId.errors.required">Holding is required</div>
+              </div>
+          </div>
+            
+          <div class="col-md-6 mb-3">
+            <label for="validationCustom01">Company</label>
+            <select class="form-control validation_border" formControlName="gCompanyId" 
+            [ngClass]="{ 'is-invalid': submitted && f.gCompanyId.errors }">
+                <option *ngFor="let cl of companyList" value="{{cl.gCompanyId}}">{{cl.name}}</option>
+            </select>
+            <div *ngIf="submitted && f.gCompanyId.errors" class="invalid-feedback">
+              <div *ngIf="f.gCompanyId.errors.required">Company is required</div>
+            </div>
+        </div>
+
+          </div>
+          <div class="form-row">
+
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Name</label>
+              <input type="text" formControlName="name"  
+              class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Name is required</div>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Module</label>
+              <select class="form-control validation_border" formControlName="moduleid">
+                  <option *ngFor="let dl of moduleList" value="{{dl.moduleId}}">{{dl.moduleName}}</option>
+              </select>
+          </div>
+
+            <!-- <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Module</label>
+              <input type="text" formControlName="modulename" class="form-control validation_border" 
+              [ngClass]="{ 'is-invalid': submitted && f.modulename.errors }">
+              <div *ngIf="submitted && f.modulename.errors" class="invalid-feedback">
+                <div *ngIf="f.modulename.errors.required">List Module is required</div>
+              </div>
+            </div> -->
+          </div>
+          <div class="form-row">
+
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Code</label>
+              <input type="text" formControlName="code" class="form-control validation_border" 
+              [ngClass]="{ 'is-invalid': submitted && f.code.errors }">
+              <div *ngIf="submitted && f.code.errors" class="invalid-feedback">
+                <div *ngIf="f.code.errors.required">Code is required</div>
+              </div>
+            </div>
+
+
+              <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Status</label>
+                <select class="form-control validation_border" formControlName="status" 
+                 [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                    <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                </select>
+                <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                    <div *ngIf="f.status.errors.required">Status is required</div>
+                  </div>
+            </div>
+
+          </div>
+
+
+        </form>
+    </app-card>
+  </div>
+
+  <!-- -------------------------------- -->
+
+  <div *ngIf="!isGeneralListValue && approvalForm.value.gApprovalwfId">
+    <app-card cardTitle="Approval Level Summary" [options]="false">
+         
+           <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+            <ul _ngcontent-epm-c40="" class="nav">
+            </ul>
+            <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+               
+            <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+             type="button" (click)="addGeneralListValue();isGeneralListValue=true" *ngIf="!isView" data-toggle="tooltip" data-placement="top"
+             title="Add">
+            <i class="fa fa-plus"></i>
+            </button>&nbsp;&nbsp;
+            <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+            type="button" (click)="editGeneralListValue();isGeneralListValue=true" *ngIf="!isView" data-toggle="tooltip" data-placement="top"
+            title="Edit">
+           <i class="fas fa-pencil-alt"></i>
+           </button>&nbsp;&nbsp;
+           <!-- <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+           type="button" (click)="editGeneralListValue();isGeneralListValue=true" data-toggle="tooltip" data-placement="top"
+           title="View">
+          <i class="fa fa-eye"></i>
+          </button>&nbsp;&nbsp;
+          <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+          type="button" (click)="deleteGeneralListValue()" *ngIf="!isView" data-toggle="tooltip" data-placement="top"
+          title="Delete">
+         <i class="fa fa-trash"></i>
+         </button>&nbsp;&nbsp;
+            <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button"
+            (click)="enableFilter = !enableFilter;"
+            [ngClass]="{'filterClass': enableFilter}" data-toggle="tooltip" data-placement="top"
+            title="Filter">
+            <i class="fa fa-filter"></i>
+            </button> -->
+            </div>
+        </nav>
+    
+           <div class="table-responsive">
+               <table class="table table-bordered">
+               <thead>
+               <tr>
+                   <th>#</th>
+                   <th>Level No.</th>
+                   <th>Username</th>
+                  <th>Max Value</th>
+                  <th>Min Value</th>
+                 
+               </tr>
+               </thead>
+               <tbody>
+               <tr *ngFor="let l of approvalLevelList">
+                   <td>
+                     <div class="form-check">
+                       <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(l)">
+                   </div>
+                   </td>
+                   <td>{{l.levelno}}</td>
+                   <td>{{l.username}}</td>
+                  <td>{{l.valuemax}}</td>
+                  <td>{{l.valuemin}}</td>
+               </tr>
+               
+               </tbody>
+               </table>
+           </div>
+         
+       </app-card>
+     </div>
+   <div *ngIf="isGeneralListValue">
+       <app-card cardTitle="Add Approval Level" [options]="false">
+        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+          <ul _ngcontent-epm-c40="" class="nav">
+          </ul>
+          <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="saveApprovalLevel()" *ngIf="!isView">{{approvalLevelForm.value.gApprovallevelId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="isGeneralListValue=false">{{isView ? 'Back':'Cancel'}}</button>
+          </div>
+      </nav>
+         <form action="javascript:" class="needs-validation" novalidate [formGroup]="approvalLevelForm">
+           <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Level</label>
+              <input type="number" formControlName="levelno" class="form-control validation_border" 
+              [ngClass]="{ 'is-invalid': submittedValue && f1.levelno.errors }" (change)="checkNumber(approvalLevelForm.value.levelno)">
+              <div *ngIf="submittedValue && f1.levelno.errors" class="invalid-feedback">
+                <div *ngIf="f1.levelno.errors.required">Level is required</div>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">User</label>
+              <select class="form-control validation_border" formControlName="userid" 
+               [ngClass]="{ 'is-invalid': submittedValue && f1.userid.errors }">
+                  <option *ngFor="let dl of usersList" value="{{dl.userId}}">{{dl.userName}}</option>
+              </select>
+              <div *ngIf="submittedValue && f1.userid.errors" class="invalid-feedback">
+                  <div *ngIf="f1.userid.errors.required">User is required</div>
+                </div>
+          </div>
+
+           </div>
+<!--  -->
+
+<div class="form-row">
+  <div class="col-md-6 mb-3">
+    <label for="validationCustom01">Name</label>
+    <input type="text" formControlName="name" class="form-control validation_border" 
+    [ngClass]="{ 'is-invalid': submittedValue && f1.name.errors }">
+    <div *ngIf="submittedValue && f1.name.errors" class="invalid-feedback">
+      <div *ngIf="f1.name.errors.required">Name is required</div>
+    </div>
+  </div>
+
+  <div class="col-md-6 mb-3">
+    <label for="validationCustom01">Description</label>
+    <input type="text" formControlName="description" class="form-control validation_border" 
+    [ngClass]="{ 'is-invalid': submittedValue && f1.description.errors }">
+    <div *ngIf="submittedValue && f1.description.errors" class="invalid-feedback">
+      <div *ngIf="f1.description.errors.required">Description is required</div>
+    </div>
+  </div>
+
+ </div>
+
+<!--  -->
+
+           <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Min. Value</label>
+              <input type="text" formControlName="valuemin" class="form-control validation_border" 
+              [ngClass]="{ 'is-invalid': submittedValue && f1.valuemin.errors }">
+              <div *ngIf="submittedValue && f1.valuemin.errors" class="invalid-feedback">
+                <div *ngIf="f1.valuemin.errors.required">Min. Value is required</div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Max. Value</label>
+              <input type="text" formControlName="valuemax" class="form-control validation_border" 
+              [ngClass]="{ 'is-invalid': submittedValue && f1.valuemax.errors }">
+              <div *ngIf="submittedValue && f1.valuemax.errors" class="invalid-feedback">
+                <div *ngIf="f1.valuemax.errors.required">Max. Value is required</div>
+              </div>
+            </div>
+           </div>
+          
+          
+
+         </form>
+         
+       </app-card>
+     </div> 
+
+
+  <!-- --------------------------------- -->
+  </div>
+  </div>
+  

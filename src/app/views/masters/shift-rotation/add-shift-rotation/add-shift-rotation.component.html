@@ -1,0 +1,86 @@
+
+<div class="row">
+    <div class="col-sm-12">
+      <div>
+      <app-card cardTitle="Add Shift Rotation"  [options]="false">
+     
+      
+        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+          <ul _ngcontent-epm-c40="" class="nav">
+          </ul>
+          <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success">Add</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+         </div>
+      </nav>
+
+        <form action="javascript:" class="needs-validation" novalidate [formGroup]="shiftrotationform">
+          
+            <app-card cardTitle="Scheduler Details" [options]="false">
+               
+                  <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                      <label for="validationCustom01">Schedule Name</label>
+                      <input type="text" formControlName="scheduleName" class="form-control">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Time of Schedule</label>
+                        <input type="time" formControlName="timeofschedule" class="form-control">
+                      </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                      <label for="validationCustom01">Schedule Frequency</label>
+                      <select class="form-control" formControlName="schedulefrequency">
+                        <option *ngFor="let dl of schedulefrequencyList" value="{{dl.code}}">{{dl.value}}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">of Every Week</label>
+                        <select class="form-control" formControlName="everyweek">
+                            <option *ngFor="let dl of daysList" value="{{dl.code}}">{{dl.value}}</option>
+                          </select>
+                      </div>
+                  </div>
+  
+                
+              </app-card>
+
+              <app-card cardTitle="Shift Rotation Details" [options]="false">
+               
+                <div class="form-row">
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Applicable From</label>
+                    <select class="form-control" formControlName="applicablefrom">
+                        <option *ngFor="let dl of daysList" value="{{dl.code}}">{{dl.value}}</option>
+                      </select>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                      <label for="validationCustom01">Applicable To</label>
+                      <select class="form-control" formControlName="applicableto">
+                        <option *ngFor="let dl of daysList" value="{{dl.code}}">{{dl.value}}</option>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Applicable For</label>
+                    <input type="text" formControlName="scheduleName" class="form-control">
+                  </div>
+                  <div class="col-md-6 mb-3">
+                      <label for="validationCustom01">Shift Rotation</label>
+                      <input type="text" formControlName="scheduleName" class="form-control">
+                    </div>
+                </div>
+
+              
+            </app-card>
+      
+        </form>
+        
+        <!-- ////////////////////////////////////////////////////////// -->
+    </app-card>
+  </div>
+  </div>
+  </div>
+  

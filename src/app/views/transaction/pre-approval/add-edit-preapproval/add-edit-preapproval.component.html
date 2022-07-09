@@ -1,0 +1,230 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="Employee Absence/Pre-Approval Request Form" [options]="false">
+
+
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" [disabled]="submitted" (click)="addPreapproval()" *ngIf="!isView">{{preApprovalForm.value.lEmpabcenceId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="preApprovalForm">
+
+
+
+
+                    <app-card cardTitle="" [options]="false">
+                        <div class="form-row">
+
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">Employee</label>
+                                <ng-multiselect-dropdown [placeholder]="" [data]="employeeList" name="employee" formControlName="employee" [(ngModel)]="selectedEmpList" [settings]="dropdownSettings" (onSelect)="onCompnaySelect($event)" (onDeSelect)="onCompanyDeSelect($event)" (onSelectAll)="onSelectAllCompnay($event)"
+                                    [ngClass]="{ 'is-invalid': submitted && f.employee.errors }" class="set-border-color">
+                                </ng-multiselect-dropdown>
+                                <div *ngIf="submitted && f.employee.errors" class="invalid-feedback">
+                                    <div *ngIf="f.employee.errors.required">Employee is required</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">Submission Date</label>
+                                <div class="input-group">
+                                    <input class="form-control " placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="datetrx1" #dp3="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeTransDate($event);preApprovalRequestEvent()"
+                                        (click)="dp3.toggleCalendar()" />
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-secondary" (click)="dp3.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- ///////////////////// -->
+                        <div class="form-row">
+
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">Type of Absence:</label>
+                                <select class="form-control " formControlName="lsAbsencetypeId" (change)="preApprovalRequestEvent()">
+                <option *ngFor="let dl of typeOfAbsenceList" value="{{dl.lListitemId}}">{{dl.name}}
+                </option>
+              </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">Absence Reason:</label>
+                                <select class="form-control" formControlName="lsAbsenceRsnId" (change)="preApprovalRequestEvent()">
+                <option *ngFor="let dl of absenceReasonList" value="{{dl.lListitemId}}">{{dl.name}}
+                </option>
+              </select>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">Start Date</label>
+                                <div class="input-group">
+                                    <input class="form-control  " placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="startdate1" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event);preApprovalRequestEvent()"
+                                        (click)="dp1.toggleCalendar()" />
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">End Date</label>
+                                <div class="input-group">
+                                    <input class="form-control  " placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="enddate1" #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event);preApprovalRequestEvent()"
+                                        (click)="dp2.toggleCalendar()" />
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">Start time</label>
+                                <input type="time" formControlName="startTime" class="form-control " (change)="calTime();preApprovalRequestEvent()">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">End time</label>
+                                <input type="time" formControlName="endTime" class="form-control" (change)="calTime();preApprovalRequestEvent()">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">Total</label>
+                                <input type="text" formControlName="totalTime" class="form-control" disabled>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">Explanation</label>
+                                <textarea type="text" formControlName="description" class="form-control" (change)="preApprovalRequestEvent()"></textarea>
+                            </div>
+
+                        </div>
+
+                        <!-- 
+                        <div class="form-row">
+
+                            <div class="col-md-12 mb-3">
+                                <label for="validationCustom01">Explanation</label>
+                                <textarea type="text" formControlName="description" class="form-control" (change)="preApprovalRequestEvent()"></textarea>
+                            </div>
+
+                        </div> -->
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3" *ngIf="!requestId">
+
+                                <label for="validationCustom01">Attachment</label>
+                                <div class="input-group">
+
+                                    <div class="custom-file">
+
+                                        <input type="file" class="custom-file-input" multiple formControlName="fileName" id="importFile" (change)="onFileChange($event.target.files)">
+                                        <label class="custom-file-label" #labelImport for="importFile"><i class="fas fa-search"></i> Choose
+                        file</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3" *ngIf="requestId">
+                                <label for="validationCustom01">Attachment</label>
+                                <div class="input-group mb-3">
+                                    <input _ngcontent-wdr-c114="" type="text" formControlName="fileName" aria-label="Recipient's username" aria-describedby="basic-addon2" class="form-control">
+                                    <div class="input-group-append">
+                                        <button type="button" (click)="openAttachment()" class="btn btn-primary">View</button></div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </app-card>
+
+                    <!-- //// -->
+
+
+                    <hr>
+
+                    <!-- ===================== -->
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Employee Name & ID</label>
+                            <input type="text" formControlName="empName" class="form-control" disabled>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Employment Status</label>
+                            <input type="text" formControlName="employmentStatus" class="form-control" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Function</label>
+                            <input type="text" formControlName="function" class="form-control " disabled>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company Name</label>
+                            <input type="text" formControlName="companyName" class="form-control" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Department</label>
+                            <input type="text" formControlName="department" class="form-control " disabled>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Work Location</label>
+                            <input type="text" formControlName="worklocation" class="form-control" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Designation</label>
+                            <input type="text" formControlName="designation" class="form-control " disabled>
+                        </div>
+
+                    </div>
+
+
+
+                </form>
+
+            </app-card>
+        </div>
+    </div>
+
+
+
+</div>

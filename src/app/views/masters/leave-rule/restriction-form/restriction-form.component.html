@@ -1,0 +1,92 @@
+<form action="javascript:" class="needs-validation" novalidate [formGroup]="restrictionForm">
+    <div class="form-row">
+        <div class="col-md-5 mb-3">
+            <label for="validationCustom01">Holidays falling within leave accounted as Part of Leave</label>
+        </div>
+
+        <div class="col-md-2 mb-3">
+            <select class="form-control " formControlName="considerholidays" (change)="restrictionEvent()">
+                <option *ngFor="let dl of yesNoList" value="{{dl.id}}">{{dl.name}}</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-5 mb-3">
+            <label for="validationCustom01">Weekends falling within leave accounted as Part of Leave</label>
+        </div>
+
+        <div class="col-md-2 mb-3">
+            <select class="form-control " formControlName="considerweekend" (change)="restrictionEvent()">
+                <option *ngFor="let dl of yesNoList" value="{{dl.id}}">{{dl.name}}</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-5 mb-3">
+            <label for="validationCustom01">Allow to Exceed leave Balance</label>
+        </div>
+
+        <div class="col-md-2 mb-3">
+            <select class="form-control " formControlName="exceedleavebal" (change)="restrictionEvent()">
+                <option *ngFor="let dl of yesNoList" value="{{dl.id}}">{{dl.name}}</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-5 mb-3">
+            <label for="validationCustom01">If Exceded deduct from</label>
+        </div>
+        <div class="col-md-2 mb-3">
+            <select class="form-control " formControlName="excddeductfrom">
+                <option></option>
+                <option *ngFor="let dl of leaveItemList" value="{{dl.id}}">{{dl.name}}</option>
+            </select>
+        </div>
+
+
+    </div>
+    <div class="form-row">
+        <div class="col-md-5 mb-3">
+            <label for="validationCustom01">Duration(s) Allowed: </label>
+        </div>
+
+        <div _ngcontent-slt-c139="" class="checkbox checkbox-primary d-inline">
+            <input _ngcontent-slt-c139="" type="checkbox" name="fullday" formControlName="fulldayAllowed1" (change)="restrictionEvent()" id="fullday">
+            <label _ngcontent-slt-c139="" for="fullday" class="cr">Full Day</label>
+        </div>
+        <div _ngcontent-slt-c139="" class="checkbox checkbox-primary d-inline">
+            <input _ngcontent-slt-c139="" type="checkbox" name="halfday" formControlName="halfdayAllowed1" (change)="restrictionEvent()" id="halfday">
+            <label _ngcontent-slt-c139="" for="halfday" class="cr">Half Days</label>
+        </div>
+
+    </div>
+    <div class="form-row">
+        <div class="col-md-5 mb-3">
+            <label for="validationCustom01">Document Compulsory required on resumption</label>
+        </div>
+
+        <div class="col-md-2 mb-3">
+            <select class="form-control " formControlName="docreq" (change)="restrictionEvent()">
+                <option *ngFor="let dl of yesNoList" value="{{dl.id}}">{{dl.name}}</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-5 mb-3">
+            <label for="validationCustom01">Max Leave</label>
+        </div>
+
+        <div class="col-md-2 mb-3">
+            <input class="form-control " type="number" name="leaveperReq" formControlName="leaveperReq" (change)="restrictionEvent()">
+        </div>
+
+    </div>
+</form>

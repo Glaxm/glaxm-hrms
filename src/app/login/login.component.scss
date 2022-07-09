@@ -1,0 +1,48 @@
+.glaxm_border_class {
+    border: 1px solid #ced4da;
+}
+
+.carousalSection {
+    background: #03192e;
+    // background-image: linear-gradient(180deg, #c20000, #fbbd00);
+    /* width: 100%; */
+    min-height: 100vh;
+    padding: 0;
+}
+
+.cursorAction {
+    cursor: pointer;
+}
+
+.forgotBtns {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.forgotBtns button {
+    width: 80px;
+}
+
+.backBtn {
+    border: 1px solid #666;
+    border-radius: 15px;
+}
+
+.submitBtn {
+    background: #457fff;
+    border: none;
+    color: white;
+    border-radius: 15px;
+}
+
+.emailInput {
+    margin: 1em 0em 2em 4em;
+}
+
+.forgotScreen {
+    text-align: center;
+}
+
+.input100 {
+    width: 185px;
+}

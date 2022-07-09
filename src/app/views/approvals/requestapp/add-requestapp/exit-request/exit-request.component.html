@@ -1,0 +1,100 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="Exit Request"
+                [options]="false">
+              
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="exitForm">
+                 
+                    <div class="form-row">
+
+                        <!-- <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Employee</label>
+                            <ng-multiselect-dropdown name="city" [placeholder]="'Select Employee'" [data]="employeeList"
+                                formControlName="employee" [(ngModel)]="selectedItems" [settings]="dropdownSettings"
+                                (onSelect)="onItemSelect($event)" [disabled]="requestId" (change)="exitRequestEvent()">
+                            </ng-multiselect-dropdown>
+                        </div> -->
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Date of Joining</label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Select a date" type="text"
+                                    angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions"
+                                    formControlName="startdate1" disabled
+                                    [ngClass]="{ 'is-invalid': submitted && f.startdate1.errors }"
+                                    #dp1="angular-mydatepicker" autocomplete="off"
+                                    (ngModelChange)="changeStartDate($event);exitRequestEvent()" (click)="dp1.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" disabled (click)="dp1.toggleCalendar()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <div *ngIf="submitted && f.startdate1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.startdate1.errors.required">Start Date is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Designation </label>
+                            <input type="text" formControlName="designation" disabled class="form-control" (change)="exitRequestEvent()">
+                        </div>
+
+                    </div>
+
+
+
+
+
+                    <div class="form-row">
+
+                      
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Department </label>
+                            <input type="text" formControlName="department" disabled class="form-control" (change)="exitRequestEvent()">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Form No.</label>
+                            <input type="text" formControlName="documentno" disabled  class="form-control" (change)="exitRequestEvent()">
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+
+                     
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Last working Date</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text"
+                                    angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions"
+                                    formControlName="enddate1"
+                                    [ngClass]="{ 'is-invalid': submitted && f.enddate1.errors }"
+                                    #dp2="angular-mydatepicker" autocomplete="off"
+                                    (ngModelChange)="changeEndDate($event);exitRequestEvent()" (click)="dp2.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <div *ngIf="submitted && f.enddate1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.enddate1.errors.required">End Date is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Reason for Exit</label>
+                            <input type="text" formControlName="reason" class="form-control" (change)="exitRequestEvent()">
+                        </div>
+
+                    </div>
+
+                </form>
+            </app-card>
+        </div>
+    </div>
+</div>

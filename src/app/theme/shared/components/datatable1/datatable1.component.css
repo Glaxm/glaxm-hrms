@@ -1,0 +1,52 @@
+div.dataTables_wrapper div.dataTables_length label {
+    font-weight: normal;
+    text-align: left;
+    white-space: nowrap;
+}
+.tc{
+    border-collapse: separate !important;
+}
+.fc{
+    font-size: 14px;
+    font-weight: normal;
+    color: #313131;
+    /* line-height: 0.5; */
+    /* line-height: 11px !important; */
+    height: 25px;
+    padding: 6px;
+}
+/* .t-i{
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    display: block;
+    font-family: 'Glyphicons Halflings';
+    opacity: 0.5;
+} */
+/* table{
+    border-spacing: 1px !important;
+}
+table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_desc, table.dataTable thead>tr>th.sorting, table.dataTable thead>tr>td.sorting_asc, table.dataTable thead>tr>td.sorting_desc, table.dataTable thead>tr>td.sorting{
+    padding-right: 0px !important;
+}
+.table tbody tr:nth-of-type(odd) {
+    
+    border-collapse: separate !important;
+} */
+
+/* .table tr:nth-of-type(even) {
+    background: blue;
+} */
+
+/* .tbody tr{
+    border-collapse: separate !important;
+} */
+.b{
+    word-wrap: break-word;
+}
+.idClass {
+        background-color: #fefefe;
+}
+/* tr .active{
+   background-color: #80808054
+} */

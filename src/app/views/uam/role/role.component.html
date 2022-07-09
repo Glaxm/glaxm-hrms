@@ -1,0 +1,92 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="Role Summary" [options]="false">
+            <!--  -->
+            <!-- <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -5%;">
+                <ul _ngcontent-epm-c40="" class="nav">
+                </ul>
+                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                    <button type="button" class="btn btn-primary btn-sm" (click)="add()">Add</button>&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary btn-sm" (click)="edit()">Edit</button>&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary btn-sm" (click)="view()">View</button>&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary btn-sm" (click)="delete()">Delete</button>
+                </div>
+            </nav> -->
+            <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                <ul _ngcontent-epm-c40="" class="nav">
+                </ul>
+                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                    <!-- <button type="button" class="btn btn-primary btn-sm" (click)="add()">Add</button>&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary btn-sm" (click)="edit()">Edit</button>&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary btn-sm" (click)="view()">View</button>&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary btn-sm" (click)="delete()">Delete</button>&nbsp;&nbsp; -->
+
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="add()" data-toggle="tooltip" data-placement="top" title="Add">
+                <i class="fa fa-plus"></i>
+                </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="edit()" data-toggle="tooltip" data-placement="top" title="Edit">
+               <i class="fas fa-pencil-alt"></i>
+               </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="view()" data-toggle="tooltip" data-placement="top" title="View">
+              <i class="fa fa-eye"></i>
+              </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="delete()" data-toggle="tooltip" data-placement="top" title="Delete">
+             <i class="fa fa-trash"></i>
+             </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="enableFilter = !enableFilter;" [ngClass]="{'filterClass': enableFilter}" data-toggle="tooltip" data-placement="top" title="Filter">
+                <i class="fa fa-filter"></i>
+                </button>&nbsp;
+                    <div class="btn-group" role="group" ngbDropdown>
+                        <button type="button" class="btn btn-primary" ngbDropdownToggle>
+                      More
+                    </button>
+                        <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu style="right: 0;
+                    left: auto;">
+
+                            <a class="dropdown-item" href="javascript:" (click)="exporttoexcel()">Export Data</a>
+
+
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+
+            <!-- <div class="table-responsive tableFixHead">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Role</th>
+                 
+                            <th>Description</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let rl of roleList">
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(rl)">
+                                </div>
+                            </td>
+                            <td>{{rl.roleName}}</td>
+                  
+                            <td>{{rl.roleDesc}}</td>
+                            <td>{{rl.status | titlecase}}</td>
+                        </tr>
+           
+                    </tbody>
+                </table>
+            </div> -->
+            <!--  -->
+            <datatable1 [dataset]=data [enableFilter]="enableFilter" (searchEvent)="search($event)" (aTagEvent)="getRows($event)" [id]="'roleId'">
+                <column1 [width1]=2 [value]="'roleId'" [header]="''" [type]="'radio'" [sortVal]="'ASC'"></column1>
+                <column1 [width1]=15 [value]="'roleName'" [header]="'Role'" [sortVal]=""></column1>
+                <column1 [width1]=15 [value]="'roleDesc'" [header]="'Description'" [type]="''" [sortVal]="''"></column1>
+                <column1 [width1]=7 [value]="'status'" [header]="'Status'" [sortVal]=""></column1>
+            </datatable1>
+        </app-card>
+    </div>
+</div>

@@ -1,0 +1,203 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{accommodationForm.value.accommodationId ? 'Edit Accommodation':'Add Accommodation'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateAccommodation()" *ngIf="!isView">{{accommodationForm.value.accommodationId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="accommodationForm">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" disabled formControlName="gHoldingId" [ngClass]="{ 'is-invalid': submitted && f.gHoldingId.errors }">
+                                <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.gHoldingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.gHoldingId.errors.required">Holding is required</div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <!-- <select class="form-control validation_border" formControlName="gCompanyId"
+                            (change)="selectcompany(accommodationForm.value.gCompanyId)"
+                                [ngClass]="{ 'is-invalid': submitted && f.gCompanyId.errors }">
+                                <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.gCompanyId.errors" class="invalid-feedback">
+                                <div *ngIf="f.gCompanyId.errors.required">Company is required</div>
+                            </div> -->
+                            <ng-multiselect-dropdown [placeholder]="" [data]="companyList" name="company" formControlName="company" [(ngModel)]="selectedCompanyList" [settings]="dropdownSettingsC" (onSelect)="onCompnaySelect($event)" (onDeSelect)="onCompanyDeSelect($event)" (onSelectAll)="onSelectAllCompnay($event)"
+                                [ngClass]="{ 'is-invalid': submitted && f.company.errors }">
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="submitted && f.company.errors" class="invalid-feedback">
+                                <div *ngIf="f.company.errors.required">Company is required</div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+
+                        <!-- <div class="col-md-6 mb-3">
+                          <label for="validationCustom01">Employee</label>
+                          <input type="text" formControlName="value" disabled class="form-control">
+                          <div class="valid-feedback">
+                            Looks good!
+                          </div>
+                        </div> -->
+
+                        <!-- <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Employee</label>
+                            <select class="form-control validation_border" formControlName="xEmployeeId">
+                                <option *ngFor="let dl of employeeList" value="{{dl.employeeId}}">{{dl.displayName}}
+                                </option>
+                            </select>
+                        </div> -->
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Employee</label>
+                            <!-- <select class="form-control" formControlName="xEmployeeId">
+                              <option *ngFor="let sl of employeeList" value="{{sl.employeeId}}">{{sl.displayName}}</option>
+                           </select> -->
+                            <ng-multiselect-dropdown name="city" [placeholder]="'Select employee'" [data]="employeeList" formControlName="employee" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Area</label>
+                            <select class="form-control" formControlName="lsAccoareaId">
+                              <option *ngFor="let dl of areaList" value="{{dl.lListitemId}}">{{dl.name}}
+                              </option>
+                              
+                          </select>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Emirates</label>
+                            <select class="form-control validation_border" formControlName="lsAccoemirtId" [ngClass]="{ 'is-invalid': submitted && f.lsAccoemirtId.errors }">
+                        <option *ngFor="let dl of emirateList" value="{{dl.lListitemId}}">{{dl.name}}</option>
+                      </select>
+                            <div *ngIf="submitted && f.lsAccoemirtId.errors" class="invalid-feedback">
+                                <div *ngIf="f.lsAccoemirtId.errors.required">Emirates is required</div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Building Name/No.</label>
+                            <!-- <input type="number" formControlName="lsBuildnmnoId" class="form-control"> -->
+                            <select class="form-control" formControlName="lsBuildnmnoId">
+                        <option *ngFor="let dl of buildingNoList" value="{{dl.lListitemId}}">{{dl.name}}</option>
+                      </select>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Type of Unit</label>
+                            <select class="form-control" formControlName="lsRoomtypeId">
+                          <option *ngFor="let dl of typeofunitList" value="{{dl.lListitemId}}">{{dl.name}}
+                          </option>
+                      </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Room Status</label>
+                            <select class="form-control" formControlName="lsRoomstatusId">
+                          <option *ngFor="let dl of status1List" value="{{dl.lListitemId}}">{{dl.name}}
+                          </option>
+                      </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Flat No./ Room Number</label>
+                            <input type="text" formControlName="flatnumber" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.flatnumber.errors }">
+                            <div *ngIf="submitted && f.flatnumber.errors" class="invalid-feedback">
+                                <div *ngIf="f.flatnumber.errors.required">Flat No./ Room Number is required</div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-6 mb-3">
+                  <label for="validationCustom01">Floor</label>
+                  <input type="text" formControlName="floor" class="form-control">
+              </div> -->
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Floor</label>
+                            <select class="form-control" formControlName="lsFloorId">
+                    <option *ngFor="let dl of floorList" value="{{dl.lListitemId}}">{{dl.name}}</option>
+                  </select>
+
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Bed No</label>
+                            <input type="text" formControlName="bedno" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Annual Rental Value</label>
+                            <input type="text" formControlName="annualrentalvalue" class="form-control">
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Monthly Rental Value</label>
+                            <input type="text" formControlName="monthlyrentalvalue" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Accommodation</label>
+                            <select class="form-control" formControlName="accommodation">
+                              <option *ngFor="let dl of accommodationList" value="{{dl.lListitemId}}">{{dl.name}}</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Request No</label>
+                            <input type="text" readonly formControlName="G_APPROVALREQ_ID" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control" formControlName="status">
+                              <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                </form>
+
+            </app-card>
+        </div>
+    </div>
+</div>

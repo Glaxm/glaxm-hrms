@@ -1,0 +1,53 @@
+<!-- <body> -->
+<div class="box-form" *ngIf="!redirectToLogin">
+    <div class="left">
+        <div class="overlay">
+        </div>
+    </div>
+
+
+    <div class="right">
+        <h5>Create New Password</h5>
+        <p>Your new password must be different from previous used passwords</p>
+        <form [formGroup]="form" (ngSubmit)="ResetPwd()">
+            <div class="form-group inputs">
+                <select class="user-control" formControlName="userId">
+                    <option value="" disabled selected>Choose Username</option> 
+                    <option *ngFor="let user of userslist"  id="userId" [ngValue]="user.userId">{{user.userName}}</option>
+                    
+                    <!-- <option *ngFor="let web of websiteList">{{web}}</option> -->
+                </select>
+                <div *ngIf="f.userId.touched && f.userId.invalid" class="alert alert-danger">
+                    <div *ngIf="f.userId.errors.required">Username is required.</div>
+                </div>
+                <!-- <span> -->
+                <input type="password" formControlName="password" id="password" placeholder="Password">
+                <div *ngIf="f.password.touched && f.password.invalid" class="alert alert-danger">
+                    <div *ngIf="f.password.errors.required">Password is required.</div>
+                </div>
+                <input type="password" formControlName="confirm_password" placeholder="Confirm Password" id="confirm_password">
+                <div *ngIf="f.confirm_password.touched && f.confirm_password.invalid" class="alert alert-danger">
+                    <div *ngIf="f.confirm_password.errors.required">Password is required.</div>
+                    <div *ngIf="f.confirm_password.errors.confirmedValidator">Password and Confirm Password must be match.</div>
+                </div>
+                <!-- </span> -->
+                <!-- <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="showEye"></i> -->
+            </div>
+            <div class="resetBtn">
+                <button>Reset Password</button>
+            </div>
+        </form>
+
+
+    </div>
+</div>
+<div *ngIf="redirectToLogin" class="redirectLoginScreen">
+    <div class="box-form-new redirectSub">
+        <h1>Password Changed !</h1>
+        <img src="assets/images/Password Changed.jpg" class="passwordChangedImg">
+        <h5>Your password has been changed successfully.</h5>
+        <h5 (click)="redirectLogin()" class="toLogin">Return to login screen</h5>
+    </div>
+</div>
+<!-- 
+</body> -->

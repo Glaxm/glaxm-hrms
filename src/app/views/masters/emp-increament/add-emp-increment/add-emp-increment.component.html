@@ -1,0 +1,325 @@
+<div class="row">
+    <div class="col-sm-12">
+      <div>
+      <app-card cardTitle="{{empincrementForm.value.lempincremId ? 'Edit Employee Salary Revision':'Add Employee Salary Revision'}}"  [options]="false">
+     
+        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+          <ul _ngcontent-epm-c40="" class="nav">
+          </ul>
+          <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addEmpIncrement()"  *ngIf="!isView">{{empincrementForm.value.lempincremId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+          </div>
+      </nav>
+
+        <form action="javascript:" class="needs-validation" novalidate [formGroup]="empincrementForm">
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Holding</label>
+                    <select class="form-control validation_border" disabled formControlName="holdingId"
+                        [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }"
+                       >
+                        <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.holdingId.errors" class="invalid-feedback">
+                        <div *ngIf="f.holdingId.errors.required">Holding is required</div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6 mb-3">
+                    <label for="validationCustom01">Company</label>
+                    <select class="form-control validation_border" formControlName="companyId"
+                    (change)="selectcompany(empincrementForm.value.companyId)"
+                        [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
+                        <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+                        <div *ngIf="f.companyId.errors.required">Company is required</div>
+                    </div>
+
+                </div>
+
+
+            </div>
+         
+          <div class="form-row">
+
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Document No.</label>
+                <input type="text" formControlName="docNo" class="form-control" disabled>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom02">Transaction Date</label>
+               <div class="input-group">
+                
+                 <input class="form-control" type="text" placeholder="Select a date" angular-mydatepicker 
+                 name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="trxdate1"
+                  #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event)" (click)="dp1.toggleCalendar()"/>
+                
+               </div>
+             </div>
+ 
+          </div>
+
+          <div class="form-row">
+            <!-- <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Employee</label>
+                <select class="form-control validation_border" formControlName="empId">
+                    <option *ngFor="let dl of employeeList" value="{{dl.employeeId}}">{{dl.displayName}}</option>
+                </select>
+              
+            </div> -->
+
+            <!-- <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Employee</label>
+             
+             <ng-multiselect-dropdown
+             name="city" [disabled]="empleaveForm.value.lEmpleaveId"
+             [placeholder]="'Select Employee'"
+             [data]="employeeList"
+             formControlName="employee" [(ngModel)]="selectedItems"
+             [settings]="dropdownSettings"
+             (onSelect)="onItemSelect($event);leaveRequestEvent()" >
+         </ng-multiselect-dropdown>
+          </div> -->
+
+          <div class="col-md-6 mb-3">
+            <label for="validationCustom01">Employee</label>
+            <!-- <select class="form-control" formControlName="xEmployeeId">
+              <option *ngFor="let sl of employeeList" value="{{sl.employeeId}}">{{sl.displayName}}</option>
+           </select> --> 
+           <ng-multiselect-dropdown
+           name="city"
+           [placeholder]="'Select Employee'"
+           [data]="employeeList"
+           formControlName="employee" [(ngModel)]="selectedItems"
+           [settings]="dropdownSettings"
+           (onSelect)="onItemSelect($event)">
+       </ng-multiselect-dropdown>
+        </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom02">Effective Date</label>
+             <div class="input-group">
+              
+               <input class="form-control" type="text" placeholder="Select a date" angular-mydatepicker 
+               name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="effectiveDate1"
+                #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)" (click)="dp2.toggleCalendar()"/>
+              
+             </div>
+           </div>
+
+           <!-- <div class="col-md-6 mb-3">
+            <label for="validationCustom01">Status</label>
+            <select class="form-control" formControlName="status"
+            [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+              <option *ngFor="let sl of statusList" value="{{sl.valueCode}}">{{sl.valueName}}</option>
+             
+            </select>
+            <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+              <div *ngIf="f.status.errors.required">Status is required</div>
+            </div>
+          </div> -->
+
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Current Grade</label>
+                <!-- <input type="text" formControlName="currentgrade" class="form-control"> -->
+                <select class="form-control" formControlName="empgradeId" disabled>
+                  <option *ngFor="let sl of gradeList" value="{{sl.empGradeId}}">{{sl.name}}</option>
+                 
+                </select>
+              
+            </div>
+
+           <div class="col-md-6 mb-3">
+            <label for="validationCustom01">New Grade</label>
+            <select class="form-control" formControlName="newempgradeId">
+              <option *ngFor="let sl of gradeList" value="{{sl.empGradeId}}">{{sl.name}}</option>
+             
+            </select>
+            
+          </div>
+
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-6 mb-3" >
+                <label for="validationCustom01">Current Designation</label>
+                <!-- <input type="text" formControlName="currentdesignation" class="form-control"> -->
+                <select class="form-control" formControlName="empdesignationId" disabled>
+                  <option *ngFor="let sl of designationList" value="{{sl.empDesignationId}}">{{sl.name}}</option>
+                 
+                </select>
+            </div>
+
+           <div class="col-md-6 mb-3">
+            <label for="validationCustom01">New Designation</label>
+            <select class="form-control" formControlName="newempdesignationId">
+              <option *ngFor="let sl of designationList" value="{{sl.empDesignationId}}">{{sl.name}}</option>
+             
+            </select>
+            
+          </div>
+
+          </div>
+
+
+          <div class="form-row">
+
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Remark</label>
+              <input type="text" formControlName="remark" class="form-control">
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+          </div>
+           
+          </div>
+         
+
+        </form>
+      
+    </app-card>
+  </div>
+  <div *ngIf="!isUserRole && empincrementForm.value.lempincremId">
+    <!-- <div > -->
+    <app-card cardTitle="Employee Increment Lines Summary" [options]="false">
+         
+           
+        
+           <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+            <ul _ngcontent-epm-c40="" class="nav">
+            </ul>
+            <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+               
+            <button  class="btn btn-white btn-icon btn-outline-primary"
+             type="button" (click)="addUserRole();isUserRole=true" *ngIf="!isView" data-toggle="tooltip" data-placement="top"
+             title="Add">
+            <i class="fa fa-plus"></i>
+            </button>&nbsp;&nbsp;
+            <button  class="btn btn-white btn-icon btn-outline-primary"
+            type="button" (click)="editLine();isUserRole=true" *ngIf="!isView" data-toggle="tooltip" data-placement="top"
+            title="Edit">
+           <i class="fas fa-pencil-alt"></i>
+           </button>&nbsp;&nbsp;
+           <button  class="btn btn-white btn-icon btn-outline-primary"
+           type="button" (click)="editLine();isUserRole=true" data-toggle="tooltip" data-placement="top"
+           title="View">
+          <i class="fa fa-eye"></i>
+          </button>&nbsp;&nbsp;
+          <!-- <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+          type="button" (click)="deleteUserRole()" *ngIf="!isView" data-toggle="tooltip" data-placement="top"
+          title="Delete">
+         <i class="fa fa-trash"></i>
+         </button>&nbsp;&nbsp; -->
+            <!-- <button  class="btn btn-white btn-icon btn-outline-primary" type="button"
+            (click)="enableFilter = !enableFilter;"
+            [ngClass]="{'filterClass': enableFilter}" data-toggle="tooltip" data-placement="top"
+            title="Filter">
+            <i class="fa fa-filter"></i>
+            </button> -->
+            </div>
+        </nav>
+    
+           <div class="table-responsive">
+               <table class="table table-bordered">
+               <thead>
+               <tr>
+                   <th>#</th>
+                   <th>Pay Item</th>
+                   <th>Amount</th>
+                   <th>Increment Amount</th>
+                  
+                 
+               </tr>
+               </thead>
+               <tbody>
+               <tr *ngFor="let rm of lineList">
+                   <td>
+                     <div class="form-check" *ngIf="rm.lempincremlineId">
+                       <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(rm)">
+                   </div>
+                   </td>
+                   <td>{{rm.name}}</td>
+                   <td>{{rm.curamount}}</td>
+                   <td>{{rm.amount}}</td>
+                  
+                  
+               </tr>
+               
+               </tbody>
+               </table>
+           </div>
+         
+       </app-card>
+     </div>
+     <div *ngIf="isUserRole">
+       <app-card cardTitle="Add Employee Increment Lines" [options]="false">
+        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+          <ul _ngcontent-epm-c40="" class="nav">
+          </ul>
+          <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="saveLines()" *ngIf="!isView">{{lineForm.value.lempincremlineId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="isUserRole=false">{{isView ? 'Back':'Cancel'}}</button>
+          </div>
+      </nav>
+         <form action="javascript:" class="needs-validation" novalidate [formGroup]="lineForm">
+           <div class="form-row">
+             <div class="col-md-6 mb-3">
+               <label for="validationCustom01">Pay Item</label>
+               <select class="form-control" formControlName="payItemId" (change)="onSelectPayItem(lineForm.value.payItemId)">
+                 <option *ngFor="let ml of payitemList" value="{{ml.payItemId}}">{{ml.name}}</option>
+               </select>
+               <div class="valid-feedback">
+                 Looks good!
+               </div>
+             </div>
+
+             <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Amount</label>
+                <input type="text" formControlName="curamount" class="form-control" disabled>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+            </div>
+           </div>
+
+           <div class="form-row">
+          
+
+            <div class="col-md-6 mb-3">
+               <label for="validationCustom01">Increament Amount</label>
+               <input type="text" formControlName="amount" class="form-control">
+               <div class="valid-feedback">
+                 Looks good!
+               </div>
+           </div>
+           <div class="col-md-6 mb-3">
+            <label for="validationCustom01">Status</label>
+            <select class="form-control" formControlName="status">
+              <option *ngFor="let sl of statusList" value="{{sl.valueCode}}">{{sl.valueName}}</option>
+            </select>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+          </div>
+
+       
+        
+
+         </form>
+         
+       </app-card>
+     </div> 
+
+    </div>
+  </div>

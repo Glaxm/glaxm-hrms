@@ -1,0 +1,494 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{empleaveForm.value.lEmpleaveId ? ' Employee Leave':' Employee Leave'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateEmpleave('N')" *ngIf="!isView" [disabled]="WFHFlag">{{empleaveForm.value.lEmpleaveId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-primary" ngbTooltip="btn-success" (click)="addUpdateEmpleave('Y')" [disabled]="isleavesttlmnt">Leave Settlement</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="empleaveForm">
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" disabled formControlName="gHoldingId" [ngClass]="{ 'is-invalid': submitted && f.gHoldingId.errors }">
+                <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+              </select>
+                            <div *ngIf="submitted && f.gHoldingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.gHoldingId.errors.required">Holding is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <select class="form-control validation_border" formControlName="gCompanyId" (change)="getEmployeeList(empleaveForm.value.gCompanyId)" [ngClass]="{ 'is-invalid': submitted && f.gCompanyId.errors }">
+                <option *ngFor="let cl of companyList" value="{{cl.gCompanyId}}">{{cl.name}}</option>
+              </select>
+                            <div *ngIf="submitted && f.gCompanyId.errors" class="invalid-feedback">
+                                <div *ngIf="f.gCompanyId.errors.required">Company is required</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Document No.</label>
+                            <input type="text" formControlName="documentno" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" disabled>
+                            <div *ngIf="submitted && f.documentno.errors" class="invalid-feedback">
+                                <div *ngIf="f.documentno.errors.required">Document No. is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Transaction Date</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="datetrx1" [ngClass]="{ 'is-invalid': submitted && f.datetrx1.errors }"
+                                    #dp3="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeTransDate($event)" (click)="dp3.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp3.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                                </div>
+                                <div *ngIf="submitted && f.datetrx1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.datetrx1.errors.required">Transaction Date is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Employee</label>
+                            <!-- <select class="form-control validation_border" formControlName="xEmployeeId">
+                <option *ngFor="let dl of employeeList" value="{{dl.employeeId}}">{{dl.displayName}}
+                </option>
+              </select> -->
+                            <ng-multiselect-dropdown [disabled]="isView" name="city" [placeholder]="'Select Employee'" [data]="employeeList" formControlName="employee" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom01">Leave Type</label>
+                            <select class="form-control validation_border" formControlName="xLeaveitemId" (change)="changeLeave(empleaveForm.value.xLeaveitemId)">
+                <option *ngFor="let dl of leaveList" value="{{dl.xLeaveitemId}}">{{dl.name}}
+                </option>
+              </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom01">Leave Balance</label>
+                            <input type="text" disabled class="form-control" formControlName="baldays">
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Start Date</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="startdate1" [ngClass]="{ 'is-invalid': submitted && f.startdate1.errors }"
+                                    #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event)" (click)="dp1.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                                </div>
+                                <div *ngIf="submitted && f.startdate1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.startdate1.errors.required">Start Date is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">End Date</label>
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="enddate1" [ngClass]="{ 'is-invalid': submitted && f.enddate1.errors }"
+                                    #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)" (click)="dp2.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                                </div>
+                                <div *ngIf="submitted && f.enddate1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.enddate1.errors.required">End Date is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Total Leave Days</label>
+                            <input type="number" formControlName="leavedays" disabled class="form-control">
+                        </div>
+
+
+                        <div class="col-md-3 mb-3" *ngIf="true">
+                            <label for="validationCustom01"></label>
+                            <div class="form-group text-left mt-2">
+                                <label for="validationCustom01"></label>
+                                <div class="checkbox checkbox-primary d-inline">
+                                    <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" formControlName="isHalfday1" (click)="selectHalfday()">
+                                    <label for="checkbox-fill-a1" class="cr"> Halfday</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom01">Process With Payroll</label>
+                            <select class="form-control" formControlName="xMonthId">
+                                <option></option>
+                                <option *ngFor="let dl of monthList" value="{{dl.monthId}}">{{dl.name}}</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom01">Paid Days</label>
+                            <input type="number" formControlName="paidLeaveDays" class="form-control" (keyup)="calTotalDays()">
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom01">Unpaid Days</label>
+                            <input type="number" formControlName="unpaidLeaveDays" class="form-control" (keyup)="calTotalDays()">
+                        </div>
+
+
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom01">Encashment Days</label>
+                            <input type="number" formControlName="encashDays" class="form-control" (keyup)="getLeaveBal(empleaveForm.value.xLeaveitemId)">
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom01">Calendar Days</label>
+                            <input type="number" formControlName="calendarDays" class="form-control" disabled>
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Description</label>
+                            <input type="text" formControlName="description" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+                            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                                <div *ngIf="f.description.errors.required">Description is required</div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Approval Status</label>
+                            <input type="text" formControlName="approvalstatus" disabled class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+
+                        <div class="col-md-4 mb-3" *ngIf="leaveCode=='AL' || leaveCode=='ALWD' || leaveCode=='ENCASH'">
+                            <div class="radio radio-primary d-inline">
+                                <input class="form-check-input" type="radio" name="encashment" formControlName="encashment" id="Y" value="Y" (change)="selectEncash('Y')">
+                                <label class="cr" for="Y">Process in payroll</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3" *ngIf="leaveCode=='AL' || leaveCode=='ALWD' || leaveCode=='ENCASH'">
+                            <div class="radio radio-primary d-inline">
+                                <input class="form-check-input" type="radio" name="encashment" formControlName="encashment" id="H" value="H" (change)="selectEncash('H')">
+                                <label class="cr" for="H">In cash salary</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3" *ngIf="false">
+                            <!-- <div class="col-md-4 mb-3" *ngIf="leaveCode=='AL' || leaveCode=='ALWD'"> -->
+                            <div class="radio radio-primary d-inline">
+                                <input class="form-check-input" type="radio" name="encashment" formControlName="encashment" id="P" value="P" (change)="selectEncash('P')">
+                                <label class="cr" for="P">Encashment with Payroll </label>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-md-4 mb-3" *ngIf="leaveCode=='AL' || leaveCode=='ALWD' || leaveCode=='ENCASH'">
+                            <div class="checkbox checkbox-primary d-inline">
+                                <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a6" formControlName="deselectbtn1" (click)="deselectbtn1Fun()">
+                                <label for="checkbox-fill-a6" class="cr"> Deselect</label>
+                            </div>
+
+                        </div> -->
+
+                    </div>
+
+                    <div class="form-row">
+
+
+                        <!-- <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Description</label>
+              <input type="text" formControlName="remarks"  class="form-control">
+            </div> -->
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control validation_border" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.status.errors }" (change)="changeStatus()">
+                                <option></option>
+                                <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                                <div *ngIf="f.status.errors.required">Status is required</div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Leave Purpose</label>
+                            <input type="text" formControlName="leavePurpose" class="form-control">
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row">
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Contact Details</label>
+                            <input type="text" formControlName="contactDetails" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Attachment</label>
+                            <div class="input-group">
+
+                                <div class="custom-file">
+                                    <input type="file" [disabled]="isView" class="custom-file-input" multiple name="file" formcontrolname="fileName" id="importFile" (change)="onFileChange($event.target.files)">
+                                    <label class="custom-file-label" #labelImport for="importFile"><i class="fas fa-search"></i> Choose
+                    file</label>
+                                    <!-- <div  class="input-group-append"> -->
+
+                                    <!-- </div> -->
+                                </div>
+                                &nbsp;
+                                <div *ngIf="filePath">
+                                    <button type="button" (click)="openAttachment()" class="btn btn-primary">View</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- ------------------------- -->
+
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Airport</label>
+                            <select class="form-control" formControlName="fromAirsectorId">
+                <option *ngFor="let dl of fromAirportList" value="{{dl.lListitemId}}">{{dl.name}}
+                </option>
+              </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Airport (Point of Hire) </label>
+                            <select class="form-control" formControlName="toAirsectorId">
+                <option *ngFor="let dl of toList" value="{{dl.airsectorId}}">{{dl.name}}
+                </option>
+              </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Air Ticket Entitlement </label>
+                            <select class="form-control" formControlName="airtktEntitled">
+                <option *ngFor="let dl of airTktEntitlementList" value="{{dl.value}}">{{dl.name}}
+                </option>
+              </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Air Ticket Class</label>
+                            <select class="form-control" formControlName="airtktClass">
+                <option *ngFor="let dl of airTktClassList" value="{{dl.value}}">{{dl.name}}
+                </option>
+              </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <div class="radio radio-primary d-inline">
+                                <input class="form-check-input" type="radio" name="ticket" (change)="selectTktInfo()" formControlName="ticket" id="With Company Purchased Ticket - Both Side" value="With Company Purchased Ticket - Both Side">
+                                <label class="cr" for="With Company Purchased Ticket - Both Side">With Company Purchased Ticket - Both
+                  Side</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <div class="radio radio-primary d-inline">
+                                <input class="form-check-input" type="radio" name="ticket" (change)="selectTktInfo()" formControlName="ticket" id="With Company Purchased Ticket - One Side" value="With Company Purchased Ticket - One Side">
+                                <label class="cr" for="With Company Purchased Ticket - One Side">With Company Purchased Ticket - One
+                  Side</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <div class="radio radio-primary d-inline">
+                                <input class="form-check-input" type="radio" name="ticket" (change)="selectTktInfo()" formControlName="ticket" id="With Ticket Encashment Claim - Both Side" value="With Ticket Encashment Claim - Both Side">
+                                <label class="cr" for="With Ticket Encashment Claim - Both Side">With Ticket Encashment Claim - Both
+                  Side</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <div class="radio radio-primary d-inline">
+                                <input class="form-check-input" type="radio" name="ticket" (change)="selectTktInfo()" formControlName="ticket" id="With Ticket Encashment Claim - One Side" value="With Ticket Encashment Claim - One Side">
+                                <label class="cr" for="With Ticket Encashment Claim - One Side">With Ticket Encashment Claim - One
+                  Side</label>
+                            </div>
+                        </div>
+
+                        <div class="form-row" *ngIf="empleaveForm.value.ticket=='With Ticket Encashment Claim - Both Side' || empleaveForm.value.ticket=='With Ticket Encashment Claim - One Side'">
+                            <div class="col-md-5 mb-3">
+                                <label for="validationCustom01">Ticket Amount :</label>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="text" min="0" formControlName="ticketAmount" class="form-control" (change)="leaveRequestEvent()">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <div class="radio radio-primary d-inline">
+                                <input class="form-check-input" type="radio" name="ticket" formControlName="ticket" (change)="selectTktInfo()" id="With Yourself Ticket Arrangements" value="With Yourself Ticket Arrangements">
+                                <label class="cr" for="With Yourself Ticket Arrangements">With Yourself Ticket Arrangements</label>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-md-4 mb-3">
+                            <div class="checkbox checkbox-primary d-inline">
+                                <input type="checkbox" name="checkbox-fill-7" id="checkbox-fill-a7" formControlName="deselectbtn2" (click)="deselectbtn2Fun()">
+                                <label for="checkbox-fill-a7" class="cr"> Deselect</label>
+                            </div>
+
+                        </div> -->
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Request ID</label>
+                            <input type="number" formControlName="g_APPROVALREQ_ID" disabled class="form-control">
+                        </div>
+                    </div>
+
+                    <!-- ------------------------------ -->
+
+                    <div class="form-row" *ngIf="leaveCode=='AL'  || leaveCode=='ALWD' || leaveCode=='ENCASH'">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Last leave settled up to</label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Select a date" disabled type="text" angular-mydatepicker name="lastleavesettledupto1" [options]="myDatePickerOptions" formControlName="lastleavesettledupto1" #dp4="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeLastLeaveSettledUpTo($event)"
+                                    (click)="dp4.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp4.toggleCalendar()">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Current leave settled up to</label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Select a date" disabled type="text" angular-mydatepicker name="curleavesettledupto1" [options]="myDatePickerOptions" formControlName="curleavesettledupto1" #dp5="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeCurrentLeaveSettledUpTo($event)"
+                                    (click)="dp5.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp5.toggleCalendar()">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row" *ngIf="leaveCode=='AL' || leaveCode=='ALWD' || leaveCode=='ENCASH'">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Last air ticket up to</label>
+                            <div class="input-group">
+                                <input class="form-control" disabled placeholder="Select a date" type="text" angular-mydatepicker name="lastticketsettledupto1" [options]="myDatePickerOptions" formControlName="lastticketsettledupto1" #dp6="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeLastAirTicketUpTo($event)"
+                                    (click)="dp6.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp6.toggleCalendar()">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Current air ticket settled up to</label>
+                            <div class="input-group">
+                                <input class="form-control" disabled placeholder="Select a date" type="text" angular-mydatepicker name="curticketsettledupto1" [options]="myDatePickerOptions" formControlName="curticketsettledupto1" #dp7="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeCurrentAirTicketSettledUpTo($event)"
+                                    (click)="dp7.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp7.toggleCalendar()">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row" *ngIf="leaveCode=='AL' || leaveCode=='ALWD' || leaveCode=='ENCASH'">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02"> To resume duty on </label>
+                            <div class="input-group">
+                                <input class="form-control" disabled placeholder="Select a date" type="text" angular-mydatepicker name="toresumedutyon1" [options]="myDatePickerOptions" formControlName="toresumedutyon1" #dp8="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeToResumeDutyOn($event)"
+                                    (click)="dp8.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp8.toggleCalendar()">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- ------------------------------- -->
+
+                </form>
+            </app-card>
+        </div>
+    </div>
+</div>

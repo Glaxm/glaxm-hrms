@@ -1,0 +1,361 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{leaveRuleForm.value.leaveRuleId ? 'Edit Leave Type':'Add Leave Type'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateLeaveRule()" *ngIf="!isView">{{leaveRuleForm.value.leaveRuleId ?
+                            'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ?
+                            'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="leaveRuleForm">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Holding</label>
+                            <select class="form-control validation_border" disabled formControlName="holdingId" [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }">
+                                <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.holdingId.errors" class="invalid-feedback">
+                                <div *ngIf="f.holdingId.errors.required">Holding is required</div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Company</label>
+                            <select class="form-control validation_border" formControlName="companyId" [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
+                                <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+                                <div *ngIf="f.companyId.errors.required">Company is required</div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Leave</label>
+                            <input type="text" formControlName="name" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required">Leave is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Description</label>
+                            <input type="text" formControlName="description" class="form-control">
+
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <!-- <div class="col-md-6 mb-3">
+                            <div class="custom-control custom-checkbox">
+                              <label for="validationCustom03"></label><br>
+                              <input type="checkbox" class="custom-control-input" formControlName="isSystemCheck1" id="customCheck3">
+                              <label class="custom-control-label" for="customCheck3">System Check</label>
+                            </div>
+                          </div> -->
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Status</label>
+                            <select class="form-control validation_border" formControlName="status">
+                                <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                </form>
+
+            </app-card>
+        </div>
+        <div *ngIf="!isleaveItem && leaveRuleForm.value.leaveRuleId">
+            <app-card cardTitle="Leave Item Summary" [options]="false">
+
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+
+                        <button class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="addLeaveItem();isleaveItem=true;" *ngIf="!isView" data-toggle="tooltip" data-placement="top" title="Add">
+                            <i class="fa fa-plus"></i>
+                        </button>&nbsp;&nbsp;
+                        <button class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="editLeaveItem();isleaveItem=true;" *ngIf="!isView" data-toggle="tooltip" data-placement="top" title="Edit">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>&nbsp;&nbsp;
+                        <!-- <button class="btn btn-white btn-icon btn-outline-primary" type="button"
+                            (click)="editLeaveItem();isleaveItem=true;" data-toggle="tooltip" data-placement="top"
+                            title="View">
+                            <i class="fa fa-eye"></i>
+                        </button>&nbsp;&nbsp; -->
+                        <!-- <button class="btn btn-white btn-icon btn-outline-primary" type="button"
+                            (click)="deleteUserRole()" *ngIf="!isView" data-toggle="tooltip" data-placement="top"
+                            title="Delete">
+                            <i class="fa fa-trash"></i>
+                        </button>&nbsp;&nbsp;
+                        <button class="btn btn-white btn-icon btn-outline-primary" type="button"
+                            (click)="enableFilter = !enableFilter;" [ngClass]="{'filterClass': enableFilter}"
+                            data-toggle="tooltip" data-placement="top" title="Filter">
+                            <i class="fa fa-filter"></i>
+                        </button> -->
+                    </div>
+                </nav>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Discription</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let rm of leaveItemList">
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(rm)">
+                                    </div>
+                                </td>
+                                <td><img [src]="setImgUsingLeaveType(rm.name)" alt="activity-user" class="rounded-circle" style="width: 40px;"></td>
+                                <td>{{rm.name}}</td>
+                                <td>{{rm.description}}</td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </app-card>
+        </div>
+
+        <div *ngIf="isleaveItem">
+            <app-card cardTitle="Leave Item" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="saveLeaveItem()" *ngIf="!isView">{{leaveItemForm.value.xLeaveitemId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="isleaveItem=false">{{isView ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+                <form action="javascript:" class="needs-validation" novalidate *ngIf="leaveItemForm" [formGroup]="leaveItemForm">
+
+                    <app-card cardTitle="" [options]="false">
+
+                        <div class="form-row">
+
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Name</label>
+                                <input type="text" class="form-control" formControlName="name">
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Code</label>
+                                <input type="text" class="form-control" formControlName="code">
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Description</label>
+                                <input type="text" class="form-control" formControlName="description">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Validity From</label>
+                                <!-- <input type="text"  class="form-control"> -->
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="Select a date" type="text" disabled angular-mydatepicker formControlName="validityFrom1" name="reactiveFormsDate" [options]="myDatePickerOptions" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeFromDate($event)"
+                                        (click)="dp1.toggleCalendar()" />
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Validity To</label>
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="Select a date" type="text" disabled angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" #dp2="angular-mydatepicker" autocomplete="off" formControlName="validityTo1" (ngModelChange)="changeToDate($event)"
+                                        (click)="dp2.toggleCalendar()" />
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Payitem</label>
+                                <ng-multiselect-dropdown [placeholder]="" [data]="payitemList" name="Payitem" formControlName="pitem" [(ngModel)]="selectedPayitemList" [settings]="dropdownSettings" (onSelect)="onPayitemSelect($event)" (onDeSelect)="onPayitemDeSelect($event)" (onSelectAll)="onSelectAllPayitem($event)">
+                                </ng-multiselect-dropdown>
+                            </div>
+
+                        </div>
+
+
+
+
+
+                        <div class="form-row">
+                            <div class="col-md-1 mb-3">
+                                <label for="validationCustom01">Type</label>
+                            </div>
+                            <div class="col-md-2 mb-3">
+
+                                <div class="radio radio-primary d-inline">
+                                    <input class="form-check-input" type="radio" id="PAIDLEAVE" name="type" formControlName="type" value="PAIDLEAVE">
+                                    <label class="cr" for="PAIDLEAVE">Paid
+                                        Leave</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2 mb-3">
+
+                                <div class="radio radio-primary d-inline">
+                                    <input class="form-check-input" type="radio" id="LEAVEWITHOUTPAY" name="type" formControlName="type" value="LEAVEWITHOUTPAY" (click)="leaveItemForm.get('payment').setValue(null);">
+                                    <label class="cr" for="LEAVEWITHOUTPAY">Leave
+                                        Without Pay</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-row">
+                            <div class="col-md-1 mb-3">
+                                <label for="validationCustom01"></label>
+                            </div>
+
+                            <div class="col-md-2 mb-3" *ngIf="leaveItemForm.value.type=='PAIDLEAVE'">
+
+                                <div class="radio radio-primary d-inline">
+                                    <input class="form-check-input" type="radio" name="payment" (change)="resetList()" formControlName="payment" id="F" value="F">
+                                    <label class="cr" for="F">Full
+                                        Pay</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2 mb-3" *ngIf="leaveItemForm.value.type=='PAIDLEAVE'">
+
+                                <div class="radio radio-primary d-inline">
+                                    <input class="form-check-input" type="radio" name="payment" formControlName="payment" id="H" value="H" (change)="resetList()">
+                                    <label class="cr" for="H">Half
+                                        Pay</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3" *ngIf="leaveItemForm.value.type=='PAIDLEAVE'">
+
+                                <div class="radio radio-primary d-inline">
+                                    <input class="form-check-input" type="radio" name="payment" formControlName="payment" value="B" (change)="onChangeTickets(0)" id="B">
+                                    <label class="cr" for="B">Both Full Pay & Half Pay</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="leaveItemForm.value.type=='PAIDLEAVE' && leaveItemForm.value.payment=='B'">
+                            <div class="list-group list-group-flush" *ngFor="let ticket of t.controls; let i = index">
+                                <div class="list-group-item">
+                                    <div [formGroup]="ticket" class="form-row">
+                                        <div class="col-md-3 mb-3">
+                                            <select class="form-control " formControlName="effectafterCycle">
+                                            <option *ngFor="let dl of fromList" value="{{dl.id}}">{{dl.value}}</option>
+                                        </select>
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <input type="number" formControlName="effectafterDays" name="effectafterDays" class="form-control">
+                                        </div>
+
+                                        <div class="col-md-0.5 mb-3">
+                                            <select class="form-control " formControlName="effectafterPeriod">
+                                            <option *ngFor="let dl of periodList" value="{{dl.id}}">{{dl.value}}</option>
+                                        </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <select class="form-control " formControlName="paymentType">
+                                            <option *ngFor="let dl of toList" value="{{dl.id}}">{{dl.value}}</option>
+                                        </select>
+                                        </div>
+
+                                        <div class="col-md-2 mb-3">
+                                            <button class="btn btn-white btn-icon btn-outline-primary" type="button" data-toggle="tooltip" data-placement="top" title="Add" (click)="onChangeTickets(i)">
+                                            <!-- <i class="fa fa-plus" ></i> -->
+                                            <i [ngClass]="getClass(i)"></i>
+                                        </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- <div *ngFor="let phone of getPhonesFormControls(); let i = index">
+                            <label>Phone {{i}} </label>    
+                            <input [formControl]="phone" type="text">
+                          <button (click)="removePhone(i)">Remove Phone</button>    
+                          </div>
+                          <br>  
+                          <button (click)="addPhone()">Add new phone</button>
+                          <br>
+                          <br>  -->
+                    </app-card>
+                </form>
+                <!-- ------------------------------------------------- -->
+
+                <div class="col-sm-12">
+                    <app-card [hidHeader]="true" cardClass="tab-card">
+
+                        <ngb-tabset>
+                            <ngb-tab title="Entitlement / Leave Policy">
+                                <ng-template ngbTabContent>
+                                    <app-entitlement-form [holdingId]="leaveRuleForm.value.holdingId" [companyId]="leaveRuleForm.value.companyId" [leaveRuleId]="leaveRuleForm.value.leaveRuleId" [leaveitemId]="leaveItemForm.value.xLeaveitemId" (entitlement)="getEntitlementData($event)">
+                                    </app-entitlement-form>
+                                </ng-template>
+                            </ngb-tab>
+                            <ngb-tab title="Applicable">
+                                <ng-template ngbTabContent>
+                                    <app-applicble-form [applicablegender]="leaveItemForm.value.applicablegender" [companyid]="leaveItemForm.value.gCompanyId" [maritalstatus]="leaveItemForm.value.maritalstatus" [applicablecategory]="leaveItemForm.value.applicablecategory" [weeklyoffType]="leaveItemForm.value.weeklyoffType"
+                                        [applicableReligion]="leaveItemForm.value.applicableReligion" [applicableGrade]="leaveItemForm.value.applicableGrade" [applEntitledtype]="leaveItemForm.value.applEntitledtype" (applicable)="getApplicableData($event)"></app-applicble-form>
+                                </ng-template>
+                            </ngb-tab>
+                            <ngb-tab title="Restrictions">
+                                <ng-template ngbTabContent>
+                                    <app-restriction-form [considerholidays]="leaveItemForm.value.considerholidays" [considerweekend]="leaveItemForm.value.considerweekend" [exceedleavebal]="leaveItemForm.value.exceedleavebal" [excddeductfrom]="leaveItemForm.value.excddeductfrom" [fulldayAllowed]="leaveItemForm.value.fulldayAllowed"
+                                        [halfdayAllowed]="leaveItemForm.value.halfdayAllowed" [halfdayAllowed]="leaveItemForm.value.maxleave" [leaveRuleId]="leaveRuleForm.value.leaveRuleId" [docreq]="leaveItemForm.value.docreq" [leaveperReq]="leaveItemForm.value.leaveperReq"
+                                        (restriction)="getRestrictionData($event)"></app-restriction-form>
+                                </ng-template>
+                            </ngb-tab>
+                        </ngb-tabset>
+                    </app-card>
+                </div>
+
+                <!-- ----------------------------------------------------- -->
+
+
+            </app-card>
+        </div>
+    </div>
+</div>

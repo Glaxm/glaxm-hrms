@@ -1,0 +1,141 @@
+<div class="row">
+    <div class="col-sm-12">
+      <div>
+      <app-card cardTitle="{{moduleForm.value.roleId ? 'Edit Module':'Add Module'}}"  [options]="false">
+     
+      
+        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+          <ul _ngcontent-epm-c40="" class="nav">
+          </ul>
+          <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" [disabled]="submitted" (click)="addModule()" *ngIf="!isView">{{moduleForm.value.moduleId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+         </div>
+      </nav>
+
+        <form action="javascript:" class="needs-validation" novalidate [formGroup]="moduleForm">
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Module Code</label>
+              <input type="text" formControlName="moduleCode" class="form-control" 
+              [ngClass]="{ 'is-invalid': submitted && f.moduleCode.errors }">
+              <div *ngIf="submitted && f.moduleCode.errors" class="invalid-feedback">
+                <div *ngIf="f.moduleCode.errors.required">Module code is required</div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Module Name</label>
+                <input type="text" formControlName="moduleName" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.moduleName.errors }">
+                <div *ngIf="submitted && f.moduleName.errors" class="invalid-feedback">
+                  <div *ngIf="f.moduleName.errors.required">Module name is required</div>
+                </div>
+            </div>
+           
+          </div>
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Module Url</label>
+              <input type="text" formControlName="moduleUrl" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.moduleUrl.errors }">
+              <div *ngIf="submitted && f.moduleUrl.errors" class="invalid-feedback">
+                <div *ngIf="f.moduleUrl.errors.required">Module url is required</div>
+              </div>
+              </div>
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Module Group</label>
+                <select class="form-control" formControlName="moduleGroup" 
+                [ngClass]="{ 'is-invalid': submitted && f.moduleGroup.errors }">
+                    <option *ngFor="let sl of moduleGroupList" value="{{sl.valueCode}}">{{sl.valueName}}</option>
+                    <!-- <option>Inactive</option> -->
+                </select>
+                <div *ngIf="submitted && f.moduleGroup.errors" class="invalid-feedback">
+                  <div *ngIf="f.moduleGroup.errors.required">Module group is required</div>
+                </div>
+            </div>
+           
+            
+
+          </div>
+         
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom01">Status</label>
+              <select class="form-control" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                <option *ngFor="let sl of statusList" value="{{sl.valueCode}}">{{sl.valueName}}</option>
+                <!-- <option>Inactive</option> -->
+              </select>
+              <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                <div *ngIf="f.status.errors.required">Status is required</div>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom02">Start Date</label>
+             <div class="input-group">
+              
+               <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker 
+               name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="startDate1"
+               [ngClass]="{ 'is-invalid': submitted && f.startDate1.errors }"
+                #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event)" (click)="dp1.toggleCalendar()"/>
+               <div class="input-group-append">
+                 <!-- <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+                   <i class="fa fa-search" aria-hidden="true"></i>
+                 </button> -->
+               </div>
+               <div *ngIf="submitted && f.startDate1.errors" class="invalid-feedback">
+                <div *ngIf="f.startDate1.errors.required">Startdate is required</div>
+              </div>
+             </div>
+           </div>
+
+           
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="validationCustom02">End Date</label>
+             <div class="input-group">
+              
+               <input class="form-control" type="text" placeholder="Select a date" angular-mydatepicker 
+               name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="endDate1"
+                #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)" (click)="dp2.toggleCalendar()"/>
+               <div class="input-group-append">
+                 <!-- <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                   <i class="fa fa-search" aria-hidden="true"></i>
+                 </button> -->
+               </div>
+             </div>
+           </div>
+          
+          <!-- <div class="col-md-4 mb-3">
+            <label for="validationCustom02">Description</label>
+            <textarea class="form-control" formControlName="moduleDesc" rows="3"></textarea>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div> -->
+          <div class="col-md-6 mb-3">
+            <label for="validationCustom01">Description</label>
+            <input type="text" formControlName="moduleDesc" class="form-control">
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+        </div>
+       
+         
+          </div>
+          <!-- <hr>
+          <div class="text-center">
+            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addModule()" *ngIf="!isView">{{moduleForm.value.moduleId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isView ? 'Back':'Cancel'}}</button>
+          </div> -->
+
+        </form>
+        
+        <!-- ////////////////////////////////////////////////////////// -->
+    </app-card>
+  </div>
+  </div>
+  </div>
+  
