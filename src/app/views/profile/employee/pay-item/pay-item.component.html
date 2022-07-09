@@ -1,25 +1,20 @@
-
 <div class="row">
     <div class="col-sm-12" *ngIf="!isOpen">
-        <app-card cardTitle="Pay Item Summary - {{displayName}}" [options]="false">
-          
+        <app-card cardTitle="Pay Item Summary" [options]="false">
+
 
             <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
                 <ul _ngcontent-epm-c40="" class="nav">
                 </ul>
                 <div _ngcontent-epm-c40="" class="nav-item nav-grid">
-                  
-                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
-                 type="button" (click)="add()" data-toggle="tooltip" data-placement="top"  *ngIf="isview=='N'"
-                 title="Add">
+
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="add()" data-toggle="tooltip" data-placement="top" *ngIf="isview=='N'" title="Add">
                 <i class="fa fa-plus"></i>
                 </button>&nbsp;
-                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
-                type="button" (click)="edit()" data-toggle="tooltip" data-placement="top"  *ngIf="isview=='N'"
-                title="Edit">
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="edit()" data-toggle="tooltip" data-placement="top" *ngIf="isview=='N'" title="Edit">
                <i class="fas fa-pencil-alt"></i>
                </button>&nbsp;
-               <!-- <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+                    <!-- <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
                type="button" (click)="view()" data-toggle="tooltip" data-placement="top"
                title="View">
               <i class="fa fa-eye"></i>
@@ -37,148 +32,145 @@
                 </button> -->
                 </div>
             </nav>
-           
-            
+
+
             <div class="table-responsive">
-               
+
                 <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>PayItem</th>
-                    <th>Amount</th>
-                    <th>Effective Date</th>
-                    <th>End Date</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let dl of empPayItemList">
-                    <td>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(dl)">
-                        </div>
-                    </td>
-                    <td>{{dl.name}}</td>
-                    <td>{{dl.amount}}</td>
-                    <td>{{dl.effectiveDate| date: 'dd-MMM-yyyy'}}</td>
-                    <td>{{dl.endDate | date: 'dd-MMM-yyyy'}}</td>
-                </tr>
-               
-                </tbody>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>PayItem</th>
+                            <th>Amount</th>
+                            <th>Effective Date</th>
+                            <th>End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dl of empPayItemList">
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(dl)">
+                                </div>
+                            </td>
+                            <td>{{dl.name}}</td>
+                            <td>{{dl.amount}}</td>
+                            <td>{{dl.effectiveDate| date: 'dd-MMM-yyyy'}}</td>
+                            <td>{{dl.endDate | date: 'dd-MMM-yyyy'}}</td>
+                        </tr>
+
+                    </tbody>
                 </table>
             </div>
             <!-- ---------------------------------------------------------------- -->
 
-         
+
             <!-- ---------------------------------------------------------------- -->
         </app-card>
     </div>
 
     <div class="col-sm-12" *ngIf="isOpen">
-        <app-card cardTitle="{{false ? 'Edit Pay Items':'Add Pay Items'}}"  [options]="false">
- 
-   
-        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
-          <ul _ngcontent-epm-c40="" class="nav">
-          </ul>
-          <div _ngcontent-epm-c40="" class="nav-item nav-grid">
-            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdatePayItem()">{{itemId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
-            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger"  (click)="isOpen=false;itemId=undefined;">{{false ? 'Back':'Cancel'}}</button>
-          </div>
-      </nav>
+        <app-card cardTitle="{{false ? 'Edit Pay Items':'Add Pay Items'}}" [options]="false">
 
-      <form action="javascript:" class="needs-validation" novalidate [formGroup]="payItemForm">
-           
-        <div class="form-row">
 
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Employee</label>
-            <input type="text" formControlName="value" disabled class="form-control">
-            <div class="valid-feedback">
-              Looks good!
-            </div>
-          </div>
+            <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                <ul _ngcontent-epm-c40="" class="nav">
+                </ul>
+                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                    <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdatePayItem()">{{itemId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="isOpen=false;itemId=undefined;">{{false ? 'Back':'Cancel'}}</button>
+                </div>
+            </nav>
 
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Per Units</label>
-            <select class="form-control validation_border" formControlName="units" [ngClass]="{ 'is-invalid': payItemsubmitted && pi.units.errors }">
+            <form action="javascript:" class="needs-validation" novalidate [formGroup]="payItemForm">
+
+                <div class="form-row">
+
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Employee</label>
+                        <input type="text" formControlName="value" disabled class="form-control">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Per Units</label>
+                        <select class="form-control validation_border" formControlName="units" [ngClass]="{ 'is-invalid': payItemsubmitted && pi.units.errors }">
               <option *ngFor="let dl of unitList" value="{{dl.value}}">{{dl.name}}</option>
             </select>
-            <div *ngIf="payItemsubmitted && pi.units.errors" class="invalid-feedback">
-              <div *ngIf="pi.units.errors.required">Per Units is required</div>
-            </div>
-          </div>
-        </div>
-         
-        <div class="form-row">
+                        <div *ngIf="payItemsubmitted && pi.units.errors" class="invalid-feedback">
+                            <div *ngIf="pi.units.errors.required">Per Units is required</div>
+                        </div>
+                    </div>
+                </div>
 
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">PayItem</label>
-            <select class="form-control validation_border"  formControlName="payItemId" [ngClass]="{ 'is-invalid': payItemsubmitted && pi.payItemId.errors }">
+                <div class="form-row">
+
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">PayItem</label>
+                        <select class="form-control validation_border" formControlName="payItemId" [ngClass]="{ 'is-invalid': payItemsubmitted && pi.payItemId.errors }">
               <option></option>
               <option *ngFor="let dl of payItemList" value="{{dl.payItemId}}">{{dl.name}}</option>
             </select>
-            <div *ngIf="payItemsubmitted && pi.payItemId.errors" class="invalid-feedback">
-              <div *ngIf="pi.payItemId.errors.required">PayItem is required</div>
-            </div>
-          </div>
-        <!-- </div> -->
+                        <div *ngIf="payItemsubmitted && pi.payItemId.errors" class="invalid-feedback">
+                            <div *ngIf="pi.payItemId.errors.required">PayItem is required</div>
+                        </div>
+                    </div>
+                    <!-- </div> -->
 
 
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Amount</label>
-            <input type="text" formControlName="amount" class="form-control validation_border" [ngClass]="{ 'is-invalid': payItemsubmitted && pi.amount.errors }">
-            <div *ngIf="payItemsubmitted && pi.amount.errors" class="invalid-feedback">
-              <div *ngIf="pi.amount.errors.required">Amount is required</div>
-            </div>
-          </div>
-
-         
-
-         
-        </div>
-
-       <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Amount</label>
+                        <input type="text" formControlName="amount" class="form-control validation_border" [ngClass]="{ 'is-invalid': payItemsubmitted && pi.amount.errors }">
+                        <div *ngIf="payItemsubmitted && pi.amount.errors" class="invalid-feedback">
+                            <div *ngIf="pi.amount.errors.required">Amount is required</div>
+                        </div>
+                    </div>
 
 
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom02">Effective Date</label>
-           <div class="input-group">
-             <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker 
-             name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="payItemEffectiveDate"
-             [ngClass]="{ 'is-invalid': payItemsubmitted && pi.payItemEffectiveDate.errors }"
-              #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEffectiveDate($event)" (click)="dp1.toggleCalendar()"/>
-             <div class="input-group-append">
-               <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+
+
+                </div>
+
+                <div class="form-row">
+
+
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom02">Effective Date</label>
+                        <div class="input-group">
+                            <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="payItemEffectiveDate" [ngClass]="{ 'is-invalid': payItemsubmitted && pi.payItemEffectiveDate.errors }"
+                                #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEffectiveDate($event)" (click)="dp1.toggleCalendar()" />
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
                  <i class="fa fa-search" aria-hidden="true"></i>
                </button>
-             </div>
-             <div *ngIf="payItemsubmitted && pi.payItemEffectiveDate.errors" class="invalid-feedback">
-              <div *ngIf="pi.payItemEffectiveDate.errors.required">Effective Date is required</div>
-            </div>
-           </div>
-         </div>
+                            </div>
+                            <div *ngIf="payItemsubmitted && pi.payItemEffectiveDate.errors" class="invalid-feedback">
+                                <div *ngIf="pi.payItemEffectiveDate.errors.required">Effective Date is required</div>
+                            </div>
+                        </div>
+                    </div>
 
-         <div class="col-md-6 mb-3">
-          <label for="validationCustom02">End Date</label>
-         <div class="input-group">
-           <input class="form-control" placeholder="Select a date" type="text" disabled angular-mydatepicker 
-           name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="endDate1"
-            #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)" (click)="dp2.toggleCalendar()"/>
-           <div class="input-group-append">
-             <button type="button" class="btn btn-secondary" disabled (click)="dp2.toggleCalendar()">
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom02">End Date</label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="Select a date" type="text" disabled angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="endDate1" #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)"
+                                (click)="dp2.toggleCalendar()" />
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-secondary" disabled (click)="dp2.toggleCalendar()">
                <i class="fa fa-search" aria-hidden="true"></i>
              </button>
-           </div>
-                   </div>
-       </div>
+                            </div>
+                        </div>
+                    </div>
 
-</div>
+                </div>
 
-        <div class="form-row">
+                <div class="form-row">
 
-          
-          <!-- <div class="col-md-6 mb-3">
+
+                    <!-- <div class="col-md-6 mb-3">
             <div class="col-md- mb-3">
               <div class="custom-control custom-checkbox">
                 <label for="validationCustom01"></label><br>
@@ -188,33 +180,32 @@
             </div>
           </div> -->
 
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Status</label>
-            <select class="form-control" formControlName="status">
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Status</label>
+                        <select class="form-control" formControlName="status">
               <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
             </select>
-            <div class="valid-feedback">
-              Looks good!
-            </div>
-          </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
 
-          <div>
+                    <div>
 
-          </div>
+                    </div>
 
-        </div>
+                </div>
 
-        <div class="form-row">
+                <div class="form-row">
 
-        
 
-        </div>
 
-      </form>
+                </div>
 
-        
-        <!-- ////////////////////////////////////////////////////////// -->
+            </form>
+
+
+            <!-- ////////////////////////////////////////////////////////// -->
         </app-card>
     </div>
 </div>
-   

@@ -4,9 +4,9 @@
       <app-card cardTitle="Employee"  [options]="false"> -->
         <ng-wizard [config]="config" (stepChanged)="stepChanged($event)">
             <!-- -------------------------------------------Employee Details----------------------- -->
-            <ng-wizard-step [title]="'Employee Info'" [description]="'&nbsp;'">
+            <ng-wizard-step [title]="'My Info'" [description]="'&nbsp;'">
 
-                <app-card cardTitle="Employee Info - {{empdetailsForm.value.displayName}}" [options]="false">
+                <app-card cardTitle="My Info - {{empdetailsForm.value.displayName}}" [options]="false">
                     <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
                         <ul _ngcontent-epm-c40="" class="nav">
                         </ul>
@@ -77,18 +77,18 @@
                                 <div *ngIf="empdetailesubmitted && ed.oldEmpId.errors" class="invalid-feedback">
                                     <div *ngIf="ed.oldEmpId.errors.required">Employee ID is required</div>
                                 </div>
-                                <label for="validationCustom01">Biometrics ID</label>
+                                <!-- <label for="validationCustom01">Biometrics ID</label>
                                 <input type="text" formControlName="bioId" class="form-control validation_border" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.bioId.errors }">
                                 <div *ngIf="empdetailesubmitted && ed.bioId.errors" class="invalid-feedback">
                                     <div *ngIf="ed.bioId.errors.required">Biometrics ID is required</div>
                                 </div>
 
 
-                                <label for="validationCustom01">Employee Code</label>
+                                <label for="validationCustom01">Internal ID</label>
                                 <input type="text" formControlName="value" class="form-control validation_border" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.value.errors }">
                                 <div *ngIf="empdetailesubmitted && ed.value.errors" class="invalid-feedback">
                                     <div *ngIf="ed.value.errors.required">Employee ID is required</div>
-                                </div>
+                                </div> -->
 
                                 <label for="validationCustom01">Emirates ID</label>
                                 <input type="text" formControlName="emiratesId" class="form-control">
@@ -607,14 +607,14 @@
             </ng-wizard-step>
 
 
-            <ng-wizard-step [title]="'Salary'" [description]="'&nbsp;'">
+            <ng-wizard-step [title]="'My Salary'" [description]="'&nbsp;'">
                 <app-emp-salary (parentFun)="showNextStep($event)" *ngIf="next==1" [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId" [displayName]="empdetailsForm.value.displayName">
                 </app-emp-salary>
             </ng-wizard-step>
 
 
-            <ng-wizard-step [title]="'Pay Elements'" [description]="'&nbsp;'">
-                <app-card cardTitle="Pay Elements" [options]="false">
+            <ng-wizard-step [title]="'My Pay Elements'" [description]="'&nbsp;'">
+                <app-card cardTitle="My Pay Elements - {{empdetailsForm.value.displayName}}" [options]="false">
 
                     <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
                         <ul _ngcontent-epm-c40="" class="nav">
@@ -638,8 +638,8 @@
 
             <!--  -->
 
-            <ng-wizard-step [title]="'Leave Balance'" [description]="'&nbsp;'">
-                <app-card cardTitle="Leave Balance" [options]="false">
+            <ng-wizard-step [title]="'My Leave Balance'" [description]="'&nbsp;'">
+                <app-card cardTitle="My Leave Balance- {{empdetailsForm.value.displayName}}" [options]="false">
 
                     <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
                         <ul _ngcontent-epm-c40="" class="nav">
@@ -669,8 +669,8 @@
             <!--  -->
 
 
-            <ng-wizard-step [title]="'Personal Info'" [description]="'&nbsp;'">
-                <app-card cardTitle="Personal Info" [options]="false">
+            <ng-wizard-step [title]="'My Personal Info'" [description]="'&nbsp;'">
+                <app-card cardTitle="My Personal Info- {{empdetailsForm.value.displayName}}" [options]="false">
 
                     <!-- <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
             <ul _ngcontent-epm-c40="" class="nav">
@@ -690,8 +690,8 @@
             </ng-wizard-step>
 
 
-            <ng-wizard-step [title]="'Benefits'" [description]="'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'">
-                <app-card cardTitle="Benefits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" [options]="false">
+            <ng-wizard-step [title]="'My Benefits'" [description]="'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'">
+                <app-card cardTitle="My Benefits- {{empdetailsForm.value.displayName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" [options]="false">
 
                     <!-- <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
             <ul _ngcontent-epm-c40="" class="nav">
@@ -746,8 +746,8 @@
         </app-card>
       </ng-wizard-step> -->
 
-            <ng-wizard-step [title]="'Personal Docs'" [description]="'&nbsp;'">
-                <app-card cardTitle="Personal Docs" [options]="false">
+            <ng-wizard-step [title]="'My Personal Docs'" [description]="'&nbsp;'">
+                <app-card cardTitle="My Personal Docs- {{empdetailsForm.value.displayName}}" [options]="false">
 
                     <!-- <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
             <ul _ngcontent-epm-c40="" class="nav">
@@ -766,8 +766,8 @@
                 </app-card>
             </ng-wizard-step>
 
-            <ng-wizard-step [title]="'Employee Attachments'" [description]="'&nbsp;'">
-                <app-card cardTitle="Employee Attachments" [options]="false">
+            <ng-wizard-step [title]="'My Attachments'" [description]="'&nbsp;'">
+                <app-card cardTitle="My Attachments- {{empdetailsForm.value.displayName}}" [options]="false">
 
                     <app-emp-docs (parentFun)="showNextStep($event)" *ngIf="next==7" [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId" [displayName]="empdetailsForm.value.displayName">
                     </app-emp-docs>
