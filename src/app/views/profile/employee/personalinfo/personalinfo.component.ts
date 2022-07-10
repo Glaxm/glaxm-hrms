@@ -216,11 +216,20 @@ export class PersonalinfoComponent implements OnInit {
   }
 
   setAge(dob) {
-    const millis = Date.now() - Date.parse(dob);
-    let count = new Date(millis).getFullYear() - 1970;
-    count = count != 0 && count < 0 ? 0 : count;
-    this.personalinfoForm.get('empage').setValue(count);
+    // const millis = Date.now() - Date.parse(dob);
+    // let count = new Date(millis).getFullYear() - 1970;
+    // count = count != 0 && count < 0 ? 0 : count;
+
+    var diff = Date.now() - Date.parse(dob);
+    var age = new Date(new Date("0000-01-01").getTime() + diff);
+    var years = age.getFullYear();
+    var months = age.getMonth();
+    var days = age.getDate();
+    console.log(years, "years", months, "months", days - 1, "days")
+    let str = years + " " + 'Years' + ", " + months + " " + 'Months' + ", " + (days - 1) + " " + 'days';
+    this.personalinfoForm.get('empage').setValue(str);
   }
+
 
   edit() {
     if (this.empId) {

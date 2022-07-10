@@ -209,11 +209,23 @@ export class CalendarViewComponent  {
           }
           else if(element.status=="Leave")
           {
-            var color = colors.green;
+            var color = colors.blue;
           }
           else if(element.status=="Absent")
           {
             var color = colors.red;
+          }
+          else if(element.status=="Iomiss")
+          {
+            var color = colors.red;
+          }
+          else if(element.status=="Holiday")
+          {
+            var color = colors.blue;
+          }
+          else if(element.status=="Shortfall")
+          {
+            var color = colors.purple;
           }
           else
           {

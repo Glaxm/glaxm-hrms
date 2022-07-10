@@ -892,6 +892,12 @@
                 <!--  -->
 
 
+                <!-- //////////////////////////////// -->
+
+
+
+                <!-- ////////////////////////////////// -->
+
                 <div class="col-xl-6 col-md-12">
                     <div class="card ng-tns-c94-743 ng-trigger ng-trigger-cardRemove user-list table-card" style="opacity: 1;">
                         <div class="card-header ng-tns-c94-743 ng-star-inserted" style="">
@@ -914,13 +920,12 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody _ngcontent-cgl-c117="">
-                                                    <tr *ngFor="let dl of payslipList">
-                                                        <td _ngcontent-cgl-c117="">
-                                                            <h6 _ngcontent-cgl-c117="" class="mb-1 text-c-green">{{dl.empcode}}</h6>
+                                                    <tr *ngFor="let dl of payslipList;let i = index">
+                                                        <td _ngcontent-cgl-c117="">{{dl.empcode}}
                                                         </td>
                                                         <td _ngcontent-cgl-c117="">{{dl.empname}}</td>
                                                         <td _ngcontent-cgl-c117="">
-                                                            <h6 _ngcontent-cgl-c117="" class="mb-1 text-c-green">{{dl.monthname}}</h6>
+                                                            <span _ngcontent-cgl-c117="" [ngClass]="i==0 ? 'mb-1 text-c-green' : i==1 ? 'mb-1 text-c-blue': i==2 ? 'mb-1 text-c-yellow': i==3 ? 'mb-1 text-c-red': i==4 ? 'mb-1 text-c-purple':i==5 ? 'mb-1 text-c-orange':'mb-1 text-c-pink'">{{dl.monthname}}</span>
                                                         </td>
                                                         <td>
                                                             <button class="btn btn-outline-primary" type="button" (click)="paySlipView(dl,'PRINT')" data-toggle="tooltip" data-placement="top" title="Payslip View">
@@ -928,7 +933,6 @@
                                                             </button>
                                                         </td>
                                                     </tr>
-
                                                 </tbody>
                                             </table>
                                         </div>
@@ -966,12 +970,11 @@
                                                 </thead>
                                                 <tbody _ngcontent-cgl-c117="">
                                                     <tr *ngFor="let dl of loandetailsList">
-                                                        <td _ngcontent-cgl-c117="">
-                                                            <h6 _ngcontent-cgl-c117="" class="mb-1 text-c-green">{{dl.loanamount}}</h6>
+                                                        <td _ngcontent-cgl-c117="">{{dl.loanamount}}
                                                         </td>
                                                         <td _ngcontent-cgl-c117="">{{dl.loandate}}</td>
                                                         <td _ngcontent-cgl-c117="">
-                                                            <h6 _ngcontent-cgl-c117="" class="mb-1 text-c-green">{{dl.balance}}</h6>
+                                                            <h6 _ngcontent-cgl-c117="" class="mb-1 text-c-red">{{dl.balance}}</h6>
                                                         </td>
                                                     </tr>
 

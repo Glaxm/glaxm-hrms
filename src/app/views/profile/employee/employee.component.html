@@ -551,7 +551,7 @@
                             <div class="form-row">
 
                                 <div class="col-md-2 mb-3">
-                                    <label for="validationCustom02">Leaving Date</label></div>
+                                    <label for="validationCustom02">Last Working Day</label></div>
                                 <div class="col-md-4 mb-3">
                                     <div class="input-group">
                                         <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" disabled="employementStatus != 'Left'" [options]="myDatePickerOptions" formControlName="effectiveDate1" #dp5="angular-mydatepicker" autocomplete="off"
@@ -575,6 +575,24 @@
                                     </div>
                                 </div>
 
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="col-md-2 mb-3">
+                                    <label for="validationCustom02">Last day on Notice</label></div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate1" disabled="employementStatus != 'Left'" [options]="myDatePickerOptions" formControlName="lastDayonNotice1" #dp12="angular-mydatepicker" autocomplete="off"
+                                            (ngModelChange)="changeLastDayonNotice($event)" (click)="dp12.toggleCalendar()" />
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-secondary" (click)="dp12.toggleCalendar()" [disabled]="employementStatus != 'Left'">
+                          <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
                             <!-- </div> -->
                         </app-card>

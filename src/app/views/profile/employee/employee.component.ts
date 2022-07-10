@@ -175,7 +175,8 @@ export class EmployeeComponent implements OnInit {
       servicePeriod: new FormControl(null),
       lscurstatusId: new FormControl(null),
       supervisorId: new FormControl(null),
-
+      lastDayonNotice1: new FormControl(null),
+      lastDayonNotice: new FormControl(null)
     });
 
     this.activeRoute.queryParams.subscribe(params => {
@@ -213,6 +214,12 @@ export class EmployeeComponent implements OnInit {
           let probationCompletionDate: Date = new Date(s.data.probationCompletionDate);
           let fromModel9: IMyDateModel = { isRange: false, singleDate: { jsDate: probationCompletionDate }, dateRange: null };
           this.empdetailsForm.controls['probationCompletionDate1'].setValue(fromModel9);
+        }
+
+        if (s.data.lastDayonNotice) {
+          let lastDayonNotice : Date = new Date(s.data.lastDayonNotice);
+          let fromModellastDayonNotice : IMyDateModel = { isRange: false, singleDate: { jsDate: lastDayonNotice  }, dateRange: null };
+          this.empdetailsForm.controls['lastDayonNotice1'].setValue(fromModellastDayonNotice);
         }
 
         if (s.data.dateOfBirth) {
@@ -703,6 +710,8 @@ export class EmployeeComponent implements OnInit {
   @ViewChild('dp4', { static: false }) myDp4: AngularMyDatePickerDirective;
   @ViewChild('dp5', { static: false }) myDp5: AngularMyDatePickerDirective;
   @ViewChild('dp11', { static: false }) myDp11: AngularMyDatePickerDirective;
+  @ViewChild('dp12', { static: false }) myDp12: AngularMyDatePickerDirective;
+  
   changeDateOfJoin(event) {
     
     this.empdetailsForm.get('dateOfJoin').setValue(event.singleDate.jsDate);
@@ -713,6 +722,10 @@ export class EmployeeComponent implements OnInit {
 
   changeProbCompDate(event) {
     this.empdetailsForm.get('probdate').setValue(this.commonService.dateFormat(event.singleDate.jsDate));
+  }
+
+  changeLastDayonNotice(event){
+
   }
 
   changeDateOfBirth(event) {
