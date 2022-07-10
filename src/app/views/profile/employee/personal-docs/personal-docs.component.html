@@ -107,9 +107,10 @@
               Looks good!
             </div>
           </div> -->
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Passport No.</label>
-                            <input type="text" formControlName="passportno" class="form-control">
+                        </div>
+                        <div class="col-md-4 mb-3"><input type="text" formControlName="passportno" class="form-control">
                         </div>
 
 
@@ -119,14 +120,16 @@
 
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Place of Birth</label>
-                            <input type="text" formControlName="ppbirthplace" class="form-control">
+                        </div>
+                        <div class="col-md-4 mb-3"><input type="text" formControlName="ppbirthplace" class="form-control">
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Place of Issue</label>
-                            <input type="text" formControlName="ppplaceissue" class="form-control">
+                        </div>
+                        <div class="col-md-4 mb-3"><input type="text" formControlName="ppplaceissue" class="form-control">
                         </div>
 
                     </div>
@@ -134,8 +137,10 @@
                     <div class="form-row">
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Date of Issue </label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="ppdateissue1" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeppdateissue1($event)"
                                     (click)="dp1.toggleCalendar()" />
@@ -147,8 +152,10 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Date of Expiry </label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="ppdateexpiry1" #dp2="angular-mydatepicker" autocomplete="off" [ngClass]="{ 'is-invalid': pi && pi.ppdateexpiry1.errors }"
                                     (ngModelChange)="changeppdateexpiry1($event)" (click)="dp2.toggleCalendar()" />
@@ -168,19 +175,25 @@
                 </app-card>
                 <app-card cardTitle="Emirates ID Details" [options]="false">
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Emirates ID Number</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="emiratesidno" class="form-control">
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Emirates ID Card No.</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="eidcardno" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Emirates ID Expiry Date</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="eiddateexpiry1" #dp3="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeeiddateexpiry1($event)"
                                     (click)="dp3.toggleCalendar()" />
@@ -198,12 +211,16 @@
                 </app-card>
                 <app-card cardTitle="Visa Details" [options]="false">
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Residence Visa Number</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="visano" class="form-control">
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Residence Visa File No.</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="visafileno" class="form-control">
                         </div>
 
@@ -211,8 +228,10 @@
 
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Residence Visa Issue Date</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="visadateissue1" #dp4="angular-mydatepicker" autocomplete="off" (ngModelChange)="changevisadateissue1($event)"
                                     (click)="dp4.toggleCalendar()" />
@@ -226,8 +245,10 @@
                         </div>
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Residence Visa Expiry Date </label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="visadateexpiry1" #dp5="angular-mydatepicker" autocomplete="off" (ngModelChange)="changevisadateexpiry1($event)"
                                     (click)="dp5.toggleCalendar()" />
@@ -244,8 +265,10 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Job Title in Res. Visa</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="visajobtitle" class="form-control">
                         </div>
                     </div>
@@ -254,13 +277,17 @@
                 <app-card cardTitle="Labour Card Details" [options]="false">
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Labour Card Number</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="labourcardno" class="form-control">
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Labour Card Expiry Date</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="lcdateexpiry1" #dp6="angular-mydatepicker" autocomplete="off" (ngModelChange)="changelcdateexpiry1($event)"
                                     (click)="dp6.toggleCalendar()" />
@@ -276,8 +303,10 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Personnel ID in Labour Card</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="lcpersonalid" class="form-control">
                         </div>
                     </div>
@@ -287,12 +316,16 @@
 
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">JAFZA ID Card Number</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="jzidcardno" class="form-control">
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Card expiry date</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="jzidateexpiry1" #dp7="angular-mydatepicker" autocomplete="off" (ngModelChange)="changejzidateexpiry1($event)"
                                     (click)="dp7.toggleCalendar()" />
@@ -308,20 +341,26 @@
                 </app-card>
                 <app-card cardTitle="Medical Insurance Details" [options]="false">
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01"> Medical Insurance Card Number</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="medinscardno" class="form-control">
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Medical Insurance Provider Name</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="medinsprovname" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Medical Insurance Expiry Date</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="medinsdateexpiry1" #dp8="angular-mydatepicker" autocomplete="off" (ngModelChange)="changemedinsdateexpiry1($event)"
                                     (click)="dp8.toggleCalendar()" />
@@ -339,26 +378,34 @@
                 <app-card cardTitle="Driving Licence Details" [options]="false">
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Driving Licence No.</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="drivinglicno" class="form-control">
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Traffic Code No.</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="dlntrafficno" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01"> Place of Issue</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="dlnplaceissue" class="form-control">
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01"> Date of Issue</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="dlndateissue1" #dp9="angular-mydatepicker" autocomplete="off" (ngModelChange)="changedlndateissue1($event)"
                                     (click)="dp9.toggleCalendar()" />

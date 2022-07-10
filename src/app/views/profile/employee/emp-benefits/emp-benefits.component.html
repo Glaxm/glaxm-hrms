@@ -120,37 +120,43 @@
                 </app-card> -->
                 <app-card cardTitle="Vehicle" [options]="false">
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom01">Vehicle</label>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Vehicle</label></div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control" formControlName="hasvehicle">
           <option *ngFor="let dl of vehiclesList" value="{{dl.value}}">{{dl.name}}
           </option>
       </select>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom01">Vehicle Brand </label>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Vehicle Brand </label></div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="vehibrand" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom01">Vehicle Model</label>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Vehicle Model</label></div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="vehimodel" class="form-control">
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom01">Value of The Vehicle</label>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Value of The Vehicle</label></div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="vehivalue" class="form-control">
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom01">Vehicle Monthly Fuel Cost Limit</label>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Vehicle Monthly Fuel Cost Limit</label></div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="fuelcostlimit" class="form-control">
                         </div>
 
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom01">Vehicle Monthly Actual Fuel Expenses</label>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Vehicle Monthly Actual Fuel Expenses</label></div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control" formControlName="fuelactualcost">
           <option *ngFor="let dl of fuelactualcostList" value="{{dl.value}}">{{dl.name}}
           </option>
@@ -160,16 +166,18 @@
 
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom01">Vehicle Monthly Maintenance Average Expenses</label>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Vehicle Monthly Maintenance Average Expenses</label></div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control" formControlName="mntsavgexps">
           <option *ngFor="let dl of vMMaitainanceAygExpList" value="{{dl.value}}">{{dl.name}}
           </option>
       </select>
                         </div>
 
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom01">Vehicle Monthly Average Salik Expenses</label>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Vehicle Monthly Average Salik Expenses</label></div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control" formControlName="saltkavgexps">
           <option *ngFor="let dl of vMAvgSalikExpensesList" value="{{dl.value}}">{{dl.name}}
           </option>
@@ -178,8 +186,10 @@
                     </div>
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Vehicle Monthly Aveage Parking Expenses</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control" formControlName="parkavgexps">
           <option *ngFor="let dl of vMAvgParkingExpList" value="{{dl.value}}">{{dl.name}}
           </option>
@@ -218,16 +228,19 @@
 </div> -->
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Airport</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control" formControlName="fromAirsectorId">
         <option *ngFor="let dl of fromAirportList" value="{{dl.lListitemId}}">{{dl.name}}
         </option>
     </select>
                         </div>
 
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom01">Airport (Point of Hire) </label>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Airport (Point of Hire) </label></div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control" formControlName="toAirsectorId">
         <option *ngFor="let dl of toList" value="{{dl.airsectorId}}">{{dl.name}}
         </option>
@@ -236,15 +249,17 @@
                     </div>
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom01">Air Ticket Entitlement </label>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Air Ticket Entitlement </label></div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control" formControlName="airtikentId">
         <option *ngFor="let dl of airTktEntitlementList"  value="{{dl.value}}">{{dl.name}}
         </option>
     </select>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom01">Air Ticket Class</label>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Air Ticket Class</label></div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control" formControlName="airtktclsId">
         <option *ngFor="let dl of airTktClassList"  value="{{dl.value}}">{{dl.name}}
         </option>
@@ -255,8 +270,9 @@
 
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom01">Air Ticket Eligibility </label>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Air Ticket Eligibility </label></div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control" formControlName="airtktelgId">
         <option *ngFor="let dl of airtktEligibiltyList" value="{{dl.value}}">{{dl.name}}
         </option>
@@ -429,13 +445,15 @@
 
                                 <div class="form-row">
 
-                                    <div class="col-md-6 mb-3">
-                                        <label for="validationCustom01">Name</label>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="validationCustom01">Name</label></div>
+                                    <div class="col-md-4 mb-3">
                                         <input type="text" formControlName="nameofFamily" class="form-control">
                                     </div>
 
-                                    <div class="col-md-6 mb-3">
-                                        <label for="validationCustom01">Relation</label>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="validationCustom01">Relation</label></div>
+                                    <div class="col-md-4 mb-3">
                                         <select class="form-control " formControlName="lsEmprelationId">
         <option></option>
         <option *ngFor="let dl of relationList" value="{{dl.lListitemId}}">{{dl.name}}</option>
@@ -445,8 +463,9 @@
 
                                 <div class="form-row">
 
-                                    <div class="col-md-6 mb-3">
-                                        <label for="validationCustom02">Date of Birth</label>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="validationCustom02">Date of Birth</label></div>
+                                    <div class="col-md-4 mb-3">
                                         <div class="input-group">
                                             <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="dob1" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeDOB($event)"
                                                 (click)="dp1.toggleCalendar()" />
@@ -459,8 +478,9 @@
                                     </div>
 
 
-                                    <div class="col-md-6 mb-3">
-                                        <label for="validationCustom01">Eligible For Medical </label>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="validationCustom01">Eligible For Medical </label></div>
+                                    <div class="col-md-4 mb-3">
                                         <select class="form-control " formControlName="lselgbmedi">
       <option></option>
       <option *ngFor="let dl of yesNoList" value="{{dl.lListitemId}}">{{dl.name}}</option>
@@ -469,16 +489,19 @@
                                 </div>
 
                                 <div class="form-row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="validationCustom01">Eligible For Visa</label>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="validationCustom01">Eligible For Visa</label></div>
+                                    <div class="col-md-4 mb-3">
                                         <select class="form-control " formControlName="lselgbvisa">
       <option></option>
       <option *ngFor="let dl of yesNoList" value="{{dl.lListitemId}}">{{dl.name}}</option>
     </select>
                                     </div>
 
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-2 mb-3">
                                         <label for="validationCustom01">Eligible For Air Ticket</label>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
                                         <select class="form-control " formControlName="lselgbairtk">
       <option></option>
       <option *ngFor="let dl of yesNoList" value="{{dl.lListitemId}}">{{dl.name}}</option>
@@ -498,12 +521,15 @@
                 <app-card cardTitle="Life Insurance Information" [options]="false">
 
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom01">Life Insurance Beneficiary's Name-1</label>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Life Insurance Beneficiary's Name-1</label></div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="licbenename1" class="form-control">
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Life Insurance Beneficiary-2's Name</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="licbenename2" class="form-control">
                         </div>
 
@@ -512,25 +538,29 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Life Insurance Beneficiary-1's Contact No.</label>
-                            <input type="text" formControlName="licbenetel1" class="form-control">
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-4 mb-3"><input type="text" formControlName="licbenetel1" class="form-control">
+                        </div>
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Life Insurance Beneficiary-2's Contact No.</label>
-                            <input type="text" formControlName="licbenetel2" class="form-control">
+                        </div>
+                        <div class="col-md-4 mb-3"><input type="text" formControlName="licbenetel2" class="form-control">
                         </div>
 
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Life Insurance Beneficiary-1's Percentage </label>
-                            <input type="number" formControlName="licbeneper1" class="form-control">
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-4 mb-3"><input type="number" formControlName="licbeneper1" class="form-control">
+                        </div>
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Life Insurance Beneficiary-2's Percentage </label>
-                            <input type="number" formControlName="licbeneper2" class="form-control">
+                        </div>
+                        <div class="col-md-4 mb-3"><input type="number" formControlName="licbeneper2" class="form-control">
                         </div>
 
                     </div>

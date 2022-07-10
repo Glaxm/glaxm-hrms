@@ -17,48 +17,34 @@
 
         <div class="form-row">
 
-            <!-- <div class="col-md-6 mb-3">
-                <label for="validationCustom01">Employee</label>
-                <input type="text" formControlName="empName" disabled class="form-control">
 
-            </div> -->
-
-            <!-- <div class="col-md-6 mb-3">
-                <label for="validationCustom01">Source Document</label>
-                <select class="form-control validation_border" formControlName="srcDoctype" (change)="selectSrcDoTypeFun($event)" [ngClass]="{ 'is-invalid': salaryFormSubmitted && es.srcDoctype.errors }">
-                  
-                    <option *ngFor="let dl of srcDocTypeList" value="{{dl.value}}">{{dl.name}}</option>
-        </select>
-                <div *ngIf="salaryFormSubmitted && es.srcDoctype.errors" class="invalid-feedback">
-                    <div *ngIf="es.srcDoctype.errors.required">Source Document is required</div>
-                </div>
-
-            </div> -->
-            <!-- </div> -->
-
-            <!-- <div class="form-row"> -->
-
-            <div class="col-md-6 mb-3" *ngIf="salaryForm.value.srcDoctype=='T'">
+            <div class="col-md-2 mb-3" *ngIf="salaryForm.value.srcDoctype=='T'">
                 <label for="validationCustom01">Normal Hours</label>
+            </div>
+            <div class="col-md-4 mb-3" *ngIf="salaryForm.value.srcDoctype=='T'">
                 <input type="text" formControlName="normalHours" class="form-control validation_border" [ngClass]="{ 'is-invalid': salaryFormSubmitted && es.normalHours.errors }">
                 <div *ngIf="salaryFormSubmitted && es.normalHours.errors" class="invalid-feedback">
                     <div *ngIf="es.normalHours.errors.required">Normal Hours is required</div>
                 </div>
             </div>
 
-            <div class="col-md-6 mb-3" *ngIf="salaryForm.value.srcDoctype=='T'">
+            <div class="col-md-2 mb-3" *ngIf="salaryForm.value.srcDoctype=='T'">
                 <label for="validationCustom01">Overtime Hours</label>
+            </div>
+            <div class="col-md-4 mb-3" *ngIf="salaryForm.value.srcDoctype=='T'">
                 <input type="text" formControlName="overtime_Hours" class="form-control validation_border" [ngClass]="{ 'is-invalid': salaryFormSubmitted && es.overtime_Hours.errors }">
                 <div *ngIf="salaryFormSubmitted && es.overtime_Hours.errors" class="invalid-feedback">
                     <div *ngIf="es.overtime_Hours.errors.required">Overtime Hours is required</div>
                 </div>
             </div>
-            <!-- </div> -->
 
-            <!-- <div class="form-row"> -->
 
-            <div class="col-md-6 mb-3">
+
+
+            <div class="col-md-2 mb-3">
                 <label for="validationCustom01">Payment Mode</label>
+            </div>
+            <div class="col-md-4 mb-3">
                 <select class="form-control validation_border" formControlName="lspaymodeId" (change)="selectPaymode(salaryForm.value.lspaymodeId)" [ngClass]="{ 'is-invalid': salaryFormSubmitted && es.lspaymodeId.errors }">
                     
                     <option *ngFor="let dl of payModeList" value="{{dl.lListitemId}}">{{dl.name}}</option>
@@ -68,8 +54,10 @@
                 </div>
             </div>
 
-            <div class="col-md-6 mb-3" *ngIf="salaryForm.value.payMode=='B'">
+            <div class="col-md-2 mb-3" *ngIf="salaryForm.value.payMode=='B'">
                 <label for="validationCustom01">Bank</label>
+            </div>
+            <div class="col-md-4 mb-3" *ngIf="salaryForm.value.payMode=='B'">
                 <select class="form-control validation_border" formControlName="xBankId" [ngClass]="{ 'is-invalid': salaryFormSubmitted && es.xBankId.errors }">
           <option *ngFor="let dl of bankList" value="{{dl.bankId}}">{{dl.name}}</option>
         </select>
@@ -78,12 +66,10 @@
                 </div>
             </div>
 
-            <!-- </div> -->
-
-            <!-- <div class="form-row"> -->
-
-            <div class="col-md-6 mb-3" *ngIf="salaryForm.value.payMode=='B'">
+            <div class="col-md-2 mb-3" *ngIf="salaryForm.value.payMode=='B'">
                 <label for="validationCustom01">Branch</label>
+            </div>
+            <div class="col-md-4 mb-3" *ngIf="salaryForm.value.payMode=='B'">
                 <input type="text" formControlName="transferBranch" class="form-control validation_border" [ngClass]="{ 'is-invalid': salaryFormSubmitted && es.transferBranch.errors }">
                 <div *ngIf="salaryFormSubmitted && es.transferBranch.errors" class="invalid-feedback">
                     <div *ngIf="es.transferBranch.errors.required">Branch is required</div>
@@ -91,84 +77,81 @@
             </div>
 
 
-            <div class="col-md-6 mb-3" *ngIf="salaryForm.value.payMode=='B'">
+            <div class="col-md-2 mb-3" *ngIf="salaryForm.value.payMode=='B'">
                 <label for="validationCustom01">Account No.</label>
+            </div>
+            <div class="col-md-4 mb-3" *ngIf="salaryForm.value.payMode=='B'">
                 <input type="text" formControlName="transferAccount" class="form-control validation_border" [ngClass]="{ 'is-invalid': salaryFormSubmitted && es.transferAccount.errors }">
                 <div *ngIf="salaryFormSubmitted && es.transferAccount.errors" class="invalid-feedback">
                     <div *ngIf="es.transferAccount.errors.required">Account No. is required</div>
                 </div>
             </div>
 
-            <div class="col-md-6 mb-3" *ngIf="salaryForm.value.payMode=='B'">
-                <label for="validationCustom01">Employee Name in Bank </label>
-                <input type="text" formControlName="empnameinbank" class="form-control">
+            <div class="col-md-2 mb-3" *ngIf="salaryForm.value.payMode=='B'">
+                <label for="validationCustom01">Employee Name in Bank </label></div>
+            <div class="col-md-4 mb-3" *ngIf="salaryForm.value.payMode=='B'"><input type="text" formControlName="empnameinbank" class="form-control">
             </div>
 
-            <div class="col-md-6 mb-3" *ngIf="salaryForm.value.payMode=='B'">
-                <label for="validationCustom01">IBAN Number</label>
-                <input type="text" formControlName="empibanno" class="form-control">
+            <div class="col-md-2 mb-3" *ngIf="salaryForm.value.payMode=='B'">
+                <label for="validationCustom01">IBAN Number</label></div>
+            <div class="col-md-4 mb-3" *ngIf="salaryForm.value.payMode=='B'"><input type="text" formControlName="empibanno" class="form-control">
             </div>
 
-            <div class="col-md-6 mb-3" *ngIf="salaryForm.value.payMode=='B'">
-                <label for="validationCustom01">Routing No.</label>
-                <input type="text" formControlName="routingNo" class="form-control">
+            <div class="col-md-2 mb-3" *ngIf="salaryForm.value.payMode=='B'">
+                <label for="validationCustom01">Routing No.</label></div>
+            <div class="col-md-4 mb-3" *ngIf="salaryForm.value.payMode=='B'"><input type="text" formControlName="routingNo" class="form-control">
             </div>
 
-            <div class="col-md-6 mb-3" *ngIf="salaryForm.value.payMode=='B'">
-                <label for="validationCustom01">Swift Code</label>
-                <input type="text" formControlName="swiftCode" class="form-control">
+            <div class="col-md-2 mb-3" *ngIf="salaryForm.value.payMode=='B'">
+                <label for="validationCustom01">Swift Code</label></div>
+            <div class="col-md-4 mb-3" *ngIf="salaryForm.value.payMode=='B'"><input type="text" formControlName="swiftCode" class="form-control">
             </div>
 
-            <div class="col-md-6 mb-3" *ngIf="salaryForm.value.payMode=='B'">
-                <label for="validationCustom01">IFSC Code</label>
+            <div class="col-md-2 mb-3" *ngIf="salaryForm.value.payMode=='B'">
+                <label for="validationCustom01">IFSC Code</label></div>
+            <div class="col-md-4 mb-3" *ngIf="salaryForm.value.payMode=='B'">
                 <input type="text" formControlName="ifsccode" class="form-control">
             </div>
 
-
-            <!--  -->
-
-            <div class="col-md-6 mb-3" *ngIf="salaryForm.value.payMode=='B'">
-                <label for="validationCustom01">City</label>
-                <select class="form-control validation_border" formControlName="empbankcity">
+            <div class="col-md-2 mb-3" *ngIf="salaryForm.value.payMode=='B'">
+                <label for="validationCustom01">City</label></div>
+            <div class="col-md-4 mb-3" *ngIf="salaryForm.value.payMode=='B'"><select class="form-control validation_border" formControlName="empbankcity">
           <option *ngFor="let dl of cityList" value="{{dl.lListitemId}}">{{dl.name}}</option>
         </select>
             </div>
 
 
 
-            <div class="col-md-6 mb-3" *ngIf="salaryForm.value.payMode=='B'">
-                <label for="validationCustom01">Country</label>
+            <div class="col-md-2 mb-3" *ngIf="salaryForm.value.payMode=='B'">
+                <label for="validationCustom01">Country</label></div>
+            <div class="col-md-4 mb-3" *ngIf="salaryForm.value.payMode=='B'">
                 <select class="form-control validation_border" formControlName="xCountryId">
           <option *ngFor="let dl of countryList" value="{{dl.lListitemId}}">{{dl.name}}</option>
         </select>
             </div>
 
-            <div class="col-md-6 mb-3" *ngIf="salaryForm.value.payMode=='E'">
-                <label for="validationCustom01">Exchange House Name</label>
+            <div class="col-md-2 mb-3" *ngIf="salaryForm.value.payMode=='E'">
+                <label for="validationCustom01">Exchange House Name</label></div>
+            <div class="col-md-4 mb-3" *ngIf="salaryForm.value.payMode=='E'">
                 <select class="form-control validation_border" formControlName="exchangeId">
           <option *ngFor="let dl of exchangeNameList" value="{{dl.lListitemId}}">{{dl.name}}</option>
         </select>
             </div>
 
-            <div class="col-md-6 mb-3" *ngIf="salaryForm.value.payMode=='E'">
-                <label for="validationCustom01">Exchange Account No.</label>
-                <input type="text" formControlName="empexchaneacno" class="form-control">
+            <div class="col-md-2 mb-3" *ngIf="salaryForm.value.payMode=='E'">
+                <label for="validationCustom01">Exchange Account No.</label></div>
+            <div class="col-md-4 mb-3" *ngIf="salaryForm.value.payMode=='E'"><input type="text" formControlName="empexchaneacno" class="form-control">
             </div>
 
-
-            <!-- </div> -->
-
-            <!-- <div class="form-row"> -->
-
-            <div class="col-md-6 mb-3">
-                <label for="validationCustom01">Description</label>
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom01">Description</label></div>
+            <div class="col-md-4 mb-3">
                 <input type="text" formControlName="description" class="form-control">
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
+
             </div>
-            <div class="col-md-6 mb-3">
-                <label for="validationCustom01">Currency</label>
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom01">Currency</label></div>
+            <div class="col-md-4 mb-3">
                 <select class="form-control validation_border" formControlName="xCurrencyId" [ngClass]="{ 'is-invalid': salaryFormSubmitted && es.xCurrencyId.errors }">
                     
                     <option *ngFor="let dl of currencyList" value="{{dl.currencyId}}">{{dl.curSymbol}}</option>
@@ -178,26 +161,9 @@
                 </div>
             </div>
 
-            <!-- </div> -->
-
-            <!-- <div class="form-row"> -->
-
-            <!-- <div class="col-md-6 mb-3">
-                <label for="validationCustom02">Processed Upto</label>
-                <div class="input-group">
-                    <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="lastDate1" disabled #dp11="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeLastDate($event)"
-                        (click)="dp11.toggleCalendar()" />
-                    <div class="input-group-append">
-                        <button type="button" class="btn btn-secondary" disabled (click)="dp11.toggleCalendar()">
-             <i class="fa fa-search" aria-hidden="true"></i>
-           </button>
-                    </div>
-                  
-                </div>
-            </div> -->
-
-            <div class="col-md-6 mb-3">
-                <label for="validationCustom01">Status</label>
+            <div class="col-md-2 mb-3">
+                <label for="validationCustom01">Status</label></div>
+            <div class="col-md-4 mb-3">
                 <select class="form-control validation_border" formControlName="status" [ngClass]="{ 'is-invalid': salaryFormSubmitted && es.status.errors }">
           <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
         </select>
@@ -236,78 +202,29 @@
                     <label class="custom-control-label" for="customCheck6">Weekly Off</label>
                 </div>
             </div>
-
-
-            <!-- <div class="col-md-3 mb-3">
-                <div class="custom-control">
-                    <label for="validationCustom04"></label><br> -->
-            <!-- <input type="checkbox" class="custom-control-input" formControlName="holidayPaid1" id="customCheck4"> -->
-            <!-- <label class="">Weekly Off: </label> -->
-            <!-- </div>
-            </div> -->
-
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
                 <label for="validationCustom01">Regular Off</label>
-                <!-- <select class="form-control" formControlName="xEmployeeId">
-          <option *ngFor="let sl of employeeList" value="{{sl.employeeId}}">{{sl.displayName}}</option>
-       </select> -->
+            </div>
+            <div class="col-md-4 mb-3">
                 <ng-multiselect-dropdown [disabled]="isview=='Y'" name="regularOff" [placeholder]="'Select Regular Off'" [data]="daysList" formControlName="reglrOff" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                 </ng-multiselect-dropdown>
-                <!-- <ng-multiselect-dropdown
-   name="city"
-   [placeholder]="'Select Employee'"
-   [data]="empList"
-   formControlName="employee" 
-   [settings]="dropdownSettings"
-   (onSelect)="onItemSelect($event)">
-</ng-multiselect-dropdown> -->
             </div>
 
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
                 <label for="validationCustom01">Alternate off</label>
-                <select class="form-control" formControlName="alternateoff">
+            </div>
+            <div class="col-md-4 mb-3"><select class="form-control" formControlName="alternateoff">
         <option></option>
         <option *ngFor="let sl of daysList" value="{{sl.valueCode}}">{{sl.valueName}}</option>
      </select>
-                <!-- <ng-multiselect-dropdown
-     name="alternateoff1"
-     [placeholder]="'Select Alternate Off'"
-     [data]="daysList"
-     formControlName="alternateoff1" 
-     [settings]="dropdownSettingsalt"
-     (onSelect)="onItemSelectalt($event)" (onDeSelect)="onitemDeSelectalt($event)">
- </ng-multiselect-dropdown> -->
+
             </div>
-            <!-- <div class="col-md-3 mb-3">
-          <div class="custom-control custom-checkbox">
-            <label for="validationCustom04"></label><br>
-            <input type="checkbox" class="custom-control-input" formControlName="fri" id="customCheck7">
-            <label class="custom-control-label" for="customCheck7"> Friday</label>
-          </div>
-        </div> -->
-            <!-- <div class="col-md-3 mb-3">
-          <div class="custom-control custom-checkbox">
-            <label for="validationCustom04"></label><br>
-            <input type="checkbox" class="custom-control-input" formControlName="frinsat" (change)="changeOverTimePaidFun($event)" id="customCheck8">
-            <label class="custom-control-label" for="customCheck8">Friday & Saturday</label>
-          </div>
-        </div> -->
 
-            <!-- <div class="col-md-3 mb-3">
-          <div class="custom-control custom-checkbox">
-            <label for="validationCustom04"></label><br>
-            <input type="checkbox" class="custom-control-input" formControlName="frinaltsat"  id="customCheck9" (click)="selectFrinaltsat()">
-            <label class="custom-control-label" for="customCheck9">Friday & Alternate Saturday</label>
-          </div>
-        </div> -->
-
-
-
-
-
-            <div class="col-md-6 mb-3" *ngIf="salaryForm.value.alternateoff">
+            <div class="col-md-2 mb-3" *ngIf="salaryForm.value.alternateoff">
                 <label for="validationCustom02">Starting Date</label>
+            </div>
+            <div class="col-md-4 mb-3" *ngIf="salaryForm.value.alternateoff">
                 <div class="input-group">
                     <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="startingDate1" disabled #dp11="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartingDate($event)"
                         (click)="dp11.toggleCalendar()" />
@@ -316,24 +233,14 @@
                <i class="fa fa-search" aria-hidden="true"></i>
              </button>
                     </div>
-                    <!-- <div *ngIf="payItemsubmitted && es.payItemEffectiveDate.errors" class="invalid-feedback">
-            <div *ngIf="pi.payItemEffectiveDate.errors.required">Effective Date is required</div>
-          </div> -->
                 </div>
             </div>
 
 
-
-            <!-- </div> -->
-
-            <!-- <div class="form-row"> -->
-
-            <div class="col-md-6 mb-3" *ngIf="salaryForm.value.overTimePaid1==true || salaryForm.value.weeklyoffpaid1==true || salaryForm.value.holidayPaid1==true">
+            <div class="col-md-2 mb-3" *ngIf="salaryForm.value.overTimePaid1==true || salaryForm.value.weeklyoffpaid1==true || salaryForm.value.holidayPaid1==true">
                 <label for="validationCustom01">Overtime Calculation</label>
-                <!-- <select class="form-control validation_border" formControlName="ovrtimerefPayitemId" [ngClass]="{ 'is-invalid': salaryFormSubmitted && es.ovrtimerefPayitemId.errors }">
-          <option *ngFor="let dl of payItemList" value="{{dl.lListitemId}}">{{dl.name}}</option>
-        </select> -->
-
+            </div>
+            <div class="col-md-4 mb-3" *ngIf="salaryForm.value.overTimePaid1==true || salaryForm.value.weeklyoffpaid1==true || salaryForm.value.holidayPaid1==true">
                 <ng-multiselect-dropdown [disabled]="isview=='Y'" name="ovrtimerefPayitemId1" [placeholder]="'Select Regular Off'" [data]="payItemList" formControlName="ovrtimerefPayitemId1" [(ngModel)]="selectedItemsOC" [settings]="dropdownSettingsOC" (onDeSelect)="onItemDeSelectOC($event)"
                     (onSelect)="onItemSelectOC($event)" (onSelectAll)="onSelectAllOC($event)">
                 </ng-multiselect-dropdown>
@@ -351,18 +258,6 @@
                 </div>
             </div>
 
-            <!-- <div class="col-md-6 mb-3">
-                <label for="validationCustom01">Hold Salary</label>
-                <ng-multiselect-dropdown [disabled]="isview=='Y'" name="months" [placeholder]="'Select Regular Off'" [data]="monthList" formControlName="pausePayroll1" [(ngModel)]="selectedPausePayroll" [settings]="dropdownSettingPayroll" (onDeSelect)="onItemDeSelectPayroll($event)"
-                    (onSelect)="onItemSelectPayroll($event)" (onSelectAll)="onSelectAllPayroll($event)">
-                </ng-multiselect-dropdown>
-
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <label for="validationCustom01">Remark</label>
-                <input type="text" formControlName="pauseRemark" class="form-control">
-            </div> -->
 
         </div>
 

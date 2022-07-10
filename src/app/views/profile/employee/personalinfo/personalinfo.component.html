@@ -104,8 +104,9 @@
             <input type="text" formControlName="dateofbirth" class="form-control">
         </div> -->
 
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Date of Birth </label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Date of Birth </label></div>
+                    <div class="col-md-4 mb-3">
                         <div class="input-group">
                             <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="dateofbirth1" disabled #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeDateofbirth($event)"
                                 (click)="dp1.toggleCalendar()" />
@@ -122,13 +123,15 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Age</label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Age</label></div>
+                    <div class="col-md-4 mb-3">
                         <input type="text" formControlName="empage" class="form-control" disabled>
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Marital Status</label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Marital Status</label></div>
+                    <div class="col-md-4 mb-3">
                         <select class="form-control validation_border" formControlName="lmaritalstatus">
                     <option *ngFor="let dl of maritalstatusList" value="{{dl.value}}">{{dl.name}}
                     </option>
@@ -136,16 +139,18 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Nationality</label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Nationality</label></div>
+                    <div class="col-md-4 mb-3">
                         <select class="form-control validation_border" formControlName="lnationality">
             <option *ngFor="let dl of countryList" value="{{dl.value}}">{{dl.name}}
             </option>
         </select>
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Religion</label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Religion</label></div>
+                    <div class="col-md-4 mb-3">
                         <select class="form-control validation_border" formControlName="xReligionId">
             <option *ngFor="let dl of religionList" value="{{dl.religionId}}">{{dl.name}}
             </option>
@@ -157,19 +162,22 @@
             <app-card cardTitle="Family members / Benefits" [options]="false">
 
                 <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Father's Name</label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Father's Name</label></div>
+                    <div class="col-md-4 mb-3">
                         <input type="text" formControlName="fathername" class="form-control">
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Mother's Name</label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Mother's Name</label></div>
+                    <div class="col-md-4 mb-3">
                         <input type="text" formControlName="mothername" class="form-control">
                     </div>
                 </div>
 
                 <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Spouse Name</label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Spouse Name</label></div>
+                    <div class="col-md-4 mb-3">
                         <input type="text" formControlName="spousename" class="form-control">
                     </div>
 
@@ -179,23 +187,27 @@
             <app-card cardTitle="Contact Information" [options]="false">
 
                 <div class="form-row">
-                    <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom01">Local Home Tel. No.</label>
-                            <input type="text" formControlName="localtele" class="form-control">
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom01">Local Address</label>
-                            <input type="text" formControlName="localaddr" class="form-control">
-                        </div>
 
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Local Home Tel. No.</label></div>
+                    <div class="col-md-4 mb-3">
+                        <input type="text" formControlName="localtele" class="form-control">
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Home country Tel. No.</label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Local Address</label></div>
+                    <div class="col-md-4 mb-3">
+                        <input type="text" formControlName="localaddr" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Home country Tel. No.</label></div>
+                    <div class="col-md-4 mb-3">
                         <input type="text" formControlName="homecontele" class="form-control">
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Home Country Address </label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Home Country Address </label></div>
+                    <div class="col-md-4 mb-3">
                         <input type="text" formControlName="homeconaddr" class="form-control">
                     </div>
 
@@ -206,20 +218,23 @@
             <app-card cardTitle="Relationsahip with employee" [options]="false">
 
                 <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Relative Name</label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Relative Name</label></div>
+                    <div class="col-md-4 mb-3">
                         <input type="text" formControlName="relativename" class="form-control">
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Relative Telephone No.</label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Relative Telephone No.</label></div>
+                    <div class="col-md-4 mb-3">
                         <input type="text" formControlName="relativetele" class="form-control">
                     </div>
 
 
                 </div>
                 <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Relative Address</label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Relative Address</label></div>
+                    <div class="col-md-4 mb-3">
                         <input type="text" formControlName="relativeaddr" class="form-control">
                     </div>
 
@@ -228,20 +243,23 @@
             <app-card cardTitle="Friend Information" [options]="false">
 
                 <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Friend Name</label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Friend Name</label></div>
+                    <div class="col-md-4 mb-3">
                         <input type="text" formControlName="friendname" class="form-control">
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Friend Telephone No.</label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Friend Telephone No.</label></div>
+                    <div class="col-md-4 mb-3">
                         <input type="text" formControlName="friendtele" class="form-control">
                     </div>
 
                 </div>
                 <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Friend Address</label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Friend Address</label></div>
+                    <div class="col-md-4 mb-3">
                         <input type="text" formControlName="friendaddr" class="form-control">
                     </div>
 
@@ -251,19 +269,22 @@
             <app-card cardTitle="Emergency Contact Information" [options]="false">
 
                 <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Emergency Contact Local No.</label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Emergency Contact Local No.</label></div>
+                    <div class="col-md-4 mb-3">
                         <input type="text" formControlName="emrglocaltele" class="form-control">
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Emergency Contact No. in Home Country</label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Emergency Contact No. in Home Country</label></div>
+                    <div class="col-md-4 mb-3">
                         <input type="text" formControlName="emrgconthometele" class="form-control">
                     </div>
 
                 </div>
                 <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Emergency Contact Name</label>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationCustom01">Emergency Contact Name</label></div>
+                    <div class="col-md-4 mb-3">
                         <input type="text" formControlName="emrgcontactName" class="form-control">
                     </div>
                 </div>
@@ -350,16 +371,18 @@
 
                             <div class="form-row">
 
-                                <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">Site Name</label>
+                                <div class="col-md-2 mb-3">
+                                    <label for="validationCustom01">Site Name</label></div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control validation_border" formControlName="lsempchatnameId">
                 <option></option>
                 <option *ngFor="let dl of netwokingList" value="{{dl.lListitemId}}">{{dl.name}}</option>
             </select>
                                 </div>
 
-                                <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">Site ID</label>
+                                <div class="col-md-2 mb-3">
+                                    <label for="validationCustom01">Site ID</label></div>
+                                <div class="col-md-4 mb-3">
                                     <input type="text" formControlName="empchatID" class="form-control">
                                 </div>
 
