@@ -132,7 +132,7 @@ export class EmpSalaryComponent implements OnInit {
       gCompanyId: new FormControl(null, [Validators.required]),
       isActive: new FormControl(null),
       status: new FormControl(null, [Validators.required]),
-      srcDoctype: new FormControl(null, [Validators.required]),
+      srcDoctype: new FormControl(null),//, [Validators.required]),
       holidayPaid: new FormControl(null),
       overtimePaid: new FormControl(null),
       holidayPaid1: new FormControl(null),

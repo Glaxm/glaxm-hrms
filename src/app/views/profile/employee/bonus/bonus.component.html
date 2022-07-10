@@ -1,25 +1,20 @@
-
 <div class="row">
     <div class="col-sm-12" *ngIf="!isOpen">
         <app-card cardTitle="Bonus Summary" [options]="false">
-          
+
 
             <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
                 <ul _ngcontent-epm-c40="" class="nav">
                 </ul>
                 <div _ngcontent-epm-c40="" class="nav-item nav-grid">
-                  
-                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
-                 type="button" (click)="add()" data-toggle="tooltip" data-placement="top"
-                 title="Add">
+
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="add()" data-toggle="tooltip" data-placement="top" title="Add">
                 <i class="fa fa-plus"></i>
                 </button>&nbsp;
-                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
-                type="button" (click)="edit()" data-toggle="tooltip" data-placement="top"
-                title="Edit">
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="edit()" data-toggle="tooltip" data-placement="top" title="Edit">
                <i class="fas fa-pencil-alt"></i>
                </button>&nbsp;
-               <!-- <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+                    <!-- <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
                type="button" (click)="view()" data-toggle="tooltip" data-placement="top"
                title="View">
               <i class="fa fa-eye"></i>
@@ -37,115 +32,111 @@
                 </button> -->
                 </div>
             </nav>
-           
-            
+
+
             <div class="table-responsive">
-               
+
                 <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Pay Item</th>
-                    <th>Amount</th>
-                  
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let dl of empbonusList">
-                    <td>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(dl)">
-                        </div>
-                    </td>
-                    <td>{{dl.payitemname}}</td>
-                    <td>{{dl.amount}}</td>
-                   
-                </tr>
-               
-                </tbody>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Pay Item</th>
+                            <th>Amount</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dl of empbonusList">
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(dl)">
+                                </div>
+                            </td>
+                            <td>{{dl.payitemname}}</td>
+                            <td>{{dl.amount}}</td>
+
+                        </tr>
+
+                    </tbody>
                 </table>
             </div>
             <!-- ---------------------------------------------------------------- -->
 
-         
+
             <!-- ---------------------------------------------------------------- -->
         </app-card>
     </div>
 
     <div class="col-sm-12" *ngIf="isOpen">
-        <app-card cardTitle="{{false ? 'Edit Bonus':'Add Bonus'}}"  [options]="false">
- 
-   
-        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
-          <ul _ngcontent-epm-c40="" class="nav">
-          </ul>
-          <div _ngcontent-epm-c40="" class="nav-item nav-grid">
-            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdatePayItem()">{{bonusId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
-            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger"  (click)="isOpen=false;itemId=undefined;">{{false ? 'Back':'Cancel'}}</button>
-          </div>
-      </nav>
+        <app-card cardTitle="{{false ? 'Edit Bonus':'Add Bonus'}}" [options]="false">
 
-      <form action="javascript:" class="needs-validation" novalidate [formGroup]="empbonusForm">
-           
-        <div class="form-row">
 
-          <div class="col-md-6 mb-3">
+            <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                <ul _ngcontent-epm-c40="" class="nav">
+                </ul>
+                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                    <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdatePayItem()">{{bonusId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="isOpen=false;itemId=undefined;">{{false ? 'Back':'Cancel'}}</button>
+                </div>
+            </nav>
+
+            <form action="javascript:" class="needs-validation" novalidate [formGroup]="empbonusForm">
+
+                <div class="form-row">
+
+                    <!-- <div class="col-md-6 mb-3">
             <label for="validationCustom01">Employee</label>
             <input type="text" formControlName="empName" disabled class="form-control">
            
-          </div>
+          </div> -->
 
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Document No.</label>
-            <input type="text" formControlName="documentno" disabled class="form-control">
-        </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Document No.</label>
+                        <input type="text" formControlName="documentno" disabled class="form-control">
+                    </div>
 
-        <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Pay Item</label>
-            <select disabled class="form-control " formControlName="xPayitemId">
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Pay Item</label>
+                        <select disabled class="form-control " formControlName="xPayitemId">
                 <option *ngFor="let dl of payitemList" value="{{dl.payItemId}}">{{dl.name}}
                 </option>
             </select>
-        </div>
- 
+                    </div>
 
-        <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Amount</label>
-            <input type="text" formControlName="amount" disabled class="form-control">
 
-        </div>
-        <div class="col-md-6 mb-3">
-            <label for="validationCustom02">Effective Date</label>
-            <div class="input-group">
-                <input  disabled class="form-control " placeholder="Select a date" type="text"
-                    angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions"
-                    formControlName="effectiveDate1" #dp2="angular-mydatepicker"
-                    autocomplete="off" (ngModelChange)="changeEndDate($event)" 
-                    (click)="dp2.toggleCalendar()" />
-                <div class="input-group-append">
-                    <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Amount</label>
+                        <input type="text" formControlName="amount" disabled class="form-control">
+
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom02">Effective Date</label>
+                        <div class="input-group">
+                            <input disabled class="form-control " placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="effectiveDate1" #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)"
+                                (click)="dp2.toggleCalendar()" />
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Remark</label>
+                        <input type="text" formControlName="remarks" disabled class="form-control">
+                    </div>
                 </div>
 
-            </div>
-        </div>
 
-        <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Remark</label>
-            <input type="text" formControlName="remarks"  disabled class="form-control">
-        </div>
-        </div>
-         
-  
 
-        
 
-      </form>
 
-        
-        <!-- ////////////////////////////////////////////////////////// -->
+            </form>
+
+
+            <!-- ////////////////////////////////////////////////////////// -->
         </app-card>
     </div>
 </div>
-   

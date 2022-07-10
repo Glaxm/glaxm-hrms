@@ -54,16 +54,16 @@
                                 </div>
                             </div>
 
+                            <!-- /////////////////////////// -->
+
+
+
+
+
+                            <!-- //////////////////////////// -->
                             <div class="col-md-6 mb-3">
-                                <!-- <label for="validationCustom01">Holding</label>
-                <select class="form-control validation_border" formControlName="holdingId" disabled
-                  [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.holdingId.errors }"
-                  (change)="getCompanyListByHoldingId(empdetailsForm.value.holdingId)">
-                  <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
-                </select>
-                <div *ngIf="empdetailesubmitted && ed.holdingId.errors" class="invalid-feedback">
-                  <div *ngIf="ed.holdingId.errors.required">Holding is required</div>
-                </div> -->
+
+
                                 <label for="validationCustom01">Company</label>
                                 <select class="form-control validation_border" formControlName="companyId" (change)="selectCompany(empdetailsForm.value.companyId)" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.companyId.errors }">
                   <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
@@ -109,8 +109,10 @@
                             <!-- <div *ngIf="selectedIndex === 1"> -->
                             <div class="form-row">
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Greeting</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control validation_border" formControlName="greetingId" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.greetingId.errors }">
                       <option *ngFor="let dl of greetingList" value="{{dl.value}}">{{dl.name}}</option>
                     </select>
@@ -119,8 +121,9 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">First Name</label>
+                                <div class="col-md-2 mb-3">
+                                    <label for="validationCustom01">First Name</label></div>
+                                <div class="col-md-4 mb-3">
                                     <input type="text" formControlName="firstName" (keyup)="fullNameFun()" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.firstName.errors }" class="form-control validation_border">
                                     <div *ngIf="empdetailesubmitted && ed.firstName.errors" class="invalid-feedback">
                                         <div *ngIf="ed.firstName.errors.required">First Name is required</div>
@@ -152,13 +155,13 @@
                                     <label for="validationCustom01">Employee Full Name</label>
                                     <input type="text" formControlName="fullName" class="form-control" disabled>
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <!-- <div class="col-md-6 mb-3">
                                     <label for="validationCustom01">Display Name</label>
                                     <input type="text" formControlName="displayName" class="form-control validation_border" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.displayName.errors }">
                                     <div *ngIf="empdetailesubmitted && ed.displayName.errors" class="invalid-feedback">
                                         <div *ngIf="ed.displayName.errors.required">Display Name is required</div>
                                     </div>
-                                </div>
+                                </div> -->
 
                             </div>
 
@@ -200,7 +203,7 @@
                                 </div>
 
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">Education</label>
+                                    <label for="validationCustom01">Highest Qualification</label>
                                     <select class="form-control" formControlName="education">
                                         <option></option>
                                         <option *ngFor="let dl of educationCategoryList" value="{{dl.eduCategoryId}}">{{dl.name}}</option>
@@ -213,7 +216,7 @@
                         </app-card>
 
 
-                        <app-card cardTitle="Function Information" [options]="false" (click)="openTab(2)">
+                        <app-card cardTitle="Positional Structure" [options]="false" (click)="openTab(2)">
                             <!-- <div *ngIf="selectedIndex === 2"> -->
                             <div class="form-row">
 
@@ -265,20 +268,7 @@
 
                             </div>
 
-                            <div class="form-row">
 
-                                <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">Work Location</label>
-                                    <select class="form-control" formControlName="locationId">
-                                        <option></option>
-                                        <option *ngFor="let dl of locationList" value="{{dl.value}}">{{dl.name}}</option>
-                    </select>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-
-                            </div>
                             <!-- </div> -->
                         </app-card>
 
@@ -356,21 +346,7 @@
                             </div>
 
                             <div class="form-row">
-                                <!-- <div class="col-md-6 mb-3">
-                    <label for="validationCustom01">Employee Grade</label>
-                    <input type="text" formControlName="jobGrade" class="form-control">
-                  </div> -->
 
-                                <!-- <div class="col-md-6 mb-3">
-                    <label for="validationCustom01">Job Role</label>
-                    <select class="form-control validation_border" formControlName="jobFunctionId"
-                      [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.jobFunctionId.errors }">
-                      <option *ngFor="let dl of jobFunList" value="{{dl.jobfunctionId}}">{{dl.name}}</option>
-                    </select>
-                    <div *ngIf="empdetailesubmitted && ed.jobFunctionId.errors" class="invalid-feedback">
-                      <div *ngIf="ed.jobFunctionId.errors.required">Job Function is required</div>
-                    </div>
-                  </div> -->
 
                                 <div class="col-md-6 mb-3">
                                     <label for="validationCustom01">Employee Grade</label>
@@ -394,6 +370,21 @@
                                         <div *ngIf="ed.empDesignationId.errors.required">Designation is required</div>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Work Location</label>
+                                    <select class="form-control" formControlName="locationId">
+                                        <option></option>
+                                        <option *ngFor="let dl of locationList" value="{{dl.value}}">{{dl.name}}</option>
+                    </select>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+
                             </div>
                             <!-- </div> -->
 
@@ -481,7 +472,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 mb-3">
+                                <!-- <div class="col-md-6 mb-3">
                                     <label for="validationCustom01">Air Sector</label>
                                     <select class="form-control" formControlName="xAirsectorId">
                                         <option></option>
@@ -490,7 +481,7 @@
                                     <div class="valid-feedback">
                                         Looks good!
                                     </div>
-                                </div>
+                                </div> -->
 
 
                             </div>
@@ -505,13 +496,13 @@
                     </select>
                                 </div>
 
-                                <div class="col-md-6 mb-3">
+                                <!-- <div class="col-md-6 mb-3">
                                     <label for="validationCustom01">Superior </label>
                                     <ng-multiselect-dropdown [placeholder]="" [data]="superiorList" name="superior" formControlName="superior" [(ngModel)]="selectedSuperiorList" [settings]="dropdownSettings" (onSelect)="onSuperiorSelect($event)" (onDeSelect)="onSuperiorDeSelect($event)"
                                         (onSelectAll)="onSelectAllSuperior($event)">
                                     </ng-multiselect-dropdown>
 
-                                </div>
+                                </div> -->
 
 
 
@@ -638,52 +629,10 @@
 
             <!--  -->
 
-            <ng-wizard-step [title]="'My Leave Balance'" [description]="'&nbsp;'">
-                <app-card cardTitle="My Leave Balance- {{empdetailsForm.value.displayName}}" [options]="false">
-
-                    <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
-                        <ul _ngcontent-epm-c40="" class="nav">
-                        </ul>
-                        <div _ngcontent-epm-c40="" class="nav-item nav-grid">
-
-                            <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="showNextStep($event)" data-toggle="tooltip" data-placement="top" title="Next">
-                <i class="fa fa-arrow-right"></i>
-              </button>
-                        </div>
-                    </nav>
-
-                    <div *ngIf="empdetailsForm.value.xEmployeeId !=undefined">
-                        <!-- <app-pay-item [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId"
-              [holdingId]="empdetailsForm.value.holdingId" [displayName]="empdetailsForm.value.displayName">
-            </app-pay-item> -->
-
-                        <app-leave-bal (parentFun)="showNextStep($event)" *ngIf="next==3" [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId" [displayName]="empdetailsForm.value.displayName">
-                        </app-leave-bal>
-
-
-                    </div>
-
-                </app-card>
-            </ng-wizard-step>
-
-            <!--  -->
-
-
             <ng-wizard-step [title]="'My Personal Info'" [description]="'&nbsp;'">
                 <app-card cardTitle="My Personal Info- {{empdetailsForm.value.displayName}}" [options]="false">
 
-                    <!-- <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
-            <ul _ngcontent-epm-c40="" class="nav">
-            </ul>
-            <div _ngcontent-epm-c40="" class="nav-item nav-grid">
-              <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button"
-                (click)="showNextStep($event)" data-toggle="tooltip" data-placement="top" title="Next">
-                <i class="fa fa-arrow-right"></i>
-              </button>
-            </div>
-          </nav> -->
-
-                    <app-personalinfo (parentFun)="showNextStep($event)" *ngIf="next==4" [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId" [dob]="dofb" [displayName]="empdetailsForm.value.displayName">
+                    <app-personalinfo (parentFun)="showNextStep($event)" *ngIf="next==3" [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId" [dob]="dofb" [displayName]="empdetailsForm.value.displayName">
                     </app-personalinfo>
 
                 </app-card>
@@ -693,74 +642,16 @@
             <ng-wizard-step [title]="'My Benefits'" [description]="'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'">
                 <app-card cardTitle="My Benefits- {{empdetailsForm.value.displayName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" [options]="false">
 
-                    <!-- <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
-            <ul _ngcontent-epm-c40="" class="nav">
-            </ul>
-            <div _ngcontent-epm-c40="" class="nav-item nav-grid">
-              <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button"
-                (click)="showNextStep($event)" data-toggle="tooltip" data-placement="top" title="Next">
-                <i class="fa fa-arrow-right"></i>
-              </button>
-            </div>
-          </nav> -->
-                    <app-emp-benefits (parentFun)="showNextStep($event)" *ngIf="next==5" [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId" [displayName]="empdetailsForm.value.displayName"></app-emp-benefits>
+                    <app-emp-benefits (parentFun)="showNextStep($event)" *ngIf="next==4" [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId" [displayName]="empdetailsForm.value.displayName"></app-emp-benefits>
                 </app-card>
             </ng-wizard-step>
 
-            <!-- <ng-wizard-step [title]="'Vehicle Information'" [description]="'&nbsp;'">
-        <app-card cardTitle="Vehicle Information" [options]="false">
-
-          <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
-            <ul _ngcontent-epm-c40="" class="nav">
-            </ul>
-            <div _ngcontent-epm-c40="" class="nav-item nav-grid">
-              <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button"
-                (click)="showNextStep($event)" data-toggle="tooltip" data-placement="top" title="Next">
-                <i class="fa fa-arrow-right"></i>
-              </button>
-            </div>
-          </nav>
-
-          <app-vehicle (parentFun)="showNextStep($event)" [empId]="empdetailsForm.value.xEmployeeId"
-            [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId"
-            [displayName]="empdetailsForm.value.displayName"></app-vehicle>
-        </app-card>
-      </ng-wizard-step> -->
-
-            <!-- <ng-wizard-step [title]="'Accommodation'" [description]="'&nbsp;'">
-        <app-card cardTitle="Accommodation" [options]="false">
-
-          <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
-            <ul _ngcontent-epm-c40="" class="nav">
-            </ul>
-            <div _ngcontent-epm-c40="" class="nav-item nav-grid">
-              <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button"
-                (click)="showNextStep($event)" data-toggle="tooltip" data-placement="top" title="Next">
-                <i class="fa fa-arrow-right"></i>
-              </button>
-            </div>
-          </nav>
-          <app-accommodation (parentFun)="showNextStep($event)" [empId]="empdetailsForm.value.xEmployeeId"
-            [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId"
-            [displayName]="empdetailsForm.value.displayName"></app-accommodation>
-        </app-card>
-      </ng-wizard-step> -->
 
             <ng-wizard-step [title]="'My Personal Docs'" [description]="'&nbsp;'">
                 <app-card cardTitle="My Personal Docs- {{empdetailsForm.value.displayName}}" [options]="false">
 
-                    <!-- <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
-            <ul _ngcontent-epm-c40="" class="nav">
-            </ul>
-            <div _ngcontent-epm-c40="" class="nav-item nav-grid">
-              <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button"
-                (click)="showNextStep($event)" data-toggle="tooltip" data-placement="top" title="Next">
-                <i class="fa fa-arrow-right"></i>
-              </button>
-            </div>
-          </nav> -->
 
-                    <app-personal-docs (parentFun)="showNextStep($event)" *ngIf="next==6" [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId" [displayName]="empdetailsForm.value.displayName">
+                    <app-personal-docs (parentFun)="showNextStep($event)" *ngIf="next==5" [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId" [displayName]="empdetailsForm.value.displayName">
                     </app-personal-docs>
 
                 </app-card>
@@ -769,7 +660,7 @@
             <ng-wizard-step [title]="'My Attachments'" [description]="'&nbsp;'">
                 <app-card cardTitle="My Attachments- {{empdetailsForm.value.displayName}}" [options]="false">
 
-                    <app-emp-docs (parentFun)="showNextStep($event)" *ngIf="next==7" [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId" [displayName]="empdetailsForm.value.displayName">
+                    <app-emp-docs (parentFun)="showNextStep($event)" *ngIf="next==6" [empId]="empdetailsForm.value.xEmployeeId" [companyId]="empdetailsForm.value.companyId" [holdingId]="empdetailsForm.value.holdingId" [displayName]="empdetailsForm.value.displayName">
                     </app-emp-docs>
 
                 </app-card>

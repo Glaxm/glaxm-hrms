@@ -17,13 +17,13 @@
 
         <div class="form-row">
 
-            <div class="col-md-6 mb-3">
+            <!-- <div class="col-md-6 mb-3">
                 <label for="validationCustom01">Employee</label>
                 <input type="text" formControlName="empName" disabled class="form-control">
 
-            </div>
+            </div> -->
 
-            <div class="col-md-6 mb-3">
+            <!-- <div class="col-md-6 mb-3">
                 <label for="validationCustom01">Source Document</label>
                 <select class="form-control validation_border" formControlName="srcDoctype" (change)="selectSrcDoTypeFun($event)" [ngClass]="{ 'is-invalid': salaryFormSubmitted && es.srcDoctype.errors }">
                   
@@ -33,7 +33,7 @@
                     <div *ngIf="es.srcDoctype.errors.required">Source Document is required</div>
                 </div>
 
-            </div>
+            </div> -->
             <!-- </div> -->
 
             <!-- <div class="form-row"> -->
@@ -351,7 +351,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6 mb-3">
+            <!-- <div class="col-md-6 mb-3">
                 <label for="validationCustom01">Hold Salary</label>
                 <ng-multiselect-dropdown [disabled]="isview=='Y'" name="months" [placeholder]="'Select Regular Off'" [data]="monthList" formControlName="pausePayroll1" [(ngModel)]="selectedPausePayroll" [settings]="dropdownSettingPayroll" (onDeSelect)="onItemDeSelectPayroll($event)"
                     (onSelect)="onItemSelectPayroll($event)" (onSelectAll)="onSelectAllPayroll($event)">
@@ -362,7 +362,7 @@
             <div class="col-md-6 mb-3">
                 <label for="validationCustom01">Remark</label>
                 <input type="text" formControlName="pauseRemark" class="form-control">
-            </div>
+            </div> -->
 
         </div>
 

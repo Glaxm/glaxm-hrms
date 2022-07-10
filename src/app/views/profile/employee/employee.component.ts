@@ -114,7 +114,7 @@ export class EmployeeComponent implements OnInit {
       updatedBy: new FormControl(0),
       processing: new FormControl(null),
       processed: new FormControl(null),
-      displayName: new FormControl(null, [Validators.required]),
+      displayName: new FormControl(null),//, [Validators.required]),
       value: new FormControl(null, [Validators.required]),
       greetingId: new FormControl(null),
       firstName: new FormControl(null, [Validators.required]),

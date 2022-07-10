@@ -1,25 +1,20 @@
-
 <div class="row">
     <div class="col-sm-12" *ngIf="!isOpenBankAccount">
         <app-card cardTitle="Bank Summary - {{displayName}}" [options]="false">
-          
+
 
             <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
                 <ul _ngcontent-epm-c40="" class="nav">
                 </ul>
                 <div _ngcontent-epm-c40="" class="nav-item nav-grid">
-                  
-                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
-                 type="button" (click)="add()" data-toggle="tooltip" data-placement="top"
-                 title="Add">
+
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="add()" data-toggle="tooltip" data-placement="top" title="Add">
                 <i class="fa fa-plus"></i>
                 </button>&nbsp;
-                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
-                type="button" (click)="edit()" data-toggle="tooltip" data-placement="top"
-                title="Edit">
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="edit()" data-toggle="tooltip" data-placement="top" title="Edit">
                <i class="fas fa-pencil-alt"></i>
                </button>&nbsp;
-               <!-- <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
+                    <!-- <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
                type="button" (click)="view()" data-toggle="tooltip" data-placement="top"
                title="View">
               <i class="fa fa-eye"></i>
@@ -37,162 +32,161 @@
                 </button> -->
                 </div>
             </nav>
-           
-            
+
+
             <div class="table-responsive">
-               
+
                 <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Bank</th>
-                    <th>Branch</th>
-                    <th>Account Number</th>
-                  
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let dl of employeeBankList">
-                    <td>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(dl)">
-                        </div>
-                    </td>
-                    <td>{{dl.bankname}}</td>
-                    <td>{{dl.empbankbranch}}</td>
-                    <td>{{dl.empaccountno}}</td>
-                  
-                </tr>
-               
-                </tbody>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Bank</th>
+                            <th>Branch</th>
+                            <th>Account Number</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dl of employeeBankList">
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(dl)">
+                                </div>
+                            </td>
+                            <td>{{dl.bankname}}</td>
+                            <td>{{dl.empbankbranch}}</td>
+                            <td>{{dl.empaccountno}}</td>
+
+                        </tr>
+
+                    </tbody>
                 </table>
             </div>
             <!-- ---------------------------------------------------------------- -->
 
-         
+
             <!-- ---------------------------------------------------------------- -->
         </app-card>
     </div>
 
     <div class="col-sm-12" *ngIf="isOpenBankAccount">
-        <app-card cardTitle="{{false ? 'Edit Bank':'Add Bank'}}"  [options]="false">
- 
-   
-        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
-          <ul _ngcontent-epm-c40="" class="nav">
-          </ul>
-          <div _ngcontent-epm-c40="" class="nav-item nav-grid">
-            <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateEmpBank()">{{bankId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
-            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger"  (click)="isOpenBankAccount=false;bankId=undefined;">{{false ? 'Back':'Cancel'}}</button>
-          </div>
-      </nav>
+        <app-card cardTitle="{{false ? 'Edit Bank':'Add Bank'}}" [options]="false">
 
-      <form action="javascript:" class="needs-validation" novalidate [formGroup]="bankForm">
-           
-        <div class="form-row">
 
-          <div class="col-md-6 mb-3">
+            <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                <ul _ngcontent-epm-c40="" class="nav">
+                </ul>
+                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                    <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateEmpBank()">{{bankId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="isOpenBankAccount=false;bankId=undefined;">{{false ? 'Back':'Cancel'}}</button>
+                </div>
+            </nav>
+
+            <form action="javascript:" class="needs-validation" novalidate [formGroup]="bankForm">
+
+                <div class="form-row">
+
+                    <!-- <div class="col-md-6 mb-3">
             <label for="validationCustom01">Employee</label>
             <input type="text" formControlName="empName" disabled class="form-control">
             <div class="valid-feedback">
               Looks good!
             </div>
-          </div>
+          </div> -->
 
-        
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Bank Name</label>
-            <select class="form-control validation_border" formControlName="xBankId">
+
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Bank Name</label>
+                        <select class="form-control validation_border" formControlName="xBankId">
                 <option *ngFor="let dl of bankList" value="{{dl.bankId}}">{{dl.name}}
                 </option>
             </select>
-        </div>
-
-        
-        </div>
-     
+                    </div>
 
 
-<div class="form-row">
-    <div class="col-md-6 mb-3">
-        <label for="validationCustom01">Account Number</label>
-        <input type="text" formControlName="empaccountno" class="form-control">
-    </div>
-    <div class="col-md-6 mb-3">
-        <label for="validationCustom01">IBAN Number</label>
-        <input type="text" formControlName="empibanno" class="form-control">
-        
-    </div>
-</div>
+                </div>
 
- <div class="form-row">
-    <div class="col-md-6 mb-3">
-        <label for="validationCustom01">Routing Code</label>
-        <input type="text" formControlName="routingno" class="form-control">
-    </div>
-    <div class="col-md-6 mb-3">
-        <label for="validationCustom01">Name as in bank records</label>
-        <input type="text" formControlName="empnameinbank" class="form-control">
-    </div>
-</div>
 
- <div class="form-row">
-    <div class="col-md-6 mb-3">
-        <label for="validationCustom01">Branch</label>
-        <input type="text" formControlName="empbankbranch" class="form-control">
-    </div>
 
-    <!-- <div class="col-md-6 mb-3">
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Account Number</label>
+                        <input type="text" formControlName="empaccountno" class="form-control">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">IBAN Number</label>
+                        <input type="text" formControlName="empibanno" class="form-control">
+
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Routing Code</label>
+                        <input type="text" formControlName="routingno" class="form-control">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Name as in bank records</label>
+                        <input type="text" formControlName="empnameinbank" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Branch</label>
+                        <input type="text" formControlName="empbankbranch" class="form-control">
+                    </div>
+
+                    <!-- <div class="col-md-6 mb-3">
         <label for="validationCustom01">City</label>
         <input type="text" formControlName="empbankcity" class="form-control">
     </div> -->
 
-    <div class="col-md-6 mb-3">
-        <label for="validationCustom01">City</label>
-        <select class="form-control " formControlName="empbankcity">
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">City</label>
+                        <select class="form-control " formControlName="empbankcity">
             <option *ngFor="let dl of cityList" value="{{dl.value}}">{{dl.name}}
             </option>
         </select>
-    </div>
+                    </div>
 
- </div> 
- <div class="form-row">
-    <div class="col-md-6 mb-3">
-        <label for="validationCustom01">UAE Exchange</label>
-        <input type="text" formControlName="empexchaneacno" class="form-control">
-    </div>
-   
-    <div class="col-md-6 mb-3">
-        <label for="validationCustom01">Country</label>
-        <select class="form-control validation_border" formControlName="xCountryId">
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">UAE Exchange</label>
+                        <input type="text" formControlName="empexchaneacno" class="form-control">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Country</label>
+                        <select class="form-control validation_border" formControlName="xCountryId">
             <option *ngFor="let dl of countryList" value="{{dl.value}}">{{dl.name}}
             </option>
         </select>
-    </div>
- </div>
+                    </div>
+                </div>
 
-  <div class="form-row">
-   
-    <div class="col-md-6 mb-3">
-        <label for="validationCustom01">Currency</label>
-        <select class="form-control validation_border" formControlName="xCurrencyId">
+                <div class="form-row">
+
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Currency</label>
+                        <select class="form-control validation_border" formControlName="xCurrencyId">
             <option *ngFor="let dl of currencyList" value="{{dl.currencyId}}">{{dl.curSymbol}}
             </option>
         </select>
-    </div>
-   
-        <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Status</label>
-            <select class="form-control" formControlName="status">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">Status</label>
+                        <select class="form-control" formControlName="status">
               <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
             </select>
-         
-    </div>
-  </div>
- </form>
-  
-        <!-- ////////////////////////////////////////////////////////// -->
+
+                    </div>
+                </div>
+            </form>
+
+            <!-- ////////////////////////////////////////////////////////// -->
         </app-card>
     </div>
 </div>
-   

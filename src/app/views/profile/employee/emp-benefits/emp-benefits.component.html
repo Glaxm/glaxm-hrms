@@ -76,25 +76,25 @@
 
             <form action="javascript:" class="needs-validation" novalidate [formGroup]="benefitsForm">
 
-                <app-card cardTitle="Annual Leave" [options]="false">
+                <!-- <app-card cardTitle="Annual Leave" [options]="false">
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                         <div class="col-md-6 mb-3">
                             <label for="validationCustom01">Employee</label>
                             <input type="text" formControlName="value" disabled class="form-control">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
+ 
 
-
-                        <!-- <div class="col-md-6 mb-3">
+                         <div class="col-md-6 mb-3">
           <label for="validationCustom01">Point of Hire</label>
           <select class="form-control validation_border" formControlName="L_AIRTKTENTL_ID">
               <option *ngFor="let dl of pointofhireList" value="{{dl.valueCode}}">{{dl.valueName}}
               </option>
           </select>
-      </div> -->
+      </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="validationCustom01">Annual Leave Entitlement Type</label>
@@ -114,13 +114,10 @@
           </option>
       </select>
                         </div>
-                        <!-- <div class="col-md-6 mb-3">
-      <label for="validationCustom01">Annual Leave Balance Days</label>
-      <input type="text" formControlName="annualbaldays" class="form-control">
-  </div> -->
+            
                     </div>
 
-                </app-card>
+                </app-card> -->
                 <app-card cardTitle="Vehicle" [options]="false">
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
@@ -189,13 +186,13 @@
       </select>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <!-- <div class="col-md-6 mb-3">
                             <label for="validationCustom01">Family Benefits Entitlement</label>
                             <select class="form-control" formControlName="famibeneentl">
           <option *ngFor="let dl of familybenefitentitList" value="{{dl.value}}">{{dl.name}}
           </option>
       </select>
-                        </div>
+                        </div> -->
                     </div>
                 </app-card>
                 <app-card cardTitle="Air Ticket" [options]="false">
@@ -361,7 +358,7 @@
      </div>
    </div>
  </div> -->
-                <app-card cardTitle="Family" [options]="false">
+                <app-card cardTitle="Family members / Benefits" [options]="false">
 
                     <div *ngIf="!isOpenRelation">
                         <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
