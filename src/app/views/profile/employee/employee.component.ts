@@ -230,9 +230,11 @@ export class EmployeeComponent implements OnInit {
           this.empdetailsForm.controls['dateOfBirth1'].setValue(fromModel1);
           this.changeDateOfBirth(this.empdetailsForm.value.dateOfBirth1);
         }
-        
+       
         this.empdetailsForm.controls['empGradeId'].setValue(s.data.empGradeId);
+        this.empdetailsForm.controls['xShiftruleId'].setValue(s.data.xShiftruleId);
         // xAirSectorId
+        
         this.empdetailsForm.controls['xAirsectorId'].setValue(s.data.xAirSectorId);
         if (s.data.effectiveDate) {
           let effectiveDate: Date = new Date(s.data.effectiveDate);

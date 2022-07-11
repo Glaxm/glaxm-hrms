@@ -55,6 +55,10 @@ const colors: any = {
     primary: '#333',
     secondary: '#fff',
   },
+  purple:{
+    primary:'#800080',
+    secondart:'#BB29BB'
+  }
 
 };
 
@@ -223,7 +227,7 @@ export class CalendarViewComponent  {
           {
             var color = colors.blue;
           }
-          else if(element.status=="Shortfall")
+          else if(element.status=="shortfall")
           {
             var color = colors.purple;
           }

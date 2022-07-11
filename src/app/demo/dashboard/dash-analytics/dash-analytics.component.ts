@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexFill, ApexLegend, ApexNonAxisChartSeries, ApexPlotOptions, ApexResponsive, ApexStroke, ApexTooltip, ApexXAxis, ApexYAxis, ChartComponent } from 'ng-apexcharts';
 import { ToastrService } from 'src/app/views/services/toastr.service';
 import { error } from 'jquery';
+import { Router } from '@angular/router';
 
 
 export type ChartOptions = {
@@ -126,7 +127,7 @@ public barChartLabels5: string[] = ['Production', 'IT/IS', 'Sales','Software Eng
 
 defaultCompany:any;
   //********************************************************************************************** */
-  constructor(public apexEvent: ApexChartService, public dashaboardService:DashboardService,private toastService:ToastrService) {
+  constructor(public router:Router,public apexEvent: ApexChartService, public dashaboardService:DashboardService,private toastService:ToastrService) {
     this.chartDB = ChartDB;
     this.dailyVisitorStatus = '1y';
 
@@ -628,5 +629,6 @@ defaultCompany:any;
     }
    }
 
+  
 
 }

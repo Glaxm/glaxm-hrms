@@ -846,7 +846,7 @@
                                     <!---->
                                 </div>
                                 &nbsp;&nbsp;
-                                <div _ngcontent-ufl-c94="" class="card ng-tns-c94-482 ng-trigger ng-trigger-cardRemove prod-p-card bg-info" style="opacity: 1;">
+                                <div _ngcontent-ufl-c94="" class="card ng-tns-c94-482 ng-trigger ng-trigger-cardRemove prod-p-card bg-c-yellow" style="opacity: 1;">
                                     <!---->
                                     <div _ngcontent-ufl-c94="" class="card-body ng-tns-c94-482 ng-star-inserted" style="">
                                         <div _ngcontent-ufl-c121="" class="row align-items-center m-b-0 ng-tns-c94-482">
@@ -945,75 +945,64 @@
                 </div>
 
                 <div class="col-xl-6 col-md-12">
-                    <app-card cardTitle="Loan details" [options]="false">
-                        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <!-- <app-card cardTitle="" [options]="false"> -->
+                    <!-- <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
                             <ul _ngcontent-epm-c30="" class="nav">
                             </ul>
                             <div _ngcontent-epm-c40="" class="nav-item nav-grid">
                                 <a href="#/views/transaction/emp-loan/employeeloan-summary">Details</a>
                             </div>
-                        </nav>
+                        </nav> -->
+                    <div class="card ng-tns-c94-47 ng-trigger ng-trigger-cardRemove" style="opacity: 1;">
+                        <!---->
+                        <div class="card-body ng-tns-c94-47 ng-star-inserted" style="">
 
-                        <div _ngcontent-cgl-c94="" class="card-body ng-tns-c94-87 ng-star-inserted" style="">
-                            <div _ngcontent-cgl-c117="" class="table-responsive ng-tns-c94-87">
-                                <perfect-scrollbar _ngcontent-cgl-c117="" style="max-height: 215px;">
-                                    <div style="position: static;" class="ps ps--active-y">
-                                        <div class="ps-content">
-                                            <table _ngcontent-cgl-c117="" class="table table-hover">
-                                                <thead _ngcontent-cgl-c117="">
-                                                    <tr _ngcontent-cgl-c117="">
-                                                        <th>Loan Amount</th>
-                                                        <th>Loan Start Date</th>
-                                                        <th>Balance as on </th>
+                            <div class="row ng-tns-c94-47">
+                                <div class="col-auto">
+                                    <h6>Loan details</h6>
+                                </div>
+                                <div class="col text-right">
+                                    <!-- <h2 class="mb-0">1042</h2> -->
+                                    <a href="#/views/transaction/emp-loan/employeeloan-summary">Details</a>
+                                </div>
+                            </div>
 
-                                                    </tr>
-                                                </thead>
-                                                <tbody _ngcontent-cgl-c117="">
-                                                    <tr *ngFor="let dl of loandetailsList">
-                                                        <td _ngcontent-cgl-c117="">{{dl.loanamount}}
-                                                        </td>
-                                                        <td _ngcontent-cgl-c117="">{{dl.loandate}}</td>
-                                                        <td _ngcontent-cgl-c117="">
-                                                            <h6 _ngcontent-cgl-c117="" class="mb-1 text-c-red">{{dl.balance}}</h6>
-                                                        </td>
-                                                    </tr>
+                            <div _ngcontent-cgl-c94="" class="card-body ng-tns-c94-87 ng-star-inserted" style="">
+                                <div _ngcontent-cgl-c117="" class="table-responsive ng-tns-c94-87">
+                                    <perfect-scrollbar _ngcontent-cgl-c117="" style="max-height: 215px;">
+                                        <div style="position: static;" class="ps ps--active-y">
+                                            <div class="ps-content">
+                                                <table _ngcontent-cgl-c117="" class="table table-hover">
+                                                    <thead _ngcontent-cgl-c117="">
+                                                        <tr _ngcontent-cgl-c117="">
+                                                            <th>Loan Amount</th>
+                                                            <th>Loan Start Date</th>
+                                                            <th>Balance as on </th>
 
-                                                </tbody>
-                                            </table>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody _ngcontent-cgl-c117="">
+                                                        <tr *ngFor="let dl of loandetailsList">
+                                                            <td _ngcontent-cgl-c117="">{{dl.loanamount}}
+                                                            </td>
+                                                            <td _ngcontent-cgl-c117="">{{dl.loandate}}</td>
+                                                            <td _ngcontent-cgl-c117="">
+                                                                <h6 _ngcontent-cgl-c117="" class="mb-1 text-c-red">{{dl.balance}}</h6>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
                                         </div>
-
-                                    </div>
-                                </perfect-scrollbar>
+                                    </perfect-scrollbar>
+                                </div>
                             </div>
                         </div>
-                        <!-- <perfect-scrollbar [style.max-height]="'362px'">
-                            <table class="table m-b-0">
-                                <thead>
-                                    <tr>
-                                        <th>Loan Amount</th>
-                                        <th>Loan Start Date</th>
-                                        <th>Balance as on </th>
+                    </div>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let dl of loandetailsList">
-
-                                        <td>{{dl.loanamount}}</td>
-                                        <td>{{dl.loandate}}</td>
-                                        <td>{{dl.balance}}</td>
-
-
-                                    </tr>
-
-                                    <tr *ngIf="loandetailsList?.length===0">
-                                        <td colspan="6" style="text-align:center;">No records</td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </perfect-scrollbar> -->
-                    </app-card>
+                    <!-- </app-card> -->
                 </div>
                 <!-- </div> -->
 
