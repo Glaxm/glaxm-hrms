@@ -196,7 +196,7 @@
                                 </div>
 
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">Education</label>
+                                    <label for="validationCustom01">Highest Qualification</label>
                                     <select class="form-control" formControlName="education">
                                         <option></option>
                                         <option *ngFor="let dl of educationCategoryList" value="{{dl.eduCategoryId}}">{{dl.name}}</option>
@@ -209,7 +209,7 @@
                         </app-card>
 
 
-                        <app-card cardTitle="Function Information" [options]="false" (click)="openTab(2)">
+                        <app-card cardTitle="Positional Structure" [options]="false" (click)="openTab(2)">
                             <!-- <div *ngIf="selectedIndex === 2"> -->
                             <div class="form-row">
 
@@ -261,20 +261,7 @@
 
                             </div>
 
-                            <div class="form-row">
 
-                                <div class="col-md-6 mb-3">
-                                    <label for="validationCustom01">Work Location</label>
-                                    <select class="form-control" formControlName="locationId">
-                                        <option></option>
-                                        <option *ngFor="let dl of locationList" value="{{dl.value}}">{{dl.name}}</option>
-                    </select>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-
-                            </div>
                             <!-- </div> -->
                         </app-card>
 
@@ -392,6 +379,20 @@
                                 </div>
                             </div>
                             <!-- </div> -->
+                            <div class="form-row">
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Work Location</label>
+                                    <select class="form-control" formControlName="locationId">
+                                        <option></option>
+                                        <option *ngFor="let dl of locationList" value="{{dl.value}}">{{dl.name}}</option>
+                    </select>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+
+                            </div>
 
                         </app-card>
 

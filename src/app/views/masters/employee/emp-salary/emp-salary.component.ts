@@ -127,6 +127,7 @@ export class EmpSalaryComponent implements OnInit {
     private empService: EmployeeService) {
     this.salaryForm = new FormGroup({
       empName: new FormControl(null),
+      notapplicable: new FormControl(null),
       l_empsalary_id: new FormControl(null),
       gHoldingId: new FormControl(null, [Validators.required]),
       gCompanyId: new FormControl(null, [Validators.required]),
@@ -304,6 +305,7 @@ export class EmpSalaryComponent implements OnInit {
         success.data.holidayPaid == "Y" ? this.salaryForm.get('holidayPaid1').setValue(true) : this.salaryForm.get('holidayPaid1').setValue(false);
         success.data.overtimePaid == "Y" ? this.salaryForm.get('overTimePaid1').setValue(true) : this.salaryForm.get('overTimePaid1').setValue(false);
         success.data.weeklyoffpaid == "Y" ? this.salaryForm.get('weeklyoffpaid1').setValue(true) : this.salaryForm.get('weeklyoffpaid1').setValue(false);
+        success.data.holidayPaid !="Y" && success.data.overtimePaid !="Y"  && success.data.weeklyoffpaid !="Y" ? this.salaryForm.get('notapplicable').setValue(true) :this.salaryForm.get('notapplicable').setValue(false) ;
         if (success.data.startingDate) {
           let dateOfJoin: Date = new Date(success.data.startingDate);
           let fromModel: IMyDateModel = { isRange: false, singleDate: { jsDate: dateOfJoin }, dateRange: null };
@@ -496,8 +498,10 @@ export class EmpSalaryComponent implements OnInit {
   changeOverTimePaidFun(event) {
     const jobid = this.salaryForm.get('ovrtimerefPayitemId1');
     if(this.salaryForm.value.overTimePaid1 || this.salaryForm.value.weeklyoffpaid1 || this.salaryForm.value.holidayPaid1){
-       jobid.setValidators([Validators.required]); }
+       jobid.setValidators([Validators.required]);
+       this.salaryForm.get('notapplicable').setValue(false); }
        else{ 
+        this.salaryForm.get('notapplicable').setValue(true);
          jobid.setValidators(null);}
     jobid.reset();
     jobid.updateValueAndValidity();

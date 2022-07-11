@@ -183,11 +183,18 @@
             <div class="col-md-3 mb-3">
                 <div class="custom-control custom-checkbox">
                     <label for="validationCustom04"></label><br>
+                    <input disabled type="checkbox" class="custom-control-input" formControlName="notapplicable" id="customCheck10" (change)="changeOverTimePaidFun($event)">
+                    <label class="custom-control-label" for="customCheck10">Not Applicable</label>
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <div class="custom-control custom-checkbox">
+                    <label for="validationCustom04"></label><br>
                     <input type="checkbox" class="custom-control-input" formControlName="holidayPaid1" id="customCheck4" (change)="changeOverTimePaidFun($event)">
                     <label class="custom-control-label" for="customCheck4">Holiday</label>
                 </div>
             </div>
-            <div class="col-md-3 mb-3">
+            <div class="col-md-2 mb-3">
                 <div class="custom-control custom-checkbox">
                     <label for="validationCustom04"></label><br>
                     <input type="checkbox" class="custom-control-input" formControlName="overTimePaid1" (change)="changeOverTimePaidFun($event)" id="customCheck5">
@@ -195,13 +202,14 @@
                 </div>
             </div>
 
-            <div class="col-md-3 mb-3">
+            <div class="col-md-2 mb-3">
                 <div class="custom-control custom-checkbox">
                     <label for="validationCustom04"></label><br>
                     <input type="checkbox" class="custom-control-input" formControlName="weeklyoffpaid1" id="customCheck6" (change)="changeOverTimePaidFun($event)">
                     <label class="custom-control-label" for="customCheck6">Weekly Off</label>
                 </div>
             </div>
+
             <div class="col-md-2 mb-3">
                 <label for="validationCustom01">Regular Off</label>
             </div>

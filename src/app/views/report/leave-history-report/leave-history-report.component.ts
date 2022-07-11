@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { IMyDateModel } from 'angular-mydatepicker';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { CommonService } from '../../services/common.service';
@@ -38,7 +39,8 @@ export class LeaveHistoryReportComponent implements OnInit {
   }
   leaveReportSummaryList:any =[];
   leavehistoryform:any;
-  constructor(public excelService: ExcelService,  private reportService: ReportService,
+  redirectfromdashboard:any;
+  constructor(private activatedRoute:ActivatedRoute,public excelService: ExcelService,  private reportService: ReportService,
      private commonService: CommonService) {
 
       this.leavehistoryform = new FormGroup({
@@ -51,6 +53,11 @@ export class LeaveHistoryReportComponent implements OnInit {
         stdate:new FormControl(null),
         endate:new FormControl(null),
         leaveType:new FormControl(null)
+      });
+
+
+      this.activatedRoute.queryParams.subscribe(params => {
+       this.redirectfromdashboard = params.redirectfromdashboard;
       });
  
   }
@@ -73,8 +80,32 @@ export class LeaveHistoryReportComponent implements OnInit {
         }
       });
     }
-    this.getAllComapny();
+    // this.getAllComapny();
     this.getAllLeaveType();
+
+    if(this.redirectfromdashboard=="Y"){
+
+      this.reportService.getAllComapny().subscribe(success => {
+      
+        this.companyList = success;
+        if(this.companyList){
+  
+          let list:any = JSON.parse(sessionStorage.getItem("company"));
+          var l:any=[];
+          if(list){
+          for(var i=0;i<list.length;i++){
+              l.push(Number(list[i]));
+          }}
+        this.companyList = this.companyList.filter(o1 => l.some(o2 => o1.companyId === o2));
+        this.selectecdCompanyList = [{'companyId':this.companyList[0].companyId,'companyName':this.companyList[0].companyName}];
+        this.changeComapny(this.selectecdCompanyList);
+       
+      }
+      });
+
+    } else{
+      this.getAllComapny();
+    }
 
   }
 
@@ -82,6 +113,12 @@ export class LeaveHistoryReportComponent implements OnInit {
     
     this.reportService.getAllLeaveType().subscribe(success=>{
       this.leaveTypeList = success;
+      if(this.redirectfromdashboard=="Y"){
+        this.selectecdLeaveTypeList = [{'xLeaveitemId':this.leaveTypeList[0].xLeaveitemId,'name':this.leaveTypeList[0].name}];
+        this.selectecdLeaveTypeList.push(...this.leaveTypeList);
+       
+        this.filterTable();
+      }
    })
   
   }
@@ -394,7 +431,7 @@ export class LeaveHistoryReportComponent implements OnInit {
 
   onSelectAllLeaveType(items: any) {
     this.selectecdLeaveTypeList = [];
-    this.selectecdLeaveTypeList.push(...[items]);
+    this.selectecdLeaveTypeList.push(...items);
   }
 
   onDeSelectAllLeaveType(items:any){

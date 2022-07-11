@@ -193,7 +193,7 @@ defaultCompany:any;
       this.getLoanDetails();
       this.getApprovalRequestDetails();
       // alert(JSON.stringify(this.empObj))
-      this.empurl = this.empObj.data.path ? environment.IMG_URL + this.empObj.data.path : (this.empObj.data.empGender=="M" ? "../assets/images/user/male.png": "../assets/images/user/female.png");
+      this.empurl = this.empObj.data.path ? environment.IMG_URL + this.empObj.data.path : (this.empObj.data.empGender=="M" ? "assets/images/user/male.png": "assets/images/user/female.png");
       // ==================
     }
 
