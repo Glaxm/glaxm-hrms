@@ -332,6 +332,10 @@ export class CalendarViewComponent  {
       this.router.navigate(['/views/report/emp-attendance-report']);
     }
 
+    calendarDayEvent(data){
+     data.show();
+    }
+
 
     // list:any =[{attendance:'Present'},{attendance:'Present'},{attendance:'Present'},{attendance:'Present'},{attendance:'Present'}]
 

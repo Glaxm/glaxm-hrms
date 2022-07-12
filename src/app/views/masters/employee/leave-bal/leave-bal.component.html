@@ -21,16 +21,18 @@
                 </nav>
                 <div class="form-row">
 
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-2 mb-3">
                         <label for="validationCustom01">Employee</label>
+                    </div>
+                    <div class="col-md-4 mb-3">
                         <input type="text" formControlName="value" disabled class="form-control">
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
+
                     </div>
 
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-2 mb-3">
                         <label for="validationCustom01">Annual Leave Entitlement Type</label>
+                    </div>
+                    <div class="col-md-4 mb-3">
                         <select class="form-control" formControlName="xEmpleaveId">
           <option *ngFor="let dl of aleaveentitelmenttypeList" value="{{dl.value}}">{{dl.name}}
           </option>
@@ -40,8 +42,10 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-2 mb-3">
                         <label for="validationCustom01">Annual Leave Entitlement Days</label>
+                    </div>
+                    <div class="col-md-4 mb-3">
                         <select class="form-control" formControlName="lentldays">
       <option *ngFor="let dl of aleaveentitelmentdaysList" value="{{dl.value}}">{{dl.name}}
       </option>

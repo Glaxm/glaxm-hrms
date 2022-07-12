@@ -1,402 +1,348 @@
 <div class="row">
-  <!-- <div class="col-sm-12">
-    <app-card cardTitle="Personal Docs Summary" [options]="false">
+    <div class="col-sm-12">
+        <app-card cardTitle="{{false ? 'Edit Personal Docs':'Add Personal Docs'}}" [options]="false">
 
 
-      <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
-        <ul _ngcontent-epm-c40="" class="nav">
-        </ul>
-        <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+            <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                <ul _ngcontent-epm-c40="" class="nav">
+                </ul>
+                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                    <button type="button" class="btn btn-success" ngbTooltip="btn-success" *ngIf="isview=='N'" (click)="addUpdateDoc()">{{pdocid ? 'Update':'Save'}}</button> &nbsp;&nbsp;&nbsp;
 
-          <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="add()"
-            data-toggle="tooltip" data-placement="top" title="Add" 
-            *ngIf="isview=='N' && pDocList?.length<1">
-
-            <i class="fa fa-plus"></i>
-          </button>&nbsp;
-          <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button"
-            (click)="edit()" data-toggle="tooltip" data-placement="top" title="Edit" *ngIf="isview=='N'">
-            <i class="fas fa-pencil-alt"></i>
-          </button>&nbsp;
-        
-        </div>
-      </nav>
-
-
-      <div class="table-responsive">
-
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Passport No.</th>
-              <th>Date of Expiry</th>
-              <th>Residence Visa No.</th>
-              <th>Residence Visa Expiry Date</th>
-              <th>Labour Card Number</th>
-              <th>Labour Card Expiry Date</th>
-              <th>Medical Insurance Card No.</th>
-              <th>Medical Insurance Expiry Date</th>
-              <th>Driving Licence No.</th>
-              <th>Date of Expiry</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let dl of pDocList">
-              <td>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1"
-                    (click)="getDataUsingRedioBtn(dl)">
-                </div>
-              </td>
-              <td>{{dl.passportno}}</td>
-              <td>{{dl.ppdateexpiry | date: 'dd-MMM-yyyy'}}</td>
-              <td>{{dl.visano}}</td>
-              <td>{{dl.visadateexpiry | date: 'dd-MMM-yyyy'}}</td>
-              <td>{{dl.labourcardno}}</td>
-              <td>{{dl.lcdateexpiry | date: 'dd-MMM-yyyy'}}</td>
-              <td>{{dl.medinscardno}}</td>
-              <td>{{dl.medinsdateexpiry  | date: 'dd-MMM-yyyy'}}</td>
-              <td>{{dl.drivinglicno}}</td>
-              <td>{{dl.eiddateexpiry | date: 'dd-MMM-yyyy'}}</td>
-
-            </tr>
-
-          </tbody>
-        </table>
-      </div>
-    </app-card>
-  </div> -->
-
-  <div class="col-sm-12">
-    <app-card cardTitle="{{false ? 'Edit Personal Docs':'Add Personal Docs'}}" [options]="false">
-
-
-      <!-- <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
-        <ul _ngcontent-epm-c40="" class="nav">
-        </ul>
-        <div _ngcontent-epm-c40="" class="nav-item nav-grid">
-          <button type="button" class="btn btn-success" ngbTooltip="btn-success"
-            (click)="addUpdateDoc()">{{pdocid ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
-          <button type="button" class="btn btn-danger" ngbTooltip="btn-danger"
-            (click)="isOpenDocs=false;pdocid=undefined;">{{false ? 'Back':'Cancel'}}</button>
-        </div>
-      </nav> -->
-
-      <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
-        <ul _ngcontent-epm-c40="" class="nav">
-        </ul>
-        <div _ngcontent-epm-c40="" class="nav-item nav-grid">
-          <button type="button" class="btn btn-success" ngbTooltip="btn-success" *ngIf="isview=='N'" 
-          (click)="addUpdateDoc()">{{pdocid ? 'Update':'Save'}}</button> &nbsp;&nbsp;&nbsp;
-               
-          <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button"
-            data-toggle="tooltip" data-placement="top" (click)="nextFun($event)" title="Next">
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" data-toggle="tooltip" data-placement="top" (click)="nextFun($event)" title="Next">
             <i class="fa fa-arrow-right"></i>
           </button>
-        </div>
-      </nav>
+                </div>
+            </nav>
 
-      <form action="javascript:" class="needs-validation" novalidate [formGroup]="personaldocsForm">
+            <form action="javascript:" class="needs-validation" novalidate [formGroup]="personaldocsForm">
 
-        <app-card cardTitle="Passport Details" [options]="false">
-        <div class="form-row">
+                <app-card cardTitle="Passport Details" [options]="false">
+                    <div class="form-row">
 
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Employee</label>
-            <input type="text" formControlName="empName" disabled class="form-control">
-            <div class="valid-feedback">
-              Looks good!
-            </div>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Passport No.</label>
-            <input type="text" formControlName="passportno" class="form-control">
-          </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Employee</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="empName" disabled class="form-control">
+
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Passport No.</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="passportno" class="form-control">
+                        </div>
 
 
-        </div>
+                    </div>
 
-        <!-- <app-card cardTitle="Passport Details" [options]="false"> -->
+                    <div class="form-row">
 
-          <div class="form-row">
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Place of Birth</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="ppbirthplace" class="form-control">
+                        </div>
 
-            <div class="col-md-6 mb-3">
-              <label for="validationCustom01">Place of Birth</label>
-              <input type="text" formControlName="ppbirthplace" class="form-control">
-            </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Place of Issue</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="ppplaceissue" class="form-control">
+                        </div>
 
-            <div class="col-md-6 mb-3">
-              <label for="validationCustom01">Place of Issue</label>
-              <input type="text" formControlName="ppplaceissue" class="form-control">
-            </div>
+                    </div>
 
-          </div>
-     
-        <div class="form-row">
+                    <div class="form-row">
 
-        
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Date of Issue </label>
-            <div class="input-group">
-              <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker
-                name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="ppdateissue1"
-                #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeppdateissue1($event)"
-                (click)="dp1.toggleCalendar()" />
-              <div class="input-group-append">
-                <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Date of Issue </label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="ppdateissue1" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeppdateissue1($event)"
+                                    (click)="dp1.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp1.toggleCalendar()">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
-              </div>
-            </div>
-          </div>
+                                </div>
+                            </div>
+                        </div>
 
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Date of Expiry </label>
-            <div class="input-group">
-              <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker
-                name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="ppdateexpiry1"
-                #dp2="angular-mydatepicker" autocomplete="off"
-                [ngClass]="{ 'is-invalid': pi && pi.ppdateexpiry1.errors }"
-                 (ngModelChange)="changeppdateexpiry1($event)"
-                (click)="dp2.toggleCalendar()" />
-              <div class="input-group-append">
-                <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Date of Expiry </label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="ppdateexpiry1" #dp2="angular-mydatepicker" autocomplete="off" [ngClass]="{ 'is-invalid': pi && pi.ppdateexpiry1.errors }"
+                                    (ngModelChange)="changeppdateexpiry1($event)" (click)="dp2.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp2.toggleCalendar()">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
-              </div>
-              <div *ngIf="pi && pi.ppdateexpiry1.errors" class="invalid-feedback">
-                <div *ngIf="pi.ppdateexpiry1.errors.required">Date of Expiry is required</div>
-              </div>
-            </div>
-          </div>
-        
+                                </div>
+                                <div *ngIf="pi && pi.ppdateexpiry1.errors" class="invalid-feedback">
+                                    <div *ngIf="pi.ppdateexpiry1.errors.required">Date of Expiry is required</div>
+                                </div>
+                            </div>
+                        </div>
 
-        </div>
-      </app-card>
-       <app-card cardTitle="Emirates ID Details" [options]="false">
-        <div class="form-row">
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Emirates ID Number</label>
-            <input type="text" formControlName="emiratesidno" class="form-control">
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Emirates ID Card No.</label>
-            <input type="text" formControlName="eidcardno" class="form-control">
-          </div>
-        </div>
 
-        <div class="form-row">
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Emirates ID Expiry Date</label>
-            <div class="input-group">
-              <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker
-                name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="eiddateexpiry1"
-                #dp3="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeeiddateexpiry1($event)"
-                (click)="dp3.toggleCalendar()" />
-              <div class="input-group-append">
-                <button type="button" class="btn btn-secondary" (click)="dp3.toggleCalendar()">
+                    </div>
+                </app-card>
+                <app-card cardTitle="Emirates ID Details" [options]="false">
+                    <div class="form-row">
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Emirates ID Number</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="emiratesidno" class="form-control">
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Emirates ID Card No.</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="eidcardno" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Emirates ID Expiry Date</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="eiddateexpiry1" #dp3="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeeiddateexpiry1($event)"
+                                    (click)="dp3.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp3.toggleCalendar()">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
-              </div>
+                                </div>
 
-            </div>
-          </div>
-         
-        </div>
+                            </div>
+                        </div>
 
-      </app-card>
-      <app-card cardTitle="Visa Details" [options]="false">
-        <div class="form-row">
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Residence Visa Number</label>
-            <input type="text" formControlName="visano" class="form-control">
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Residence Visa File No.</label>
-            <input type="text" formControlName="visafileno" class="form-control">
-          </div>
-         
-        </div>
+                    </div>
 
-        <div class="form-row">
+                </app-card>
+                <app-card cardTitle="Visa Details" [options]="false">
+                    <div class="form-row">
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Residence Visa Number</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="visano" class="form-control">
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Residence Visa File No.</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="visafileno" class="form-control">
+                        </div>
 
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Residence Visa Issue Date</label>
-            <div class="input-group">
-              <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker
-                name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="visadateissue1"
-                #dp4="angular-mydatepicker" autocomplete="off" (ngModelChange)="changevisadateissue1($event)"
-                (click)="dp4.toggleCalendar()" />
-              <div class="input-group-append">
-                <button type="button" class="btn btn-secondary" (click)="dp4.toggleCalendar()">
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Residence Visa Issue Date</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="visadateissue1" #dp4="angular-mydatepicker" autocomplete="off" (ngModelChange)="changevisadateissue1($event)"
+                                    (click)="dp4.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp4.toggleCalendar()">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
-              </div>
+                                </div>
 
-            </div>
-          </div>
-         
+                            </div>
+                        </div>
 
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Residence Visa Expiry Date </label>
-            <div class="input-group">
-              <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker
-                name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="visadateexpiry1"
-                #dp5="angular-mydatepicker" autocomplete="off" (ngModelChange)="changevisadateexpiry1($event)"
-                (click)="dp5.toggleCalendar()" />
-              <div class="input-group-append">
-                <button type="button" class="btn btn-secondary" (click)="dp5.toggleCalendar()">
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Residence Visa Expiry Date </label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="visadateexpiry1" #dp5="angular-mydatepicker" autocomplete="off" (ngModelChange)="changevisadateexpiry1($event)"
+                                    (click)="dp5.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp5.toggleCalendar()">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
-              </div>
+                                </div>
 
-            </div>
-          </div>
-         
+                            </div>
+                        </div>
 
-        </div>
 
-        <div class="form-row">
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Job Title in Res. Visa</label>
-            <input type="text" formControlName="visajobtitle" class="form-control">
-          </div>
-          </div>
-          </app-card>
+                    </div>
 
-          <app-card cardTitle="Labour Card Details" [options]="false">
-        <div class="form-row">
-        
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Labour Card Number</label>
-            <input type="text" formControlName="labourcardno" class="form-control">
-          </div>
+                    <div class="form-row">
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Job Title in Res. Visa</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="visajobtitle" class="form-control">
+                        </div>
+                    </div>
+                </app-card>
 
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Labour Card Expiry Date</label>
-            <div class="input-group">
-              <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker
-                name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="lcdateexpiry1"
-                #dp6="angular-mydatepicker" autocomplete="off" (ngModelChange)="changelcdateexpiry1($event)"
-                (click)="dp6.toggleCalendar()" />
-              <div class="input-group-append">
-                <button type="button" class="btn btn-secondary" (click)="dp6.toggleCalendar()">
+                <app-card cardTitle="Labour Card Details" [options]="false">
+                    <div class="form-row">
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Labour Card Number</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="labourcardno" class="form-control">
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Labour Card Expiry Date</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="lcdateexpiry1" #dp6="angular-mydatepicker" autocomplete="off" (ngModelChange)="changelcdateexpiry1($event)"
+                                    (click)="dp6.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp6.toggleCalendar()">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
-              </div>
+                                </div>
 
-            </div>
-          </div>
+                            </div>
+                        </div>
 
-        </div>
+                    </div>
 
-        <div class="form-row">
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Personnel ID in Labour Card</label>
-            <input type="text" formControlName="lcpersonalid" class="form-control">
-          </div>
-        </div>
-</app-card>
-<app-card cardTitle="Jafza Card Details" [options]="false">
-        <div class="form-row">
+                    <div class="form-row">
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Personnel ID in Labour Card</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="lcpersonalid" class="form-control">
+                        </div>
+                    </div>
+                </app-card>
+                <app-card cardTitle="Jafza Card Details" [options]="false">
+                    <div class="form-row">
 
-         
-        
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">JAFZA ID Card Number</label>
-            <input type="text" formControlName="jzidcardno" class="form-control">
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Card expiry date</label>
-            <div class="input-group">
-              <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker
-                name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="jzidateexpiry1"
-                #dp7="angular-mydatepicker" autocomplete="off" (ngModelChange)="changejzidateexpiry1($event)"
-                (click)="dp7.toggleCalendar()" />
-              <div class="input-group-append">
-                <button type="button" class="btn btn-secondary" (click)="dp7.toggleCalendar()">
+
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">JAFZA ID Card Number</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="jzidcardno" class="form-control">
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Card expiry date</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="jzidateexpiry1" #dp7="angular-mydatepicker" autocomplete="off" (ngModelChange)="changejzidateexpiry1($event)"
+                                    (click)="dp7.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp7.toggleCalendar()">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
-              </div>
+                                </div>
 
-            </div>
-          </div>
-        </div>
-       </app-card>
-       <app-card cardTitle="Medical Insurance Details" [options]="false">
-        <div class="form-row">
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01"> Medical Insurance Card Number</label>
-            <input type="text" formControlName="medinscardno" class="form-control">
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Medical Insurance Provider Name</label>
-            <input type="text" formControlName="medinsprovname" class="form-control">
-          </div>
-        </div>
+                            </div>
+                        </div>
+                    </div>
+                </app-card>
+                <app-card cardTitle="Medical Insurance Details" [options]="false">
+                    <div class="form-row">
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01"> Medical Insurance Card Number</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="medinscardno" class="form-control">
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Medical Insurance Provider Name</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="medinsprovname" class="form-control">
+                        </div>
+                    </div>
 
-        <div class="form-row">
+                    <div class="form-row">
 
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Medical Insurance Expiry Date</label>
-            <div class="input-group">
-              <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker
-                name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="medinsdateexpiry1"
-                #dp8="angular-mydatepicker" autocomplete="off" (ngModelChange)="changemedinsdateexpiry1($event)"
-                (click)="dp8.toggleCalendar()" />
-              <div class="input-group-append">
-                <button type="button" class="btn btn-secondary" (click)="dp8.toggleCalendar()">
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Medical Insurance Expiry Date</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="medinsdateexpiry1" #dp8="angular-mydatepicker" autocomplete="off" (ngModelChange)="changemedinsdateexpiry1($event)"
+                                    (click)="dp8.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp8.toggleCalendar()">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
-              </div>
+                                </div>
 
-            </div>
-          </div>
+                            </div>
+                        </div>
 
-        </div>
-       </app-card>
-       <app-card cardTitle="Driving Licence Details" [options]="false">
-        <div class="form-row">
+                    </div>
+                </app-card>
+                <app-card cardTitle="Driving Licence Details" [options]="false">
+                    <div class="form-row">
 
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Driving Licence No.</label>
-            <input type="text" formControlName="drivinglicno" class="form-control">
-          </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Driving Licence No.</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="drivinglicno" class="form-control">
+                        </div>
 
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01">Traffic Code No.</label>
-            <input type="text" formControlName="dlntrafficno" class="form-control">
-          </div>
-        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Traffic Code No.</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="dlntrafficno" class="form-control">
+                        </div>
+                    </div>
 
-        <div class="form-row">
+                    <div class="form-row">
 
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01"> Place of Issue</label>
-            <input type="text" formControlName="dlnplaceissue" class="form-control">
-          </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01"> Place of Issue</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="dlnplaceissue" class="form-control">
+                        </div>
 
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom01"> Date of Issue</label>
-            <div class="input-group">
-              <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker
-                name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="dlndateissue1"
-                #dp9="angular-mydatepicker" autocomplete="off" (ngModelChange)="changedlndateissue1($event)"
-                (click)="dp9.toggleCalendar()"/>
-              <div class="input-group-append">
-                <button type="button" class="btn btn-secondary" (click)="dp9.toggleCalendar()">
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01"> Date of Issue</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="dlndateissue1" #dp9="angular-mydatepicker" autocomplete="off" (ngModelChange)="changedlndateissue1($event)"
+                                    (click)="dp9.toggleCalendar()" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dp9.toggleCalendar()">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
-              </div>
+                                </div>
 
-            </div>
-          </div>
-        
-        </div>
-       </app-card>
-      </form>
-      <!-- ////////////////////////////////////////////////////////// -->
-    </app-card>
-  </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </app-card>
+            </form>
+            <!-- ////////////////////////////////////////////////////////// -->
+        </app-card>
+    </div>
 </div>

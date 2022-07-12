@@ -52,7 +52,7 @@
     <div class="cal-cell-top">
         <div *ngFor="let l of events">
 
-            <span class="cal-day-badge" *ngIf="(l.start | date:'E MMM d y h:mm:ss a zzzz') == (day.date | date:'E MMM d y h:mm:ss a zzzz')" [style.color]="l.color.primary" [style.background]="l.color.secondary">
+            <span class="cal-day-badge" (click)="calendarDayEvent(fileUploadPopup)" *ngIf="(l.start | date:'E MMM d y h:mm:ss a zzzz') == (day.date | date:'E MMM d y h:mm:ss a zzzz')" [style.color]="l.color.primary" [style.background]="l.color.secondary">
                 {{ l.meta}}
             </span>
         </div>
@@ -82,3 +82,28 @@
     </div> -->
 
 </ng-template>
+
+<div class="col-xl-4 col-md-6">
+    <app-ui-modal #fileUploadPopup dialogClass="modal-dialog-centered">
+        <div class="app-modal-header">
+            <h5 class="modal-title text-center">Air Sector</h5>
+        </div>
+        <div class="app-modal-body">
+            <form action="javascript:" class="needs-validation">
+
+                <div class="form-group">
+                    <button>ARF</button>
+                </div>
+
+            </form>
+
+
+        </div>
+        <div class="app-modal-footer">
+
+            <!-- <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="fileUploadFun($event);fileUploadPopup.hide()">Upload</button> &nbsp;&nbsp;&nbsp; -->
+            <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" data-dismiss="modal" (click)="fileUploadPopup.hide()">Close</button>
+
+        </div>
+    </app-ui-modal>
+</div>

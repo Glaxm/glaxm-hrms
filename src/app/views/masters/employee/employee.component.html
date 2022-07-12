@@ -105,9 +105,10 @@
                             <!-- <div *ngIf="selectedIndex === 1"> -->
                             <div class="form-row">
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Greeting</label>
-                                    <select class="form-control validation_border" formControlName="greetingId" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.greetingId.errors }">
+                                </div>
+                                <div class="col-md-4 mb-3"><select class="form-control validation_border" formControlName="greetingId" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.greetingId.errors }">
                       <option *ngFor="let dl of greetingList" value="{{dl.value}}">{{dl.name}}</option>
                     </select>
                                     <div *ngIf="empdetailesubmitted && ed.greetingId.errors" class="invalid-feedback">
@@ -115,9 +116,10 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">First Name</label>
-                                    <input type="text" formControlName="firstName" (keyup)="fullNameFun()" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.firstName.errors }" class="form-control validation_border">
+                                </div>
+                                <div class="col-md-4 mb-3"><input type="text" formControlName="firstName" (keyup)="fullNameFun()" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.firstName.errors }" class="form-control validation_border">
                                     <div *ngIf="empdetailesubmitted && ed.firstName.errors" class="invalid-feedback">
                                         <div *ngIf="ed.firstName.errors.required">First Name is required</div>
                                     </div>
@@ -126,16 +128,18 @@
                             </div>
 
                             <div class="form-row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Middle Name</label>
-                                    <input type="text" formControlName="middleName" class="form-control" (keyup)="fullNameFun()">
+                                </div>
+                                <div class="col-md-4 mb-3"><input type="text" formControlName="middleName" class="form-control" (keyup)="fullNameFun()">
                                     <div class="valid-feedback">
                                         Looks good!
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Last Name</label>
-                                    <input type="text" formControlName="lastName" (keyup)="fullNameFun()" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.lastName.errors }" class="form-control validation_border">
+                                </div>
+                                <div class="col-md-4 mb-3"><input type="text" formControlName="lastName" (keyup)="fullNameFun()" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.lastName.errors }" class="form-control validation_border">
                                     <div *ngIf="empdetailesubmitted && ed.lastName.errors" class="invalid-feedback">
                                         <div *ngIf="ed.lastName.errors.required">Last Name is required</div>
                                     </div>
@@ -144,12 +148,15 @@
                             </div>
 
                             <div class="form-row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Employee Full Name</label>
-                                    <input type="text" formControlName="fullName" class="form-control" disabled>
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3"><input type="text" formControlName="fullName" class="form-control" disabled>
+                                </div>
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Display Name</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <input type="text" formControlName="displayName" class="form-control validation_border" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.displayName.errors }">
                                     <div *ngIf="empdetailesubmitted && ed.displayName.errors" class="invalid-feedback">
                                         <div *ngIf="ed.displayName.errors.required">Display Name is required</div>
@@ -162,9 +169,10 @@
 
 
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Gender</label>
-                                    <select class="form-control validation_border" formControlName="empGender" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.empGender.errors }">
+                                </div>
+                                <div class="col-md-4 mb-3"><select class="form-control validation_border" formControlName="empGender" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.empGender.errors }">
                       <option *ngFor="let dl of genderList" value="{{dl.value}}">{{dl.name}}</option>
                     </select>
                                     <div *ngIf="empdetailesubmitted && ed.empGender.errors" class="invalid-feedback">
@@ -172,8 +180,10 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom02">Date of Birth</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <div class="input-group">
                                         <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="dateOfBirth1" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.dateOfBirth1.errors }"
                                             #dp4="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeDateOfBirth($event)" (click)="dp4.toggleCalendar()" />
@@ -190,20 +200,21 @@
 
                             </div>
                             <div class="form-row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Age</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <input type="text" formControlName="age" class="form-control" disabled>
                                 </div>
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Highest Qualification</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control" formControlName="education">
                                         <option></option>
                                         <option *ngFor="let dl of educationCategoryList" value="{{dl.eduCategoryId}}">{{dl.name}}</option>
                   </select>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
                                 </div>
                             </div>
                         </app-card>
@@ -213,19 +224,19 @@
                             <!-- <div *ngIf="selectedIndex === 2"> -->
                             <div class="form-row">
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Function</label>
-                                    <select class="form-control" formControlName="divisionId">
+                                </div>
+                                <div class="col-md-4 mb-3"> <select class="form-control" formControlName="divisionId">
                                         <option></option>
                                         <option *ngFor="let dl of divisionList" value="{{dl.xdivId}}">{{dl.name}}</option>
                     </select>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
                                 </div>
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Department</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control validation_border" formControlName="departmentId" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.departmentId.errors }">
                                        
                                         <option *ngFor="let dl of deptList" value="{{dl.deptId}}">{{dl.name}}</option>
@@ -238,25 +249,23 @@
                             </div>
 
                             <div class="form-row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Section</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control" formControlName="sectionId">
                                         <option></option>
                       <option *ngFor="let dl of sectionList" value="{{dl.xsectionId}}">{{dl.name}}</option>
                     </select>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Sub-Section</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control" formControlName="subSectionId">
                                         <option></option>
                                         <option *ngFor="let dl of subsectionList" value="{{dl.xsubsectionId}}">{{dl.name}}</option>
                     </select>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
                                 </div>
 
                             </div>
@@ -269,19 +278,21 @@
                             <!-- <div *ngIf="selectedIndex === 3"> -->
                             <div class="form-row">
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Visa Sponsor Company</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control" formControlName="visaCompanyId">
                                         <option></option>
                                         <option *ngFor="let dl of visacompanyList" value="{{dl.xvisasponsorId}}">{{dl.companyName}}</option>
                     </select>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
+
                                 </div>
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom02">Date of Joining</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <div class="input-group">
                                         <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="dateOfJoin1" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.dateOfJoin1.errors }"
                                             #dp3="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeDateOfJoin($event)" (click)="dp3.toggleCalendar()" />
@@ -300,13 +311,17 @@
                             </div>
 
                             <div class="form-row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">MOL ID</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <input type="text" formControlName="molEmployeeId" class="form-control">
                                 </div>
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Employee Category</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control validation_border" formControlName="empCategoryId" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.empCategoryId.errors }">
                                        
                                         <option *ngFor="let dl of categoryList" value="{{dl.empCatId}}">{{dl.name}}</option>
@@ -355,8 +370,10 @@
                     </div>
                   </div> -->
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Employee Grade</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control validation_border" formControlName="empGradeId" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.empGradeId.errors }">
                                         
                                         <option *ngFor="let dl of empGradeList" value="{{dl.empGradeId}}">{{dl.name}}</option>
@@ -367,8 +384,10 @@
                                 </div>
 
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Employee Designation</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control validation_border" formControlName="empDesignationId" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.empDesignationId.errors }">
                                        
                                         <option *ngFor="let dl of empDesignationList" value="{{dl.empDesignationId}}">{{dl.name}}</option>
@@ -381,15 +400,15 @@
                             <!-- </div> -->
                             <div class="form-row">
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Work Location</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control" formControlName="locationId">
                                         <option></option>
                                         <option *ngFor="let dl of locationList" value="{{dl.value}}">{{dl.name}}</option>
                     </select>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
+
                                 </div>
 
                             </div>
@@ -401,13 +420,17 @@
                             <!-- <div *ngIf="selectedIndex === 4"> -->
                             <div class="form-row">
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Email ID</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <input type="text" formControlName="emailId" class="form-control">
                                 </div>
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">User ID</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <input type="text" formControlName="userId" class="form-control validation_border" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.userId.errors }">
                                     <div *ngIf="empdetailesubmitted && ed.userId.errors" class="invalid-feedback">
                                         <div *ngIf="ed.userId.errors.required">User ID is required</div>
@@ -418,13 +441,17 @@
 
                             <div class="form-row">
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Manager - Email ID</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <input type="text" formControlName="mngrmailId" class="form-control">
 
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Manager ID</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <input type="text" formControlName="mngrName" class="form-control">
                                 </div>
 
@@ -432,22 +459,22 @@
 
                             <div class="form-row" * ngIf="">
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Domain Name</label>
-                                    <input type="text" formControlName="userDomain" class="form-control">
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
+                                    <input type="text" formControlName="userDomain" class="form-control">
+
+                                </div>
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Manager Name</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control" formControlName="managerId">
                       <option></option>
                                         <option *ngFor="let dl of manageruseridList" value="{{dl.value}}">{{dl.name}}</option>
                     </select>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
+
                                 </div>
 
                             </div>
@@ -455,20 +482,26 @@
                             <div class="form-row">
 
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Office telephone number</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <input type="text" formControlName="oTelephone" class="form-control">
                                 </div>
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Office extension number</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <input type="text" formControlName="oExtensionNum" class="form-control">
                                 </div>
                             </div>
 
                             <div class="form-row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Shift Rule</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control validation_border" formControlName="xShiftruleId" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.xShiftruleId.errors }">
                                        
                                         <option *ngFor="let dl of shiftRuleList" value="{{dl.shiftRuleId}}">{{dl.name}}</option>
@@ -478,15 +511,14 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Air Sector</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control" formControlName="xAirsectorId">
                                         <option></option>
                                         <option *ngFor="let dl of airsectorlist" value="{{dl.airsectorId}}">{{dl.name}}</option>
                     </select>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
                                 </div>
 
 
@@ -494,16 +526,20 @@
 
                             <div class="form-row">
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Shift Supervisor</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control" formControlName="supervisorId">
                                         <option></option>
                                         <option *ngFor="let dl of supervisorList" value="{{dl.employeeId}}">{{dl.displayName}}</option>
                     </select>
                                 </div>
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Superior </label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <ng-multiselect-dropdown [placeholder]="" [data]="superiorList" name="superior" formControlName="superior" [(ngModel)]="selectedSuperiorList" [settings]="dropdownSettings" (onSelect)="onSuperiorSelect($event)" (onDeSelect)="onSuperiorDeSelect($event)"
                                         (onSelectAll)="onSelectAllSuperior($event)">
                                     </ng-multiselect-dropdown>
@@ -520,16 +556,20 @@
                             <!-- <div *ngIf="selectedIndex === 5"> -->
                             <div class="form-row">
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Probation period</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <!-- <input type="text" formControlName="probationPeriod" class="form-control"> -->
                                     <select class="form-control" formControlName="probationPeriod" (change)="setProbationDateByPeriod(empdetailsForm.value.probationPeriod)">
                                         <option></option>
                                         <option *ngFor="let dl of probationPeriodList" value="{{dl.lListitemId}}">{{dl.name}}</option>
                     </select>
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom02">Probation completion date</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <div class="input-group">
                                         <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="probationCompletionDate1" #dp9="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeProbCompDate($event)"
                                             (click)="dp9.toggleCalendar()" />
@@ -543,7 +583,7 @@
                                 </div>
 
                             </div>
-                            <!-- </div> -->
+
                         </app-card>
 
 
@@ -551,8 +591,10 @@
                             <!-- <div *ngIf="selectedIndex === 6"> -->
                             <div class="form-row">
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Employement Status</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control validation_border" formControlName="lscurstatusId" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.lscurstatusId.errors }" (change)="changeEmpStatus(empdetailsForm.value.lscurstatusId)">
                                         
                                         <option *ngFor="let dl of employeeStatusList" value="{{dl.lListitemId}}">{{dl.name}}</option>
@@ -562,16 +604,20 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Service period</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <input type="text" formControlName="servicePeriod" class="form-control" disabled>
                                 </div>
                             </div>
 
                             <div class="form-row">
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom02">Leaving Date</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <div class="input-group">
                                         <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" disabled="employementStatus != 'Left'" [options]="myDatePickerOptions" formControlName="effectiveDate1" #dp5="angular-mydatepicker" autocomplete="off"
                                             (ngModelChange)="changeEffectiveDate1($event)" (click)="dp5.toggleCalendar()" />
@@ -584,8 +630,10 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Status</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control validation_border" formControlName="status" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.status.errors }">
                       <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
                     </select>
