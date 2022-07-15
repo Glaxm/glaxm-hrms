@@ -96,6 +96,8 @@ export class AddRequestappComponent implements OnInit {
       this.isapprove = Boolean(params.isapprove);
       this.statuscode = params.statuscode;
       
+
+
       // for employee absence report
       this.fromattenreport = params.fromattenreport;
       this.preApproval.startdate = params.stdate;
@@ -141,6 +143,8 @@ export class AddRequestappComponent implements OnInit {
     // this.commonService.getModuleDetailsByCode(WorkflowRequestList.LEAVE_REQUEST).subscribe(s=>{
 
     // })
+
+
 
     if (this.requestForm.value.G_APPROVALREQ_ID) {
       this.getApprovalReqHistory(this.requestForm.value.G_APPROVALREQ_ID);

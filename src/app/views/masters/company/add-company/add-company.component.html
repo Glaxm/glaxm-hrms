@@ -12,8 +12,10 @@
                 </nav>
                 <form action="javascript:" class="needs-validation" novalidate [formGroup]="companyForm">
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Holding</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" formControlName="holdingId" [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }">
                 <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
               </select>
@@ -24,8 +26,10 @@
                         </div>
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Company</label>
+                        </div>
+                        <div class="col-md-4 mb-3"  >
                             <input type="text" formControlName="companyName" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }">
                             <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
                                 <div *ngIf="f.companyName.errors.required">Company is required</div>
@@ -36,8 +40,10 @@
                     </div>
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Search Key</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="value" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.value.errors }">
                             <div *ngIf="submitted && f.value.errors" class="invalid-feedback">
                                 <div *ngIf="f.value.errors.required">Search Key is required</div>
@@ -45,8 +51,10 @@
                         </div>
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Description</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="companyDisc" class="form-control">
                             <div class="valid-feedback">
                                 Looks good!
@@ -57,41 +65,53 @@
 
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">MOL Card</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="molCard" class="form-control">
                         </div>
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">VAT Registration No.</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="vatRegNo" class="form-control">
                         </div>
 
                     </div>
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Phone No.</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="phoneNo" class="form-control">
                         </div>
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Fax No.</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="faxno" class="form-control">
                         </div>
 
                     </div>
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">P.O. Box No.</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="poBoxNo" class="form-control">
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Address</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="address" class="form-control">
 
                         </div>
@@ -99,14 +119,18 @@
                     </div>
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Email</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="email" formControlName="email" class="form-control">
                         </div>
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Website</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="website" class="form-control">
 
                         </div>
@@ -116,12 +140,16 @@
 
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Code</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="code" class="form-control" disabled>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">status</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" formControlName="status">
             <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
           </select>
@@ -143,8 +171,10 @@
                             <label for="validationCustom01">Trade Licence</label>
                             <input type="file" class="form-control" style="border-width:0px;border:none;">
                         </div> -->
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Logo</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
 
                                 <div class="custom-file">

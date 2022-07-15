@@ -12,16 +12,20 @@
                 </nav>
                 <form action="javascript:" class="needs-validation" novalidate [formGroup]="roleForm">
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Name</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="roleName" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.roleName.errors }">
                             <div *ngIf="submitted && f.roleName.errors" class="invalid-feedback">
                                 <div *ngIf="f.roleName.errors.required">Name is required</div>
                             </div>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Status</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
                 <option *ngFor="let sl of statusList" value="{{sl.valueCode}}">{{sl.valueName}}</option>
                 <!-- <option>Inactive</option> -->
@@ -76,8 +80,10 @@
             -->
                     </div>
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Description</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="roleDesc" class="form-control">
                             <div class="valid-feedback">
                                 Looks good!

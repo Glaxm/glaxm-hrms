@@ -17,8 +17,10 @@
                 </nav>
                 <form action="javascript:" class="needs-validation" novalidate [formGroup]="vehicletranForm">
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Holding</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" disabled formControlName="gHoldingId"
                                 [ngClass]="{ 'is-invalid': submitted && f.gHoldingId.errors }"
                                >
@@ -31,8 +33,10 @@
                         </div>
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Company</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" formControlName="gCompanyId"
                             (change)="selectcompany(vehicletranForm.value.gCompanyId)"
                                 [ngClass]="{ 'is-invalid': submitted && f.gCompanyId.errors }">
@@ -98,11 +102,13 @@
                             </select>
                         </div> -->
               
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Employee</label>
+                        </div>
                             <!-- <select class="form-control" formControlName="xEmployeeId">
                               <option *ngFor="let sl of employeeList" value="{{sl.employeeId}}">{{sl.displayName}}</option>
                            </select> --> 
+                           <div class="col-md-4 mb-3">
                            <ng-multiselect-dropdown
                            name="city"
                            [placeholder]="'Select employee'"
@@ -113,8 +119,10 @@
                        </ng-multiselect-dropdown>
                         </div>
                        
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                           <label for="validationCustom01">Vehicle Registration Number</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                           <input type="text" formControlName="vehiregno" class="form-control">
                       </div>
               
@@ -123,19 +131,25 @@
 
 
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Plate Colour</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="vehiplateclr" class="form-control">
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Plate Code</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="vehiplatecode" class="form-control">
                         </div>
                      </div> 
                     
                      <div class="form-row">
-                     <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                         <label for="validationCustom02">Date of Expiry</label>
+                    </div>
+                    <div class="col-md-4 mb-3"  >
                        <div class="input-group">
                          <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker 
                          name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="vehidateexpiry1"
@@ -153,8 +167,10 @@
                         <label for="validationCustom01">Insurance Company</label>
                         <input type="text" formControlName="insurancecompany" class="form-control">
                     </div> -->
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-2 mb-3">
                       <label for="validationCustom01">Insurance Company</label>
+                    </div>
+                    <div class="col-md-4 mb-3">
                       <select class="form-control" formControlName="vehiinsucomp">
                         <option *ngFor="let dl of insurancecompanyList" value="{{dl.value}}">{{dl.name}}</option>
                       </select>
@@ -163,8 +179,10 @@
                     
                     </div>
                             <div class="form-row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom02">Insurance Expiry Date</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                    <div class="input-group">
                                      <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker 
                                      name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="vehiinscdateexpiry1"
@@ -178,8 +196,10 @@
                                    </div>
                                  </div>
 
-                                 <div class="col-md-6 mb-3">
+                                 <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Vehicle Ownership</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control" formControlName="lvehiowner">
                                       <option *ngFor="let dl of vehicleOwnershipList" value="{{dl.value}}">{{dl.name}}</option>
                                     </select>
@@ -193,13 +213,17 @@
                     
                             <div class="form-row">
 
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01"> Request No.</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <input type="text" ng-readonly="all" formControlName="G_APPROVALREQ_ID" class="form-control">
                                 </div>
 
-                                   <div class="col-md-6 mb-3">
+                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Status</label>
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <select class="form-control" formControlName="status">
                                       <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
                                     </select>

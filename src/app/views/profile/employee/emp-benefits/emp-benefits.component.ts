@@ -50,6 +50,7 @@ export class EmpBenefitsComponent implements OnInit {
   empBenifitList: any = [];
   fromAirportList: any = [];
   relationform: any;
+  insuranceform:any;
   isview:string;
   public myDatePickerOptions = this.commonService.datepickerFormat;
   @ViewChild('dp1', { static: false }) myDp1: AngularMyDatePickerDirective;
@@ -119,6 +120,8 @@ export class EmpBenefitsComponent implements OnInit {
       licbeneper2: new FormControl(null),
 
     });
+
+    this.insuranceform= new FormGroup({});
 
     this.relationform = new FormGroup({
       xEmployeeId: new FormControl(null),
@@ -479,6 +482,22 @@ export class EmpBenefitsComponent implements OnInit {
   getDataUsingRedioBtn1(data){
       this.relationId = data.xEmprelationId;
   }
+
+  // Life Insurance Information
+
+  isLifeInsuranceInformation:boolean=false;
+  lifeInsuranceInfoList:any=[];
+
+  LifeInsuranceEnum={
+    LIFE_INSURNACE:0
+  };
+
+  addLifeInsuranceInfo(){ 
+    this.LifeInsuranceEnum.LIFE_INSURNACE=1;
+  }
+
+  editLifeInsuranceInfo(){ }
+
 
 
 }

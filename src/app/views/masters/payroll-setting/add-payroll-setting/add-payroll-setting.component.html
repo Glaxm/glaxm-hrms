@@ -14,8 +14,10 @@
                 <form action="javascript:" class="needs-validation" novalidate [formGroup]="payrollsettingForm">
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Holding</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" disabled formControlName="gHoldingId" [ngClass]="{ 'is-invalid': submitted && f.gHoldingId.errors }">
                   <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
               </select>
@@ -24,8 +26,10 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Company</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <ng-multiselect-dropdown [placeholder]="" [data]="companyList" name="company" formControlName="company" [(ngModel)]="selectedCompanyList" [settings]="dropdownSettings" (onSelect)="onCompnaySelect($event)" (onDeSelect)="onCompanyDeSelect($event)" (onSelectAll)="onSelectAllCompnay($event)"
                                 [ngClass]="{ 'is-invalid': submitted && f.company.errors }">
                             </ng-multiselect-dropdown>
@@ -41,8 +45,10 @@
 
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Normal OT Rate</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="number" formControlName="normalOtRate" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.normalOtRate.errors }">
                             <div *ngIf="submitted && f.normalOtRate.errors" class="invalid-feedback">
                                 <div *ngIf="f.normalOtRate.errors.required">Normal OT is required</div>
@@ -50,8 +56,10 @@
                         </div>
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Weekend OT Rate</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="number" formControlName="weekendOtRate" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.weekendOtRate.errors }">
                             <div *ngIf="submitted && f.weekendOtRate.errors" class="invalid-feedback">
                                 <div *ngIf="f.weekendOtRate.errors.required">Weekend OT Rate is required</div>
@@ -62,16 +70,20 @@
 
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Public Holiday OT Rate</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="number" formControlName="holidayOtRate" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.holidayOtRate.errors }">
                             <div *ngIf="submitted && f.holidayOtRate.errors" class="invalid-feedback">
                                 <div *ngIf="f.holidayOtRate.errors.required">Holiday OT Rate is required</div>
                             </div>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Code</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="code" class="form-control">
                         </div>
 
@@ -82,8 +94,10 @@
                     <div class="form-row">
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom02">Effective Date</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="payItemEffectiveDate" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEffectiveDate($event)"
                                     (click)="dp1.toggleCalendar()" />
@@ -98,8 +112,10 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom02">End Date</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="endDate1" #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)"
                                     (click)="dp2.toggleCalendar()" />
@@ -115,8 +131,10 @@
 
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Status</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.isActive.errors }">
                     <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
                 </select>

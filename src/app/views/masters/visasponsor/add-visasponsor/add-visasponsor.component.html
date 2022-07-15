@@ -16,8 +16,10 @@
                 </nav>
                 <form action="javascript:" class="needs-validation" novalidate [formGroup]="visasponsorForm">
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Holding</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" disabled formControlName="holdingId"
                                
                                >
@@ -30,13 +32,15 @@
                         </div>
 
  
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Company</label>
+                        </div>
                             <!-- <select class="form-control validation_border" formControlName="companyId"
                               >
                                 <option></option>
                                 <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
                             </select> -->
+                            <div class="col-md-4 mb-3">
                             <ng-multiselect-dropdown 
                             [placeholder]="" [data]="companyList" 
                             name="company"
@@ -58,8 +62,10 @@
                     </div>
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Visa Sponsor</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="companyName" 
                             class="form-control validation_border"
                             [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }">
@@ -69,8 +75,10 @@
                         </div>
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Description</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="companyDisc" class="form-control">
                             <div class="valid-feedback">
                                 Looks good!
@@ -87,14 +95,18 @@
                                 Looks good!
                             </div>
                         </div> -->
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Status</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control" formControlName="status">
                                 <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
                             </select>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Code</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="CODE" class="form-control">
                         </div>
                     </div>

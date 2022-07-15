@@ -52,7 +52,7 @@
     <div class="cal-cell-top">
         <div *ngFor="let l of events">
 
-            <span class="cal-day-badge" (click)="calendarDayEvent(fileUploadPopup)" *ngIf="(l.start | date:'E MMM d y h:mm:ss a zzzz') == (day.date | date:'E MMM d y h:mm:ss a zzzz')" [style.color]="l.color.primary" [style.background]="l.color.secondary">
+            <span class="cal-day-badge" (click)="calendarDayEvent(l)" *ngIf="(l.start | date:'E MMM d y h:mm:ss a zzzz') == (day.date | date:'E MMM d y h:mm:ss a zzzz')" [style.color]="l.color.primary" [style.background]="l.color.secondary">
                 {{ l.meta}}
             </span>
         </div>
@@ -107,3 +107,19 @@
         </div>
     </app-ui-modal>
 </div>
+
+<jw-modal id="custom-modal-1">
+    <!-- <h1>A Custom Modal!</h1>
+    <p>Home page text: <input type="text" [(ngModel)]="bodyText" /></p> -->
+    <!-- <button (click)="closeModal('custom-modal-1');">Close</button> -->
+    <div style="text-align: center;">
+        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="redirectPage('ARF')">ARF</button> &nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="redirectPage('LR')">LR</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <!-- <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="closeFun()"><i class="fa fa-times" aria-hidden="true"></i></button> -->
+        <!-- <a href="#" class="close">close</a> -->
+        <button type="button" class="close" aria-label="Close" (click)="closeFun()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
+
+</jw-modal>

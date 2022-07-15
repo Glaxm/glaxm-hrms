@@ -175,6 +175,8 @@ export class EmployeeComponent implements OnInit {
       servicePeriod: new FormControl(null),
       lscurstatusId: new FormControl(null),
       supervisorId: new FormControl(null),
+      lastDayonNotice1: new FormControl(null),
+      lastDayonNotice: new FormControl(null)
 
     });
 
@@ -222,6 +224,12 @@ export class EmployeeComponent implements OnInit {
           let fromModel1: IMyDateModel = { isRange: false, singleDate: { jsDate: dateOfBirth }, dateRange: null };
           this.empdetailsForm.controls['dateOfBirth1'].setValue(fromModel1);
           this.changeDateOfBirth(this.empdetailsForm.value.dateOfBirth1);
+        }
+
+        if (s.data.lastDayonNotice) {
+          let lastDayonNotice : Date = new Date(s.data.lastDayonNotice);
+          let fromModellastDayonNotice : IMyDateModel = { isRange: false, singleDate: { jsDate: lastDayonNotice  }, dateRange: null };
+          this.empdetailsForm.controls['lastDayonNotice1'].setValue(fromModellastDayonNotice);
         }
         
         this.empdetailsForm.controls['empGradeId'].setValue(s.data.empGradeId);
@@ -866,6 +874,10 @@ employementStatus:any;
 
       openUpdatedForm(){
         this.router.navigate(['/views/masters/employee/employee-update']);
+      }
+
+      changeLastDayonNotice(event){
+
       }
   
 

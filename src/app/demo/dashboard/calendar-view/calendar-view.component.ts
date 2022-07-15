@@ -25,6 +25,7 @@ import {
 } from 'angular-calendar';
 import { Router } from '@angular/router';
 import { DashboardService } from 'src/app/views/services/dashboard.service';
+import { ModalService } from '../_modal/modal.service';
 
 const colors: any = {
   red: {
@@ -167,7 +168,7 @@ export class CalendarViewComponent  {
     activeDayIsOpen: boolean = false;
     tempList:any=[];
     eventMnth: any;
-    constructor(private modal: NgbModal, private router:Router,private dashboardService:DashboardService) {
+    constructor(private modalService: ModalService,private modal: NgbModal, private router:Router,private dashboardService:DashboardService) {
       this.setView(CalendarView.Month);
       var employeeInfo= JSON.parse(sessionStorage.getItem("empinfo"));
       this.employee_id.push(employeeInfo.data.employeeId);
@@ -333,9 +334,27 @@ export class CalendarViewComponent  {
     }
 
     calendarDayEvent(data){
-     data.show();
+      if(data.title=="IOMiss" || data.title=="Absent"){
+        this.modalService.open('custom-modal-1');
+      }
     }
 
+    closeModal(id:string){
+        this.modalService.close(id);
+    }
+
+    redirectPage(id){
+      this.modalService.close('custom-modal-1');
+      if(id=="ARF"){
+        this.router.navigateByUrl('views/report/emp-attendance-report');
+      } else{
+        this.router.navigateByUrl('views/approval-flow/approvalrequest/request-summary');
+      }
+    }
+
+    closeFun(){
+      this.modalService.close('custom-modal-1');
+    }   
 
     // list:any =[{attendance:'Present'},{attendance:'Present'},{attendance:'Present'},{attendance:'Present'},{attendance:'Present'}]
 

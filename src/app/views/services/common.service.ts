@@ -175,7 +175,7 @@ export const IMPORT_FORMAT_SHIFT_ROSTER=[{
 
 export const IMPORT_FORMAT_EMPLOYEE = [
   { 
-    "Company": '', "Employee ID": '',"Biometrics ID": '',"Old EMP code":"", "Greeting":'Mr',"First Name":'',
+    "Company": '', "Employee ID": '',"Biometrics ID": '',"Internal ID":"", "Greeting":'Mr',"First Name":'',
     "Middle Name":'',"Last Name":'',"Gender":'Male',"Date of Birth":'',"Education":'Bcom',"Function":'',"Department":'',"Section":'',
     "Sub-Section":'',"Work Location":'',"Visa Sponsor Company":'',"Date of Joining":'',"MOL ID":'',
     "Employee Category":'',"Employee Grade":'',"Employee Designation":'',
@@ -196,7 +196,7 @@ export const IMPORT_FORMAT_EMPLOYEE = [
     "Regular off Day":'',"Alternate off Day":'',"Alternate off Date":'',"Superior":'',"Shift Supervisor":''
   },
   { 
-    "Company": '', "Employee ID": '',"Biometrics ID": '',"Old EMP code":"","Greeting":'Mrs',"First Name":'',
+    "Company": '', "Employee ID": '',"Biometrics ID": '',"Internal ID":"","Greeting":'Mrs',"First Name":'',
     "Middle Name":'',"Last Name":'',"Gender":'Female',"Date of Birth":'',"Education":'',"Function":'',"Department":'',"Section":'',
     "Sub-Section":'',"Work Location":'',"Visa Sponsor Company":'',"Date of Joining":'',"MOL ID":'',
     "Employee Category":'',"Employee Grade":'',"Employee Designation":'',
@@ -218,7 +218,7 @@ export const IMPORT_FORMAT_EMPLOYEE = [
 
   },
   { 
-    "Company": '', "Employee ID": '',"Biometrics ID": '',"Old EMP code":"", "Greeting":'Miss',"First Name":'',
+    "Company": '', "Employee ID": '',"Biometrics ID": '',"Internal ID":"", "Greeting":'Miss',"First Name":'',
     "Middle Name":'',"Last Name":'',"Gender":'',"Date of Birth":'',"Education":'',"Function":'',"Department":'',"Section":'',
     "Sub-Section":'',"Work Location":'',"Visa Sponsor Company":'',"Date of Joining":'',"MOL ID":'',
     "Employee Category":'',"Employee Grade":'',"Employee Designation":'',
@@ -240,7 +240,7 @@ export const IMPORT_FORMAT_EMPLOYEE = [
 
   },
   { 
-    "Company": '', "Employee ID": '',"Biometrics ID": '', "Old EMP code":"","Greeting":'',"First Name":'',
+    "Company": '', "Employee ID": '',"Biometrics ID": '', "Internal ID":"","Greeting":'',"First Name":'',
     "Middle Name":'',"Last Name":'',"Gender":'',"Date of Birth":'',"Education":'',"Function":'',"Department":'',"Section":'',
     "Sub-Section":'',"Work Location":'',"Visa Sponsor Company":'',"Date of Joining":'',"MOL ID":'',
     "Employee Category":'',"Employee Grade":'',"Employee Designation":'',
@@ -262,7 +262,7 @@ export const IMPORT_FORMAT_EMPLOYEE = [
 
   },
   { 
-    "Company": '', "Employee ID": '',"Biometrics ID": '',"Old EMP code":"", "Greeting":'',"First Name":'',
+    "Company": '', "Employee ID": '',"Biometrics ID": '',"Internal ID":"", "Greeting":'',"First Name":'',
     "Middle Name":'',"Last Name":'',"Gender":'',"Date of Birth":'',"Education":'',"Function":'',"Department":'',"Section":'',
     "Sub-Section":'',"Work Location":'',"Visa Sponsor Company":'',"Date of Joining":'',"MOL ID":'',
     "Employee Category":'',"Employee Grade":'',"Employee Designation":'',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { EmployeeService } from '../../masters/employee/employee.service';
 import { ToastrService } from '../../services/toastr.service';
@@ -30,8 +30,23 @@ export class RequestappComponent implements OnInit {
   }
 
   leaveballist:any =[];
+  redirectfromdashboard:any;
+  datafromdashboard:any;
 
-  constructor(private empService:EmployeeService,private router:Router, private toastService:ToastrService,private requestAppService:RequestappService) { }
+
+  constructor(private activatedRoute:ActivatedRoute,private empService:EmployeeService,private router:Router, private toastService:ToastrService,private requestAppService:RequestappService) {
+
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.redirectfromdashboard=params.redirectfromdashboard;
+      this.datafromdashboard = params.sortStr;
+      if(params.redirectfromdashboard=="Y"){
+        this.search(params.sortStr);
+      } else{
+        this.getapproveRequestList();
+      }
+    });
+
+   }
 
   ngOnInit() {
 
@@ -53,7 +68,7 @@ export class RequestappComponent implements OnInit {
       });
   }
 
-  this.getapproveRequestList();
+
 
 }
 

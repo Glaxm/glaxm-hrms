@@ -331,4 +331,20 @@ export class PersonalinfoComponent implements OnInit {
       this.netwokingList = data;
     })
   }
+
+  // Relationship with Employee
+
+  
+  isrelationshipwithemployee:boolean=true;
+  relationshipWithEmployee:any=[];
+  
+  addRelationshipwithemployee(){
+      this.isrelationshipwithemployee=false;
+  }
+
+  editRelationshipwithemployee(){
+
+  }
+
+
 }

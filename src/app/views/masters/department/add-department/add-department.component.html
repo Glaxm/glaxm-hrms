@@ -16,8 +16,10 @@
         <form action="javascript:" class="needs-validation" novalidate [formGroup]="deptForm">
           <div class="form-row">
             
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Holding</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <select class="form-control validation_border" disabled formControlName="holdingId" (change)="selectHolding(deptForm.value.holdingId)"
               [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }">
                   <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
@@ -38,8 +40,10 @@
             </div>
         </div> -->
 
-        <div class="col-md-6 mb-3">
+        <div class="col-md-2 mb-3">
           <label for="validationCustom01">Company</label>
+        </div>
+        <div class="col-md-4 mb-3">
           <ng-multiselect-dropdown 
           [placeholder]="" [data]="companyList" 
           name="name"
@@ -58,8 +62,10 @@
         
       </div>
           <div class="form-row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Department </label>
+            </div>
+            <div class="col-md-4 mb-3">
               <input type="text" formControlName="name" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
               <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                 <div *ngIf="f.name.errors.required">Department is required</div>
@@ -68,8 +74,10 @@
 
             
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Description</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <input type="text" formControlName="desc" class="form-control">
               <div class="valid-feedback">
                 Looks good!
@@ -89,17 +97,21 @@
 
           </div>
           <div class="form-row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Code</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <input type="text" formControlName="code" class="form-control">
           </div>
-            <div class="col-md-6 mb-3">
+          <div class="col-md-2 mb-3">
               <!-- <div class="custom-control custom-checkbox">
                 <label for="validationCustom01"></label><br>
                 <input type="checkbox" class="custom-control-input" formControlName="isActive" id="customCheck1">
                 <label class="custom-control-label" for="customCheck1">Is Active</label>
               </div> -->
               <label for="validationCustom01">Status</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <select class="form-control validation_border" formControlName="status">
                   <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
               </select>

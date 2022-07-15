@@ -741,7 +741,7 @@
                                     <h6>Approval Request</h6>
                                 </div>
                                 <div class="col text-right">
-                                    <a href="#/views/approval-flow/approvalrequest/request-summary">Details</a>
+                                    <a [routerLink]="" (click)="approvalRequestDetailsFun()">Details</a>
                                 </div>
                             </div>
                             <div class="row mt-1 ng-tns-c94-47">
@@ -812,7 +812,7 @@
                                 </div>
                                 <div class="col text-right">
                                     <!-- <h2 class="mb-0">1042</h2> -->
-                                    <a href="#/views/report/leave-history-report?redirectfromdashboard=Y">Details</a>
+                                    <a [routerLink]="" (click)="leaveDetailsFun()">Details</a>
                                 </div>
                             </div>
                             <div class="row mt-1 ng-tns-c94-47">
@@ -951,10 +951,10 @@
                                 <div class="col-auto">
                                     <h6>Loan details</h6>
                                 </div>
-                                <div class="col text-right">
-                                    <!-- <h2 class="mb-0">1042</h2> -->
+                                <!-- <div class="col text-right">
+                                    
                                     <a href="#/views/transaction/emp-loan/employeeloan-summary">Details</a>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
 
@@ -979,6 +979,11 @@
                                                         <td _ngcontent-cgl-c117="">{{dl.loandate}}</td>
                                                         <td _ngcontent-cgl-c117="">
                                                             <h6 _ngcontent-cgl-c117="" class="mb-1 text-c-red">{{dl.balance}}</h6>
+                                                        </td>
+                                                        <td>
+                                                            <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="loanDetailsFun(dl)" data-toggle="tooltip" data-placement="top" title="Filter">
+                                                                Details
+                                                                </button>
                                                         </td>
                                                     </tr>
                                                 </tbody>

@@ -16,8 +16,10 @@
                 <form action="javascript:" class="needs-validation" novalidate [formGroup]="holdingForm">
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Holding </label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="name" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                                 <div *ngIf="f.name.errors.required">Holding is required</div>
@@ -36,8 +38,10 @@
                 </div>
             </div> -->
 
-                        <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Search Key</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="value" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.value.errors }">
                             <div *ngIf="submitted && f.value.errors" class="invalid-feedback">
                                 <div *ngIf="f.value.errors.required">Search Key is required</div>
@@ -50,15 +54,19 @@
 
 
                         <!-- <div class="form-row"> -->
-                        <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Code</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="code" class="form-control">
                         </div>
                         <!-- </div> -->
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Description</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="description" class="form-control">
                             <div class="valid-feedback">
                                 Looks good!
@@ -81,20 +89,24 @@
                     <div class="form-row">
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <!-- <div class="custom-control custom-checkbox">
                 <label for="validationCustom01"></label><br>
                 <input type="checkbox" class="custom-control-input" formControlName="status" id="customCheck1">
                 <label class="custom-control-label" for="customCheck1">Is Active</label>
               </div> -->
                             <label for="validationCustom01">status</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" formControlName="status">
                 <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
             </select>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Logo</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
 
                                 <div class="custom-file">

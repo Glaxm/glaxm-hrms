@@ -17,8 +17,10 @@
                 <form action="javascript:" class="needs-validation" novalidate [formGroup]="jobcardForm">
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Holding</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" disabled formControlName="gHoldingId" (change)="selectHolding(jobcardForm.value.gHoldingId)" [ngClass]="{ 'is-invalid': submitted && f.gHoldingId.errors }">
                 <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
               </select>
@@ -27,12 +29,14 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Company</label>
+                        </div>
                             <!-- <select class="form-control validation_border" formControlName="gCompanyId"
                 [ngClass]="{ 'is-invalid': submitted && f.gCompanyId.errors }">
                 <option *ngFor="let cl of companyList" value="{{cl.gCompanyId}}">{{cl.name}}</option>
               </select> -->
+              <div class="col-md-4 mb-3">
                             <ng-select formControlName="gCompanyId" [options]="companyList" class="validation_border" [ngClass]="{ 'is-invalid': submitted && f.gCompanyId.errors }">
                             </ng-select>
                             <div *ngIf="submitted && f.gCompanyId.errors" class="invalid-feedback">
@@ -41,14 +45,18 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Job Card No</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="jobcardNo" class="form-control" disabled>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
 
                             <label for="validationCustom01">Job</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control" formControlName="jobdefinationId" (change)="selectJObDef(jobcardForm.value.jobdefinationId)">
                 <option *ngFor="let dl of jobDefinitionList" value="{{dl.jobdefinationId}}">{{dl.name}}</option>
               </select>
@@ -59,15 +67,19 @@
 
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Job Function</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control" formControlName="jobfunctionId" disabled>
                 <option *ngFor="let dl of jobFuntionList" value="{{dl.jobfunctionId}}">{{dl.name}}</option>
               </select>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">UOM</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control" formControlName="xunitmeasureId" disabled>
                 <option *ngFor="let dl of uomList" value="{{dl.xunitmeasureId}}">{{dl.uomName}}</option>
               </select>
@@ -76,8 +88,10 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom02">Transaction Date</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <input class="form-control " placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" formControlName="trxDate1" [options]="myDatePickerOptions" [ngClass]="{ 'is-invalid': submitted && f.trxDate1.errors }" #dp2="angular-mydatepicker"
                                     autocomplete="off" (ngModelChange)="changeTrxDate($event)" (click)="dp2.toggleCalendar()" />
@@ -89,9 +103,11 @@
 
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
 
                             <label for="validationCustom01">Status</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" formControlName="status">
                 <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
               </select>
@@ -193,16 +209,19 @@
 
                                 <div class="form-row">
 
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-2 mb-3">
                                         <label for="validationCustom01">Employee</label>
-
+                                    </div>
+                                    <div class="col-md-4 mb-3">
                                         <ng-multiselect-dropdown name="city" [placeholder]="'Select Employee'" [data]="employeeList" formControlName="employee" [(ngModel)]="selectedItemsemp" [settings]="dropdownSettingsemp" (onSelect)="onItemSelectemp($event)">
                                         </ng-multiselect-dropdown>
                                     </div>
 
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-2 mb-3">
 
                                         <label for="validationCustom01">Shift</label>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
                                         <select class="form-control" formControlName="xshiftruleId" disabled>
                     <option></option>
                     <option *ngFor="let dl of shiftRuleList" value="{{dl.shiftRuleId}}">{{dl.name}}</option>
@@ -214,14 +233,18 @@
 
                                 <div class="form-row">
 
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-2 mb-3">
                                         <label for="validationCustom01">Actual Qty</label>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
                                         <input type="number" formControlName="actQnty" class="form-control" (keyup)="calAmt()">
 
                                     </div>
 
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-2 mb-3">
                                         <label for="validationCustom01">Planned Qty</label>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
                                         <input type="number" formControlName="plannedQnty" class="form-control" disabled>
 
                                     </div>
@@ -230,19 +253,25 @@
 
                                 <div class="form-row">
 
-                                    <div class="col-md-6 mb-3" *ngIf="false">
+                                    <div class="col-md-2 mb-3" *ngIf="false">
                                         <label for="validationCustom01">Qty Achieved</label>
+                                    </div>
+                                    <div class="col-md-4 mb-3" *ngIf="false">
                                         <input type="number" formControlName="achievedQnty" class="form-control">
 
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-2 mb-3">
                                         <label for="validationCustom01">Rate</label>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
                                         <input type="text" formControlName="rate" class="form-control" disabled>
 
                                     </div>
 
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-2 mb-3">
                                         <label for="validationCustom01">Bonus Amount</label>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
                                         <input type="text" formControlName="bonusAmount" class="form-control" (keyup)="calAmt()">
 
                                     </div>
@@ -251,8 +280,10 @@
 
                                 <div class="form-row">
 
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-2 mb-3">
                                         <label for="validationCustom01">Amount</label>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
                                         <input type="text" formControlName="amount" class="form-control" disabled>
 
                                     </div>

@@ -36,6 +36,7 @@ export class AddEmployeeloanComponent implements OnInit {
   selectedItems: Array<any> = [];
 dropdownSettings: any = {};
 moduleid:any;
+redirectfromdashboard:any;
 
 tepMethod(){
   this.dropdownSettings = {
@@ -126,6 +127,7 @@ onSelectAll(items: any) {
       this.emploanForm.controls['lEmploanId'].setValue(params.id);
       this.isView = params.view;
       this.moduleid = params.moduleid;
+      this.redirectfromdashboard = params.redirectfromdashboard;
     });
 
   }
@@ -298,7 +300,12 @@ onSelectAll(items: any) {
   }
 
   back() {
+    if(this.redirectfromdashboard=="Y"){
+      this.router.navigate(["/dashboard/analytics"]);
+    }else{
       this.router.navigate(["/views/transaction/emp-loan/employeeloan-summary"]);
+    }
+      
   }
 
   calInstallAmt(){

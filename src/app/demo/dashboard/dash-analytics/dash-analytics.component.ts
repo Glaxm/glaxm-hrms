@@ -629,6 +629,18 @@ defaultCompany:any;
     }
    }
 
+   loanDetailsFun(data){
+    if(data.lEmploanId && data.moduleid){
+      this.router.navigateByUrl('views/transaction/emp-loan/add-employeeloan?id='+data.lEmploanId+'&view='+true+'&moduleid='+data.moduleid+'&redirectfromdashboard=Y');
+    }
+   }
+
+   leaveDetailsFun(){
+    this.router.navigate(['/views/report/leave-history-report'], { queryParams: { redirectfromdashboard: 'Y'} });
+   };
+   approvalRequestDetailsFun(){
+    this.router.navigate(['/views/approval-flow/approvalrequest/request-summary'], { queryParams: { redirectfromdashboard: 'Y',sortStr:"length=10&page=1&req_no=&req_type=&empname="+this.empObj.data.firstName+"&req_date=&current_level=&current_status=&leaveitemname=&leavedays=&=" } });
+   }
   
 
 }

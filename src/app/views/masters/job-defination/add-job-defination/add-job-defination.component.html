@@ -19,8 +19,10 @@
         <form action="javascript:" class="needs-validation" novalidate [formGroup]="jobdefinationForm">
           <div class="form-row">
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Holding</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <select class="form-control validation_border" disabled formControlName="holdingId"
                 (change)="selectHolding(jobdefinationForm.value.holdingId)"
                 [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }">
@@ -31,8 +33,10 @@
               </div>
             </div>
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Company</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <select class="form-control validation_border" formControlName="companyId"
                 [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
                 <option *ngFor="let cl of companyList" value="{{cl.gCompanyId}}">{{cl.name}}</option>
@@ -44,15 +48,19 @@
           </div>
           <div class="form-row">
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Job Function</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <select class="form-control" formControlName="jobfunctionId">
                 <option *ngFor="let cl of jobfunList" value="{{cl.jobfunctionId}}">{{cl.name}}</option>
               </select>
             </div>
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Job Defination </label>
+            </div>
+            <div class="col-md-4 mb-3">
               <input type="text" formControlName="name" class="form-control validation_border"
                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
               <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
@@ -68,14 +76,18 @@
           <div class="form-row">
 
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Standard Quantity</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <input type="number" formControlName="stdQnty" class="form-control">
 
             </div>
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Unit of Measure</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <select class="form-control " formControlName="xunitmeasureId">
                 <option *ngFor="let cl of uomList" value="{{cl.xunitmeasureId}}">{{cl.uomName}}</option>
               </select>
@@ -165,14 +177,18 @@
 
           <div class="form-row">
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Description</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <input type="text" formControlName="description" class="form-control">
 
             </div>
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Code</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <input type="text" formControlName="code" class="form-control">
             </div>
 
@@ -180,9 +196,11 @@
 
           <div class="form-row">
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
 
               <label for="validationCustom01">Status</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <select class="form-control validation_border" formControlName="status">
                 <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
               </select>

@@ -23,8 +23,10 @@
         <form action="javascript:" class="needs-validation" novalidate [formGroup]="empleaveresumptionForm">
           <div class="form-row">
             
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Holding</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <select class="form-control validation_border" disabled formControlName="gHoldingId" (change)="selectHolding(empleaveresumptionForm.value.holdingId)"
               [ngClass]="{ 'is-invalid': submitted && f.gHoldingId.errors }">
                   <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
@@ -34,8 +36,10 @@
               </div>
           </div>
             
-          <div class="col-md-6 mb-3">
+          <div class="col-md-2 mb-3">
             <label for="validationCustom01">Company</label>
+          </div>
+          <div class="col-md-4 mb-3">
             <select class="form-control validation_border" formControlName="gCompanyId" 
             (change)="selectcompany(empleaveresumptionForm.value.gCompanyId)"
               [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
@@ -48,14 +52,18 @@
       </div>
 
           <div class="form-row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
                 <label for="validationCustom01">Document No</label>
+              </div>
+              <div class="col-md-4 mb-3">
                 <input type="text" formControlName="documentno" disabled class="form-control">
                
               </div>
 
-              <div class="col-md-6 mb-3">
+              <div class="col-md-2 mb-3">
                 <label for="validationCustom02">Transaction Date</label>
+              </div>
+              <div class="col-md-4 mb-3">
                <div class="input-group">
                  <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker 
                  name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="datetrx1"
@@ -76,12 +84,14 @@
 
 
           <div class="form-row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Employee</label>
+            </div>
               <!-- <select class="form-control validation_border" formControlName="xEmployeeId" (change)="getReferenceByID(empleaveresumptionForm.value.xEmployeeId)">
                 <option *ngFor="let dl of employeeList" value="{{dl.employeeId}}">{{dl.displayName}}
                 </option>
               </select> -->
+              <div class="col-md-4 mb-3">
               <ng-multiselect-dropdown
               name="city"
               [placeholder]="'Select Employee'"
@@ -92,8 +102,10 @@
           </ng-multiselect-dropdown>
           </div>
            
-            <div class="col-md-6 mb-3">
+          <div class="col-md-2 mb-3">
                 <label for="validationCustom02">Resumption Date</label>
+              </div>
+              <div class="col-md-4 mb-3">
                <div class="input-group">
                  <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker 
                  name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="resumptiondate1"
@@ -110,8 +122,10 @@
           </div>
 
           <div class="form-row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Leave Reference</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <select class="form-control validation_border" formControlName="lEmpleaveId" (change)="selectLeaveRef(empleaveresumptionForm.value.lEmpleaveId)">
                 
                 <option *ngFor="let dl of referenceList" value="{{dl.lEmpleaveId}}">{{dl.documentno}}
@@ -120,8 +134,10 @@
           </div>
            
             
-                <div class="col-md-6 mb-3">
+          <div class="col-md-2 mb-3">
                     <label for="validationCustom01">Leave Type</label>
+                  </div>
+                  <div class="col-md-4 mb-3">
                     <select class="form-control validation_border" disabled formControlName="xleaveitemId">
                       <option *ngFor="let dl of leaveTypeList" value="{{dl.xLeaveitemId}}">{{dl.name}}
                       </option>
@@ -236,13 +252,16 @@
 
 
           <div class="form-row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Remark</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <input type="text" formControlName="remarks" class="form-control">
           </div>
-            <div class="col-md-6 mb-3">
-            
+          <div class="col-md-2 mb-3">
               <label for="validationCustom01">Status</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <select class="form-control validation_border" formControlName="status">
                   <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
               </select>

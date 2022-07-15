@@ -14,8 +14,10 @@
                 <form action="javascript:" class="needs-validation" novalidate [formGroup]="generallistForm">
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Holding</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" disabled formControlName="gHoldingId" [ngClass]="{ 'is-invalid': submitted && f.gHoldingId.errors }">
                   <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
               </select>
@@ -35,8 +37,10 @@
             </div>
         </div> -->
 
-                        <div class="col-md-6 mb-3">
+        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Code</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="value" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.value.errors }">
                             <div *ngIf="submitted && f.value.errors" class="invalid-feedback">
                                 <div *ngIf="f.value.errors.required">Value is required</div>
@@ -47,15 +51,19 @@
 
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">List Name</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="name" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                                 <div *ngIf="f.name.errors.required">List Name is required</div>
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Status</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
                   <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
               </select>
@@ -148,16 +156,20 @@
                 </nav>
                 <form action="javascript:" class="needs-validation" novalidate [formGroup]="generalListValueForm">
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Group Code</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="groupcode" class="form-control validation_border" [ngClass]="{ 'is-invalid': submittedValue && f1.groupcode.errors }" disabled>
                             <div *ngIf="submittedValue && f1.groupcode.errors" class="invalid-feedback">
                                 <div *ngIf="f1.groupcode.errors.required">Group Code is required</div>
                             </div>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Status</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" formControlName="valuestatus" [ngClass]="{ 'is-invalid': submittedValue && f1.valuestatus.errors }">
                   <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
               </select>
@@ -168,15 +180,19 @@
 
                     </div>
                     <div class="form-row">
-                        <div class="col-md-6 mb-3" hidden>
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Code</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="listvalue" class="form-control validation_border" [ngClass]="{ 'is-invalid': submittedValue && f1.listvalue.errors }">
                             <div *ngIf="submittedValue && f1.listvalue.errors" class="invalid-feedback">
                                 <div *ngIf="f1.listvalue.errors.required">Value is required</div>
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Name</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="listValueName" class="form-control validation_border" [ngClass]="{ 'is-invalid': submittedValue && f1.listValueName.errors }">
                             <div *ngIf="submittedValue && f1.listValueName.errors" class="invalid-feedback">
                                 <div *ngIf="f1.listValueName.errors.required">Name is required</div>

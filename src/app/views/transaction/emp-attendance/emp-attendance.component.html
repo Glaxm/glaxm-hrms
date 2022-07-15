@@ -12,8 +12,10 @@
                 </nav>
                 <form action="javascript:" class="needs-validation" novalidate [formGroup]="empAttenForm">
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Holding</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control " formControlName="holdingId" [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }" disabled>
                                 <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
                             </select>
@@ -24,8 +26,10 @@
                         </div>
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Company</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" formControlName="companyId" (change)="selectcompany(empAttenForm.value.companyId)" [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
                                 <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
                             </select>
@@ -39,8 +43,10 @@
                     </div>
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom02">Attendance From</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="dateFrom1" [ngClass]="{ 'is-invalid': submitted && f.dateFrom1.errors }"
                                     #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeFromDate($event)" (click)="dp1.toggleCalendar()" />
@@ -55,8 +61,10 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom02">Attendance To</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="dateTo1" [ngClass]="{ 'is-invalid': submitted && f.dateTo1.errors }" #dp2="angular-mydatepicker"
                                     autocomplete="off" (ngModelChange)="changeToDate($event)" (click)="dp2.toggleCalendar()" />
@@ -75,12 +83,14 @@
                     </div>
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Employee</label>
+                        </div>
                             <!-- <select class="form-control validation_border" formControlName="employeeId"  
                             [ngClass]="{ 'is-invalid': submitted && f.employeeId.errors }">
                                 <option *ngFor="let dl of empList" value="{{dl .employeeId}}">{{dl.displayName}}({{dl.value}})</option>
                             </select> -->
+                            <div class="col-md-4 mb-3">
                             <ng-multiselect-dropdown name="city" [placeholder]="'Select Employee'" [data]="empList" formControlName="employee" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)">
                             </ng-multiselect-dropdown>
 
@@ -89,8 +99,10 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Description</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="remark" class="form-control">
 
                         </div>
@@ -98,15 +110,19 @@
 
                     </div>
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Status</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control" formControlName="status">
                                 <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
                             </select>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Shift Name</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control" formControlName="xShiftruleId" [ngClass]="{ 'is-invalid': submitted && f.xShiftruleId.errors }" (change)="selectShiftRule(empAttenForm.value.xShiftruleId)">
                                 <option *ngFor="let dl of shiftRuleList" value="{{dl.shiftRuleId}}">{{dl.name}}</option>
                             </select>
@@ -117,16 +133,20 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom02">Start Time</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="time" formControlName="startTime" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.startTime.errors }">
                             <div *ngIf="submitted && f.startTime.errors" class="invalid-feedback">
                                 <div *ngIf="f.startTime.errors.required">Start Time is required</div>
                             </div>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom02">End Time</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="time" formControlName="endTime" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.endTime.errors }">
                             <div *ngIf="submitted && f.endTime.errors" class="invalid-feedback">
                                 <div *ngIf="f.endTime.errors.required">End Time is required</div>
@@ -137,13 +157,17 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom02">Break Start</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="time" formControlName="breakStart" class="form-control">
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom02">Break End</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="time" formControlName="breakEnd" class="form-control">
                         </div>
 

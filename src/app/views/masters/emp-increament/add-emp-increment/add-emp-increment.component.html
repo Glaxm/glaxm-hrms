@@ -14,8 +14,10 @@
 
         <form action="javascript:" class="needs-validation" novalidate [formGroup]="empincrementForm">
             <div class="form-row">
-                <div class="col-md-6 mb-3">
+              <div class="col-md-2 mb-3">
                     <label for="validationCustom01">Holding</label>
+                  </div>
+                  <div class="col-md-4 mb-3">
                     <select class="form-control validation_border" disabled formControlName="holdingId"
                         [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }"
                        >
@@ -28,8 +30,10 @@
                 </div>
 
 
-                <div class="col-md-6 mb-3">
+                <div class="col-md-2 mb-3">
                     <label for="validationCustom01">Company</label>
+                  </div>
+                  <div class="col-md-4 mb-3">
                     <select class="form-control validation_border" formControlName="companyId"
                     (change)="selectcompany(empincrementForm.value.companyId)"
                         [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
@@ -46,15 +50,19 @@
          
           <div class="form-row">
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
                 <label for="validationCustom01">Document No.</label>
+              </div>
+              <div class="col-md-4 mb-3">
                 <input type="text" formControlName="docNo" class="form-control" disabled>
                 <div class="valid-feedback">
                   Looks good!
                 </div>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
                 <label for="validationCustom02">Transaction Date</label>
+              </div>
+              <div class="col-md-4 mb-3">
                <div class="input-group">
                 
                  <input class="form-control" type="text" placeholder="Select a date" angular-mydatepicker 
@@ -88,11 +96,13 @@
          </ng-multiselect-dropdown>
           </div> -->
 
-          <div class="col-md-6 mb-3">
+          <div class="col-md-2 mb-3">
             <label for="validationCustom01">Employee</label>
+          </div>
             <!-- <select class="form-control" formControlName="xEmployeeId">
               <option *ngFor="let sl of employeeList" value="{{sl.employeeId}}">{{sl.displayName}}</option>
            </select> --> 
+           <div class="col-md-4 mb-3">
            <ng-multiselect-dropdown
            name="city"
            [placeholder]="'Select Employee'"
@@ -103,8 +113,10 @@
        </ng-multiselect-dropdown>
         </div>
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom02">Effective Date</label>
+            </div>
+            <div class="col-md-4 mb-3">
              <div class="input-group">
               
                <input class="form-control" type="text" placeholder="Select a date" angular-mydatepicker 
@@ -129,9 +141,11 @@
           </div>
 
           <div class="form-row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
                 <label for="validationCustom01">Current Grade</label>
+              </div>
                 <!-- <input type="text" formControlName="currentgrade" class="form-control"> -->
+                <div class="col-md-4 mb-3">
                 <select class="form-control" formControlName="empgradeId" disabled>
                   <option *ngFor="let sl of gradeList" value="{{sl.empGradeId}}">{{sl.name}}</option>
                  
@@ -139,8 +153,10 @@
               
             </div>
 
-           <div class="col-md-6 mb-3">
+           <div class="col-md-2 mb-3">
             <label for="validationCustom01">New Grade</label>
+          </div>
+          <div class="col-md-4 mb-3">
             <select class="form-control" formControlName="newempgradeId">
               <option *ngFor="let sl of gradeList" value="{{sl.empGradeId}}">{{sl.name}}</option>
              
@@ -151,17 +167,21 @@
           </div>
 
           <div class="form-row">
-            <div class="col-md-6 mb-3" >
+            <div class="col-md-2 mb-3" >
                 <label for="validationCustom01">Current Designation</label>
+              </div>
                 <!-- <input type="text" formControlName="currentdesignation" class="form-control"> -->
+                <div class="col-md-4 mb-3">
                 <select class="form-control" formControlName="empdesignationId" disabled>
                   <option *ngFor="let sl of designationList" value="{{sl.empDesignationId}}">{{sl.name}}</option>
                  
                 </select>
             </div>
 
-           <div class="col-md-6 mb-3">
+           <div class="col-md-2 mb-3">
             <label for="validationCustom01">New Designation</label>
+          </div>
+          <div class="col-md-4 mb-3">
             <select class="form-control" formControlName="newempdesignationId">
               <option *ngFor="let sl of designationList" value="{{sl.empDesignationId}}">{{sl.name}}</option>
              
@@ -174,8 +194,10 @@
 
           <div class="form-row">
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Remark</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <input type="text" formControlName="remark" class="form-control">
               <div class="valid-feedback">
                 Looks good!
@@ -273,8 +295,10 @@
       </nav>
          <form action="javascript:" class="needs-validation" novalidate [formGroup]="lineForm">
            <div class="form-row">
-             <div class="col-md-6 mb-3">
+             <div class="col-md-2 mb-3">
                <label for="validationCustom01">Pay Item</label>
+              </div>
+              <div class="col-md-4 mb-3">
                <select class="form-control" formControlName="payItemId" (change)="onSelectPayItem(lineForm.value.payItemId)">
                  <option *ngFor="let ml of payitemList" value="{{ml.payItemId}}">{{ml.name}}</option>
                </select>
@@ -283,8 +307,10 @@
                </div>
              </div>
 
-             <div class="col-md-6 mb-3">
+             <div class="col-md-2 mb-3">
                 <label for="validationCustom01">Amount</label>
+              </div>
+              <div class="col-md-4 mb-3">
                 <input type="text" formControlName="curamount" class="form-control" disabled>
                 <div class="valid-feedback">
                   Looks good!
@@ -295,15 +321,19 @@
            <div class="form-row">
           
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
                <label for="validationCustom01">Increament Amount</label>
+              </div>
+              <div class="col-md-4 mb-3">
                <input type="text" formControlName="amount" class="form-control">
                <div class="valid-feedback">
                  Looks good!
                </div>
            </div>
-           <div class="col-md-6 mb-3">
+           <div class="col-md-2 mb-3">
             <label for="validationCustom01">Status</label>
+          </div>
+          <div class="col-md-4 mb-3">
             <select class="form-control" formControlName="status">
               <option *ngFor="let sl of statusList" value="{{sl.valueCode}}">{{sl.valueName}}</option>
             </select>

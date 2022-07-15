@@ -15,8 +15,10 @@
 
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Holding</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" disabled formControlName="gHoldingId" [ngClass]="{ 'is-invalid': submitted && f.gHoldingId.errors }">
                                 <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
                             </select>
@@ -26,8 +28,10 @@
 
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Company</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" formControlName="gCompanyId" (change)="selectcompany(emppaytransactionForm.value.gCompanyId)" [ngClass]="{ 'is-invalid': submitted && f.gCompanyId.errors }">
                                 <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
                             </select>
@@ -41,13 +45,17 @@
 
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Document No.</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="documentno" disabled class="form-control">
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom02">Transaction Date</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="transactionDate1" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event)"
                                     (click)="dp1.toggleCalendar()" />
@@ -65,17 +73,21 @@
                     <div class="form-row">
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Employee</label>
+                        </div>
                             <!-- <select class="form-control" formControlName="xEmployeeId">
                               <option *ngFor="let sl of employeeList" value="{{sl.employeeId}}">{{sl.displayName}}</option>
                            </select> -->
+                           <div class="col-md-4 mb-3">
                             <ng-multiselect-dropdown name="city" [placeholder]="'Select Employee'" [data]="employeeList" formControlName="employee" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)">
                             </ng-multiselect-dropdown>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom02">Effective Date</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="effectiveDate1" #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)"
                                     (click)="dp2.toggleCalendar()" />
@@ -94,16 +106,20 @@
 
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Pay Item</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" formControlName="xPayitemId" (change)="changePayitem(emppaytransactionForm.value.xPayitemId)">
                                 <option *ngFor="let dl of payitemList" value="{{dl.payItemId}}">{{dl.name}}
                                 </option>
                             </select>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Amount</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="amount" class="form-control">
 
                         </div>
@@ -113,14 +129,18 @@
                     <div class="form-row">
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">OT Hours</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="otHrs" class="form-control">
 
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Description</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="description" class="form-control">
                         </div>
 
@@ -129,8 +149,10 @@
 
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Status</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" formControlName="isActive">
                                 <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
                             </select>

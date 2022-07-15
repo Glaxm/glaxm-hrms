@@ -38,9 +38,9 @@
                 </div>
 
             </div>
-            <!-- </div> -->
+        </div>
 
-            <!-- <div class="form-row"> -->
+        <div class="form-row">
 
             <div class="col-md-2 mb-3" *ngIf="salaryForm.value.srcDoctype=='T'">
                 <label for="validationCustom01">Normal Hours</label>
@@ -61,9 +61,9 @@
                     <div *ngIf="es.overtime_Hours.errors.required">Overtime Hours is required</div>
                 </div>
             </div>
-            <!-- </div> -->
+        </div>
 
-            <!-- <div class="form-row"> -->
+        <div class="form-row">
 
             <div class="col-md-2 mb-3">
                 <label for="validationCustom01">Payment Mode</label>
@@ -90,9 +90,9 @@
                 </div>
             </div>
 
-            <!-- </div> -->
+        </div>
 
-            <!-- <div class="form-row"> -->
+        <div class="form-row">
 
             <div class="col-md-2 mb-3" *ngIf="salaryForm.value.payMode=='B'">
                 <label for="validationCustom01">Branch</label>
@@ -114,7 +114,8 @@
                     <div *ngIf="es.transferAccount.errors.required">Account No. is required</div>
                 </div>
             </div>
-
+        </div>
+        <div class="form-row">
             <div class="col-md-2 mb-3" *ngIf="salaryForm.value.payMode=='B'">
                 <label for="validationCustom01">Employee Name in Bank </label>
             </div>
@@ -128,7 +129,8 @@
             <div class="col-md-4 mb-3" *ngIf="salaryForm.value.payMode=='B'">
                 <input type="text" formControlName="empibanno" class="form-control">
             </div>
-
+        </div>
+        <div class="form-row">
             <div class="col-md-2 mb-3" *ngIf="salaryForm.value.payMode=='B'">
                 <label for="validationCustom01">Routing No.</label>
             </div>
@@ -142,7 +144,8 @@
             <div class="col-md-4 mb-3" *ngIf="salaryForm.value.payMode=='B'">
                 <input type="text" formControlName="swiftCode" class="form-control">
             </div>
-
+        </div>
+        <div class="form-row">
             <div class="col-md-2 mb-3" *ngIf="salaryForm.value.payMode=='B'">
                 <label for="validationCustom01">IFSC Code</label>
             </div>
@@ -162,7 +165,8 @@
         </select>
             </div>
 
-
+        </div>
+        <div class="form-row">
 
             <div class="col-md-2 mb-3" *ngIf="salaryForm.value.payMode=='B'">
                 <label for="validationCustom01">Country</label>
@@ -181,7 +185,8 @@
           <option *ngFor="let dl of exchangeNameList" value="{{dl.lListitemId}}">{{dl.name}}</option>
         </select>
             </div>
-
+        </div>
+        <div class="form-row">
             <div class="col-md-2 mb-3" *ngIf="salaryForm.value.payMode=='E'">
                 <label for="validationCustom01">Exchange Account No.</label>
             </div>
@@ -202,6 +207,8 @@
                     Looks good!
                 </div>
             </div>
+        </div>
+        <div class="form-row">
             <div class="col-md-2 mb-3">
                 <label for="validationCustom01">Currency</label>
             </div>
@@ -243,7 +250,8 @@
                     <div *ngIf="es.status.errors.required">Status is required</div>
                 </div>
             </div>
-
+        </div>
+        <div class="form-row">
             <div class="col-md-3 mb-3">
                 <div class="custom-control">
                     <label for="validationCustom04"></label><br>
@@ -281,8 +289,8 @@
                     <label class="custom-control-label" for="customCheck6">Weekly Off</label>
                 </div>
             </div>
-
-
+        </div>
+        <div class="form-row">
             <div class="col-md-2 mb-3">
                 <label for="validationCustom01">Regular Off</label>
             </div>
@@ -334,7 +342,8 @@
 
 
 
-
+        </div>
+        <div class="form-row">
 
             <div class="col-md-2 mb-3" *ngIf="salaryForm.value.alternateoff">
                 <label for="validationCustom02">Starting Date</label>
@@ -372,7 +381,8 @@
                     <div *ngIf="es.ovrtimerefPayitemId1.errors.required">Overtime Calculation is required</div>
                 </div>
             </div>
-
+        </div>
+        <div class="form-row">
             <div class="col-md-6 mb-3" *ngIf="isSelectSrc">
                 <div class="custom-control custom-checkbox">
                     <label for="validationCustom04"></label><br>
@@ -390,7 +400,8 @@
                 </ng-multiselect-dropdown>
 
             </div>
-
+        </div>
+        <div class="form-row">
             <div class="col-md-2 mb-3">
                 <label for="validationCustom01">Remark</label>
             </div>

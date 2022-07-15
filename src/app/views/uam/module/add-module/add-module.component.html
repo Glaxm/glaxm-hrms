@@ -15,16 +15,20 @@
 
         <form action="javascript:" class="needs-validation" novalidate [formGroup]="moduleForm">
           <div class="form-row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Module Code</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <input type="text" formControlName="moduleCode" class="form-control" 
               [ngClass]="{ 'is-invalid': submitted && f.moduleCode.errors }">
               <div *ngIf="submitted && f.moduleCode.errors" class="invalid-feedback">
                 <div *ngIf="f.moduleCode.errors.required">Module code is required</div>
               </div>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
                 <label for="validationCustom01">Module Name</label>
+              </div>
+              <div class="col-md-4 mb-3">
                 <input type="text" formControlName="moduleName" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.moduleName.errors }">
                 <div *ngIf="submitted && f.moduleName.errors" class="invalid-feedback">
@@ -34,16 +38,20 @@
            
           </div>
           <div class="form-row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Module Url</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <input type="text" formControlName="moduleUrl" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f.moduleUrl.errors }">
               <div *ngIf="submitted && f.moduleUrl.errors" class="invalid-feedback">
                 <div *ngIf="f.moduleUrl.errors.required">Module url is required</div>
               </div>
               </div>
-            <div class="col-md-6 mb-3">
+              <div class="col-md-2 mb-3">
                 <label for="validationCustom01">Module Group</label>
+              </div>
+              <div class="col-md-4 mb-3">
                 <select class="form-control" formControlName="moduleGroup" 
                 [ngClass]="{ 'is-invalid': submitted && f.moduleGroup.errors }">
                     <option *ngFor="let sl of moduleGroupList" value="{{sl.valueCode}}">{{sl.valueName}}</option>
@@ -59,8 +67,10 @@
           </div>
          
           <div class="form-row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Status</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <select class="form-control" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
                 <option *ngFor="let sl of statusList" value="{{sl.valueCode}}">{{sl.valueName}}</option>
                 <!-- <option>Inactive</option> -->
@@ -70,8 +80,10 @@
               </div>
             </div>
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom02">Start Date</label>
+            </div>
+            <div class="col-md-4 mb-3">
              <div class="input-group">
               
                <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker 
@@ -93,8 +105,10 @@
           </div>
 
           <div class="form-row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom02">End Date</label>
+            </div>
+            <div class="col-md-4 mb-3">
              <div class="input-group">
               
                <input class="form-control" type="text" placeholder="Select a date" angular-mydatepicker 
@@ -115,8 +129,10 @@
               Looks good!
             </div>
           </div> -->
-          <div class="col-md-6 mb-3">
+          <div class="col-md-2 mb-3">
             <label for="validationCustom01">Description</label>
+          </div>
+          <div class="col-md-4 mb-3">
             <input type="text" formControlName="moduleDesc" class="form-control">
             <div class="valid-feedback">
               Looks good!

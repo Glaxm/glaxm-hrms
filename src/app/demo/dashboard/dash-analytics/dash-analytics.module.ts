@@ -11,6 +11,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { CalendarViewComponent } from '../calendar-view/calendar-view.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { ModalComponent } from '../_modal/modal.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -30,7 +31,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
   ],
   declarations: [
     DashAnalyticsComponent,
-    CalendarViewComponent
+    CalendarViewComponent,
+    ModalComponent
   ]
 })
 export class DashAnalyticsModule { }

@@ -80,7 +80,7 @@
                                 </div>
 
 
-                                <label for="validationCustom01">Employee Code</label>
+                                <label for="validationCustom01">Internal ID</label>
                                 <input type="text" formControlName="value" class="form-control validation_border" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.value.errors }">
                                 <div *ngIf="empdetailesubmitted && ed.value.errors" class="invalid-feedback">
                                     <div *ngIf="ed.value.errors.required">Employee ID is required</div>
@@ -615,7 +615,7 @@
                             <div class="form-row">
 
                                 <div class="col-md-2 mb-3">
-                                    <label for="validationCustom02">Leaving Date</label>
+                                    <label for="validationCustom02">Last Working Day</label>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <div class="input-group">
@@ -629,7 +629,25 @@
 
                                     </div>
                                 </div>
+                                <div class="col-md-2 mb-3">
+                                    <label for="validationCustom02">Last day on Notice</label></div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate1" disabled="employementStatus != 'Left'" [options]="myDatePickerOptions" formControlName="lastDayonNotice1" #dp12="angular-mydatepicker" autocomplete="off"
+                                            (ngModelChange)="changeLastDayonNotice($event)" (click)="dp12.toggleCalendar()" />
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-secondary" (click)="dp12.toggleCalendar()" [disabled]="employementStatus != 'Left'">
+                          <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                                        </div>
 
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-row">
                                 <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Status</label>
                                 </div>
@@ -641,6 +659,8 @@
                                         <div *ngIf="ed.status.errors.required">Status is required</div>
                                     </div>
                                 </div>
+                                <!--  -->
+
 
                             </div>
                             <!-- </div> -->

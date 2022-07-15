@@ -16,8 +16,10 @@
         <form action="javascript:" class="needs-validation" novalidate [formGroup]="sectionForm">
           <div class="form-row">
             
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Holding</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <select class="form-control validation_border" disabled formControlName="gHoldingId" (change)="selectHolding(sectionForm.value.gHoldingId)"
               [ngClass]="{ 'is-invalid': submitted && f.gHoldingId.errors }">
                   <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
@@ -27,8 +29,9 @@
               </div>
           </div>
             
-          <div class="col-md-6 mb-3">
+          <div class="col-md-2 mb-3">
             <label for="validationCustom01">Company</label>
+          </div>
             <!-- <select class="form-control validation_border" formControlName="gCompanyId" 
               [ngClass]="{ 'is-invalid': submitted && f.gCompanyId.errors }">
                 <option *ngFor="let cl of companyList" value="{{cl.gCompanyId}}">{{cl.name}}</option>
@@ -36,6 +39,7 @@
             <div *ngIf="submitted && f.gCompanyId.errors" class="invalid-feedback">
               <div *ngIf="f.gCompanyId.errors.required">Company is required</div>
             </div> -->
+            <div class="col-md-4 mb-3">
             <ng-multiselect-dropdown 
             [placeholder]="" [data]="companyList" 
             name="company"
@@ -53,16 +57,20 @@
         </div>
       </div>
           <div class="form-row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Section </label>
+            </div>
+            <div class="col-md-4 mb-3">
               <input type="text" formControlName="name" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
               <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                 <div *ngIf="f.name.errors.required">Section is required</div>
               </div>
             </div>
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Description</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <input type="text" formControlName="description" class="form-control">
               <div class="valid-feedback">
                 Looks good!
@@ -72,13 +80,17 @@
 
           </div>
           <div class="form-row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="validationCustom01">Code</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <input type="text" formControlName="code" class="form-control">
           </div>
-            <div class="col-md-6 mb-3">
+          <div class="col-md-2 mb-3">
             
               <label for="validationCustom01">Status</label>
+            </div>
+            <div class="col-md-4 mb-3">
               <select class="form-control validation_border" formControlName="status">
                   <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
               </select>

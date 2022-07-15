@@ -13,8 +13,10 @@
 
                 <form action="javascript:" class="needs-validation" novalidate [formGroup]="monthyearForm">
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Holding</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" disabled formControlName="holdingId" [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }">
                     <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
                 </select>
@@ -22,8 +24,10 @@
                                 <div *ngIf="f.holdingId.errors.required">Holding is required</div>
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Close for Processing</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <ng-multiselect-dropdown [placeholder]="" [data]="companyList" name="company" formControlName="company" [(ngModel)]="selectedCompanyList" [settings]="dropdownSettings" (onSelect)="onCompnaySelect($event)" (onDeSelect)="onCompanyDeSelect($event)" (onSelectAll)="onSelectAllCompnay($event)"
                                 [ngClass]="{ 'is-invalid': submitted && f.company.errors }">
                             </ng-multiselect-dropdown>
@@ -40,15 +44,19 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Month Year</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="name" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                                 <div *ngIf="f.name.errors.required">Month Year is required</div>
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Month</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="number" formControlName="monthNo" min="0" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.monthNo.errors }">
                             <div *ngIf="submitted && f.monthNo.errors" class="invalid-feedback">
                                 <div *ngIf="f.monthNo.errors.required">Month is required</div>
@@ -56,21 +64,27 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Year</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="number" min="0" formControlName="yearId" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.yearId.errors }">
                             <div *ngIf="submitted && f.yearId.errors" class="invalid-feedback">
                                 <div *ngIf="f.yearId.errors.required">year is required</div>
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Description</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="description" class="form-control">
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom02">Start Date</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="startdate1" #dp1="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeStartDate($event)"
                                     (click)="dp1.toggleCalendar()" />
@@ -81,8 +95,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom02">End Date</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <div class="input-group">
                                 <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="enddate1" #dp2="angular-mydatepicker" autocomplete="off" (ngModelChange)="changeEndDate($event)"
                                     (click)="dp2.toggleCalendar()" />
@@ -99,24 +115,30 @@
 
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Financial Year</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="financialYear" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.financialYear.errors }">
                             <div *ngIf="submitted && f.financialYear.errors" class="invalid-feedback">
                                 <div *ngIf="f.financialYear.errors.required">Financial Year is required</div>
                             </div>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Code</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="code" class="form-control" disabled>
                         </div>
                     </div>
 
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Status</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.isActive.errors }">
                         <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
                     </select>

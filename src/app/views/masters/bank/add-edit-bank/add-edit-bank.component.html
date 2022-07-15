@@ -14,8 +14,10 @@
                 <form action="javascript:" class="needs-validation" novalidate [formGroup]="bankForm">
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Holding</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" disabled formControlName="holdingId" [ngClass]="{ 'is-invalid': submitted && f.holdingId.errors }">
                   <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
               </select>
@@ -24,8 +26,9 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Company</label>
+                        </div>
                             <!-- <select class="form-control validation_border" formControlName="companyId" 
             [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }">
                 <option *ngFor="let cl of companyList" value="{{cl.gCompanyId}}">{{cl.name}}</option>
@@ -33,6 +36,7 @@
             <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
               <div *ngIf="f.companyId.errors.required">Company is required</div>
             </div> -->
+            <div class="col-md-4 mb-3">
                             <ng-multiselect-dropdown [placeholder]="" [data]="companyList" name="company" formControlName="company" [(ngModel)]="selectedCompanyList" [settings]="dropdownSettings" (onSelect)="onCompnaySelect($event)" (onDeSelect)="onCompanyDeSelect($event)" (onSelectAll)="onSelectAllCompnay($event)"
                                 [ngClass]="{ 'is-invalid': submitted && f.company.errors }" class="set-border-color">
                             </ng-multiselect-dropdown>
@@ -44,16 +48,20 @@
                     </div>
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Bank</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="name" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                                 <div *ngIf="f.name.errors.required">Bank is required</div>
                             </div>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Swift Code</label>
+                        </div>
+                        <div class="col-md-4 mb-3"  >
                             <input type="text" formControlName="swiftCode" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.swiftCode.errors }">
                             <div *ngIf="submitted && f.swiftCode.errors" class="invalid-feedback">
                                 <div *ngIf="f.swiftCode.errors.required">Swift Code is required</div>
@@ -64,8 +72,10 @@
                     </div>
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Routing Number</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="routingNo" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.routingNo.errors }">
                             <div *ngIf="submitted && f.routingNo.errors" class="invalid-feedback">
                                 <div *ngIf="f.routingNo.errors.required">Routing Number is required</div>
@@ -73,8 +83,10 @@
                         </div>
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Description</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="desc" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.desc.errors }">
                             <div *ngIf="submitted && f.desc.errors" class="invalid-feedback">
                                 <div *ngIf="f.desc.errors.required">Description is required</div>
@@ -84,12 +96,16 @@
 
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Code</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <input type="text" formControlName="code" class="form-control">
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Status</label>
+                        </div>
+                        <div class="col-md-4 mb-3"  >
                             <select class="form-control validation_border" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.isActive.errors }">
                     <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
                 </select>

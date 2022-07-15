@@ -13,8 +13,10 @@
                 </nav>
                 <form action="javascript:" class="needs-validation" novalidate [formGroup]="documentsForm">
                     <div class="form-row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Holding</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" disabled formControlName="gHoldingId" [ngClass]="{ 'is-invalid': submitted && f.gHoldingId.errors }">
                 <option *ngFor="let dl of holdingList" value="{{dl.gHoldingId}}">{{dl.name}}</option>
               </select>
@@ -25,8 +27,10 @@
                         </div>
 
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Company</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" formControlName="gCompanyId" (change)="selectcompany(documentsForm.value.gCompanyId)" [ngClass]="{ 'is-invalid': submitted && f.gCompanyId.errors }" (change)="getEmployeeByCompany(documentsForm.value.gCompanyId)">
                 <option *ngFor="let dl of companyList" value="{{dl.gCompanyId}}">{{dl.name}}</option>
               </select>
@@ -42,8 +46,10 @@
 
                     <div class="form-row">
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Employee</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <ng-multiselect-dropdown name="city" [placeholder]="'Select Employee'" [data]="employeeList" formControlName="employee" [(ngModel)]="selectedItems" [settings]="dropdownSettings" [ngClass]="{ 'is-invalid': submitted && f.employee.errors }" (onSelect)="onItemSelect($event)">
                             </ng-multiselect-dropdown>
                             <div *ngIf="submitted && f.employee.errors" class="invalid-feedback">
@@ -51,8 +57,10 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Document Type</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <select class="form-control validation_border" formControlName="xdoctypeId" (change)="selectDocType(documentsForm.value.xdoctypeId)" [ngClass]="{ 'is-invalid': submitted && f.xdoctypeId.errors }">
                 <option *ngFor="let dl of docType" value="{{dl.xdoctypeId}}">{{dl.docName}}</option>
               </select>
@@ -78,17 +86,21 @@
                     <app-card cardTitle="Passport Details" [options]="false" *ngIf="doctypecode == 'PP'">
                         <div class="form-row">
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Passport No.</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <input type="text" formControlName="p_passportno" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.p_dateofissue.errors }">
                                 <div *ngIf="submitted && f.p_passportno.errors" class="invalid-feedback">
                                     <div *ngIf="f.p_passportno.errors.required">Passport No. is required</div>
                                 </div>
                             </div>
 
-                            <div class="col-md-6 mb-3" *ngIf="!filePath">
+                            <div class="col-md-2 mb-3" *ngIf="!filePath">
 
                                 <label for="validationCustom01">Attachment</label>
+                            </div>
+                            <div class="col-md-4 mb-3"  *ngIf="!filePath">
                                 <div class="input-group">
 
                                     <div class="custom-file">
@@ -106,8 +118,10 @@
 
 
                             <!--  -->
-                            <div class="col-md-6 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
+                            <div class="col-md-2 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
                                 <label for="validationCustom01">Attachment</label>
+                            </div>
+                            <div class="col-md-4 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
                                 <div class="input-group mb-3">
                                     <input _ngcontent-wdr-c114="" type="text" formControlName="fileName" disabled aria-label="Recipient's username" aria-describedby="basic-addon2" class="form-control">
                                     <div class="input-group-append">
@@ -122,13 +136,17 @@
 
                         <div class="form-row">
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Place of Birth</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <input type="text" formControlName="p_birthplace" class="form-control">
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Place of Issue</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <input type="text" formControlName="p_placeissue" class="form-control">
                             </div>
 
@@ -137,8 +155,10 @@
                         <div class="form-row">
 
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Date of Issue </label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="p_dateofissue" [ngClass]="{ 'is-invalid': submitted && f.p_dateofissue.errors }"
                                         #dp1="angular-mydatepicker" autocomplete="off" (click)="dp1.toggleCalendar()" (ngModelChange)="changeDateofIssue($event)" />
@@ -153,8 +173,10 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Date of Expiry </label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="p_dateofexpiry" #dp2="angular-mydatepicker" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.p_dateofexpiry.errors }"
                                         (click)="dp2.toggleCalendar()" (ngModelChange)="changeDateofExpiry($event)" />
@@ -175,16 +197,20 @@
                         <div class="form-row">
 
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Possession</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <select class="form-control" formControlName="p_lspossessionId">
                                   <option *ngFor="let dl of possessionList" value="{{dl.lListitemId}}">{{dl.name}}</option>
                                 </select>
                             </div>
                             <!-- / -->
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Other Remark</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <input type="text" formControlName="p_remark" class="form-control">
                             </div>
 
@@ -197,22 +223,28 @@
                     <!-- ******Emirates ID Details****** -->
                     <app-card cardTitle="Emirates ID Details" [options]="false" *ngIf="doctypecode == 'EID'">
                         <div class="form-row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Emirates ID Number</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <input type="text" formControlName="e_emiratesid" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.e_emiratesid.errors }">
                                 <div *ngIf="submitted && f.e_emiratesid.errors" class="invalid-feedback">
                                     <div *ngIf="f.e_emiratesid.errors.required">Emirates ID Number is required</div>
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Emirates ID Card No.</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <input type="text" formControlName="e_emiratesidcardno" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Emirates ID Expiry Date</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="e_eiddateexpiry" #dp3="angular-mydatepicker" autocomplete="off" (click)="dp3.toggleCalendar()"
                                         [ngClass]="{ 'is-invalid': submitted && f.e_eiddateexpiry.errors }" (ngModelChange)="changeEDateofExpiry($event)" />
@@ -231,9 +263,11 @@
 
 
 
-                            <div class="col-md-6 mb-3" *ngIf="!filePath">
+                            <div class="col-md-2 mb-3" *ngIf="!filePath">
 
                                 <label for="validationCustom01">Attachment</label>
+                            </div>
+                            <div class="col-md-4 mb-3" *ngIf="!filePath">
                                 <div class="input-group">
 
                                     <div class="custom-file">
@@ -251,8 +285,10 @@
 
 
                             <!--  -->
-                            <div class="col-md-6 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
+                            <div class="col-md-2 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
                                 <label for="validationCustom01">Attachment</label>
+                            </div>
+                            <div class="col-md-4 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
                                 <div class="input-group mb-3">
                                     <input _ngcontent-wdr-c114="" type="text" formControlName="fileName" disabled aria-label="Recipient's username" aria-describedby="basic-addon2" class="form-control">
                                     <div class="input-group-append">
@@ -273,15 +309,19 @@
                     <app-card cardTitle="Visa Details" [options]="false" *ngIf="doctypecode == 'VISA'">
 
                         <div class="form-row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Residence Visa Number</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <input type="text" formControlName="v_visano" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.v_visano.errors }">
                                 <div *ngIf="submitted && f.v_visano.errors" class="invalid-feedback">
                                     <div *ngIf="f.v_visano.errors.required">Residence Visa Number is required</div>
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Residence Visa File No.</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <input type="text" formControlName="v_visafileno" class="form-control">
                             </div>
 
@@ -289,8 +329,10 @@
 
                         <div class="form-row">
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Residence Visa Issue Date</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="v_visadateissue" [ngClass]="{ 'is-invalid': submitted && f.v_visadateissue.errors }"
                                         #dp4="angular-mydatepicker" autocomplete="off" (click)="dp4.toggleCalendar()" (ngModelChange)="changeVIssueDate($event)" />
@@ -306,8 +348,10 @@
                             </div>
 
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Residence Visa Expiry Date </label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="v_visadateexpiry" #dp5="angular-mydatepicker" autocomplete="off" (click)="dp5.toggleCalendar()"
                                         [ngClass]="{ 'is-invalid': submitted && f.v_visadateexpiry.errors }" (ngModelChange)="changeVExpiryDate($event)" />
@@ -326,15 +370,19 @@
                         </div>
 
                         <div class="form-row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Job Title in Res. Visa</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <input type="text" formControlName="v_visajobtitle" class="form-control">
                             </div>
 
 
-                            <div class="col-md-6 mb-3" *ngIf="!filePath">
+                            <div class="col-md-2 mb-3" *ngIf="!filePath">
 
                                 <label for="validationCustom01">Attachment</label>
+                            </div>
+                            <div class="col-md-4 mb-3" *ngIf="!filePath">
                                 <div class="input-group">
 
                                     <div class="custom-file">
@@ -352,8 +400,10 @@
 
 
                             <!--  -->
-                            <div class="col-md-6 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
+                            <div class="col-md-2 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
                                 <label for="validationCustom01">Attachment</label>
+                            </div>
+                            <div class="col-md-4 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
                                 <div class="input-group mb-3">
                                     <input _ngcontent-wdr-c114="" type="text" formControlName="fileName" disabled aria-label="Recipient's username" aria-describedby="basic-addon2" class="form-control">
                                     <div class="input-group-append">
@@ -375,16 +425,20 @@
                     <app-card cardTitle="Labour Card Details" [options]="false" *ngIf="doctypecode == 'LBRCRD'">
                         <div class="form-row">
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Labour Card Number</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <input type="text" formControlName="l_labourcardno" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.l_labourcardno.errors }">
                                 <div *ngIf="submitted && f.l_labourcardno.errors" class="invalid-feedback">
                                     <div *ngIf="f.l_labourcardno.errors.required">Labour Card Number is required</div>
                                 </div>
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Labour Card Expiry Date</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="l_lcdateexpiry" [ngClass]="{ 'is-invalid': submitted && f.l_lcdateexpiry.errors }"
                                         #dp6="angular-mydatepicker" autocomplete="off" (click)="dp6.toggleCalendar()" (ngModelChange)="changeLExpiryDate($event)" />
@@ -402,15 +456,19 @@
                         </div>
 
                         <div class="form-row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Personnel ID in Labour Card</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <input type="text" formControlName="l_lcpersonalid" class="form-control">
                             </div>
 
 
-                            <div class="col-md-6 mb-3" *ngIf="!filePath">
+                            <div class="col-md-2 mb-3" *ngIf="!filePath">
 
                                 <label for="validationCustom01">Attachment</label>
+                            </div>
+                            <div class="col-md-4 mb-3" *ngIf="!filePath">
                                 <div class="input-group">
 
                                     <div class="custom-file">
@@ -428,8 +486,10 @@
 
 
                             <!--  -->
-                            <div class="col-md-6 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
+                            <div class="col-md-2 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
                                 <label for="validationCustom01">Attachment</label>
+                            </div>
+                            <div class="col-md-4 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
                                 <div class="input-group mb-3">
                                     <input _ngcontent-wdr-c114="" type="text" formControlName="fileName" disabled aria-label="Recipient's username" aria-describedby="basic-addon2" class="form-control">
                                     <div class="input-group-append">
@@ -450,16 +510,20 @@
 
 
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">JAFZA ID Card Number</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <input type="text" formControlName="j_jzidcardno" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.j_jzidcardno.errors }">
                                 <div *ngIf="submitted && f.j_jzidcardno.errors" class="invalid-feedback">
                                     <div *ngIf="f.j_jzidcardno.errors.required">JAFZA ID Card Number is required</div>
                                 </div>
 
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Card expiry date</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="j_jzidateexpiry" [ngClass]="{ 'is-invalid': submitted && f.j_jzidateexpiry.errors }"
                                         #dp7="angular-mydatepicker" autocomplete="off" (click)="dp7.toggleCalendar()" (ngModelChange)="changeJExpiryDate($event)" />
@@ -476,9 +540,11 @@
                         </div>
                         <div class="form-row">
 
-                            <div class="col-md-6 mb-3" *ngIf="!filePath">
+                            <div class="col-md-2 mb-3" *ngIf="!filePath">
 
                                 <label for="validationCustom01">Attachment</label>
+                            </div>
+                            <div class="col-md-4 mb-3" *ngIf="!filePath">
                                 <div class="input-group">
 
                                     <div class="custom-file">
@@ -496,8 +562,10 @@
 
 
                             <!--  -->
-                            <div class="col-md-6 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
+                            <div class="col-md-2 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
                                 <label for="validationCustom01">Attachment</label>
+                            </div>
+                            <div class="col-md-4 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
                                 <div class="input-group mb-3">
                                     <input _ngcontent-wdr-c114="" type="text" formControlName="fileName" disabled aria-label="Recipient's username" aria-describedby="basic-addon2" class="form-control">
                                     <div class="input-group-append">
@@ -516,23 +584,29 @@
 
                     <app-card cardTitle="Medical Insurance Details" [options]="false" *ngIf="doctypecode == 'MEDINS'">
                         <div class="form-row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01"> Medical Insurance Card Number</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <input type="text" formControlName="m_medinscardno" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.m_medinscardno.errors }">
                                 <div *ngIf="submitted && f.m_medinscardno.errors" class="invalid-feedback">
                                     <div *ngIf="f.m_medinscardno.errors.required">Medical Insurance Card Number is required</div>
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Medical Insurance Provider Name</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <input type="text" formControlName="m_medinsprovname" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-row">
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Medical Insurance Expiry Date</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="m_medinsdateexpiry" [ngClass]="{ 'is-invalid': submitted && f.m_medinsdateexpiry.errors }"
                                         #dp8="angular-mydatepicker" autocomplete="off" (click)="dp8.toggleCalendar()" (ngModelChange)="changeMExpiryDate($event)" />
@@ -548,9 +622,11 @@
                             </div>
 
 
-                            <div class="col-md-6 mb-3" *ngIf="!filePath">
+                            <div class="col-md-2 mb-3" *ngIf="!filePath">
 
                                 <label for="validationCustom01">Attachment</label>
+                            </div>
+                            <div class="col-md-4 mb-3" *ngIf="!filePath">
                                 <div class="input-group">
 
                                     <div class="custom-file">
@@ -568,8 +644,10 @@
 
 
                             <!--  -->
-                            <div class="col-md-6 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
+                            <div class="col-md-2 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
                                 <label for="validationCustom01">Attachment</label>
+                            </div>
+                            <div class="col-md-4 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
                                 <div class="input-group mb-3">
                                     <input _ngcontent-wdr-c114="" type="text" formControlName="fileName" disabled aria-label="Recipient's username" aria-describedby="basic-addon2" class="form-control">
                                     <div class="input-group-append">
@@ -588,29 +666,37 @@
                     <app-card cardTitle="Driving Licence Details" [options]="false" *ngIf="doctypecode == 'DRVLIC'">
                         <div class="form-row">
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Driving Licence No.</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <input type="text" formControlName="d_drivinglicno" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.d_drivinglicno.errors }">
                                 <div *ngIf="submitted && f.d_drivinglicno.errors" class="invalid-feedback">
                                     <div *ngIf="f.d_drivinglicno.errors.required">Driving Licence No. is required</div>
                                 </div>
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01">Traffic Code No.</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <input type="text" formControlName="d_trafficcardno" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-row">
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01"> Place of Issue</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <input type="text" formControlName="d_placeofissue" class="form-control">
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="validationCustom01"> Date of Issue</label>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <div class="input-group">
                                     <input class="form-control validation_border" placeholder="Select a date" type="text" angular-mydatepicker name="reactiveFormsDate" [options]="myDatePickerOptions" formControlName="d_dateofissue" [ngClass]="{ 'is-invalid': submitted && f.d_dateofissue.errors }"
                                         #dp9="angular-mydatepicker" autocomplete="off" (click)="dp9.toggleCalendar()" (ngModelChange)="changeDDOI($event)" />
@@ -632,6 +718,8 @@
                             <div class="col-md-6 mb-3" *ngIf="!filePath">
 
                                 <label for="validationCustom01">Attachment</label>
+                            </div>
+                            <div class="col-md-4 mb-3" *ngIf="!filePath">
                                 <div class="input-group">
 
                                     <div class="custom-file">
@@ -651,6 +739,8 @@
                             <!--  -->
                             <div class="col-md-6 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
                                 <label for="validationCustom01">Attachment</label>
+                            </div>
+                            <div class="col-md-4 mb-3" *ngIf="documentsForm.value.lEmppdocId && filePath">
                                 <div class="input-group mb-3">
                                     <input _ngcontent-wdr-c114="" type="text" formControlName="fileName" disabled aria-label="Recipient's username" aria-describedby="basic-addon2" class="form-control">
                                     <div class="input-group-append">
