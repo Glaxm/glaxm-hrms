@@ -810,9 +810,13 @@
                                 <div class="col-auto">
                                     <h6>Leave balance</h6>
                                 </div>
-                                <div class="col text-right">
-                                    <!-- <h2 class="mb-0">1042</h2> -->
+                                <!-- <div class="col text-right">
                                     <a [routerLink]="" (click)="leaveDetailsFun()">Details</a>
+                                </div> -->
+                                <div class="col text-right">
+                                    <!-- <a href="javascript:leaveDetailsFun()">Details</a> -->
+                                    <a routerLink="." (click)="leaveDetailsFun()">Details</a>
+                                    <!-- <a [routerLink]="" (click)="leaveDetailsFun()">Details</a> -->
                                 </div>
                             </div>
                             <div class="row mt-1 ng-tns-c94-47">
@@ -969,7 +973,7 @@
                                                     <tr _ngcontent-cgl-c117="">
                                                         <th>Loan Amount</th>
                                                         <th>Loan Start Date</th>
-                                                        <th>Balance as on </th>
+                                                        <th>Balance as on {{loandetailsList[0].ipaidDate}} </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody _ngcontent-cgl-c117="">

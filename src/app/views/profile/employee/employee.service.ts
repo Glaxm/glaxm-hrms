@@ -45,8 +45,8 @@ export class EmployeeService {
     return this.http.get(environment.IP+"/api/masters/empvehicleinfo/getempvehicleinfobyid/"+id)
   }
 
-  getEmpList(userid,companylist){
-    return this.http.post(environment.IP+"/api/employee/getemployeesummary?userId="+userid+"&length=10&page=1",companylist);
+  getEmpList(userid,companylist,moduleid){
+    return this.http.post(environment.IP+"/api/employee/getemployeesummary?userId="+userid+"&length=10&page=1&moduleid="+moduleid,companylist);
   }
 
 
@@ -106,8 +106,8 @@ export class EmployeeService {
     return this.http.put(environment.IP+"/api/employee/saveemployeeimage/"+id,imgData)
   }
 
-  empDatatable(userid,companylist,data){
-    return this.http.post(environment.IP+"/api/employee/getemployeesummary?userId="+userid+"&"+data,companylist);
+  empDatatable(userid,companylist,data,moduleid){
+    return this.http.post(environment.IP+"/api/employee/getemployeesummary?userId="+userid+"&moduleid="+moduleid+"&"+data,companylist);
   }
 
   addUpdateDoc(data){
@@ -198,8 +198,8 @@ export class EmployeeService {
     return this.http.get(environment.IP+"/api/masters/empleave/getempleavebyid/"+id);
   }
 
-  uploadCsvFile(data){
-    return this.http.post(environment.IP+"/api/employee/uploadempprofile?userId="+sessionStorage.getItem("userId"),data);
+  uploadCsvFile(data,moduleid){
+    return this.http.post(environment.IP+"/api/employee/uploadempprofile?userId="+sessionStorage.getItem("userId")+"&moduleId="+moduleid,data);
   }
 
   addUpdatePInfo(data){
@@ -222,8 +222,8 @@ export class EmployeeService {
     return this.http.post(environment.IP+"/api/employee/uploadpaymentinfo",data);
   }
 
-  exportEmpData(str,data){
-    return this.http.post(environment.IP+"/api/employee/exportallemployees?userId="+sessionStorage.getItem("userId")+"&"+str,data);
+  exportEmpData(str,company,moduleid){
+    return this.http.post(environment.IP+"/api/employee/exportallemployees?userId="+sessionStorage.getItem("userId")+"&"+str+"&moduleId="+moduleid,company);
   }
   
 
@@ -270,6 +270,20 @@ getChatById(id){
 
 getDocListByEmpId(id){
   return this.http.get(environment.IP+"/api/transaction/empdoctransaction/getdochistorybyempId/"+id)
+}
+
+// Relationship with Employee
+
+saveRelationshipWithEmp(data){
+  return this.http.post(environment.IP+"/api/masters/employee/emprelatives/saveemprelative",data)
+}
+
+getEmpRelativeByEmpid(id){
+  return this.http.get(environment.IP+"/api/masters/employee/emprelatives/getemprelativebyempid/"+id)
+}
+
+getEmpRelativeById(id){
+  return this.http.get(environment.IP+"/api/masters/employee/emprelatives/getemprelativebyid/"+id)
 }
 
 }

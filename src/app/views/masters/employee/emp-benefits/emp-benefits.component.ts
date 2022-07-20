@@ -15,7 +15,7 @@ import { EmpBenefitsService } from './emp-benefits.service';
   styleUrls: ['./emp-benefits.component.scss']
 })
 export class EmpBenefitsComponent implements OnInit {
-
+ 
   countryList: any = [];
   enableFilter: boolean = false;
   benefitsForm: any;
@@ -50,6 +50,7 @@ export class EmpBenefitsComponent implements OnInit {
   empBenifitList: any = [];
   fromAirportList: any = [];
   relationform: any;
+  insuranceform:any;
   isview:string;
   public myDatePickerOptions = this.commonService.datepickerFormat;
   @ViewChild('dp1', { static: false }) myDp1: AngularMyDatePickerDirective;
@@ -119,6 +120,25 @@ export class EmpBenefitsComponent implements OnInit {
       licbeneper2: new FormControl(null),
 
     });
+    
+    this.insuranceform= new FormGroup({
+      lEmpbenefitsId: new FormControl(null),
+      lEmpinsuranceId: new FormControl(null),
+      xEmployeeId: new FormControl(null),
+      gCompanyId: new FormControl(null),
+      gHoldingId: new FormControl(null),
+      isActive: new FormControl(null),
+      created: new FormControl(null),
+      createdBy: new FormControl(null),
+      updated: new FormControl(null),
+      updatedBy: new FormControl(null),
+      bName: new FormControl(null),
+      bphoneNo: new FormControl(null),
+      brelation: new FormControl(null),
+      baddress: new FormControl(null),
+      bpercentage: new FormControl(null)
+    });
+
 
     this.relationform = new FormGroup({
       xEmployeeId: new FormControl(null),
@@ -167,6 +187,8 @@ export class EmpBenefitsComponent implements OnInit {
     this.getAirTicketClassList();
     this.getAirTecketElegibiltyList();
     this.edit();
+    //LIC API
+    this.getLICSummaryByEmpid();
   }
 
   getEmpbenefitsListByEmpId() {
@@ -479,6 +501,86 @@ export class EmpBenefitsComponent implements OnInit {
   getDataUsingRedioBtn1(data){
       this.relationId = data.xEmprelationId;
   }
+
+  
+  // Life Insurance Information
+
+  isLifeInsuranceInformation:boolean=false;
+  lifeInsuranceInfoList:any=[];
+
+  LifeInsuranceEnum={
+    LIFE_INSURNACE:0
+  };
+
+  addLifeInsuranceInfo(){ 
+    this.LifeInsuranceEnum.LIFE_INSURNACE=1;
+    this.insuranceform.reset();
+  }
+
+  editLifeInsuranceInfo(){
+    if(this.insuranceform.value.lEmpinsuranceId){
+      this.LifeInsuranceEnum.LIFE_INSURNACE=1;
+      this.empBenefitService.editLIC(this.insuranceform.value.lEmpinsuranceId).subscribe(data=>{
+        var success:any = data;
+        if(success){
+          this.insuranceform.patchValue(success.data);
+        }
+      })
+    } else{
+      this.toastService.showToast('danger','Please select record for edit.');
+    }
+    
+   }
+
+  addUpdateLIC(){
+    this.insuranceform.get('xEmployeeId').setValue(Number(this.empId));
+    this.insuranceform.get('gHoldingId').setValue(this.holdingId);
+    this.insuranceform.get('gCompanyId').setValue(this.companyId);
+    this.insuranceform.get('isActive').setValue("Y");
+    this.insuranceform.get('created').setValue(new Date());
+    this.insuranceform.get('createdBy').setValue(Number(sessionStorage.getItem("userId")));
+    this.insuranceform.get('updatedBy').setValue(Number(sessionStorage.getItem("userId")));
+    this.insuranceform.get('updated').setValue(new Date());
+   
+    if(this.insuranceform.value.bpercentage==null){ 
+      this.insuranceform.get('bpercentage').setValue(0);
+    }
+    if(this.insuranceform.value.lEmpinsuranceId){
+      this.insuranceform.get('lEmpinsuranceId').setValue(this.insuranceform.value.lEmpinsuranceId);
+    } else{
+      this.insuranceform.get('lEmpinsuranceId').setValue(undefined);
+    }
+    console.log(JSON.stringify(this.insuranceform.value));
+    this.empBenefitService.addUpdateLIC(this.insuranceform.value).subscribe(data=>{
+      var success:any = data;
+   //   if(success.code==1){
+        this.toastService.showToast('success',success.message);
+        this.getLICSummaryByEmpid();
+        this.LifeInsuranceEnum.LIFE_INSURNACE=0;
+     // }
+    })
+  }
+
+  getLICSummaryByEmpid(){
+    if(this.empId){
+      this.empBenefitService.getLICSummaryByEmpid(this.empId).subscribe(data=>{
+          var success:any = data;
+          if(success){
+            this.lifeInsuranceInfoList = success.data;
+          }
+          
+      })
+    }
+  }
+
+  getLICDataUsingId(data){
+      if(data){
+        this.insuranceform.get('lEmpinsuranceId').setValue(data.lEmpinsuranceId);
+      }
+  }
+
+
+
 
 
 }

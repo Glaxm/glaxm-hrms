@@ -266,8 +266,8 @@ export class AddApprovalWorkflowComponent implements OnInit {
   }
 
   selectedCompanyFun(CompanyId){
-  
-    let companyid = typeof CompanyId !='number'? [Number(this.approvalForm.value.gCompanyId)] : [];
+ // debugger
+    let companyid = typeof CompanyId !='number' ? [Number(this.approvalForm.value.gCompanyId)] : [this.approvalForm.value.gCompanyId];
     let depList =this.selectedDeptList!= null &&  this.selectedDeptList.length!= 0 ? this.setDeptList(this.selectedDeptList):[];
     let funList =  this.selectedFunctionList!=null &&this.selectedFunctionList.length!=0 ? this.setFunList(this.selectedFunctionList):[];
 
@@ -485,6 +485,7 @@ empList:any=[];
  
   onFunctionSelect(item: any) {
     this.selectedFunctionList.push(item);
+   // alert(this.approvalForm.value.gCompanyId)
     this.selectedCompanyFun(this.approvalForm.value.gCompanyId);
   }
 
@@ -496,6 +497,7 @@ empList:any=[];
   onSelectAllFunction(items: any) {
     this.selectedFunctionList = [];
     this.selectedFunctionList.push(...items);
+   // alert(this.approvalForm.value.gCompanyId)
     this.selectedCompanyFun(this.approvalForm.value.gCompanyId);
   }
 
@@ -593,7 +595,7 @@ onEmpDeSelect(items: any) {
 onSelectAllEmp(items: any) {
   this.selectedEmpList = [];
   this.selectedEmpList.push(...items);
-  alert(JSON.stringify(this.selectedEmpList))
+//  alert(JSON.stringify(this.selectedEmpList))
 }
 
 

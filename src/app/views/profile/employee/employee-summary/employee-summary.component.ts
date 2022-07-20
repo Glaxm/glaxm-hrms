@@ -63,7 +63,7 @@ export class EmployeeSummaryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getEmpList();
+   
     this.moduleList = JSON.parse(sessionStorage.getItem("moduleList"));
     if (this.moduleList) {
       this.moduleList.map((e) => {
@@ -75,6 +75,7 @@ export class EmployeeSummaryComponent implements OnInit {
         }
       });
     }
+    this.getEmpList();
   }
 
   getDataUsingRedioBtn(data) {
@@ -89,7 +90,7 @@ export class EmployeeSummaryComponent implements OnInit {
       l.push(Number(list[i]));
     }
 
-    this.empService.getEmpList(sessionStorage.getItem("userId"), l).subscribe(success => {
+    this.empService.getEmpList(sessionStorage.getItem("userId"), l,this.moduleid).subscribe(success => {
       this.data = success;
     });
 
@@ -114,10 +115,10 @@ export class EmployeeSummaryComponent implements OnInit {
   isuploadfile: boolean = false;
 
   fileUploadFun(event, tab) {
-
+    // this.formData.append('moduleId', this.moduleid);
     if (this.file.name) {
       this.isuploadfile = true;
-      this.empService.uploadCsvFile(this.formData).subscribe(s => {
+      this.empService.uploadCsvFile(this.formData,this.moduleid).subscribe(s => {
         var data: any = s;
         
         this.isuploadfile = false;
@@ -137,7 +138,7 @@ export class EmployeeSummaryComponent implements OnInit {
 
   fileUploadFunSalarymode(event, tab) {
     console.log(event);
-    // this.formData.append('fileinfo', tab);
+    this.formData.append('moduleId', this.moduleid);
     if (this.file.name) {
       this.empService.uploadCsvFileSaaryMode(this.formData).subscribe(s => {
         var data: any = s;
@@ -154,7 +155,7 @@ export class EmployeeSummaryComponent implements OnInit {
 
   fileUploadFunPayitem(event, tab) {
     console.log(event);
-    //  this.formData.append('fileinfo', tab);
+    this.formData.append('moduleId', this.moduleid);
     if (this.file.name) {
       this.empService.uploadCsvFilePayitem(this.formData).subscribe(s => {
         var data: any = s;
@@ -190,7 +191,7 @@ export class EmployeeSummaryComponent implements OnInit {
       l.push(Number(list[i]));
     }
 
-    this.empService.exportEmpData(this.searchUrl,l).subscribe(data => {
+    this.empService.exportEmpData(this.searchUrl,l,this.moduleid).subscribe(data => {
       this.exportList = data;
       let exportDataList = Array(this.exportList.length).fill(0).map((x, i) => (
         {
@@ -226,7 +227,7 @@ export class EmployeeSummaryComponent implements OnInit {
           "Air Sector": this.exportList[i].airSector,
           "Probation period": this.exportList[i].probationPeriod,
           "Probation completion date": this.exportList[i].probcompPeriod,
-          "Employement Status": this.exportList[i].empStatus,
+          "Employment Status": this.exportList[i].empStatus,
           "Service period": this.exportList[i].servicePeriod,
           "Leaving Date": this.exportList[i].leavingDate,
           "Status": this.exportList[i].status,
@@ -320,7 +321,7 @@ export class EmployeeSummaryComponent implements OnInit {
     }
     this.data = {};
 
-    this.empService.empDatatable(sessionStorage.getItem("userId"), l, data).subscribe(success => {
+    this.empService.empDatatable(sessionStorage.getItem("userId"), l, data,this.moduleid).subscribe(success => {
       this.data = success;
     });
 

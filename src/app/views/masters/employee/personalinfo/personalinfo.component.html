@@ -150,32 +150,103 @@
 
                 </div>
             </app-card>
-            <app-card cardTitle="Relatives Information" [options]="false">
+            <app-card cardTitle="Relative Information" [options]="false">
 
-                <div class="form-row">
-                    <div class="col-md-2 mb-3">
-                        <label for="validationCustom01">Relative Name</label>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <input type="text" formControlName="relativename" class="form-control">
-                    </div>
-                    <div class="col-md-2 mb-3">
-                        <label for="validationCustom01">Relative Telephone No.</label>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <input type="text" formControlName="relativetele" class="form-control">
-                    </div>
+                <div *ngIf="RelatioshipEnum.RELATIONSHIP_WITH_EMP==0">
 
 
+                    <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;" *ngIf="isview=='N'">
+                        <ul _ngcontent-epm-c40="" class="nav">
+                        </ul>
+                        <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+
+                            <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="addRelationshipwithemployee()" data-toggle="tooltip" data-placement="top" title="Add">
+            <i class="fa fa-plus"></i>
+            </button>&nbsp;
+                            <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="editRelationshipwithemployee()" data-toggle="tooltip" data-placement="top" title="Edit">
+           <i class="fas fa-pencil-alt"></i>
+           </button>&nbsp;
+                        </div>
+                    </nav>
+                    <div>
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Relative Name</th>
+                                        <th>Relative Telephone No.</th>
+                                        <th>Relative Address</th>
+                                        <th>Relationship with employee</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let dl of relationshipWithEmpList">
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2" value="option2" (click)="getRelationshipDataUsingId(dl)">
+                                            </div>
+                                        </td>
+                                        <td>{{dl.relativeName}}</td>
+                                        <td>{{dl.phoneNo}}</td>
+                                        <td>{{dl.address}}</td>
+                                        <td>{{dl.relation}}</td>
+                                    </tr>
+                                    <tr>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-row">
-                    <div class="col-md-2 mb-3">
-                        <label for="validationCustom01">Relative Address</label>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <input type="text" formControlName="relativeaddr" class="form-control">
-                    </div>
+                <!--  -->
+                <div *ngIf="RelatioshipEnum.RELATIONSHIP_WITH_EMP==1">
 
+                    <app-card cardTitle="{{relationWithEmpForm.value.lEmprelativeId ? 'Edit Relationsahip with employee':'Add Relationsahip with employee'}}" [options]="false">
+
+
+                        <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                            <ul _ngcontent-epm-c40="" class="nav">
+                            </ul>
+                            <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                                <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="saveRelationshipWithEmp()">{{relationWithEmpForm.value.lEmprelativeId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                                <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="RelatioshipEnum.RELATIONSHIP_WITH_EMP=0;relationWithEmpForm.value.lEmprelativeId=undefined;">Back</button>
+                            </div>
+                        </nav>
+                        <form action="javascript:" class="needs-validation" novalidate [formGroup]="relationWithEmpForm">
+
+
+                            <div class="form-row">
+                                <div class="col-md-2 mb-3">
+                                    <label for="validationCustom01">Relative Name</label></div>
+                                <div class="col-md-4 mb-3">
+                                    <input type="text" formControlName="relativeName" class="form-control">
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <label for="validationCustom01">Relative Telephone No.</label></div>
+                                <div class="col-md-4 mb-3">
+                                    <input type="text" formControlName="phoneNo" class="form-control">
+                                </div>
+                            </div>
+
+
+                            <div class="form-row">
+                                <div class="col-md-2 mb-3">
+                                    <label for="validationCustom01">Relative Address</label></div>
+                                <div class="col-md-4 mb-3">
+                                    <input type="text" formControlName="address" class="form-control">
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                    <label for="validationCustom01">Relationship with employee</label></div>
+                                <div class="col-md-4 mb-3">
+                                    <input type="text" formControlName="relation" class="form-control">
+                                </div>
+                            </div>
+                        </form>
+                    </app-card>
                 </div>
             </app-card>
             <app-card cardTitle="Friend Information" [options]="false">

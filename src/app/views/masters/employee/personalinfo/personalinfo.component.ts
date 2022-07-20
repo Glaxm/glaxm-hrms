@@ -53,6 +53,7 @@ export class PersonalinfoComponent implements OnInit {
   currentStatusList: any = [{ valueCode: 1, valueName: "Permanent" }];
 
   chatform: any;
+  relationWithEmpForm:any;
   isview: string;
 
   constructor(private cdr: ChangeDetectorRef, private activeRoute: ActivatedRoute, private toastService: ToastrService, private empService: EmployeeService, private router: Router, public commonService: CommonService) {
@@ -112,6 +113,23 @@ export class PersonalinfoComponent implements OnInit {
       lEmpchatId: new FormControl(null),
     });
 
+    this.relationWithEmpForm = new FormGroup({
+      lEmprelativeId: new FormControl(null),
+      relativeName: new FormControl(null),
+      phoneNo: new FormControl(null),
+      relation: new FormControl(null),
+      address: new FormControl(null),
+      xEmployeeId: new FormControl(null),
+      createdBy: new FormControl(null),
+      gHoldingId: new FormControl(null),
+      created: new FormControl(null),
+      gCompanyId: new FormControl(null),
+      isActive: new FormControl(null),
+      updated: new FormControl(null),
+      updatedBy: new FormControl(null)
+    });
+
+
     this.activeRoute.queryParams.subscribe(params => {
       this.isview = params.view;
     });
@@ -123,7 +141,8 @@ export class PersonalinfoComponent implements OnInit {
     this.getMaritalstatusList();
     this.getCountryList();
     this.edit();
-
+ //Relationship with Employee
+ this.getRelationWithEmpSummaryByEmpId();
   }
   getMaritalstatusList() {
     this.commonService.getGeneralListByCode(GeneralListCode.MARITALL_STATUS_LIST).subscribe(data => {
@@ -216,10 +235,19 @@ export class PersonalinfoComponent implements OnInit {
   }
 
   setAge(dob) {
-    const millis = Date.now() - Date.parse(dob);
-    let count = new Date(millis).getFullYear() - 1970;
-    count = count != 0 && count < 0 ? 0 : count;
-    this.personalinfoForm.get('empage').setValue(count);
+    // const millis = Date.now() - Date.parse(dob);
+    // let count = new Date(millis).getFullYear() - 1970;
+    // count = count != 0 && count < 0 ? 0 : count;
+    // this.personalinfoForm.get('empage').setValue(count);
+
+    var diff = Date.now() - Date.parse(dob);
+    var age = new Date(new Date("0000-01-01").getTime() + diff);
+    var years = age.getFullYear();
+    var months = age.getMonth();
+    var days = age.getDate();
+    console.log(years, "years", months, "months", days - 1, "days")
+    let str = years + " " + 'Years' + ", " + months + " " + 'Months' + ", " + (days - 1) + " " + 'days';
+    this.personalinfoForm.get('empage').setValue(str);
   }
 
   edit() {
@@ -322,4 +350,76 @@ export class PersonalinfoComponent implements OnInit {
       this.netwokingList = data;
     })
   }
+    // Relationship with Employee
+
+    isrelationshipwithemployee:boolean=true;
+    RelatioshipEnum={
+      RELATIONSHIP_WITH_EMP:0
+    };
+    relationshipWithEmpList:any=[];
+    
+    addRelationshipwithemployee(){
+        this.RelatioshipEnum.RELATIONSHIP_WITH_EMP=1;
+        this.relationWithEmpForm.reset();
+    }
+  
+    editRelationshipwithemployee(){
+        if(this.relationWithEmpForm.value.lEmprelativeId){
+          this.RelatioshipEnum.RELATIONSHIP_WITH_EMP=1;
+          this.empService.getEmpRelativeById(this.relationWithEmpForm.value.lEmprelativeId).subscribe(data=>{
+            var success:any = data;
+            if(success){
+              this.relationWithEmpForm.patchValue(success.data);
+            }  
+          });
+        } else{
+          this.toastService.showToast('danger','Please select record for edit.');
+        }
+    }
+  
+    getRelationWithEmpSummaryByEmpId(){
+        if(this.empId){
+          this.empService.getEmpRelativeByEmpid(this.empId).subscribe(data=>{
+            var success:any = data;
+            if(success){
+              this.relationshipWithEmpList = success.data;
+            }
+          });
+        }
+    }
+  
+    saveRelationshipWithEmp(){
+  
+      this.relationWithEmpForm.get('xEmployeeId').setValue(Number(this.empId));
+      this.relationWithEmpForm.get('gHoldingId').setValue(this.holdingId);
+      this.relationWithEmpForm.get('gCompanyId').setValue(this.companyId);
+      this.relationWithEmpForm.get('isActive').setValue("Y");
+      this.relationWithEmpForm.get('created').setValue(new Date());
+      this.relationWithEmpForm.get('createdBy').setValue(Number(sessionStorage.getItem("userId")));
+      this.relationWithEmpForm.get('updatedBy').setValue(Number(sessionStorage.getItem("userId")));
+      this.relationWithEmpForm.get('updated').setValue(new Date());
+      if(this.relationWithEmpForm.value.lEmprelativeId){
+        this.relationWithEmpForm.get('lEmprelativeId').setValue(this.relationWithEmpForm.value.lEmprelativeId);
+      } else{
+        this.relationWithEmpForm.get('lEmprelativeId').setValue(undefined);
+      }
+      console.log(JSON.stringify(this.relationWithEmpForm.value));
+      
+  
+      this.empService.saveRelationshipWithEmp(this.relationWithEmpForm.value).subscribe(data=>{
+        var success:any = data;
+        // if(success.code==1){
+          this.toastService.showToast('success',success.message);
+          this.getRelationWithEmpSummaryByEmpId();
+          this.RelatioshipEnum.RELATIONSHIP_WITH_EMP=0;
+        // }
+      });
+    }
+  
+    getRelationshipDataUsingId(data){
+      // debugger;
+      if(data){
+        this.relationWithEmpForm.get('lEmprelativeId').setValue(data.lEmprelativeId);
+    }
+    }
 }

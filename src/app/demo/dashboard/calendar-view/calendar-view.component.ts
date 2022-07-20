@@ -168,10 +168,11 @@ export class CalendarViewComponent  {
     activeDayIsOpen: boolean = false;
     tempList:any=[];
     eventMnth: any;
+    employeeInfo:any;
     constructor(private modalService: ModalService,private modal: NgbModal, private router:Router,private dashboardService:DashboardService) {
       this.setView(CalendarView.Month);
-      var employeeInfo= JSON.parse(sessionStorage.getItem("empinfo"));
-      this.employee_id.push(employeeInfo.data.employeeId);
+      this.employeeInfo= JSON.parse(sessionStorage.getItem("empinfo"));
+      this.employee_id.push(this.employeeInfo.data.employeeId);
       console.log(this.employee_id);
       // setTimeout(() => {
       //   $('#content').css('display','block');
@@ -333,7 +334,10 @@ export class CalendarViewComponent  {
       this.router.navigate(['/views/report/emp-attendance-report']);
     }
 
+    stdate:any;
     calendarDayEvent(data){
+      
+      this.stdate = data.start;
       if(data.title=="IOMiss" || data.title=="Absent"){
         this.modalService.open('custom-modal-1');
       }
@@ -344,11 +348,13 @@ export class CalendarViewComponent  {
     }
 
     redirectPage(id){
+      
       this.modalService.close('custom-modal-1');
       if(id=="ARF"){
-        this.router.navigateByUrl('views/report/emp-attendance-report');
+        this.router.navigate(['views/report/emp-attendance-report'], { queryParams: { redirectfromdashboard: 'Y', startdate:this.stdate} });
       } else{
-        this.router.navigateByUrl('views/approval-flow/approvalrequest/request-summary');
+        // this.router.navigate(['views/approval-flow/approvalrequest/request-summary'], { queryParams: { redirectfromdashboard: 'Y',sortStr:"length=10&page=1&req_no=&req_type=&empname="+this.employeeInfo.data.firstName+"&req_date=&current_level=&current_status=&leaveitemname=&leavedays=&="} });
+        this.router.navigateByUrl('/views/approval-flow/approvalrequest/add-request');
       }
     }
 

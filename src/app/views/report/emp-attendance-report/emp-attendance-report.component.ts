@@ -72,7 +72,8 @@ export class EmpAttendanceReportComponent implements OnInit {
   }
 
   fileUploadForm: FormGroup;
-
+  redirectfromdashboard:any;
+  dashboardstartdate:any;
   constructor(public excelService: ExcelService, public activatedRoute: ActivatedRoute, public router: Router, private reportService: ReportService, private toastService: ToastrService, private commonService: CommonService) {
 
     this.activatedRoute.queryParams.subscribe(data => {
@@ -102,6 +103,9 @@ export class EmpAttendanceReportComponent implements OnInit {
         this.departmentid = data.departmentid,
         this.status = data.status,
         this.spontype = data.spontype;
+
+        this.redirectfromdashboard = data.redirectfromdashboard; 
+        this.dashboardstartdate = data.startdate;
 
     });
 
@@ -143,12 +147,13 @@ export class EmpAttendanceReportComponent implements OnInit {
       this.filterObj.companyId = this.com_id;
       this.selectecdCompanyList = this.companyList;
       this.filterObj.deptId = this.departmentid;
+      
       let startDate: Date = new Date(this.st_date);
       let fromModel: IMyDateModel = { isRange: false, singleDate: { jsDate: startDate }, dateRange: null };
       this.filterObj.startDate1 = fromModel;
 
       this.changeStartDate(fromModel);
-      let endDate: Date = new Date(this.en_date);
+      let endDate: Date =  new Date(this.en_date);
       let endModel: IMyDateModel = { isRange: false, singleDate: { jsDate: endDate }, dateRange: null };
       this.filterObj.endDate1 = endModel;
       this.changeEndDate(endModel);
@@ -160,13 +165,13 @@ export class EmpAttendanceReportComponent implements OnInit {
     } else {
       this.getAllEmpAttendance();
 
-      let stdate: Date = new Date(new Date());
+      let stdate: Date = new Date(this.redirectfromdashboard=='Y' ? this.dashboardstartdate : new Date());
       let fromModel1: IMyDateModel = { isRange: false, singleDate: { jsDate: stdate }, dateRange: null };
 
       this.filterObj.startDate1 = fromModel1;
       this.changeStartDate(fromModel1);
 
-      let endate: Date = new Date(new Date());
+      let endate: Date = new Date(this.redirectfromdashboard=='Y' ? this.dashboardstartdate : new Date());
       let fromModel2: IMyDateModel = { isRange: false, singleDate: { jsDate: endate }, dateRange: null };
 
       this.filterObj.endDate1 = fromModel2;
@@ -184,6 +189,8 @@ export class EmpAttendanceReportComponent implements OnInit {
       this.filterObj.companyId = l[l.length - 1]
       //  this.changeCompany(l[l.length-1])
     }
+
+    
 
   }
 
@@ -217,6 +224,10 @@ export class EmpAttendanceReportComponent implements OnInit {
         this.selectedEmpList = [{ 'employeeId': this.empList[0].employeeId, 'displayName': this.empList[0].displayName }]
       }
       this.codeList = data;
+      if(this.redirectfromdashboard=='Y' && this.selectedEmpList.length>0){
+        this.redirectfromdashboard="N";
+        this.filterTable();
+      }
     });
   }
 
@@ -224,7 +235,7 @@ export class EmpAttendanceReportComponent implements OnInit {
     this.reportService.getAllComapny().subscribe(success => {
 
       this.companyList = success;
-      debugger;
+     // debugger;
       if(this.companyList.length==1){
         this.selectecdCompanyList = [{"companyId":this.companyList[0].companyId ,"companyName":this.companyList[0].companyName}];//this.selectecdCompanyList.filter(item => item.companyId !== this.companyList[0].companyId);
         this.changeComapny(this.selectecdCompanyList);

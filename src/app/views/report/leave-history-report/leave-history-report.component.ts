@@ -26,7 +26,7 @@ export class LeaveHistoryReportComponent implements OnInit {
   items = [];
   public myDatePickerOptions = this.commonService.datepickerFormat;
   submitted = false;
-
+  empObj:any = JSON.parse(sessionStorage.getItem("empinfo"));
   moduleid:any;
   moduleList:any=[];
   flags={
@@ -99,10 +99,11 @@ export class LeaveHistoryReportComponent implements OnInit {
         this.companyList = this.companyList.filter(o1 => l.some(o2 => o1.companyId === o2));
         this.selectecdCompanyList = [{'companyId':this.companyList[0].companyId,'companyName':this.companyList[0].companyName}];
         this.changeComapny(this.selectecdCompanyList);
-       
+        
       }
       });
 
+    
     } else{
       this.getAllComapny();
     }
@@ -117,7 +118,7 @@ export class LeaveHistoryReportComponent implements OnInit {
         this.selectecdLeaveTypeList = [{'xLeaveitemId':this.leaveTypeList[0].xLeaveitemId,'name':this.leaveTypeList[0].name}];
         this.selectecdLeaveTypeList.push(...this.leaveTypeList);
        
-        this.filterTable();
+       // this.filterTable();
       }
    })
   
@@ -130,6 +131,14 @@ export class LeaveHistoryReportComponent implements OnInit {
       this.empList = data;
       if(this.flags.readFlag=='Y' && this.empList.length==1){
           this.selectedEmpList = [{'employeeId':this.empList[0].employeeId,'displayName':this.empList[0].displayName}]
+      } else{
+        if(this.redirectfromdashboard=="Y"){
+          this.selectedEmpList = [{'employeeId':this.empObj.data.employeeId,'displayName':this.empObj.data.displayName}]
+        }
+      }
+      if(this.redirectfromdashboard=="Y"){
+        this.redirectfromdashboard='N';
+        this.filterTable();
       }
     });
   }
@@ -202,7 +211,7 @@ export class LeaveHistoryReportComponent implements OnInit {
     } else{
       let data = {'empId':empIdList,'leaveType':ltypeList }
      
-
+      
       this.getEmpLeaveReportSummary(data,this.leavehistoryform.value.stdate,this.leavehistoryform.value.endate);
 
       this.exportData(data,this.leavehistoryform.value.stdate,this.leavehistoryform.value.endate);

@@ -52,10 +52,10 @@
                 </div>
             </div>
 
-            <div class="col-md-6 mb-3" *ngIf="salaryForm.value.srcDoctype=='T'">
+            <div class="col-md-2 mb-3" *ngIf="salaryForm.value.srcDoctype=='T'">
                 <label for="validationCustom01">Overtime Hours</label>
             </div>
-            <div class="col-md-6 mb-3" *ngIf="salaryForm.value.srcDoctype=='T'">
+            <div class="col-md-4 mb-3" *ngIf="salaryForm.value.srcDoctype=='T'">
                 <input type="text" formControlName="overtime_Hours" class="form-control validation_border" [ngClass]="{ 'is-invalid': salaryFormSubmitted && es.overtime_Hours.errors }">
                 <div *ngIf="salaryFormSubmitted && es.overtime_Hours.errors" class="invalid-feedback">
                     <div *ngIf="es.overtime_Hours.errors.required">Overtime Hours is required</div>

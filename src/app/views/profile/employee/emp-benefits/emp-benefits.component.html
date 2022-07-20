@@ -544,27 +544,25 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Relation</th>
-                                        <th> Date of Birth</th>
-                                        <th>Eligible for Medical</th>
-                                        <th>Eligible for Visa</th>
-                                        <th>Eligible for Air ticket</th>
+                                        <th>Beneficiary Name</th>
+                                        <th>Beneficiary Contact No.</th>
+                                        <th> Beneficiary Relations</th>
+                                        <th>Beneficiary Address</th>
+                                        <th>Beneficiary Percentage</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let dl of lifeInsuranceInfoList">
                                         <td>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn1(dl)">
+                                                <input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2" value="option1" (click)="getLICDataUsingId(dl)">
                                             </div>
                                         </td>
-                                        <td>{{dl.nameofFamily}}</td>
-                                        <td>{{dl.relation}}</td>
-                                        <td>{{dl.dob| date: 'dd-MMM-yyyy'}}</td>
-                                        <td>{{dl.medical}}</td>
-                                        <td>{{dl.visa}}</td>
-                                        <td>{{dl.airticket}}</td>
+                                        <td>{{dl.bName}}</td>
+                                        <td>{{dl.bphoneNo}}</td>
+                                        <td>{{dl.brelation}}</td>
+                                        <td>{{dl.baddress}}</td>
+                                        <td>{{dl.bpercentage}}</td>
                                     </tr>
 
 
@@ -580,8 +578,8 @@
                                 <ul _ngcontent-epm-c40="" class="nav">
                                 </ul>
                                 <div _ngcontent-epm-c40="" class="nav-item nav-grid">
-                                    <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateRelation()">{{relationId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
-                                    <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="LifeInsuranceEnum.LIFE_INSURNACE=0;relationId=undefined;">{{false ? 'Back':'Cancel'}}</button>
+                                    <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="addUpdateLIC()">{{insuranceform.value.lEmpinsuranceId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                                    <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="LifeInsuranceEnum.LIFE_INSURNACE=0;insuranceform.value.lEmpinsuranceId=undefined;">{{false ? 'Back':'Cancel'}}</button>
                                 </div>
                             </nav>
 
@@ -589,15 +587,15 @@
 
                                 <div class="form-row">
                                     <div class="col-md-2 mb-3">
-                                        <label for="validationCustom01">Life Insurance Beneficiary's Name-1</label></div>
+                                        <label for="validationCustom01">Life Insurance Beneficiary Name</label></div>
                                     <div class="col-md-4 mb-3">
-                                        <input type="text" formControlName="licbenename1" class="form-control">
+                                        <input type="text" formControlName="bName" class="form-control">
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <label for="validationCustom01">Life Insurance Beneficiary-2's Name</label>
+                                        <label for="validationCustom01">Life Insurance Beneficiary Contact No.</label>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <input type="text" formControlName="licbenename2" class="form-control">
+                                        <input type="text" formControlName="bphoneNo" class="form-control">
                                     </div>
 
 
@@ -606,40 +604,26 @@
 
                                 <div class="form-row">
                                     <div class="col-md-2 mb-3">
-                                        <label for="validationCustom01">Life Insurance Beneficiary-1's Contact No.</label>
+                                        <label for="validationCustom01">Life Insurance Beneficiary Relations</label>
                                     </div>
-                                    <div class="col-md-4 mb-3"><input type="text" formControlName="licbenetel1" class="form-control">
+                                    <div class="col-md-4 mb-3"><input type="text" formControlName="brelation" class="form-control">
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <label for="validationCustom01">Life Insurance Beneficiary-2's Contact No.</label>
+                                        <label for="validationCustom01">Life Insurance Beneficiary Address</label>
                                     </div>
-                                    <div class="col-md-4 mb-3"><input type="text" formControlName="licbenetel2" class="form-control">
+                                    <div class="col-md-4 mb-3"><input type="text" formControlName="baddress" class="form-control">
                                     </div>
 
                                 </div>
 
                                 <div class="form-row">
                                     <div class="col-md-2 mb-3">
-                                        <label for="validationCustom01">Life Insurance Beneficiary-1's Percentage </label>
+                                        <label for="validationCustom01">Life Insurance Beneficiary Percentage </label>
                                     </div>
-                                    <div class="col-md-4 mb-3"><input type="number" formControlName="licbeneper1" class="form-control">
+                                    <div class="col-md-4 mb-3"><input type="number" formControlName="bpercentage" class="form-control">
                                     </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label for="validationCustom01">Life Insurance Beneficiary-2's Percentage </label>
-                                    </div>
-                                    <div class="col-md-4 mb-3"><input type="number" formControlName="licbeneper2" class="form-control">
-                                    </div>
-
                                 </div>
 
-                                <div class="form-row">
-                                    <div class="col-md-2 mb-3">
-                                        <label for="validationCustom01">Address</label>
-                                    </div>
-                                    <div class="col-md-4 mb-3"><input type="number" formControlName="licbeneper1" class="form-control">
-                                    </div>
-
-                                </div>
 
                             </form>
 

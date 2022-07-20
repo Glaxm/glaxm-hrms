@@ -12,7 +12,7 @@
                         </ul>
                         <div _ngcontent-epm-c40="" class="nav-item nav-grid">
                             <button type="button" class="btn btn-success" ngbTooltip="btn-success" *ngIf="isview=='N'" (click)="saveEmpDetails()">{{empdetailsForm.value.xEmployeeId ? 'Update':'Save'}}</button> &nbsp;&nbsp;&nbsp;
-                            <button type="button" class="btn btn-success" ngbTooltip="btn btn-primary" *ngIf="isview=='N'" (click)="openUpdatedForm()">Employee Update</button> &nbsp;&nbsp;&nbsp;
+                            <!-- <button type="button" class="btn btn-success" ngbTooltip="btn btn-primary" *ngIf="isview=='N'" (click)="openUpdatedForm()">Employee Update</button> &nbsp;&nbsp;&nbsp; -->
                             <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{isview=='Y' ? 'Back':'Cancel'}}</button> &nbsp;&nbsp;&nbsp;
 
                             <!-- <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" *ngIf="empdetailsForm.value.xEmployeeId" (click)="showNextStep($event)" data-toggle="tooltip" data-placement="top" title="Next">
@@ -530,7 +530,7 @@
                             <div class="form-row">
 
                                 <div class="col-md-2 mb-3">
-                                    <label for="validationCustom01">Employement Status</label></div>
+                                    <label for="validationCustom01">Employment Status</label></div>
                                 <div class="col-md-4 mb-3">
                                     <select class="form-control validation_border" formControlName="lscurstatusId" [ngClass]="{ 'is-invalid': empdetailesubmitted && ed.lscurstatusId.errors }" (change)="changeEmpStatus(empdetailsForm.value.lscurstatusId)">
                                         

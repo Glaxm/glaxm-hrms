@@ -34,4 +34,19 @@ export class EmpBenefitsService {
   getRelationById(id){
     return this.http.get(environment.IP+"/api/masters/employee/emprelation/getemprelationbyid/"+id);
   }
+
+   // LIC API
+
+   addUpdateLIC(data){
+    return this.http.post(environment.IP+"/api/masters/employee/empinsureance/saveempinsurance",data)
+  }
+
+  getLICSummaryByEmpid(id){
+    return this.http.get(environment.IP+"/api/masters/employee/empinsureance/getempinsurancebyempid/"+id);
+  }
+
+  editLIC(id){
+    return this.http.get(environment.IP+"/api/masters/employee/empinsureance/getempinsurancebyid/"+id);
+  }
+
 }
