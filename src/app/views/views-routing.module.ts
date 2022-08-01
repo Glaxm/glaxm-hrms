@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'payroll', loadChildren:()=>import("./payroll/payroll.module").then(m=>m.PayrollModule)},
   { path: 'report', loadChildren:()=>import("./report/report.module").then(m=>m.ReportModule)},
   { path: 'approval-flow', loadChildren:()=>import("./approvals/approvals.module").then(m=>m.ApprovalsModule)},
-  { path:'profile', loadChildren:()=>import("./profile/profile.module").then(m=>m.ProfileModule)}
+  { path:'profile', loadChildren:()=>import("./profile/profile.module").then(m=>m.ProfileModule)},
+  { path: 'email', loadChildren:()=>import("./email/email.module").then(m=>m.EmailModule)},
 ];
 
 @NgModule({

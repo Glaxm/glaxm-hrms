@@ -1,43 +1,32 @@
 <div class="row">
     <div class="col-sm-12">
         <app-card cardTitle="Approval Workflow Summary" [options]="false">
-           
-            
+
+
             <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
                 <ul _ngcontent-epm-c40="" class="nav">
                 </ul>
                 <div _ngcontent-epm-c40="" class="nav-item nav-grid">
-                   
-                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
-                 type="button" (click)="add()" data-toggle="tooltip" data-placement="top" *ngIf="flags.createFlag=='Y'"
-                 title="Add">
+
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="add()" data-toggle="tooltip" data-placement="top" *ngIf="flags.createFlag=='Y'" title="Add">
                 <i class="fa fa-plus"></i>
                 </button>&nbsp;
-                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
-                type="button" (click)="edit()" data-toggle="tooltip" data-placement="top" *ngIf="flags.editFlag=='Y'"
-                title="Edit">
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="edit()" data-toggle="tooltip" data-placement="top" *ngIf="flags.editFlag=='Y'" title="Edit">
                <i class="fas fa-pencil-alt"></i>
                </button>&nbsp;
-               <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
-               type="button" (click)="view()" data-toggle="tooltip" data-placement="top" *ngIf="flags.readFlag=='Y'"
-               title="View">
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="view()" data-toggle="tooltip" data-placement="top" *ngIf="flags.readFlag=='Y'" title="View">
               <i class="fa fa-eye"></i>
               </button>&nbsp;
-              <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary"
-              type="button" (click)="delete()" data-toggle="tooltip" data-placement="top" *ngIf="flags.deleteFlag=='Y'"
-              title="Delete">
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="delete()" data-toggle="tooltip" data-placement="top" *ngIf="flags.deleteFlag=='Y'" title="Delete">
              <i class="fa fa-trash"></i>
              </button>&nbsp;
-                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button"
-                (click)="enableFilter = !enableFilter;"
-                [ngClass]="{'filterClass': enableFilter}" data-toggle="tooltip" data-placement="top"
-                title="Filter">
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="enableFilter = !enableFilter;" [ngClass]="{'filterClass': enableFilter}" data-toggle="tooltip" data-placement="top" title="Filter">
                 <i class="fa fa-filter"></i>
                 </button>
                 </div>
             </nav>
 
-            <div class="table-responsive tableFixHead">
+            <!-- <div class="table-responsive tableFixHead">
                
                 <table class="table table-bordered">
                 <thead>
@@ -61,9 +50,15 @@
                
                 </tbody>
                 </table>
-            </div>
-          
+            </div> -->
+
+            <datatable1 [dataset]=data [enableFilter]="enableFilter" (searchEvent)="search($event)" (aTagEvent)="getRows($event)" [id]="'gApprovalwfId'">
+                <column1 [width1]=2 [value]="'gApprovalwfId'" [header]="''" [type]="'radio'" [sortVal]="'ASC'"></column1>
+                <column1 [width1]=10 [value]="'name'" [header]="'Name'" [sortVal]=""></column1>
+                <column1 [width1]=38 [value]="'modulename'" [header]="'Module'" [type]="''" [sortVal]="''"></column1>
+            </datatable1>
+
+
         </app-card>
     </div>
 </div>
-   

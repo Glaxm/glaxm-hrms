@@ -44,6 +44,255 @@
 
                     <div *ngFor="let r of dashboardRoleList">
 
+                        <ngb-tab title="About" *ngIf="r.code=='SELF'">
+                            <ng-template ngbTabContent>
+                                <div class="form-row">
+                                    <div class="col-xl-6 col-md-12">
+                                        <app-card [hidHeader]="true" cardClass="comp-card">
+
+                                            <div _ngcontent-cgl-c117="" class="row">
+                                                <div _ngcontent-cgl-c117="" class="col-sm-auto p-r-0">
+                                                    <img _ngcontent-cgl-c117="" [src]="empurl" alt="user image" style="width: 100px;
+                                                    height: 100px;
+                                                    object-fit: cover;
+                                                    border-radius: 50%;" class="img-radius profile-img cust-img m-b-15"></div>
+                                                <div _ngcontent-cgl-c117="" class="col" style="left: 15px;">
+                                                    <h6 _ngcontent-cgl-c117="" class="m-b-10">Hi {{empObj.data.firstName}}</h6>
+                                                    <div _ngcontent-cgl-c117="" class="row align-items-center">
+                                                        <div _ngcontent-cgl-c117="" class="col">
+                                                        </div>
+                                                        <div _ngcontent-cgl-c117="" class="col">
+                                                        </div>
+                                                    </div>
+                                                    <p _ngcontent-cgl-c117="" class="m-t-10 m-b-0">Last Login : {{lastLogin}}</p>
+                                                </div>
+                                            </div>
+                                        </app-card>
+                                    </div>
+
+                                </div>
+                                <div class="form-row">
+
+                                    <div class="col-xl-6 col-md-12">
+
+                                        <div class="card ng-tns-c94-47 ng-trigger ng-trigger-cardRemove" style="opacity: 1;">
+                                            <!---->
+                                            <div class="card-body ng-tns-c94-47 ng-star-inserted" style="">
+                                                <div class="row ng-tns-c94-47">
+                                                    <div class="col-auto">
+                                                        <h6>Approval Request</h6>
+                                                    </div>
+                                                    <div class="col text-right">
+                                                        <a [routerLink]="" (click)="approvalRequestDetailsFun()">Details</a>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-1 ng-tns-c94-47">
+                                                    <div _ngcontent-ufl-c94="" class="card ng-tns-c90-484 ng-trigger ng-trigger-cardRemove prod-p-card bg-c-green" style="opacity: 1;">
+                                                        <div _ngcontent-ufl-c94="" class="card-body ng-tns-c94-484 ng-star-inserted" style="">
+                                                            <div _ngcontent-ufl-c121="" class="row align-items-center m-b-0 ng-tns-c94-484">
+                                                                <div _ngcontent-ufl-c121="" class="col" style="width: 97px;">
+                                                                    <h6 _ngcontent-ufl-c121="" class="m-b-5 text-white">Approved</h6>
+                                                                    <h3 _ngcontent-ufl-c121="" class="m-b-0 text-white">{{approvalRequestDetails.approved}}</h3>
+                                                                </div>
+                                                                <div _ngcontent-ufl-c121="" class="col-auto" style="width: 40px;"><i _ngcontent-tnj-c115="" class="feather icon-check-circle text-white"></i></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    &nbsp;&nbsp;
+                                                    <div _ngcontent-tnj-c94="" class="card ng-tns-c94-3 ng-trigger ng-trigger-cardRemove prod-p-card bg-c-yellow" style="opacity: 1;">
+                                                        <div _ngcontent-tnj-c94="" class="card-body ng-tns-c94-3 ng-star-inserted" style="">
+                                                            <div _ngcontent-tnj-c113="" class="row align-items-center m-b-0 ng-tns-c94-3">
+                                                                <div _ngcontent-tnj-c113="" class="col" style="width: 97px;">
+                                                                    <h6 _ngcontent-tnj-c113="" class="m-b-5 text-white">Pending</h6>
+                                                                    <h3 _ngcontent-tnj-c113="" class="m-b-0 text-white">{{approvalRequestDetails.pending}}</h3>
+                                                                </div>
+                                                                <div _ngcontent-tnj-c113="" class="col-auto" style="width: 40px;"><i class="feather icon-loader text-white"></i></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    &nbsp;&nbsp;
+                                                    <div _ngcontent-ufl-c94="" class="card ng-tns-c94-482 ng-trigger ng-trigger-cardRemove prod-p-card bg-c-red" style="opacity: 1;">
+                                                        <div _ngcontent-ufl-c94="" class="card-body ng-tns-c94-482 ng-star-inserted" style="">
+                                                            <div _ngcontent-ufl-c121="" class="row align-items-center m-b-0 ng-tns-c94-482">
+                                                                <div _ngcontent-ufl-c121="" class="col" style="width: 97px;">
+                                                                    <h6 _ngcontent-ufl-c121="" class="m-b-5 text-white">Rejected</h6>
+                                                                    <h3 _ngcontent-ufl-c121="" class="m-b-0 text-white">{{approvalRequestDetails.rejected}}</h3>
+                                                                </div>
+                                                                <div _ngcontent-ufl-c121="" class="col-auto" style="width: 40px;"><i _ngcontent-tnj-c115="" class="feather icon-slash text-white"></i></div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-md-12">
+
+                                        <div class="card ng-tns-c94-47 ng-trigger ng-trigger-cardRemove" style="opacity: 1;">
+                                            <div class="card-body ng-tns-c94-47 ng-star-inserted" style="">
+                                                <div class="row ng-tns-c94-47">
+                                                    <div class="col-auto">
+                                                        <h6>Leave balance</h6>
+                                                    </div>
+                                                    <div class="col text-right">
+                                                        <a routerLink="." (click)="leaveDetailsFun()">Details</a>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-1 ng-tns-c94-47">
+                                                    <div _ngcontent-ufl-c94="" class="card ng-tns-c90-484 ng-trigger ng-trigger-cardRemove prod-p-card bg-c-blue" style="opacity: 1;">
+                                                        <div _ngcontent-ufl-c94="" class="card-body ng-tns-c94-484 ng-star-inserted" style="">
+                                                            <div _ngcontent-ufl-c121="" class="row align-items-center m-b-0 ng-tns-c94-484">
+                                                                <div _ngcontent-ufl-c121="" class="col">
+
+                                                                    <h3 _ngcontent-ufl-c121="" class="m-b-0 text-white">{{empLeaveDetails.annualleave}}</h3>
+                                                                    <span _ngcontent-ufl-c121="" class="m-b-5 text-white">Annual leave</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    &nbsp;&nbsp;
+                                                    <div _ngcontent-tnj-c94="" class="card ng-tns-c94-3 ng-trigger ng-trigger-cardRemove prod-p-card" style="opacity: 1;background-color: #ff00ff;">
+                                                        <div _ngcontent-tnj-c94="" class="card-body ng-tns-c94-3 ng-star-inserted" style="">
+                                                            <div _ngcontent-tnj-c113="" class="row align-items-center m-b-0 ng-tns-c94-3">
+                                                                <div _ngcontent-tnj-c113="" class="col">
+
+                                                                    <h3 _ngcontent-tnj-c113="" class="m-b-0 text-white">{{empLeaveDetails.sickleave}}</h3>
+                                                                    <span _ngcontent-tnj-c113="" class="m-b-5 text-white">Sick leave Availed</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    &nbsp;&nbsp;
+                                                    <div _ngcontent-ufl-c94="" class="card ng-tns-c94-482 ng-trigger ng-trigger-cardRemove prod-p-card bg-c-yellow" style="opacity: 1;">
+                                                        <div _ngcontent-ufl-c94="" class="card-body ng-tns-c94-482 ng-star-inserted" style="">
+                                                            <div _ngcontent-ufl-c121="" class="row align-items-center m-b-0 ng-tns-c94-482">
+                                                                <div _ngcontent-ufl-c121="" class="col">
+                                                                    <h3 _ngcontent-ufl-c121="" class="m-b-0 text-white">{{empLeaveDetails.wfh}}</h3>
+                                                                    <span _ngcontent-ufl-c121="" class="m-b-5 text-white">Work from home Availed</span>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-xl-6 col-md-12">
+                                        <div class="card ng-tns-c94-743 ng-trigger ng-trigger-cardRemove user-list table-card" style="opacity: 1;">
+                                            <div class="card-header ng-tns-c94-743 ng-star-inserted" style="">
+                                                <h5 class="ng-tns-c94-743 ng-star-inserted">Last 6 month's payslip</h5>
+                                            </div>
+
+                                            <div _ngcontent-cgl-c94="" class="card-body ng-tns-c94-87 ng-star-inserted" style="">
+                                                <div _ngcontent-cgl-c117="" class="table-responsive ng-tns-c94-87">
+                                                    <perfect-scrollbar _ngcontent-cgl-c117="" style="max-height: 215px;">
+                                                        <div style="position: static;" class="ps ps--active-y">
+                                                            <div class="ps-content">
+                                                                <table _ngcontent-cgl-c117="" class="table table-hover">
+                                                                    <thead _ngcontent-cgl-c117="">
+                                                                        <tr _ngcontent-cgl-c117="">
+                                                                            <th>Employee Code</th>
+                                                                            <th>Employee Name</th>
+                                                                            <th>Month</th>
+                                                                            <th>Download</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody _ngcontent-cgl-c117="">
+                                                                        <tr *ngFor="let dl of payslipList;let i = index">
+                                                                            <td _ngcontent-cgl-c117="">{{dl.empcode}}
+                                                                            </td>
+                                                                            <td _ngcontent-cgl-c117="">{{dl.empname}}</td>
+                                                                            <td _ngcontent-cgl-c117="">
+                                                                                <span _ngcontent-cgl-c117="" [ngClass]="i==0 ? 'mb-1 text-c-green' : i==1 ? 'mb-1 text-c-blue': i==2 ? 'mb-1 text-c-yellow': i==3 ? 'mb-1 text-c-red': i==4 ? 'mb-1 text-c-purple':i==5 ? 'mb-1 text-c-orange':'mb-1 text-c-pink'">{{dl.monthname}}</span>
+                                                                            </td>
+                                                                            <td>
+                                                                                <button class="btn btn-outline-primary" type="button" (click)="paySlipView(dl,'PRINT')" data-toggle="tooltip" data-placement="top" title="Payslip View">
+                                                                                    <i class="fa fa-print"></i>
+                                                                                </button>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+                                                        </div>
+                                                    </perfect-scrollbar>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 col-md-12">
+                                        <div class="card ng-tns-c94-743 ng-trigger ng-trigger-cardRemove user-list table-card" style="opacity: 1;">
+                                            <div class="card-header ng-tns-c94-743 ng-star-inserted" style="">
+                                                <div class="row ng-tns-c94-47">
+                                                    <div class="col-auto">
+                                                        <h6>Loan details</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div _ngcontent-cgl-c94="" class="card-body ng-tns-c94-87 ng-star-inserted" style="">
+                                                <div _ngcontent-cgl-c117="" class="table-responsive ng-tns-c94-87">
+                                                    <perfect-scrollbar _ngcontent-cgl-c117="" style="max-height: 215px;">
+                                                        <div style="position: static;" class="ps ps--active-y">
+                                                            <div class="ps-content">
+                                                                <table _ngcontent-cgl-c117="" class="table table-hover">
+                                                                    <thead _ngcontent-cgl-c117="">
+                                                                        <tr _ngcontent-cgl-c117="">
+                                                                            <th>Loan Amount</th>
+                                                                            <th>Loan Start Date</th>
+                                                                            <th>Balance as on {{loandetailsList[0].ipaidDate}} </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody _ngcontent-cgl-c117="">
+                                                                        <tr *ngFor="let dl of loandetailsList">
+                                                                            <td _ngcontent-cgl-c117="">{{dl.loanamount}}
+                                                                            </td>
+                                                                            <td _ngcontent-cgl-c117="">{{dl.loandate}}</td>
+                                                                            <td _ngcontent-cgl-c117="">
+                                                                                <h6 _ngcontent-cgl-c117="" class="mb-1 text-c-red">{{dl.balance}}</h6>
+                                                                            </td>
+                                                                            <td>
+                                                                                <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="loanDetailsFun(dl)" data-toggle="tooltip" data-placement="top" title="Filter">
+                                                                                    Details
+                                                                                    </button>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+                                                        </div>
+                                                    </perfect-scrollbar>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xl-12 col-md-12">
+                                        <app-calendar-view></app-calendar-view>
+                                    </div>
+
+                                </div>
+                            </ng-template>
+
+
+                        </ngb-tab>
+
                         <ngb-tab title="Dashboard" *ngIf="r.code=='DASHBOARD'">
                             <ng-template ngbTabContent>
                                 <div class="row">

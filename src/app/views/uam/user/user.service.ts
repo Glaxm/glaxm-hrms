@@ -23,9 +23,11 @@ export class UserService {
     return this.http.get(environment.IP+'/api/Dashboard/getallDashboard');
   }
 
-  getAllDept(data){
-    return this.http.post(environment.IP+"/api/masters/dept/getalldept?userId="+sessionStorage.getItem("userId"),data);
-  }
+  // getAllDept(data){
+  //   return this.http.post(environment.IP+"/api/masters/dept/getalldept?userId="+sessionStorage.getItem("userId"),data);
+  // }
+
+ 
 
   saveUser(data){
     return this.http.post(environment.IP+'/api/users/saveusers',data);
@@ -73,4 +75,29 @@ export class UserService {
   userExport(data){
     return this.http.get(environment.IP+"/api/users/exportuserSummary?userId="+sessionStorage.getItem("userId")+"&"+data);
   }
+
+  // Filter 
+
+  
+  getAllFunction(data){
+    return this.http.post(environment.IP+"/api/division/getdivisionbyCompid",data);
+  }
+
+  getAllDept(data){
+    return this.http.post(environment.IP+"/api/masters/dept/getdeptbyCompid",data);
+  }
+  
+
+  // getemplbycompDeptid(data){
+  //   return this.http.post(environment.IP+"/api/employee/getemplbycompDeptid",data);
+  // }
+  
+  
+  getAllSectionByCompId(data){
+    return this.http.post(environment.IP+"/api/section/getsectbyCompid",data);
+  }
+  getAllSubsectionByCompId(data){
+    return this.http.post(environment.IP+"/api/subsection/getsubsectbyCompid",data);
+  }
+
 }

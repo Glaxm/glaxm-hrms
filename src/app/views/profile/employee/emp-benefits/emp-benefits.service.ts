@@ -48,6 +48,10 @@ export class EmpBenefitsService {
   editLIC(id){
     return this.http.get(environment.IP+"/api/masters/employee/empinsureance/getempinsurancebyid/"+id);
   }
+    // Country API
+    getCountryList(){
+      return this.http.get(environment.IP+"/api/masters/xflycountry/getallflycountry");
+    }
 
 
 }

@@ -63,6 +63,7 @@ export class EmpBenefitsComponent implements OnInit {
       value: new FormControl(null),
       lEmpbenefitsId: new FormControl(null),
       xEmployeeId: new FormControl(null),
+      xAirsectorId: new FormControl(null),
       gCompanyId: new FormControl(null),
       gHoldingId: new FormControl(null),
       isActive: new FormControl(null),
@@ -189,6 +190,23 @@ export class EmpBenefitsComponent implements OnInit {
     this.edit();
     //LIC API
     this.getLICSummaryByEmpid();
+
+    // Country API
+    this.getCountryList();
+    this.getAirsectorList();
+  }
+
+  airsectorlist: any = [];
+  getAirsectorList() {
+    this.empBenefitService.getAirSectorList().subscribe(data => {
+      this.airsectorlist = data;
+    })
+  }
+
+  getCountryList(){this.empBenefitService.getCountryList().subscribe(data=>{
+      this.countryList = data;
+  })
+
   }
 
   getEmpbenefitsListByEmpId() {

@@ -1,0 +1,208 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <app-card cardTitle="{{mailgroupForm.value.xmailgrpId  ? 'Edit Mail':'Add Mail'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" [disabled]="submitted" (click)="saveMailAuto()" *ngIf="!isView">{{mailgroupForm.value.xmailgrpId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="back()">{{mailgroupForm.value.xmailgrpId ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="mailgroupForm">
+                    <div class="form-row">
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Company</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <ng-multiselect-dropdown [placeholder]="" [data]="companyList" name="company" formControlName="company" [(ngModel)]="selectedCompanyList" [settings]="companySettings" (onSelect)="onCompnaySelect($event)" (onDeSelect)="onCompanyDeSelect($event)" (onSelectAll)="onSelectAllCompnay($event)"
+                                [ngClass]="{ 'is-invalid': submitted && f.company.errors }">
+                            </ng-multiselect-dropdown>
+                            <div *ngIf="submitted && f.company.errors" class="invalid-feedback">
+                                <div *ngIf="f.company.errors.required">Company is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Sponsor</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <ng-multiselect-dropdown [placeholder]="" [data]="sponsorList" name="sponsor" formControlName="sponsor" [(ngModel)]="selectedSponsorList" [settings]="sponsorSettings" (onSelect)="onSponsorSelect($event)" (onDeSelect)="onSponsorDeSelect($event)" (onSelectAll)="onSelectAllSponsor($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Department</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <ng-multiselect-dropdown [placeholder]="" [data]="deptList" name="dept" formControlName="dept" [(ngModel)]="selectedDeptList" [settings]="deptSettings" (onSelect)="onDeptSelect($event)" (onDeSelect)="onDeptDeSelect($event)" (onSelectAll)="onSelectAllDept($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Shift</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <ng-multiselect-dropdown [placeholder]="" [data]="shiftList" name="shift" formControlName="shift" [(ngModel)]="selectedShiftList" [settings]="shiftSettings" (onSelect)="onShiftSelect($event)" (onDeSelect)="onShiftDeSelect($event)" (onSelectAll)="onSelectAllShift($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Name</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="name" class="form-control validation_border" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required">List Name is required</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Frequency</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <select class="form-control" formControlName="frequency">
+                                <option *ngFor="let dl of frequencyList" value="{{dl.id}}">{{dl.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Remark</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="description" class="form-control">
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Status</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <select class="form-control validation_border" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                                <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                                <div *ngIf="f.status.errors.required">Status is required</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </app-card>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="mailgroupForm.value.xmailgrpId">
+    <div class="col-sm-12">
+        <div *ngIf="MAILLINE_ENUM.MAILLINES_SUMMARY==0">
+            <app-card cardTitle="Mail Lines Summary" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="addMailLines()" *ngIf="!isView" data-toggle="tooltip" data-placement="top" title="Add">
+                            <i class="fa fa-plus"></i>
+                        </button>&nbsp;&nbsp;
+                        <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="editMailLines()" *ngIf="!isView" data-toggle="tooltip" data-placement="top" title="Edit">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>&nbsp;&nbsp;
+                    </div>
+                </nav>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>User</th>
+                                <th>Mail ID</th>
+                                <th>Status</th>
+                                <th>Recepient Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let l of mailLineList">
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getMailLineRowData(l)">
+                                    </div>
+                                </td>
+                                <td>{{l.groupcode}}</td>
+                                <td>{{l.name}}</td>
+                                <td>{{l.isActive=='Y' ? 'Active' : 'Inactive' }}</td>
+                                <td>{{l.isActive}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </app-card>
+        </div>
+
+        <!--  -->
+        <div *ngIf="MAILLINE_ENUM.MAILLINES_SUMMARY==1">
+            <app-card cardTitle="{{maillineForm.value.xmailgrplineId  ? 'Edit Mail Lines':'Add Mail Lines'}}" [options]="false">
+                <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                    <ul _ngcontent-epm-c40="" class="nav">
+                    </ul>
+                    <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                        <button type="button" class="btn btn-success" ngbTooltip="btn-success" (click)="saveMailLine()" [disabled]="submitted" *ngIf="!isView">{{maillineForm.value.xmailgrplineId ? 'Update':'Add'}}</button> &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" ngbTooltip="btn-danger" (click)="cancelMailLine()">{{maillineForm.value.xmailgrplineId ? 'Back':'Cancel'}}</button>
+                    </div>
+                </nav>
+
+                <form action="javascript:" class="needs-validation" novalidate [formGroup]="maillineForm">
+
+                    <div class="form-row">
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">User</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <select class="form-control" formControlName="userId" (change)="selectUser(maillineForm.value.userId)">
+                                <option *ngFor="let dl of userList" value="{{dl.userId}}">{{dl.userName}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Email ID</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" formControlName="mailId" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Status</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <select class="form-control" formControlName="status">
+                                <option *ngFor="let dl of statusList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Recipient Type</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <select class="form-control" formControlName="recipientType">
+                                <option *ngFor="let dl of recipientTypeList" value="{{dl.id}}">{{dl.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </form>
+            </app-card>
+        </div>
+    </div>

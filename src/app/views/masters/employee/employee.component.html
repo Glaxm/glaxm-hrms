@@ -512,21 +512,6 @@
                                 </div>
 
                                 <div class="col-md-2 mb-3">
-                                    <label for="validationCustom01">Air Sector</label>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <select class="form-control" formControlName="xAirsectorId">
-                                        <option></option>
-                                        <option *ngFor="let dl of airsectorlist" value="{{dl.airsectorId}}">{{dl.name}}</option>
-                    </select>
-                                </div>
-
-
-                            </div>
-
-                            <div class="form-row">
-
-                                <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Shift Supervisor</label>
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -535,6 +520,12 @@
                                         <option *ngFor="let dl of supervisorList" value="{{dl.employeeId}}">{{dl.displayName}}</option>
                     </select>
                                 </div>
+
+
+
+                            </div>
+
+                            <div class="form-row">
 
                                 <div class="col-md-2 mb-3">
                                     <label for="validationCustom01">Superior </label>

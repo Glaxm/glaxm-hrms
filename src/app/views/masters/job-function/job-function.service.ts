@@ -20,8 +20,8 @@ export class JobFunctionService {
     return this.http.post(environment.IP+"/api/masters/dept/getalldept?userId="+sessionStorage.getItem("userId"),data);
   }
 
-  getAllDiv(){
-    return this.http.get(environment.IP+"/api/division/getalldivision?userId="+sessionStorage.getItem("userId"));
+  getAllDiv(company){
+    return this.http.post(environment.IP+"/api/division/getalldivision?userId="+sessionStorage.getItem("userId"),company);
   }
 
   getJobFunDataById(id){

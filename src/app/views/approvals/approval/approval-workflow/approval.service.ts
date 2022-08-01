@@ -9,8 +9,12 @@ export class ApprovalService {
 
   constructor(private http:HttpClient) { }
 
-  getAllApprovalList(data){
-    return this.http.post(environment.IP+"/api/approvalwf/getapprovalwfbyCompid",data);
+  getAllApprovalList(l){
+    return this.http.post(environment.IP+"/api/approvalwf/getapprovalsummary?userId="+sessionStorage.getItem("userId")+"&length=10&page=1",l);
+  }
+
+  getAllApprovalListDatabase(data,company){
+    return this.http.post(environment.IP+"/api/approvalwf/getapprovalsummary?userId="+sessionStorage.getItem("userId")+"&"+data,company);
   }
 
   getApprovalDetailsById(id){
@@ -52,6 +56,10 @@ export class ApprovalService {
 getUserList(){
   return this.http.get(environment.IP+"/api/users/getall");
 }
+
+getuserbycompDeptid(data){
+  return this.http.post(environment.IP+"/api/users/getuserbycompDeptid",data);
+}
 saveUpdateApprovalLevel(data){
   return this.http.post(environment.IP+"/api/approvals/G_APPROVALLEVEL/saveupdateapprovallevel",data);
   
@@ -72,6 +80,15 @@ getemplbycompDeptid(data){
 getAllDept(data){
   return this.http.post(environment.IP+"/api/masters/dept/getdeptbyCompid",data);
 }
+
+getAllSectionByCompId(data){
+  return this.http.post(environment.IP+"/api/section/getsectbyCompid",data);
+}
+getAllSubsectionByCompId(data){
+  return this.http.post(environment.IP+"/api/subsection/getsubsectbyCompid",data);
+}
+
+
 
   
 }

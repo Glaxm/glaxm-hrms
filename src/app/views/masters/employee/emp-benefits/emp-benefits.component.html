@@ -59,10 +59,16 @@
           </option>
       </select>
                         </div>
-                        <!-- <div class="col-md-6 mb-3">
-      <label for="validationCustom01">Annual Leave Balance Days</label>
-      <input type="text" formControlName="annualbaldays" class="form-control">
-  </div> -->
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Air Sector</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <select class="form-control" formControlName="xAirsectorId">
+                                <option></option>
+                                <option *ngFor="let dl of airsectorlist" value="{{dl.airsectorId}}">{{dl.name}}</option>
+            </select>
+                        </div>
+
                     </div>
 
                 </app-card>
@@ -165,7 +171,7 @@
                 </app-card>
                 <app-card cardTitle="Air Ticket" [options]="false">
 
-                    <div class="form-row">
+                    <!-- <div class="form-row">
 
                         <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Airport</label>
@@ -186,7 +192,32 @@
         </option>
     </select>
                         </div>
+                    </div> -->
+
+                    <div class="form-row">
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Country</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <select class="form-control" formControlName="fromAirsectorId">
+                                <option *ngFor="let dl of countryList" value="{{dl.xflycountryId}}">{{dl.countryName}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Air Ticket Eligibility </label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <select class="form-control" formControlName="airtktelgId">
+                                <option *ngFor="let dl of airtktEligibiltyList" value="{{dl.value}}">{{dl.name}}
+                                </option>
+                            </select>
+                        </div>
+
+
                     </div>
+
                     <div class="form-row">
 
                         <div class="col-md-2 mb-3">
@@ -210,20 +241,7 @@
 
                     </div>
 
-                    <div class="form-row">
 
-                        <div class="col-md-2 mb-3">
-                            <label for="validationCustom01">Air Ticket Eligibility </label>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <select class="form-control" formControlName="airtktelgId">
-        <option *ngFor="let dl of airtktEligibiltyList" value="{{dl.value}}">{{dl.name}}
-        </option>
-    </select>
-                        </div>
-
-
-                    </div>
                 </app-card>
 
                 <app-card cardTitle="Family" [options]="false">

@@ -49,4 +49,13 @@ export class EmpBenefitsService {
     return this.http.get(environment.IP+"/api/masters/employee/empinsureance/getempinsurancebyid/"+id);
   }
 
+  // Country API
+  getCountryList(){
+    return this.http.get(environment.IP+"/api/masters/xflycountry/getallflycountry");
+  }
+
+  // Airsector API
+  getAirSectorList(){
+    return this.http.get(environment.IP+"/api/masters/airsector/getallairsector");
+  }
 }

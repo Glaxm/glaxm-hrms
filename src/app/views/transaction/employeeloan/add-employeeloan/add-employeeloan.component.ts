@@ -188,7 +188,10 @@ onSelectAll(items: any) {
         this.emploanForm.controls['lastdate1'].setValue(lastdateModel);
 
         success.data.addAsEarning =='Y' ?  this.emploanForm.get('addAsEarning1').setValue(true) :this.emploanForm.get('addAsEarning1').setValue(false);
-
+        if(success.data.x_EMPLOYEE){
+          this.selectedItems=[{'employeeId':success.data.x_EMPLOYEE.employeeId,'displayName':success.data.x_EMPLOYEE.displayName}];
+        }
+        
         this.getCOmpanyById(success.data.holdingId);
         this.emploanForm.patchValue(success.data);
         this.emploanForm.get('lndate').setValue(success.data.loandate);
@@ -213,12 +216,12 @@ onSelectAll(items: any) {
     
     this.employeeloanService.getEmployeeList(this.moduleid,l).subscribe(s=>{
       this.employeeList = s;
-      if(this.emploanForm.value.lEmploanId && this.emploanForm.value.xEmployeeId){
-        let list = this.employeeList.filter(item => item.employeeId == this.emploanForm.value.xEmployeeId);
-        if(list.length>0){
-          this.selectedItems=[{'employeeId':list[0].employeeId,'displayName':list[0].displayName}];
-        }
-      }
+      // if(this.emploanForm.value.lEmploanId && this.emploanForm.value.xEmployeeId){
+      //   let list = this.employeeList.filter(item => item.employeeId == this.emploanForm.value.xEmployeeId);
+      //   if(list.length>0){
+      //     this.selectedItems=[{'employeeId':list[0].employeeId,'displayName':list[0].displayName}];
+      //   }
+      // }
     })
   }
 

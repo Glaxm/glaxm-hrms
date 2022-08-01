@@ -211,6 +211,13 @@ div#ngwizard ul {
     padding-left: 2px;
 }
 
+// remove space in text from input and select fields
+input[type=text],
+select {
+    // border-left: 2px solid grey;
+    padding-left: 2px;
+}
+
 .ng-wizard-theme-arrows .step-content {
     padding: 0 0px !important;
     border: 0 solid #d4d4d4;

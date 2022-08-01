@@ -36,47 +36,19 @@
                 </div>
             </nav>
 
+            <datatable1 [dataset]=data [enableFilter]="enableFilter" (searchEvent)="search($event)" (aTagEvent)="getRows($event)" [id]="'shiftRuleId'">
+                <column1 [width1]=2 [value]="'shiftRuleId'" [header]="''" [type]="'radio'" [sortVal]="'ASC'"></column1>
+                <column1 [width1]=10 [value]="'code'" [header]="'Shift Code'" [sortVal]=""></column1>
+                <column1 [width1]=38 [value]="'name'" [header]="'Shift Name'" [type]="''" [sortVal]="''"></column1>
+                <column1 [width1]=30 [value]="'startTime'" [header]="'Start time'" [sortVal]=""></column1>
+                <column1 [width1]=2 [value]="'breakStart'" [header]="'Break Start'" [type]="''" [sortVal]="''"></column1>
+                <column1 [width1]=10 [value]="'breakEnd'" [header]="'Break End'" [sortVal]=""></column1>
+                <column1 [width1]=38 [value]="'endTime'" [header]="'End time'" [type]="''" [sortVal]="''"></column1>
+                <column1 [width1]=30 [value]="'totalworkinghrs'" [header]="'Total Working Hrs'" [sortVal]=""></column1>
+                <column1 [width1]=38 [value]="'totalworkinghrsperweek'" [header]="'Total Working Hrs Per Week'" [type]="''" [sortVal]="''"></column1>
+                <column1 [width1]=30 [value]="'totalworkinghrspermonth'" [header]="'Total Working Hrs Per Month'" [sortVal]=""></column1>
+            </datatable1>
 
-
-            <div class="table-responsive tableFixHead">
-
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Shift Code</th>
-                            <th>Shift Name</th>
-                            <th>Start time</th>
-                            <th>Break Start</th>
-                            <th>Break End</th>
-                            <th>End time</th>
-                            <th>Total Working Hrs</th>
-                            <th>Total Working Hrs Per Week</th>
-                            <th>Total Working Hrs Per Month</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let dl of shiftRuleList">
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(dl)">
-                                </div>
-                            </td>
-                            <td>{{dl.code}}</td>
-                            <td>{{dl.name}}</td>
-                            <td>{{dl.startTime}}</td>
-                            <td>{{dl.breakStart}}</td>
-                            <td>{{dl.breakEnd}}</td>
-                            <td>{{dl.endTime}}</td>
-                            <td>{{dl.totalworkinghrs}}</td>
-                            <td>{{dl.totalworkinghrsperweek}}</td>
-                            <td>{{dl.totalworkinghrspermonth}}</td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-            <!--  -->
         </app-card>
     </div>
 </div>

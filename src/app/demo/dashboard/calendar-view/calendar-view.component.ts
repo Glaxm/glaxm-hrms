@@ -353,8 +353,8 @@ export class CalendarViewComponent  {
       if(id=="ARF"){
         this.router.navigate(['views/report/emp-attendance-report'], { queryParams: { redirectfromdashboard: 'Y', startdate:this.stdate} });
       } else{
-        // this.router.navigate(['views/approval-flow/approvalrequest/request-summary'], { queryParams: { redirectfromdashboard: 'Y',sortStr:"length=10&page=1&req_no=&req_type=&empname="+this.employeeInfo.data.firstName+"&req_date=&current_level=&current_status=&leaveitemname=&leavedays=&="} });
-        this.router.navigateByUrl('/views/approval-flow/approvalrequest/add-request');
+        this.router.navigate(['views/approval-flow/approvalrequest/add-request'], { queryParams: { redirectfromdashboard: 'Y'} });
+        // this.router.navigateByUrl('/views/approval-flow/approvalrequest/add-request');
       }
     }
 

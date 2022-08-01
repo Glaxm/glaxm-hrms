@@ -136,7 +136,7 @@ export class AddAccommodationComponent implements OnInit {
 getEmpList(l)
 {
   
-  let compList: any = this.selectedCompanyList.length==1 ? this.setCompanyList(this.selectedCompanyList[0]):this.setCompanyList(this.selectedCompanyList);
+  let compList = this.selectedCompanyList!=null && this.selectedCompanyList.length>0 ? this.setCompanyList(this.selectedCompanyList) : [];
 
   this.accommodationService.getEmpList(this.moduleid,compList).subscribe(data=>{
     this.employeeList=data;
@@ -351,7 +351,7 @@ getAccommodation(){
 
   onSelectAllCompnay(items: any) {
     this.selectedCompanyList = [];
-    this.selectedCompanyList.push(...[items]);
+    this.selectedCompanyList.push(...items);
     this.selectcompany();
   }
 

@@ -84,6 +84,8 @@ export class LeaveHistoryReportComponent implements OnInit {
     this.getAllLeaveType();
 
     if(this.redirectfromdashboard=="Y"){
+      
+      this.selectedEmpList = [{'employeeId':this.empObj.data.employeeId,'displayName':this.empObj.data.displayName}];
 
       this.reportService.getAllComapny().subscribe(success => {
       
@@ -99,7 +101,7 @@ export class LeaveHistoryReportComponent implements OnInit {
         this.companyList = this.companyList.filter(o1 => l.some(o2 => o1.companyId === o2));
         this.selectecdCompanyList = [{'companyId':this.companyList[0].companyId,'companyName':this.companyList[0].companyName}];
         this.changeComapny(this.selectecdCompanyList);
-        
+        this.filterTable();
       }
       });
 
@@ -132,14 +134,14 @@ export class LeaveHistoryReportComponent implements OnInit {
       if(this.flags.readFlag=='Y' && this.empList.length==1){
           this.selectedEmpList = [{'employeeId':this.empList[0].employeeId,'displayName':this.empList[0].displayName}]
       } else{
-        if(this.redirectfromdashboard=="Y"){
-          this.selectedEmpList = [{'employeeId':this.empObj.data.employeeId,'displayName':this.empObj.data.displayName}]
-        }
+        // if(this.redirectfromdashboard=="Y"){
+        //   this.selectedEmpList = [{'employeeId':this.empObj.data.employeeId,'displayName':this.empObj.data.displayName}]
+        // }
       }
-      if(this.redirectfromdashboard=="Y"){
-        this.redirectfromdashboard='N';
-        this.filterTable();
-      }
+      // if(this.redirectfromdashboard=="Y"){
+      //   this.redirectfromdashboard='N';
+      //   this.filterTable();
+      // }
     });
   }
 

@@ -46,19 +46,7 @@ export class ApprovalWorkflowComponent implements OnInit {
       });
     }
   }
-  getAllApprovalList() {
-      // alert(sessionStorage.getItem("company"))
-      let list: any = JSON.parse(sessionStorage.getItem("company"));
-      var l: any = [];
-      if (list) {
-        for (var i = 0; i < list.length; i++) {
-          l.push(Number(list[i]));
-        }
-      }
-    this.approvalService.getAllApprovalList(l).subscribe(success => {
-      this.approvalList = success;
-    });
-  }
+  
 
   getDataUsingRedioBtn(data) {
     this.gApprovalwfId = data.gApprovalwfId;
@@ -79,5 +67,46 @@ export class ApprovalWorkflowComponent implements OnInit {
   }
   delete() { }
 
+       //============================================ Datatable
+
+       data: any = [];
+   
+       getAllApprovalList() {
+          let list: any = JSON.parse(sessionStorage.getItem("company"));
+          var l: any = [];
+          if (list) {
+            for (var i = 0; i < list.length; i++) {
+              l.push(Number(list[i]));
+            }
+          }
+        this.approvalService.getAllApprovalList(l).subscribe(success => {
+          this.data = success;
+        });
+      }
+        
+      
+       search(data) {
+           this.data = {};
+           let list:any = JSON.parse(sessionStorage.getItem("company"));
+           var l:any=[];
+           for(var i=0;i<list.length;i++){
+               l.push(Number(list[i]));
+           }
+           this.approvalService.getAllApprovalListDatabase(data,l).subscribe(s => {
+           this.data = s;
+          });
+      
+       }
+      
+      
+         getRows(data){
+          this.gApprovalwfId = data.gApprovalwfId;
+          if(data.key==""){
+     
+         } else{
+           this.edit();
+         }
+         }
+     
 
 }

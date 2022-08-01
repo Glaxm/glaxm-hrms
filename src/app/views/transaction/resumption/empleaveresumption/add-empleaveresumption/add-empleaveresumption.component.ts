@@ -284,8 +284,12 @@ if(resumptiondate!="Invalid date" && enddate!="Invalid date"){
     let fromModel1: IMyDateModel = { isRange: false, singleDate: { jsDate: enddate }, dateRange: null };
     this.empleaveresumptionForm.controls['actualto1'].setValue(fromModel1);
     this.changeActualTo(fromModel1);
- 
-    this.empleaveresumptionForm.get('latedays').setValue(this.calDays(fromModel1.singleDate.jsDate,this.empleaveresumptionForm.value.enddate1.singleDate.jsDate));
+    
+    if(this.empleaveresumptionForm.value.lEmpleaveId){
+      this.getLateDaysByResumptionDate(this.empleaveresumptionForm.value.lEmpleaveId, this.empleaveresumptionForm.value.resumdate);
+    }
+    
+    // this.empleaveresumptionForm.get('latedays').setValue(this.calDays(fromModel1.singleDate.jsDate,this.empleaveresumptionForm.value.enddate1.singleDate.jsDate));
 
   }
   changeEndDate(event){
@@ -331,10 +335,20 @@ if(resumptiondate!="Invalid date" && enddate!="Invalid date"){
         let fromModel1: IMyDateModel = { isRange: false, singleDate: { jsDate: enddate }, dateRange: null };
         this.empleaveresumptionForm.controls['enddate1'].setValue(fromModel1);
         this.changeEndDate(fromModel1);
-
-         this.empleaveresumptionForm.get('latedays').setValue(this.calDays(this.empleaveresumptionForm.value.actualto1.singleDate.jsDate,fromModel1.singleDate.jsDate));
-     
+        this.getLateDaysByResumptionDate(id,  this.empleaveresumptionForm.value.resumdate);
   }
+
+  getLateDaysByResumptionDate(lEmpleaveId,resumptiondate){
+    if(this.empleaveresumptionForm.value.resumptiondate1 && resumptiondate){
+      this.empleaveresumptionService.calLateDays(resumptiondate,lEmpleaveId).subscribe(data=>{
+        let success:any = data;
+          this.empleaveresumptionForm.get('latedays').setValue(success.lateDays);
+      });
+    }
+      
+  }
+
+
 
   selectcompany(id)
   {

@@ -60,7 +60,7 @@ export class AddRequestappComponent implements OnInit {
   }
 
   fromattenreport:any;
-  
+  redirectfromdashboard:any;
   constructor(private preApproval:PreApproval, private empLeave: EmpLeave, private empLoan: EmpLoan, private exitrequest: ExitRequest, private commonService: CommonService, private toastService: ToastrService, private activatedRoute: ActivatedRoute, private requestService: RequestappService, private router: Router) {
     this.requestForm = new FormGroup({
       xLeaveitemId: new FormControl(null),
@@ -112,6 +112,8 @@ export class AddRequestappComponent implements OnInit {
       this.preApproval.punchout = params.punchout;
       // this.preApproval.startTime = params.punchin;
       // this.preApproval.endTime = params.punchout;
+      this.redirectfromdashboard = params.redirectfromdashboard;
+
     });
     this.empObj = JSON.parse(sessionStorage.getItem("empinfo"));
     this.getApprovalWorkflow();
@@ -190,16 +192,15 @@ export class AddRequestappComponent implements OnInit {
         if(this.workflowList){
           // this.workflowList.find(x => x.gApprovalwfId == id);
         }
-        
-      //   this.fromattenreport = params.fromattenreport;
-      // this.preApproval.startdate = params.stdate;
-      // this.preApproval.enddate = params.endate;
-      // this.moduleCode = params.requesttype;
-      // this.preApproval.companyId = params.companyid;
-      // this.preApproval.xEmployeeId = params.employeeid;
-
       }
 
+    }
+
+    if(this.redirectfromdashboard=="Y"){
+      this.requestForm.controls['G_COMPANY_ID'].setValue(this.empObj.data.companyId);
+      // this.requestForm.controls['xEmployeeId'].setValue(this.empObj.data.employeeId);
+      this.selectedItems1 = [{'employeeId':this.empObj.data.employeeId,'displayName':this.empObj.data.displayName}];
+     
     }
   }
 
@@ -297,12 +298,15 @@ export class AddRequestappComponent implements OnInit {
         this.companyList = this.companyList.filter(o1 => l.some(o2 => o1.gCompanyId === o2));
         
         if(this.companyList){
+          if(this.redirectfromdashboard=="Y"){
+              this.requestForm.controls['G_COMPANY_ID'].setValue(this.empObj.data.companyId);
+              this.selectCompany(this.empObj.data.companyId); 
+          } else{
           if(this.fromattenreport!="Y"){
-          this.requestForm.get('G_COMPANY_ID').setValue(this.companyList[0].gCompanyId);
-          this.selectCompany(this.companyList[0].gCompanyId);
-         
-        }
-        }
+            this.requestForm.get('G_COMPANY_ID').setValue(this.companyList[0].gCompanyId);
+            this.selectCompany(this.companyList[0].gCompanyId); 
+          }
+        }}
       }}
     });
   }

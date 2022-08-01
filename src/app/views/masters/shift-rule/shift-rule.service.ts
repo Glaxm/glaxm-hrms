@@ -10,7 +10,11 @@ export class ShiftRuleService {
   constructor(private http:HttpClient) { }
 
   getShiftRuleList(l){
-    return this.http.post(environment.IP+"/api/masters/shiftrule/getallshiftrule",l);
+    return this.http.post(environment.IP+"/api/masters/shiftrule/getshiftrulesummary?userId="+sessionStorage.getItem("userId")+"&length=10&page=1",l);
+  }
+
+  getShiftRuleDatabase(company,data){
+    return this.http.post(environment.IP+"/api/masters/shiftrule/getshiftrulesummary?userId="+sessionStorage.getItem("userId")+"&"+data,company);
   }
 
   getShiftRoleDataById(id){

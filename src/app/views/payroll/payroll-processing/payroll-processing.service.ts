@@ -137,12 +137,12 @@ export class PayrollProcessingService {
     return this.http.get(environment.IP+"/api/masters/company/getcompanybyid/"+id)
   }
 
-  publishPayslips(data,empId){
-    return this.http.post(environment.IP+"/api/payroll/payrollprocessing/publishPayslips?cid="+data.cid+"&from_dt="+data.from_dt+"&to_dt="+data.to_dt+"&dept_id="+data.dept_id+"&sponsor="+data.sponsor+"&wps="+data.wps,empId)
+  publishPayslips(data,empId,moduleid){
+    return this.http.post(environment.IP+"/api/payroll/payrollprocessing/publishPayslips?cid="+data.cid+"&from_dt="+data.from_dt+"&to_dt="+data.to_dt+"&dept_id="+data.dept_id+"&sponsor="+data.sponsor+"&wps="+data.wps+"&moduleId="+moduleid,empId)
   }
 
-  unpublishPayslips(data,empId){
-    return this.http.post(environment.IP+"/api/payroll/payrollprocessing/unpublishPayslips?cid="+data.cid+"&from_dt="+data.from_dt+"&to_dt="+data.to_dt+"&dept_id="+data.dept_id+"&sponsor="+data.sponsor+"&wps="+data.wps,empId)
+  unpublishPayslips(data,empId,moduleid){
+    return this.http.post(environment.IP+"/api/payroll/payrollprocessing/unpublishPayslips?cid="+data.cid+"&from_dt="+data.from_dt+"&to_dt="+data.to_dt+"&dept_id="+data.dept_id+"&sponsor="+data.sponsor+"&wps="+data.wps+"&moduleId="+moduleid,empId)
   }
 
 }

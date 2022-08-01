@@ -628,6 +628,7 @@ export class PaySlipComponent implements OnInit {
       cid: this.payrollSlipForm.value.companyId ? Number(this.payrollSlipForm.value.companyId):0,
       from_dt:  '',
       to_dt:  '',
+      monthId:this.payrollSlipForm.value.monthId,
       dept_id: this.payrollSlipForm.value.departmentid ? Number(this.payrollSlipForm.value.departmentid):'',
       sponsor:  this.payrollSlipForm.value.sponsortypeid ? Number(this.payrollSlipForm.value.sponsortypeid): '',
       wps:this.payrollSlipForm.value.wps==null ?  null : Number(this.payrollSlipForm.value.wps)==1 ? "Y": "N"
@@ -636,7 +637,7 @@ export class PaySlipComponent implements OnInit {
 
     if(str=='P'){
 
-      this.payrollProcessingService.publishPayslips(tempObj,empIdList).subscribe(data=>{
+      this.payrollProcessingService.publishPayslips(tempObj,empIdList,this.moduleid).subscribe(data=>{
         var s:any = data;
         
         if(s.code==1){
@@ -648,7 +649,7 @@ export class PaySlipComponent implements OnInit {
     }, error => { this.btnLoader = false; console.log('oops', error); })
       
     } else{
-      this.payrollProcessingService.unpublishPayslips(tempObj,empIdList).subscribe(data=>{
+      this.payrollProcessingService.unpublishPayslips(tempObj,empIdList,this.moduleid).subscribe(data=>{
         var s:any = data;
         if(s.code==1){
           this.toastService.showToast('success',s.message);

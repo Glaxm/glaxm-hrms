@@ -65,5 +65,8 @@ export class EmpleaveresumptionService {
     return this.http.get(environment.IP+"/api/empleaveresumption/exportleaveresumeSummary?userId="+sessionStorage.getItem("userId")+"&"+data);
   }
 
+  calLateDays(resumptiondate,id){
+    return this.http.get(environment.IP+"/api/empleaveresumption/calLateDays?resumptiondate="+resumptiondate+"&lEmpleaveId="+id);
+  }
 }
 

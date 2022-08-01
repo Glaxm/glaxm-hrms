@@ -50,7 +50,7 @@ export class AddEditJobFunctionComponent implements OnInit {
   ngOnInit() {
     this.getHoldingList();
     this.companySetting();
-    this.getAllDiv();
+   
     if (this.jobFunForm.value.jobfunctionId) {
       this.jobFunService.getJobFunDataById(this.jobFunForm.value.jobfunctionId).subscribe(success => {
         var s: any = success;
@@ -69,23 +69,19 @@ export class AddEditJobFunctionComponent implements OnInit {
   get f() { return this.jobFunForm.controls; }
 
   getAllDept(companyId){
-    // let list:any =JSON.parse(sessionStorage.getItem("company"));
-   // var l:any=[];
-    // for(var i=0;i<list.length;i++){
-    //     l.push(Number(list[i]))
-    // }
-    if(companyId){
-    this.jobFunService.getAllDept([Number(companyId)]).subscribe(s=>{
+    this.jobFunService.getAllDept(companyId).subscribe(s=>{
       this.deptList=s;
-    });}
+    });
   }
 
   selectCompany(id){
-        this.getAllDept(id);
+      let companyList = id!=null && id.length>0 ? this.setCompanyList(id):[];
+      this.getAllDept(companyList);
+      this.getAllDiv(companyList);
   }
 
-  getAllDiv(){
-    this.jobFunService.getAllDiv().subscribe(s=>{
+  getAllDiv(companyId){
+    this.jobFunService.getAllDiv(companyId).subscribe(s=>{
       this.divisionList=s;
     });
   }
@@ -176,15 +172,18 @@ export class AddEditJobFunctionComponent implements OnInit {
    
     onCompnaySelect(item: any) {
       this.selectedCompanyList.push(item);
+      this.selectCompany(this.selectedCompanyList);
     }
   
     onCompanyDeSelect(items: any) {
       this.selectedCompanyList = this.selectedCompanyList.filter(item => item.gCompanyId !== items.gCompanyId);
+      this.selectCompany(this.selectedCompanyList);
     }
   
     onSelectAllCompnay(items: any) {
       this.selectedCompanyList = [];
-      this.selectedCompanyList.push(...[items]);
+      this.selectedCompanyList.push(...items);
+      this.selectCompany(this.selectedCompanyList);
     }
   
 

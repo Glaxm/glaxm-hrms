@@ -61,6 +61,16 @@
                     </div>
 
                     <div class="form-row">
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Function</label></div>
+                        <div class="col-md-4 mb-3">
+                            <ng-multiselect-dropdown [placeholder]="" [data]="functionList" name="function" formControlName="function" [(ngModel)]="selectedFunctionList" [settings]="dropdownFunctionSettings" (onSelect)="onFunctionSelect($event)" (onDeSelect)="onFunctionDeSelect($event)"
+                                (onSelectAll)="onSelectAllFunction($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+
                         <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Department</label>
                         </div>
@@ -68,6 +78,39 @@
                             <ng-multiselect-dropdown [placeholder]="" [data]="deptList" name="deptName" formControlName="dept" [(ngModel)]="selectedDeptList" [settings]="deptSettings" (onSelect)="onDeptSelect($event)" (onDeSelect)="onDeptDeSelect($event)" (onSelectAll)="onSelectAllDept($event)">
                             </ng-multiselect-dropdown>
                         </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Section</label></div>
+                        <div class="col-md-4 mb-3">
+                            <ng-multiselect-dropdown [placeholder]="" [data]="sectionList" name="section" formControlName="section" [(ngModel)]="selectedSectionList" [settings]="dropdownSectionSettings" (onSelect)="onSectionSelect($event)" (onDeSelect)="onSectionDeSelect($event)"
+                                (onSelectAll)="onSelectAllSection($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Sub Section</label></div>
+                        <div class="col-md-4 mb-3">
+                            <ng-multiselect-dropdown [placeholder]="" [data]="subsectionList" name="subsection" formControlName="subsection" [(ngModel)]="selectedSubsectionList" [settings]="dropdownSubsectionSettings" (onSelect)="onSubsectionSelect($event)" (onDeSelect)="onSubsectionDeSelect($event)"
+                                (onSelectAll)="onSelectAllSubsection($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-row">
+                        <!-- <div class="col-md-2 mb-3">
+                            <label for="validationCustom01">Department</label>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <ng-multiselect-dropdown [placeholder]="" [data]="deptList" name="deptName" formControlName="dept" [(ngModel)]="selectedDeptList" [settings]="deptSettings" (onSelect)="onDeptSelect($event)" (onDeSelect)="onDeptDeSelect($event)" (onSelectAll)="onSelectAllDept($event)">
+                            </ng-multiselect-dropdown>
+                        </div> -->
                         <div class="col-md-2 mb-3">
                             <label for="validationCustom01">Workflow</label>
                         </div>

@@ -74,6 +74,8 @@ export class EmpAttendanceReportComponent implements OnInit {
   fileUploadForm: FormGroup;
   redirectfromdashboard:any;
   dashboardstartdate:any;
+  empObj:any = JSON.parse(sessionStorage.getItem("empinfo"));
+
   constructor(public excelService: ExcelService, public activatedRoute: ActivatedRoute, public router: Router, private reportService: ReportService, private toastService: ToastrService, private commonService: CommonService) {
 
     this.activatedRoute.queryParams.subscribe(data => {
@@ -164,18 +166,6 @@ export class EmpAttendanceReportComponent implements OnInit {
 
     } else {
       this.getAllEmpAttendance();
-
-      let stdate: Date = new Date(this.redirectfromdashboard=='Y' ? this.dashboardstartdate : new Date());
-      let fromModel1: IMyDateModel = { isRange: false, singleDate: { jsDate: stdate }, dateRange: null };
-
-      this.filterObj.startDate1 = fromModel1;
-      this.changeStartDate(fromModel1);
-
-      let endate: Date = new Date(this.redirectfromdashboard=='Y' ? this.dashboardstartdate : new Date());
-      let fromModel2: IMyDateModel = { isRange: false, singleDate: { jsDate: endate }, dateRange: null };
-
-      this.filterObj.endDate1 = fromModel2;
-      this.changeEndDate(fromModel2);
       let list: any = JSON.parse(sessionStorage.getItem("company"));
       var l: any = [];
       if(list){
@@ -190,6 +180,21 @@ export class EmpAttendanceReportComponent implements OnInit {
       //  this.changeCompany(l[l.length-1])
     }
 
+    if(this.redirectfromdashboard=="Y"){
+      
+      let stdate: Date = new Date(this.dashboardstartdate);
+      let fromModel1: IMyDateModel = { isRange: false, singleDate: { jsDate: stdate }, dateRange: null };
+      this.filterObj.startDate1 = fromModel1;
+      this.changeStartDate(fromModel1);
+
+      let endate: Date = new Date(this.dashboardstartdate);
+      let fromModel2: IMyDateModel = { isRange: false, singleDate: { jsDate: endate }, dateRange: null };
+      this.filterObj.endDate1 = fromModel2;
+      this.changeEndDate(fromModel2);
+      
+      this.selectedEmpList = [{'employeeId':this.empObj.data.employeeId,'displayName':this.empObj.data.displayName}];
+
+    }
     
 
   }
@@ -224,10 +229,7 @@ export class EmpAttendanceReportComponent implements OnInit {
         this.selectedEmpList = [{ 'employeeId': this.empList[0].employeeId, 'displayName': this.empList[0].displayName }]
       }
       this.codeList = data;
-      if(this.redirectfromdashboard=='Y' && this.selectedEmpList.length>0){
-        this.redirectfromdashboard="N";
-        this.filterTable();
-      }
+      
     });
   }
 
@@ -239,6 +241,13 @@ export class EmpAttendanceReportComponent implements OnInit {
       if(this.companyList.length==1){
         this.selectecdCompanyList = [{"companyId":this.companyList[0].companyId ,"companyName":this.companyList[0].companyName}];//this.selectecdCompanyList.filter(item => item.companyId !== this.companyList[0].companyId);
         this.changeComapny(this.selectecdCompanyList);
+      }
+      if(this.redirectfromdashboard=="Y"){
+        let company:any = this.companyList.filter(o1 => o1.companyId === this.empObj.data.companyId);
+        if(company){
+          this.selectecdCompanyList = [{"companyId":company[0].companyId ,"companyName":company[0].companyName}];
+        }
+        this.filterTable();
       }
       // if (this.companyList) {
 

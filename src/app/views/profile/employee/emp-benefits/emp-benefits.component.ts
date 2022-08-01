@@ -189,7 +189,18 @@ export class EmpBenefitsComponent implements OnInit {
 
     //LIC API
     this.getLICSummaryByEmpid();
+
+    // Country API
+    this.getCountryList();
   }
+
+  getCountryList()
+  {
+    this.empBenefitService.getCountryList().subscribe(data=>{
+      this.countryList = data;
+    })
+
+}
 
   getEmpbenefitsListByEmpId() {
     if (this.empId) {

@@ -67,20 +67,7 @@ export class ShiftRuleComponent implements OnInit {
     this.shiftRuleId = data.shiftRuleId;
   }
 
-  getShiftRuleList() {
-    let list:any = JSON.parse(sessionStorage.getItem("company"));
-    var l:any=[];
-    for(var i=0;i<list.length;i++){
-     // if(list[i]!=','){
-        l.push(Number(list[i]));
-      // }
-    }
 
-    // alert(l);
-    this.shiftRuleService.getShiftRuleList(l).subscribe(s => {
-      this.shiftRuleList = s;
-    })
-  }
 
   exporttoexcel() {
     let title = "Shift_Rule";
@@ -104,4 +91,51 @@ export class ShiftRuleComponent implements OnInit {
   //  this.excelService.exportAsExcelFile(this.reportSummaryList, "AttendanceSummary");
   
   }
+
+     //============================================ Datatable
+
+     data: any = [];
+    //  getAirSectorList() {
+    //    this.airSectorService.airsectordatatable().subscribe(s => {
+    //    this.data = s;
+    //    });
+  
+    //  }
+
+    getShiftRuleList() {
+      let list:any = JSON.parse(sessionStorage.getItem("company"));
+      var l:any=[];
+      for(var i=0;i<list.length;i++){
+          l.push(Number(list[i]));
+      }
+      
+      this.shiftRuleService.getShiftRuleList(l).subscribe(s => {
+        this.data = s;
+      });
+    }
+     
+   
+    search(data) {
+        this.data = {};
+        let list:any = JSON.parse(sessionStorage.getItem("company"));
+        var l:any=[];
+        for(var i=0;i<list.length;i++){
+            l.push(Number(list[i]));
+        }
+        this.shiftRuleService.getShiftRuleDatabase(l,data).subscribe(s => {
+        this.data = s;
+       });
+   
+    }
+   
+   
+      getRows(data){
+       this.shiftRuleId = data.shiftRuleId;
+       if(data.key==""){
+  
+      } else{
+        this.edit();
+      }
+      }
+  
 }

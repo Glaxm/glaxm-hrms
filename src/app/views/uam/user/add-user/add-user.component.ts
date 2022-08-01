@@ -21,6 +21,7 @@ export class AddUserComponent implements OnInit {
   userRoleForm: any;
   isView: boolean = false;
   moduleid:any;
+  
   statusList: any = [{ valueCode: 'ACTIVE', valueName: 'Active' }, { valueCode: 'INACTIVE', valueName: 'Inactive' }];
   public myDatePickerOptions = this.commonService.datepickerFormat;
   @ViewChild('dp1', { static: false }) myDp1: AngularMyDatePickerDirective;
@@ -87,7 +88,13 @@ export class AddUserComponent implements OnInit {
       deptWiseEmp1: new FormControl(null),
       dashSetting: new FormControl(null),
       dashboardId: new FormControl(null),
-      dashIdwithname: new FormControl(null)
+      dashIdwithname: new FormControl(null),
+      function: new FormControl(null),
+      divId: new FormControl(null),
+      section: new FormControl(null),
+      subsection: new FormControl(null),
+      sectionId:new FormControl(null),
+      subsectionId:new FormControl(null)
 
     });
 
@@ -131,71 +138,90 @@ export class AddUserComponent implements OnInit {
   ngOnInit() {
 
     this.tepMethodemp();
-   this.deptMultiSelFun();
-  this.deptWiseMultiSelFun();
-  this.dashboardSSetting();
- 
+    this.deptMultiSelFun();
+    this.deptWiseMultiSelFun();
+    this.dashboardSSetting();
+    this.functionSetting();
+    this.subsectionSetting();
+    this.sectionSetting();
+
     if (this.userForm.value.userId) {
 
       this.userService.getUserDataById(this.userForm.value.userId).subscribe(success => {
         var s: any = success;
         this.userForm.patchValue(s.data);
-        let startDate: Date = new Date(s.data.startDate);
-        let fromModel: IMyDateModel = { isRange: false, singleDate: { jsDate: startDate }, dateRange: null };
-        this.userForm.controls['startDate1'].setValue(fromModel);
-
-        let endDate: Date = new Date(s.data.endDate);
-        let toModel: IMyDateModel = { isRange: false, singleDate: { jsDate: endDate }, dateRange: null };
-        this.userForm.controls['endDate1'].setValue(toModel);
-
-        this.dashSettObj.dashboardId = s.data.dashboardId;
-        
-        this.obj.companyId = s.data.companyId1;
-        this.compList = s.data.companyId1;
-        this.workflowObj.gApprovalwfId = s.data.workflowId;
-        this.deptObj.deptId = s.data.deptId;
-        this.selDeptList = s.data.deptId;
-        this.deptWiseEmp.employeeId = s.data.deptWiseEmp;
-      if(s.data.companyId1){  
-        this.userService.getAllEmployee(this.moduleid,s.data.companyId1).subscribe(s => {
-          this.employeeList = s;
-          if (this.userForm.value.userId) {
-            let list = this.employeeList.filter(item => item.employeeId == this.userForm.value.employeeId);
-            this.selectedItemsemp = [{ 'employeeId': list[0].employeeId, 'displayName': list[0].displayName }];
-          }
-        });
-      }
-if(s.data.companyId1){
-      this.userService.getWorkflowList(s.data.companyId1).subscribe(data => {
-        this.workflowList = data;
-        if (this.workflowObj.gApprovalwfId) {
-          this.selectedworkflowList = this.workflowList.filter(o1 => this.workflowObj.gApprovalwfId.some(o2 => o1.gApprovalwfId === o2));
+        if(s.data.startDate){
+            let startDate: Date = new Date(s.data.startDate);
+            let fromModel: IMyDateModel = { isRange: false, singleDate: { jsDate: startDate }, dateRange: null };
+            this.userForm.controls['startDate1'].setValue(fromModel);
         }
-      });
-    }
+        if(s.data.endDate){
+          let endDate: Date = new Date(s.data.endDate);
+          let toModel: IMyDateModel = { isRange: false, singleDate: { jsDate: endDate }, dateRange: null };
+          this.userForm.controls['endDate1'].setValue(toModel);
+        }
+
+        this.userForm.get('dashSetting').setValue(s.data.dashIdwithname);
+
+        this.userForm.get('companyId').setValue(s.data.compIdwithname);
+         
+        this.userForm.get('dept').setValue(s.data.deptIdwithname);
+        this.userForm.get('function').setValue(s.data.divIdwithname);
+        this.userForm.get('deptWiseEmp1').setValue(s.data.empIdwithname); 
+
+        this.userForm.get('section').setValue(s.data.sectIdwithname);
+        this.userForm.get('subsection').setValue(s.data.subsectIdwithname);
+
+        this.userForm.get('workflow').setValue(s.data.wFidwithname);
+
+       // this.userForm.get('employee').setValue(s.data.wFidwithname);
+        
+        // this.dashSettObj.dashboardId = s.data.dashboardId;
+        
+        // this.obj.companyId = s.data.companyId1;
+        // this.compList = s.data.companyId1;
+        // this.workflowObj.gApprovalwfId = s.data.workflowId;
+      //   this.deptObj.deptId = s.data.deptId;
+      //   this.selDeptList = s.data.deptId;
+      //   this.deptWiseEmp.employeeId = s.data.deptWiseEmp;
+      // if(s.data.companyId1){  
+      //   this.userService.getAllEmployee(this.moduleid,s.data.companyId1).subscribe(s => {
+      //     this.employeeList = s;
+      //     if (this.userForm.value.userId) {
+      //       let list = this.employeeList.filter(item => item.employeeId == this.userForm.value.employeeId);
+      //       this.selectedItemsemp = [{ 'employeeId': list[0].employeeId, 'displayName': list[0].displayName }];
+      //     }
+      //   });
+      // }
+// if(s.data.companyId1){
+//       this.userService.getWorkflowList(s.data.companyId1).subscribe(data => {
+//         this.workflowList = data;
+//         if (this.workflowObj.gApprovalwfId) {
+//           this.selectedworkflowList = this.workflowList.filter(o1 => this.workflowObj.gApprovalwfId.some(o2 => o1.gApprovalwfId === o2));
+//         }
+//       });
+//     }
 
     // s.data.deptIdwithname = [{"deptId":19,"name":"Accounts"},{"deptId":32,"name":"Accounts2"}];
-    this.selectedDeptList = s.data.deptIdwithname;
+  //  this.selectedDeptList = s.data.deptIdwithname;
     // this.getAllDept(s.data.companyId1);
-        if(s.data.companyId1){
-          this.userService.getAllDept(s.data.companyId1).subscribe(s => {
-            this.deptList = s;
-            // if(this.userForm.value.userId){       
-            //   this.selectedDeptList = this.deptList.filter(o1 => this.deptObj.deptId.some(o2 => o1.deptId === o2));
-            // }
-          }); 
-        }
+        // if(s.data.companyId1){
+        //   this.userService.getAllDept(s.data.companyId1).subscribe(s => {
+        //     this.deptList = s;
+        //   }); 
+        // }
 
-        if(s.data.companyId1 && s.data.deptId){
-          this.userService.getemplbycompDeptid({"eligibleforCompany":s.data.companyId1,"eligiblefordept":s.data.deptId}).subscribe(data=>{
-            this.departtWiseList = data;
-            if(this.userForm.value.userId && this.deptWiseEmp.employeeId){
-              this.selectedDeptWiseList = this.departtWiseList.filter(o1 => this.deptWiseEmp.employeeId.some(o2 => o1.employeeId === o2));
-            }
-         });
-        }
+        // if(s.data.companyId1 && s.data.deptId){
+        //   this.userService.getemplbycompDeptid({"eligibleforCompany":s.data.companyId1,"eligiblefordept":s.data.deptId}).subscribe(data=>{
+        //     this.departtWiseList = data;
+        //     if(this.userForm.value.userId && this.deptWiseEmp.employeeId){
+        //       this.selectedDeptWiseList = this.departtWiseList.filter(o1 => this.deptWiseEmp.employeeId.some(o2 => o1.employeeId === o2));
+        //     }
+        //  });
+        // }
         this.getDashboardSettingList();
         this.getAllCompanies();
+        this.filterEmpByList();
         if (this.isView) { this.userForm.disable() }
 
       });
@@ -288,18 +314,22 @@ if(s.data.companyId1){
       this.userForm.get('endDate').setValue(this.userForm.value.endDate1.singleDate.jsDate);
     }
 
-    this.userForm.get('companyId1').setValue(this.setCompanyList(this.selectedEmpList))
-    this.userForm.get('workflowId').setValue(this.setWorkflowList(this.selectedworkflowList));
+    
+   
     this.userForm.get('createdBy').setValue(1);
     this.userForm.get('creationDate').setValue(new Date());
     this.userForm.get('lastUpdatedBy').setValue(1);
     this.userForm.get('lastUpdateDate').setValue(new Date());
     this.userForm.get('lastUpdateLogin').setValue(1);
     this.userForm.get('employeeId').setValue(Number(this.userForm.value.employeeId));
+
+    let comp: any = this.selectedEmpList!= null &&  this.selectedEmpList.length!= 0 ? this.setCompanyList(this.selectedEmpList):[];
+    this.userForm.get('companyId1').setValue(comp)
+
+    let wrkflow: any = this.selectedworkflowList!= null &&  this.selectedworkflowList.length!= 0 ? this.setWorkflowList(this.selectedworkflowList):[];
+    this.userForm.get('workflowId').setValue(wrkflow);
     
-    this.userForm.controls['deptId'].setValue(this.selDeptList);
-    
-    let deptWiseEmp1: any = this.setDeptWiseList1(this.selectedDeptWiseList);
+    let deptWiseEmp1: any = this.selectedDeptWiseList!= null &&  this.selectedDeptWiseList.length!= 0 ? this.setDeptWiseList1(this.selectedDeptWiseList):[];
     this.userForm.get('deptWiseEmp').setValue(deptWiseEmp1);
 
     let dashsettList: any = this.setdashbrdSettList(this.selectedDashSettingList);
@@ -447,41 +477,6 @@ if(s.data.companyId1){
   }
 
 
-  selectedEmpList = [];
-  dropdownSettings: IDropdownSettings = {
-    singleSelection: false,
-    idField: 'companyId',
-    textField: 'companyName',
-    selectAllText: 'Select All',
-    unSelectAllText: 'UnSelect All',
-    itemsShowLimit: 3,
-    allowSearchFilter: true
-  };
-
-  onEmployeeSelect(item: any) {
-    this.selectedEmpList.push(item);
-    this.getAllDept(this.selectedEmpList);
-  }
-
-  onEmployeeDeSelect(items: any) {
-    this.selectedEmpList = this.selectedEmpList.filter(item => item.companyId !== items.companyId);
-    this.getAllDept(this.selectedEmpList);
-  }
-
-  onSelectAllEmployee(items: any) {
-    this.selectedEmpList = [];
-    this.selectedEmpList.push(...[items]);
-    this.getAllDept(this.selectedEmpList);
-  }
-
-  setCompanyList(list) {
-    let elm: any = [];
-    list.forEach(element => {
-      elm.push(element.companyId);
-    });
-    let unique = [...new Set(elm)];
-    return unique;
-  }
 
   ////////////////////////////////////
 
@@ -519,7 +514,6 @@ if(s.data.companyId1){
     return unique;
   }
 
-  //================================================ Multiselect Department list
   
   setSelectedCompList(list) {
     let elm: any = [];
@@ -531,105 +525,15 @@ if(s.data.companyId1){
   }
 
 
-  deptList: any = [];
-  compList:any=[];
-  getAllDept(selCompnyList) {
-    
-    this.compList = this.selectedEmpList.length==1 ? this.setSelectedCompList(selCompnyList[0]) : this.setSelectedCompList(selCompnyList);
-    this.getWorkflowList(this.compList); 
-    this.getAllEmployeeById(this.compList);
-    this.userService.getAllDept(this.compList).subscribe(s => {
-      this.deptList = s;
-      // if(this.userForm.value.userId){
-      //   this.selectedDeptList = this.deptList.filter(o1 => this.deptObj.deptId.some(o2 => o1.deptId === o2));
-      // }
-    });
-
-  }
-
-  selectedDeptList = [];
-  deptSettings: any = {};
-  deptMultiSelFun() {
-    this.deptSettings = {
-      singleSelection: false,
-      idField: 'deptId',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
-      allowSearchFilter: true
-    };
-  }
-
-
-  onDeptSelect(item: any) {
-    this.selectedDeptList.push(item);
-    this.deptWiseEmpListFun(this.selectedDeptList);
-  }
-
-  onDeptDeSelect(items: any) {
-    this.selectedDeptList = this.selectedDeptList.filter(item => item.deptId !== items.deptId);
-    this.deptWiseEmpListFun(this.selectedDeptList);
-  }
-
-  onSelectAllDept(items: any) {
-    this.selectedDeptList = [];
-    this.selectedDeptList.push(...[items]);
-    this.deptWiseEmpListFun(this.selectedDeptList);
-  }
-
-  // ===========================================
-
-  setSelectedDeptList1(list) {
-    let elm: any = [];
-    list.forEach(element => {
-      elm.push(element.deptId);
-    });
-    let unique = [...new Set(elm)];
-    return unique;
-  }
-
+  
   
   selDeptList:any=[];
   departtWiseList:any=[];
-  deptWiseEmpListFun(selDepartmentlist){
-    this.selDeptList = this.selectedDeptList.length==1 ? this.setSelectedDeptList1(selDepartmentlist[0]) : this.setSelectedDeptList1(selDepartmentlist);
-
-    this.userService.getemplbycompDeptid({"eligibleforCompany":this.compList,"eligiblefordept":this.selDeptList}).subscribe(data=>{
-       this.departtWiseList = data;
-    });
-  }
+  
 
 
   // ================================================
-
-  selectedDeptWiseList = [];
-  deptWiseSettings: any = {};
-  deptWiseMultiSelFun() {
-    this.deptWiseSettings = {
-      singleSelection: false,
-      idField: 'employeeId',
-      textField: 'displayName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
-      allowSearchFilter: true
-    };
-  }
-
-
-  onDeptWiseSelect(item: any) {
-    this.selectedDeptWiseList.push(item);
-  }
-
-  onDeptWiseDeSelect(items: any) {
-    this.selectedDeptWiseList = this.selectedDeptWiseList.filter(item => item.employeeId !== items.employeeId);
-  }
-
-  onSelectAllDeptWise(items: any) {
-    this.selectedDeptWiseList = [];
-    this.selectedDeptWiseList.push(...[items]);
-  }
+  
 
     //================================================ Multiselect DashboardSettings list
 
@@ -660,5 +564,345 @@ if(s.data.companyId1){
       this.selectedDashSettingList = [];
       this.selectedDashSettingList.push(...[items]);
     }
+
+
+    //        ==========================        FILTER 
+
+    filterEmpByList(){
+      let companyid = this.selectedEmpList!= null &&  this.selectedEmpList.length!= 0 ? this.setCompanyList(this.selectedEmpList):[];
+      let depList =this.selectedDeptList!= null &&  this.selectedDeptList.length!= 0 ? this.setSelectedDeptList1(this.selectedDeptList):[];
+      let funList =  this.selectedFunctionList!=null &&this.selectedFunctionList.length!=0 ? this.setFunList(this.selectedFunctionList):[];
+      let secList = this.selectedSectionList!=null &&this.selectedSectionList.length!=0 ? this.setSecList(this.selectedSectionList):[];
+      let subSecList =  this.selectedSubsectionList!=null &&this.selectedSubsectionList.length!=0 ? this.setSubSecList(this.selectedSubsectionList):[];
+     
+      this.userForm.get('sectionId').setValue(secList);
+      this.userForm.get('subsectionId').setValue(subSecList);
+      this.userForm.get('deptId').setValue(depList);
+      this.userForm.get('divId').setValue(funList);
+
+      this.getemplbycompDeptid(companyid,depList,funList,secList,subSecList);
+      this.getWorkflowList(companyid); 
+      this.getAllEmployeeById(companyid);
+      this.getAllDept(companyid);
+      this.getAllFunction(companyid);
+      this.getAllSubsectionByCompId(companyid);
+      this.getAllSectionByCompId(companyid);
+    }
+
+
+    selectedCompanyFun(){
+      let companyid = this.selectedEmpList!= null &&  this.selectedEmpList.length!= 0 ? this.setCompanyList(this.selectedEmpList):[];
+      let depList =this.selectedDeptList!= null &&  this.selectedDeptList.length!= 0 ? this.setSelectedDeptList1(this.selectedDeptList):[];
+      let funList =  this.selectedFunctionList!=null &&this.selectedFunctionList.length!=0 ? this.setFunList(this.selectedFunctionList):[];
+      let secList = this.selectedSectionList!=null &&this.selectedSectionList.length!=0 ? this.setSecList(this.selectedSectionList):[];
+      let subSecList = this.selectedSubsectionList!=null &&this.selectedSubsectionList.length!=0 ? this.setSubSecList(this.selectedSubsectionList):[];
+      
+      this.userForm.get('sectionId').setValue(secList);
+      this.userForm.get('subsectionId').setValue(subSecList);
+      this.userForm.get('deptId').setValue(depList);
+      this.userForm.get('divId').setValue(funList);
+  
+      this.getemplbycompDeptid(companyid,depList,funList,secList,subSecList);
+    }
+  
+
+    getemplbycompDeptid(company,dept,func,sec,subsec){
+      let data ={
+        "eligibleforCompany":company ? company : [],
+        "eligiblefordept":dept ? dept : [],
+        "eligiblefordiv":func ? func : [],
+        "eligibleforsect":sec ? sec:[],
+        "eligibleforsubsect":subsec ? subsec : []
+      };
+
+      this.userService.getemplbycompDeptid(data).subscribe(data=>{
+        this.departtWiseList = data;
+     });
+    }
+    
+
+    // Company multiselect
+
+    selectedEmpList = [];
+    dropdownSettings: IDropdownSettings = {
+      singleSelection: false,
+      idField: 'companyId',
+      textField: 'companyName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+  
+    onEmployeeSelect(item: any) {
+      this.selectedEmpList.push(item);
+       this.filterEmpByList();
+    }
+  
+    onEmployeeDeSelect(items: any) {
+      this.selectedEmpList = this.selectedEmpList.filter(item => item.companyId !== items.companyId);
+      this.filterEmpByList();
+    }
+  
+    onSelectAllEmployee(items: any) {
+      this.selectedEmpList = [];
+      this.selectedEmpList.push(...items);
+      this.filterEmpByList();
+    }
+  
+    setCompanyList(list) {
+      let elm: any = [];
+      list.forEach(element => {
+        elm.push(element.companyId);
+      });
+      let unique = [...new Set(elm)];
+      return unique;
+    }
+
+    
+    // Department multiselect
+
+  deptList: any = [];
+  compList:any=[];
+  getAllDept(selCompnyList) {    
+    this.userService.getAllDept(selCompnyList).subscribe(s => {
+      this.deptList = s;
+    });
+  }
+
+  selectedDeptList = [];
+  deptSettings: any = {};
+  
+  deptMultiSelFun() {
+    this.deptSettings = {
+      singleSelection: false,
+      idField: 'deptId',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+  }
+
+
+  onDeptSelect(item: any) {
+    this.selectedDeptList.push(item);
+    this.selectedCompanyFun();
+  }
+
+  onDeptDeSelect(items: any) {
+    this.selectedDeptList = this.selectedDeptList.filter(item => item.deptId !== items.deptId);
+    this.selectedCompanyFun();
+  }
+
+  onSelectAllDept(items: any) {
+    this.selectedDeptList = [];
+    this.selectedDeptList.push(...items);
+    this.selectedCompanyFun();
+  }
+
+  setSelectedDeptList1(list) {
+    let elm: any = [];
+    list.forEach(element => {
+      elm.push(element.deptId);
+    });
+    let unique = [...new Set(elm)];
+    return unique;
+  }
+
+  // Employee Multiselect
+
+  selectedDeptWiseList = [];
+  deptWiseSettings: any = {};
+  deptWiseMultiSelFun() {
+    this.deptWiseSettings = {
+      singleSelection: false,
+      idField: 'employeeId',
+      textField: 'displayName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+  }
+
+
+  onDeptWiseSelect(item: any) {
+    this.selectedDeptWiseList.push(item);
+  }
+
+  onDeptWiseDeSelect(items: any) {
+    this.selectedDeptWiseList = this.selectedDeptWiseList.filter(item => item.employeeId !== items.employeeId);
+  }
+
+  onSelectAllDeptWise(items: any) {
+    this.selectedDeptWiseList = [];
+    this.selectedDeptWiseList.push(...[items]);
+  }
+
+
+  // Function Multiselect
+  functionList:any=[];
+// deptList:any=[];
+empList:any=[];
+// Function Multiselect
+
+setFunList(list) {
+  let elm: any = [];
+  list.forEach(element => {
+    elm.push(element.xdivId | element.divId);
+  });
+  let unique = [...new Set(elm)];
+  return unique;
+}
+
+  getAllFunction(companyid){
+    this.userService.getAllFunction(companyid).subscribe(s=>{
+          this.functionList = s;
+    });
+  }
+
+  selectedFunctionList = [];
+  dropdownFunctionSettings: IDropdownSettings;
+
+  functionSetting() {
+    this.dropdownFunctionSettings = {
+      singleSelection: false,
+      idField: 'xdivId',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+  }
+ 
+  onFunctionSelect(item: any) {
+    this.selectedFunctionList.push(item);
+    this.selectedCompanyFun();
+  }
+
+  onFunctionDeSelect(items: any) {
+    this.selectedFunctionList = this.selectedFunctionList.filter(item => item.gCompanyId !== items.gCompanyId);
+    this.selectedCompanyFun();
+  }
+
+  onSelectAllFunction(items: any) {
+    this.selectedFunctionList = [];
+    this.selectedFunctionList.push(...items);
+    this.selectedCompanyFun();
+  }
+
+  //////////////////// multi select - section////////////////////
+
+selectedSectionList = [];
+sectionList:any=[];
+dropdownSectionSettings: IDropdownSettings;
+
+sectionSetting() {
+  this.dropdownSectionSettings = {
+    singleSelection: false,
+    idField: 'xsectionId',
+    textField: 'name',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+}
+
+getAllSectionByCompId(company){
+    this.userService.getAllSectionByCompId(company).subscribe(s=>{
+          this.sectionList = s;
+    });
+}
+
+onSectionSelect(item: any) {
+  this.selectedSectionList.push(item);
+  this.selectedCompanyFun();
+}
+
+onSectionDeSelect(items: any) {
+  this.selectedSectionList = this.selectedSectionList.filter(item => item.gCompanyId !== items.gCompanyId);
+  this.selectedCompanyFun();
+}
+
+onSelectAllSection(items: any) {
+  this.selectedSectionList = [];
+  this.selectedSectionList.push(...items);
+  this.selectedCompanyFun();
+}
+
+
+setSecList(list) {
+  let elm: any = [];
+  if(list){
+    list.forEach(element => {
+      elm.push(element.xsectionId);
+    });
+  } else{ elm=[];}
+  let unique = [...new Set(elm)];
+  return unique;
+}
+
+
+//////////////////// multi select - sub-section////////////////////
+
+selectedSubsectionList = [];
+subsectionList:any=[];
+dropdownSubsectionSettings: IDropdownSettings;
+
+
+
+subsectionSetting() {
+  this.dropdownSubsectionSettings = {
+    singleSelection: false,
+    idField: 'xsubsectionId',
+    textField: 'name',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+}
+
+getAllSubsectionByCompId(company){
+    // let compid = this.approvalForm.value.gCompanyId;
+    // var l:any=[typeof compid == 'number' ? compid : Number(compid)];
+    
+    this.userService.getAllSubsectionByCompId(company).subscribe(s=>{
+          this.subsectionList = s;
+    });
+}
+
+onSubsectionSelect(item: any) {
+  this.selectedSubsectionList.push(item);
+  this.selectedCompanyFun();
+}
+
+onSubsectionDeSelect(items: any) {
+  this.selectedSubsectionList = this.selectedSubsectionList.filter(item => item.gCompanyId !== items.gCompanyId);
+  this.selectedCompanyFun();
+}
+
+onSelectAllSubsection(items: any) {
+  this.selectedSubsectionList = [];
+  this.selectedSubsectionList.push(...items);
+  this.selectedCompanyFun();
+}
+
+
+setSubSecList(list) {
+  let elm: any = [];
+  if(list){
+    list.forEach(element => {
+      elm.push(element.xsubsectionId);
+    });
+  } else{ elm=[];}
+  let unique = [...new Set(elm)];
+  return unique;
+}
+
 
 }

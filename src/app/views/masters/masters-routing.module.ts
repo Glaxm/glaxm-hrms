@@ -4,6 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
+    path:"country", loadChildren:()=> import('./country/country.module').then(m=>m.CountryModule)
+  },
+  {
     path:"transfer-form", loadChildren:()=> import('./transfer-form/transfer-form.module').then(m=>m.TransferFormModule)
   },
   {

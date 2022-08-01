@@ -418,7 +418,7 @@ export class PayrollProcessingComponent implements OnInit {
 
     if(str=='P'){
 
-      this.payrollProcessingService.publishPayslips(tempObj,empIdList).subscribe(data=>{
+      this.payrollProcessingService.publishPayslips(tempObj,empIdList,this.moduleid).subscribe(data=>{
         var s:any = data;
         
         if(s.code==1){
@@ -430,7 +430,7 @@ export class PayrollProcessingComponent implements OnInit {
     }, error => { this.btnLoader = false; console.log('oops', error); })
       
     } else{
-      this.payrollProcessingService.unpublishPayslips(tempObj,empIdList).subscribe(data=>{
+      this.payrollProcessingService.unpublishPayslips(tempObj,empIdList,this.moduleid).subscribe(data=>{
         var s:any = data;
         if(s.code==1){
           this.toastService.showToast('success',s.message);

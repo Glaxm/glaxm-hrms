@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="COuntry Summary" [options]="false">
+
+            <nav class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                <ul class="nav"></ul>
+                <div class="nav-item nav-grid">
+                    <button class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="addCountry()" data-toggle="tooltip" data-placement="top" *ngIf="flags.createFlag=='Y'" title="Add">
+                <i class="fa fa-plus"></i>
+                </button>&nbsp;
+                    <button class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="editCountry()" data-toggle="tooltip" data-placement="top" *ngIf="flags.editFlag=='Y'" title="Edit">
+               <i class="fas fa-pencil-alt"></i>
+               </button>&nbsp;
+                    <button class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="viewCountry()" data-toggle="tooltip" data-placement="top" *ngIf="flags.readFlag=='Y'" title="View">
+              <i class="fa fa-eye"></i>
+              </button>&nbsp;
+                    <button class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="deleteCountry()" data-toggle="tooltip" data-placement="top" *ngIf="flags.deleteFlag=='Y'" title="Delete">
+             <i class="fa fa-trash"></i>
+             </button>&nbsp;
+                    <button class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="enableFilter = !enableFilter;" [ngClass]="{'filterClass': enableFilter}" data-toggle="tooltip" data-placement="top" title="Filter">
+                <i class="fa fa-filter"></i>
+                </button>&nbsp;
+                </div>
+            </nav>
+
+            <datatable1 [dataset]=data [enableFilter]="enableFilter" (searchEvent)="search($event)" (aTagEvent)="getRows($event)" [id]="'xflycountryId'">
+                <column1 [width1]=2 [value]="'xflycountryId'" [header]="''" [type]="'radio'" [sortVal]="'ASC'"></column1>
+                <column1 [width1]=30 [value]="'countryName'" [header]="'Country'" [sortVal]=""></column1>
+                <column1 [width1]=38 [value]="'desc'" [header]="'Description'" [type]="''" [sortVal]="''"></column1>
+                <column1 [width1]=10 [value]="'ticketAmount'" [header]="'Ticket Amount'" [sortVal]=""></column1>
+            </datatable1>
+        </app-card>
+    </div>
+</div>

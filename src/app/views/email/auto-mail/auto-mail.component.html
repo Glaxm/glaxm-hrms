@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="Auto Mail Summary" [options]="false">
+
+            <nav _ngcontent-epm-c40="" class="navbar m-b-30 p-10" style="margin-top: -4%;">
+                <ul _ngcontent-epm-c40="" class="nav">
+                </ul>
+                <div _ngcontent-epm-c40="" class="nav-item nav-grid">
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="add()" data-toggle="tooltip" data-placement="top" *ngIf="flags.createFlag=='Y'" title="Add">
+                <i class="fa fa-plus"></i>
+                </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="edit()" data-toggle="tooltip" data-placement="top" *ngIf="flags.editFlag=='Y'" title="Edit">
+               <i class="fas fa-pencil-alt"></i>
+               </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="view()" data-toggle="tooltip" data-placement="top" *ngIf="flags.readFlag=='Y'" title="View">
+              <i class="fa fa-eye"></i>
+              </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="delete()" data-toggle="tooltip" data-placement="top" *ngIf="flags.deleteFlag=='Y'" title="Delete">
+             <i class="fa fa-trash"></i>
+             </button>&nbsp;
+                    <button _ngcontent-ssu-c28="" class="btn btn-white btn-icon btn-outline-primary" type="button" (click)="enableFilter = !enableFilter;" [ngClass]="{'filterClass': enableFilter}" data-toggle="tooltip" data-placement="top" title="Filter">
+                <i class="fa fa-filter"></i>
+                </button>&nbsp;
+                </div>
+            </nav>
+
+            <div class="table-responsive tableFixHead">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>Frequency</th>
+                            <th>Company</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dl of data">
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getRowByObj(dl)">
+                                </div>
+                            </td>
+
+                            <td>{{dl.name}}</td>
+                            <td>{{dl.grpCode}}</td>
+                            <td>{{dl.frequency}}</td>
+                            <td>{{dl.companyname}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- <datatable1 [dataset]=data [enableFilter]="enableFilter" (searchEvent)="search($event)" (aTagEvent)="getRows($event)" [id]="'xmailgrpId'">
+                <column1 [width1]=2 [value]="'xmailgrpId'" [header]="''" [type]="'radio'" [sortVal]="'ASC'"></column1>
+                <column1 [width1]=10 [value]="'companyId'" [header]="'Company'" [sortVal]=""></column1>
+                <column1 [width1]=38 [value]="'sponsorId'" [header]="'Sponsor'" [type]="''" [sortVal]="''"></column1>
+                <column1 [width1]=30 [value]="'deptId'" [header]="'Department'" [sortVal]=""></column1>
+                <column1 [width1]=30 [value]="'shift'" [header]="'Shift'" [sortVal]=""></column1>
+            </datatable1> -->
+        </app-card>
+    </div>
+</div>

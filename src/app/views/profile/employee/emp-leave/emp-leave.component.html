@@ -95,8 +95,8 @@
                         <select class="form-control validation_border" formControlName="X_LEAVEITEM_ID  " [ngClass]="{ 'is-invalid': payItemsubmitted && pi.units.errors }">
               <option *ngFor="let dl of leaveitemList" value="{{dl.valueCode}}">{{dl.valueName}}</option>
             </select>
-                        <div *ngIf="payItemsubmitted && pi.X_LEAVEITEM_ID  .errors" class="invalid-feedback">
-                            <div *ngIf="pi.X_LEAVEITEM_ID  .errors.required">Leave item is required</div>
+                        <div *ngIf="payItemsubmitted && pi.X_LEAVEITEM_ID.errors" class="invalid-feedback">
+                            <div *ngIf="pi.X_LEAVEITEM_ID.errors.required">Leave item is required</div>
                         </div>
                     </div>
 

@@ -10,6 +10,10 @@ const routes: Routes = [
         loadChildren: () => import('./dash-analytics/dash-analytics.module').then(module => module.DashAnalyticsModule)
       },
       {
+        path:'self-dashboard',
+        loadChildren: () => import('./dash-analytics/dash-analytics.module').then(module => module.DashAnalyticsModule)
+      },
+      {
         path: 'org-chart',
         loadChildren: () => import('./org-chart/org-chart-routing.module').then(module => module.OrgChartRoutingModule)
       }

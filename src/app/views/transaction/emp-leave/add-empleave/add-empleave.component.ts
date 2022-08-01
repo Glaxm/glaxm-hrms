@@ -606,6 +606,8 @@ export class AddEmpleaveComponent implements OnInit {
           this.eligibleforTicket = data.data.eligibleforTicket;
           this.lastticketsettledupto1=data.data.lastticketsettledupto;
           
+          
+          this.empleaveForm.controls['paidLeaveDays'].setValue(data.data.aLleaveDays);
 
           if (data.data.lastleavesettledupto) {
             let lastleavesettledupto: Date = new Date(data.data.lastleavesettledupto);

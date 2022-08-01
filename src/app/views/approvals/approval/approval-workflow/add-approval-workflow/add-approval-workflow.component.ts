@@ -24,7 +24,13 @@ export class AddApprovalWorkflowComponent implements OnInit {
   empobj={ employeeId:null };
   funobj={ xdivId:null };
   deptobj={ deptId:null };
-
+  eligibiltyObj:any = {
+    "eligibleforCompany":[],
+    "eligiblefordept":[],
+    "eligiblefordiv":[],
+    "eligibleforsect":[],
+    "eligibleforsubsect":[]
+  };
      
   statusList: any = [{ valueCode: 'ACTIVE', valueName: 'Active' }, { valueCode: 'INACTIVE', valueName: 'Inactive' }]
   constructor(private toastService:ToastrService,private approvalService:ApprovalService,private router:Router, private activatedRoute:ActivatedRoute) {
@@ -45,10 +51,14 @@ export class AddApprovalWorkflowComponent implements OnInit {
       dept: new FormControl(null),
       emp: new FormControl(null),
       function: new FormControl(null),
+      section: new FormControl(null),
+      subsection: new FormControl(null),
       divId: new FormControl(null),
       deptId: new FormControl(null),
       empId: new FormControl(null),
-      prevempId:new FormControl(null)
+      prevempId:new FormControl(null),
+      sectionId:new FormControl(null),
+      subsectionId:new FormControl(null)
   });
 
   this.approvalLevelForm= new FormGroup({
@@ -111,13 +121,15 @@ export class AddApprovalWorkflowComponent implements OnInit {
    tempempId:any=[];
   ngOnInit() {
     this.getHoldingList();
-    this.getUserList();
+   // this.getUserList();
     this.getModuleList();
     // this.getAllFunction();
     // this.getAllDept();
     this.deptSetting();
     this.functionSetting();
     this.empSetting();
+    this.subsectionSetting();
+    this.sectionSetting();
 
     if(this.approvalForm.value.gApprovalwfId){
       this.isGeneralListValue=false;
@@ -136,10 +148,35 @@ export class AddApprovalWorkflowComponent implements OnInit {
         this.approvalForm.get('dept').setValue(success.data.deptIdwithname);
         this.approvalForm.get('function').setValue(success.data.divIdwithname);
         this.approvalForm.get('emp').setValue(success.data.empIdwithname); 
+
+        this.approvalForm.get('section').setValue(success.data.sectIdwithname);
+        this.approvalForm.get('subsection').setValue(success.data.subsectIdwithname);
+
+        // if(success.data.deptIdwithname){
+        //   this.selectedFunctionList.push(...success.data.deptIdwithname);
+        // }
+
+        // if(success.data.divIdwithname){
+        //   this.selectedFunctionList.push(...success.data.divIdwithname);
+        // }
+
+        // if(success.data.empIdwithname){
+        //   this.selectedFunctionList.push(...success.data.empIdwithname);
+        // }
+
+        // if(success.data.sectIdwithname){
+        //   this.selectedFunctionList.push(...success.data.sectIdwithname);
+        // }
+        // if(success.data.subsectIdwithname){
+        //   this.selectedFunctionList.push(...success.data.subsectIdwithname);
+        // }
+
+        
        
         this.tempempId = success.data.empId;
         this.selectedCompanyFun(success.data.gCompanyId);
-        this.getemplbycompDeptid([success.data.gCompanyId],success.data.deptId,success.data.divId);
+        this.selectCompany(success.data.gCompanyId);
+        this.getemplbycompDeptid([success.data.gCompanyId],success.data.deptId,success.data.divId,success.data.sec,success.data.subsec);
         this.approvalForm.patchValue(success.data);
         
         // success.data.deptIdwithname ? this.selectedDeptList.push(...success.data.deptIdwithname) : '';
@@ -210,6 +247,7 @@ export class AddApprovalWorkflowComponent implements OnInit {
     
     if(this.approvalForm.value.gApprovalwfId){
       this.approvalForm.controls['prevempId'].setValue(this.tempempId);
+      this.approvalForm.controls['gApprovalwfId'].setValue(Number(this.approvalForm.value.gApprovalwfId));
     } else{
       this.approvalForm.controls['prevempId'].setValue([]);
     }
@@ -265,16 +303,75 @@ export class AddApprovalWorkflowComponent implements OnInit {
     return unique;
   }
 
+  
+  setSubSecList(list) {
+    let elm: any = [];
+    if(list){
+      list.forEach(element => {
+        elm.push(element.xsubsectionId);
+      });
+    } else{ elm=[];}
+    let unique = [...new Set(elm)];
+    return unique;
+  }
+  setSecList(list) {
+    let elm: any = [];
+    if(list){
+      list.forEach(element => {
+        elm.push(element.xsectionId);
+      });
+    } else{ elm=[];}
+    let unique = [...new Set(elm)];
+    return unique;
+  }
+  
+
   selectedCompanyFun(CompanyId){
- // debugger
+ 
     let companyid = typeof CompanyId !='number' ? [Number(this.approvalForm.value.gCompanyId)] : [this.approvalForm.value.gCompanyId];
     let depList =this.selectedDeptList!= null &&  this.selectedDeptList.length!= 0 ? this.setDeptList(this.selectedDeptList):[];
     let funList =  this.selectedFunctionList!=null &&this.selectedFunctionList.length!=0 ? this.setFunList(this.selectedFunctionList):[];
+    let secList =  this.selectedSectionList!=null &&this.selectedSectionList.length!=0 ? this.setSecList(this.selectedSectionList):[];
+    let subSecList =  this.selectedSubsectionList!=null &&this.selectedSubsectionList.length!=0 ? this.setSubSecList(this.selectedSubsectionList):[];
+    
+    this.approvalForm.get('sectionId').setValue(secList);
+    this.approvalForm.get('subsectionId').setValue(subSecList);
 
-    this.getemplbycompDeptid(companyid,depList,funList);
-    this.getAllDept();
-    this.getAllFunction();
+    this.eligibiltyObj.eligibleforCompany = companyid;
+    this.eligibiltyObj.eligiblefordiv = funList;
+    this.eligibiltyObj.eligiblefordept = depList;
+    this.eligibiltyObj.eligibleforsect = secList;
+    this.eligibiltyObj.eligibleforsubsect = subSecList;
+
+    this.getemplbycompDeptid(companyid,depList,funList,secList,subSecList);
+    // this.getAllDept();
+    // this.getAllFunction();
+    // this.getAllSectionByCompId();
+    // this.getAllSubsectionByCompId();
   }
+
+  selectCompany(CompanyId){
+       let companyid = typeof CompanyId !='number' ? [Number(this.approvalForm.value.gCompanyId)] : [this.approvalForm.value.gCompanyId];
+       let depList =this.selectedDeptList!= null &&  this.selectedDeptList.length!= 0 ? this.setDeptList(this.selectedDeptList):[];
+       let funList =  this.selectedFunctionList!=null &&this.selectedFunctionList.length!=0 ? this.setFunList(this.selectedFunctionList):[];
+       let secList =  this.selectedSectionList!=null &&this.selectedSectionList.length!=0 ? this.setSecList(this.selectedSectionList):[];
+       let subSecList =  this.selectedSubsectionList!=null &&this.selectedSubsectionList.length!=0 ? this.setSubSecList(this.selectedSubsectionList):[];
+ 
+       this.approvalForm.get('sectionId').setValue(secList);
+       this.approvalForm.get('subsectionId').setValue(subSecList);
+   
+       this.eligibiltyObj.eligibleforCompany = companyid;
+       this.eligibiltyObj.eligiblefordiv = funList;
+       this.eligibiltyObj.eligiblefordept = depList;
+       this.eligibiltyObj.eligibleforsect = secList;
+       this.eligibiltyObj.eligibleforsubsect = subSecList;
+
+       this.getemplbycompDeptid(companyid,depList,funList,secList,subSecList);
+       this.getAllDept();
+       this.getAllFunction();
+       this.getAllSectionByCompId();
+       this.getAllSubsectionByCompId();
+     }
 
   // ---------------------------------------------------------------------------------------------------------
 
@@ -288,6 +385,7 @@ export class AddApprovalWorkflowComponent implements OnInit {
 
   addGeneralListValue(){ 
     this.approvalLevelForm.reset();
+    this.getUserList(this.eligibiltyObj);
     this.isGeneralListValue = true;
     this.approvalLevelList.length > 0 ?  this.approvalLevelForm.controls['levelno'].setValue(this.approvalLevelList.length+1) :  this.approvalLevelForm.controls['levelno'].setValue(1);
     this.approvalLevelForm.controls['status'].setValue("ACTIVE");
@@ -295,6 +393,7 @@ export class AddApprovalWorkflowComponent implements OnInit {
   }
 
   editGeneralListValue(){ 
+    this.getUserList(this.eligibiltyObj);
     this.approvalService.getApprovalLevelById(this.approvalLevelForm.value.gApprovallevelId).subscribe(s=>{
         
         var success:any = s;
@@ -320,8 +419,8 @@ export class AddApprovalWorkflowComponent implements OnInit {
       });
   }
 
-  getUserList(){
-      this.approvalService.getUserList().subscribe(s=>{
+  getUserList(data){
+      this.approvalService.getuserbycompDeptid(data).subscribe(s=>{
         this.usersList =s;
       });
   }
@@ -384,24 +483,39 @@ getApprovalEmailListById(listId){
 
 selectUser(userId){
     if(userId){
-      let filterData = this.usersList.filter(data=>data.userId==userId);
+      let filterData = this.usersListEmail.filter(data=>data.userId==userId);
+      if(filterData){
       this.approvalEmailForm.controls['mailId'].setValue(filterData[0].email);
     }
+    }
+}
+
+usersListEmail:any=[];
+getAllUserList(){
+  this.approvalService.getUserList().subscribe(success=>{
+      this.usersListEmail = success;
+  });
 }
 
 addApprovalEmail(){ 
   this.approvalEmailForm.reset();
+  this.getAllUserList();
   this.isApprovalEmail = true;
   this.approvalEmailForm.controls['status'].setValue("ACTIVE");
   this.approvalEmailForm.controls['recipientType'].setValue("TO");
 }
 
 editApprovalEmail(){ 
+  this.getAllUserList();
   this.approvalService.getApprovalEmailById(this.approvalEmailForm.value.xmailgrplineId).subscribe(s=>{
       var success:any = s;
-      this.approvalEmailForm.patchValue(success.data);
+      
+      this.approvalEmailForm.get('userId').setValue(success.data.userId);
+      this.approvalEmailForm.get('mailId').setValue(success.data.mailId);
+      this.approvalEmailForm.get('recipientType').setValue(success.data.recipientType);
+
       success.data.isActive == 'Y' ? this.approvalEmailForm.get('status').setValue("ACTIVE") : this.approvalEmailForm.get('status').setValue("INACTIVE");
-     
+      this.approvalEmailForm.patchValue(success.data);
   })
 }
 
@@ -570,11 +684,13 @@ empSetting() {
   };
 }
 
-getemplbycompDeptid(company,dept,func){
+getemplbycompDeptid(company,dept,func,sec,subsec){
   let data ={
     "eligibleforCompany":company ? company : [],
     "eligiblefordept":dept ? dept : [],
-    "eligiblefordiv":func ? func : []
+    "eligiblefordiv":func ? func : [],
+    "eligibleforsect":sec ? sec:[],
+    "eligibleforsubsect":subsec ? subsec : []
   };
   this.approvalService.getemplbycompDeptid(data).subscribe(data=>{
       this.empList=data;
@@ -598,7 +714,103 @@ onSelectAllEmp(items: any) {
 //  alert(JSON.stringify(this.selectedEmpList))
 }
 
+//////////////////// multi select - section////////////////////
 
+selectedSectionList = [];
+sectionList:any=[];
+dropdownSectionSettings: IDropdownSettings;
+
+sectionSetting() {
+  this.dropdownSectionSettings = {
+    singleSelection: false,
+    idField: 'xsectionId',
+    textField: 'name',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+}
+
+getAllSectionByCompId(){
+    let compid = this.approvalForm.value.gCompanyId;
+    var l:any=[typeof compid == 'number' ? compid : Number(compid)];
+    
+    this.approvalService.getAllSectionByCompId(l).subscribe(s=>{
+          this.sectionList = s;
+    });
+}
+
+onSectionSelect(item: any) {
+  this.selectedSectionList.push(item);
+  this.selectedCompanyFun(this.approvalForm.value.gCompanyId);
+}
+
+onSectionDeSelect(items: any) {
+  this.selectedSectionList = this.selectedSectionList.filter(item => item.gCompanyId !== items.gCompanyId);
+  this.selectedCompanyFun(this.approvalForm.value.gCompanyId);
+}
+
+onSelectAllSection(items: any) {
+  this.selectedSectionList = [];
+  this.selectedSectionList.push(...items);
+  this.selectedCompanyFun(this.approvalForm.value.gCompanyId);
+}
+
+//////////////////// multi select - sub-section////////////////////
+
+selectedSubsectionList = [];
+subsectionList:any=[];
+dropdownSubsectionSettings: IDropdownSettings;
+
+
+
+subsectionSetting() {
+  this.dropdownSubsectionSettings = {
+    singleSelection: false,
+    idField: 'xsubsectionId',
+    textField: 'name',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+}
+
+getAllSubsectionByCompId(){
+    let compid = this.approvalForm.value.gCompanyId;
+    var l:any=[typeof compid == 'number' ? compid : Number(compid)];
+    
+    this.approvalService.getAllSubsectionByCompId(l).subscribe(s=>{
+          this.subsectionList = s;
+    });
+}
+
+onSubsectionSelect(item: any) {
+  this.selectedSubsectionList.push(item);
+  this.selectedCompanyFun(this.approvalForm.value.gCompanyId);
+}
+
+onSubsectionDeSelect(items: any) {
+  this.selectedSubsectionList = this.selectedSubsectionList.filter(item => item.gCompanyId !== items.gCompanyId);
+  this.selectedCompanyFun(this.approvalForm.value.gCompanyId);
+}
+
+onSelectAllSubsection(items: any) {
+  this.selectedSubsectionList = [];
+  this.selectedSubsectionList.push(...items);
+  this.selectedCompanyFun(this.approvalForm.value.gCompanyId);
+}
+
+
+
+// Add user select method
+selectedUserLevelFun(userId){
+  let user:any = this.usersList.filter(el=>el.userId==userId);
+  if(user){
+    this.approvalLevelForm.get('name').setValue(user[0].empName);
+  }
+}
 
 
   

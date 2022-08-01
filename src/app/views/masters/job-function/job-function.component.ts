@@ -70,6 +70,11 @@ export class JobFunctionComponent implements OnInit {
   }
 
   getJobFunList() {
+    // let list:any = JSON.parse(sessionStorage.getItem("company"));
+    // var l:any=[];
+    // for(var i=0;i<list.length;i++){
+    //     l.push(Number(list[i]));
+    // }
     this.jobFunService.getJobFunList().subscribe(s => {
       this.jobFunList = s;
     })
