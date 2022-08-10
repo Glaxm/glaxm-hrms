@@ -56,7 +56,7 @@ export class AddUpdateAutoMailComponent implements OnInit {
         grpCode: new FormControl(null),
         description: new FormControl(null),
         frequency: new FormControl(null),
-        company: new FormControl(null),
+        company: new FormControl(null,[Validators.required]),
         companyId: new FormControl(null),
         dept: new FormControl(null),
         deptId: new FormControl(null),
@@ -121,6 +121,7 @@ export class AddUpdateAutoMailComponent implements OnInit {
     this.mailgroupForm.get('created').setValue(new Date());
     this.mailgroupForm.get('updatedBy').setValue(Number(sessionStorage.getItem('userId')));
     this.mailgroupForm.get('updated').setValue(new Date());
+    this.mailgroupForm.get('grpCode').setValue('ATTN');
     this.mailgroupForm.value.status=="ACTIVE" ? this.mailgroupForm.controls['isActive'].setValue('Y') : this.mailgroupForm.controls['isActive'].setValue('N');  
 
     let compid = this.selectedCompanyList!= null &&  this.selectedCompanyList.length!= 0 ? this.setCompanyList(this.selectedCompanyList):[];
@@ -139,8 +140,14 @@ export class AddUpdateAutoMailComponent implements OnInit {
       this.mailgroupForm.controls['xmailgrpId'].setValue(undefined);
     }
    
-    this.saveAutoMailHeader(this.mailgroupForm.value);
-
+    this.submitted = true;
+    if (this.mailgroupForm.invalid) {
+      return;
+    } else { 
+      this.submitted = false;
+     // alert("else");
+   this.saveAutoMailHeader(this.mailgroupForm.value);
+    }
 
   }
 
@@ -153,6 +160,7 @@ export class AddUpdateAutoMailComponent implements OnInit {
 
   addMailLines(){ 
     this.MAILLINE_ENUM.MAILLINES_SUMMARY=1;
+    this.maillineForm.reset();
     this.maillineForm.controls['status'].setValue('ACTIVE');
     this.getAllUser();
   }
@@ -225,6 +233,7 @@ export class AddUpdateAutoMailComponent implements OnInit {
   }
 
   onCompnaySelect(item: any) {
+    this.submitted = false;
     this.selectedCompanyList.push(item);
     this.getDataByComapnyID(this.selectedCompanyList);
   }
@@ -235,6 +244,7 @@ export class AddUpdateAutoMailComponent implements OnInit {
   }
 
   onSelectAllCompnay(items: any) {
+    this.submitted = false;
     this.selectedCompanyList = [];
     this.selectedCompanyList.push(...items);
     this.getDataByComapnyID(this.selectedCompanyList);

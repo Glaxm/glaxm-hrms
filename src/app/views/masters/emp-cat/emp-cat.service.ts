@@ -9,8 +9,8 @@ export class EmpCatService {
 
   constructor(private http:HttpClient) { }
 
-  getEmpCat(){
-      return this.http.get(environment.IP+"/api/masters/empcat/getallempcat?userId="+sessionStorage.getItem("userId"));
+  getEmpCat(company){
+      return this.http.post(environment.IP+"/api/masters/empcat/getempcatSummary?userId="+sessionStorage.getItem("userId")+"&page=1&length=10",company);
   }
   getEmpCatById(id){
     return this.http.get(environment.IP+"/api/masters/empcat/getempcatbyid/"+id);
@@ -25,5 +25,9 @@ export class EmpCatService {
   }
   addUpdateEmpCat(data){
     return this.http.post(environment.IP+"/api/masters/empcat/saveupdateempcat",data);
+  }
+
+  empCatSearch(data,company){
+    return this.http.post(environment.IP+"/api/masters/empcat/getempcatSummary?userId="+sessionStorage.getItem("userId")+"&"+data,company);
   }
 }

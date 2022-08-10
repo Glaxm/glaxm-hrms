@@ -159,7 +159,10 @@ export class PaySlipComponent implements OnInit {
       });
   }
 
+  monthId:any;
   getMonthById(monthId){
+    this.monthId = monthId;
+  
       this.payrollProcessingService.getMonthById(monthId).subscribe(s=>{
       var success:any = s;
       let startDate: Date = new Date(success.data.startDate);
@@ -628,13 +631,14 @@ export class PaySlipComponent implements OnInit {
       cid: this.payrollSlipForm.value.companyId ? Number(this.payrollSlipForm.value.companyId):0,
       from_dt:  '',
       to_dt:  '',
-      monthId:this.payrollSlipForm.value.monthId,
+      monthId:Number(this.monthId),//this.payrollSlipForm.value.monthId,
       dept_id: this.payrollSlipForm.value.departmentid ? Number(this.payrollSlipForm.value.departmentid):'',
       sponsor:  this.payrollSlipForm.value.sponsortypeid ? Number(this.payrollSlipForm.value.sponsortypeid): '',
       wps:this.payrollSlipForm.value.wps==null ?  null : Number(this.payrollSlipForm.value.wps)==1 ? "Y": "N"
     }
 
 
+   
     if(str=='P'){
 
       this.payrollProcessingService.publishPayslips(tempObj,empIdList,this.moduleid).subscribe(data=>{

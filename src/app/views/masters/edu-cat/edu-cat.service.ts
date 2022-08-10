@@ -9,8 +9,13 @@ export class EduCatService {
 
   constructor(private http:HttpClient) { }
 
-  getEduCatList(){
-    return this.http.get(environment.IP+"/api/masters/educategory/getalleducategory?userId="+sessionStorage.getItem("userId"));
+  getEduCatList(company){
+   // return this.http.get(environment.IP+"/api/masters/empcat/getempcatSummary?userId="+sessionStorage.getItem("userId")+"&page=1&length=10",company);
+   return this.http.get(environment.IP+"/api/masters/educategory/getalleducategory?userId="+sessionStorage.getItem("userId"));
+  }
+
+  searchEmpCat(data,company){
+    return this.http.get(environment.IP+"/api/masters/empcat/getempcatSummary?userId="+sessionStorage.getItem("userId")+"&"+data,company);
   }
 
   getCompanyListByHoldingId(id){

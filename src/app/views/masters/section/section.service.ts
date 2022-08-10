@@ -30,6 +30,10 @@ export class SectionService {
   }
 
   sectionDatabase(data){
-    return this.http.post(environment.IP+"/api/section/getallsection?userId="+sessionStorage.getItem("userId"),data);
+    return this.http.post(environment.IP+"/api/section/getsectSummary?userId="+sessionStorage.getItem("userId")+"&page=1&length=10",data);
+  }
+
+  searchSection(data,company){
+    return this.http.post(environment.IP+"/api/section/getsectSummary?userId="+sessionStorage.getItem("userId")+"&"+data,company);
   }
 }

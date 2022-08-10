@@ -13,6 +13,10 @@ export class SubsectionService {
     return this.http.get(environment.IP+"/api/masters/subsection/getallsubsection");
   }
 
+  getSubsectionList(data){
+    return this.http.post(environment.IP+"/api/subsection/getsubsectSummary?userId="+sessionStorage.getItem("userId")+"&page=1&length=10",data);
+  }
+
   getAllHolding(){
     return this.http.get(environment.IP+"/api/masters/holding/getallholding");
   }
@@ -29,7 +33,7 @@ export class SubsectionService {
     return this.http.get(environment.IP+"/api/subsection/getsubsectionbyid/"+id);
   }
 
-  subsectionDatabase(data){
-    return this.http.post(environment.IP+"/api/subsection/getallsubsection?userId="+sessionStorage.getItem("userId"),data);
+  subsectionDatabase(data,company){
+    return this.http.post(environment.IP+"/api/subsection/getsubsectSummary?userId="+sessionStorage.getItem("userId")+"&"+data,company);
   }
 }

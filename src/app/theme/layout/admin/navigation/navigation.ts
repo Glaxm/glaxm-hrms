@@ -457,13 +457,13 @@ this.NavigationItems = [];
             title: 'Dashboard',
             type: 'item',
             url: '/dashboard/analytics'
+          },
+          {
+            id: 'organizationchart',
+            title: 'Organization Chart',
+            type: 'item',
+            url: '/dashboard/org-chart'
           }
-          // {
-          //   id: 'organizationchart',
-          //   title: 'Organization Chart',
-          //   type: 'item',
-          //   url: '/dashboard/org-chart'
-          // }
         ]
       }
     ]

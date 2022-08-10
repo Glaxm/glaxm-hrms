@@ -10,8 +10,10 @@ export class DepatmentService {
   constructor(private http:HttpClient) { }
 
   getAllDept(data){
-    return this.http.post(environment.IP+"/api/masters/dept/getalldept?userId="+sessionStorage.getItem("userId"),data);
+    return this.http.post(environment.IP+"/api/masters/dept/getdeptSummary?userId="+sessionStorage.getItem("userId")+"&page=1&length=10",data);
   }
+
+ 
 
   getAllHolding(){
     return this.http.get(environment.IP+"/api/masters/holding/getallholding");
@@ -29,8 +31,8 @@ export class DepatmentService {
     return this.http.get(environment.IP+"/api/masters/dept/getdeptbyid/"+id);
   }
 
-  deptDatabase(){
-    return this.http.get(environment.IP+"/api/masters/dept/datatable");
+  searchDept(data,company){
+    return this.http.post(environment.IP+"/api/masters/dept/getdeptSummary?userId="+sessionStorage.getItem("userId")+"&"+data,company);
   }
 
 }

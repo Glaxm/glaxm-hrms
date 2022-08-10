@@ -42,8 +42,13 @@ export class CompanyComponent implements OnInit {
   
 
   getAllComapny(){
-    this.companyService.getAllComapny().subscribe(success=>{
-        this.companyList=success;
+    let list:any =JSON.parse(sessionStorage.getItem("company"));
+         var l:any=[];
+         for(var i=0;i<list.length;i++){
+            l.push(Number(list[i]));
+         }
+    this.companyService.getAllComapny(l).subscribe(success=>{
+        this.data=success;
     });
   }
 
@@ -82,6 +87,28 @@ export class CompanyComponent implements OnInit {
   //  this.excelService.exportAsExcelFile(this.reportSummaryList, "AttendanceSummary");
   
   }
+
+     // Datatable  
+ 
+     data: any = [];
+
+     search(data) {
+       this.data = {};
+       let list:any =JSON.parse(sessionStorage.getItem("company"));
+       var l:any=[];
+       for(var i=0;i<list.length;i++){
+          l.push(Number(list[i]));
+       }
+       this.companyService.searchCompany(data,l).subscribe(s => {
+       this.data = s;
+      });
+     }
+   
+     getRows(data){
+      this.companyId = data.companyId;
+      if(data.key==""){ } else{ this.edit(); }
+     }
+  
 }
 
 

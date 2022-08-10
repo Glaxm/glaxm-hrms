@@ -23,6 +23,7 @@ export class EmpCatComponent implements OnInit {
     importFlag:'',
     forSelf: ''
   }
+  data: any = [];
   constructor(private router:Router,private empCatService:EmpCatService,private excelService:ExcelService) { }
 
   ngOnInit() { 
@@ -48,8 +49,14 @@ export class EmpCatComponent implements OnInit {
   }
   
   getEmpCat(){
-    this.empCatService.getEmpCat().subscribe(success=>{
-        this.empCatList = success;
+
+    let list:any =JSON.parse(sessionStorage.getItem("company"));
+    var l:any=[];
+    for(var i=0;i<list.length;i++){
+       l.push(Number(list[i]));
+    }
+    this.empCatService.getEmpCat(l).subscribe(success=>{
+        this.data = success;
     });
   }
 
@@ -91,4 +98,25 @@ export class EmpCatComponent implements OnInit {
   //  this.excelService.exportAsExcelFile(this.reportSummaryList, "AttendanceSummary");
   
   }
+
+      // Database
+
+      search(data) {
+        this.data = {};
+        let list:any =JSON.parse(sessionStorage.getItem("company"));
+        var l:any=[];
+        for(var i=0;i<list.length;i++){
+           l.push(Number(list[i]));
+        }
+        this.empCatService.empCatSearch(data,l).subscribe(s => {
+        this.data = s;
+       });
+      }
+    
+      getRows(data){
+       this.empCatId = data.empCatId;
+       if(data.key==""){ } else{ this.edit(); }
+      }
+
+      
 }

@@ -37,7 +37,14 @@
                 </div>
             </nav>
 
-            <div class="table-responsive tableFixHead">
+            <datatable1 [dataset]=sectionList [enableFilter]="enableFilter" (searchEvent)="search($event)" (aTagEvent)="getRows($event)" [id]="'xsectionId'">
+                <column1 [width1]=3 [value]="'xsectionId'" [header]="''" [type]="'radio'" [sortVal]="'ASC'"></column1>
+                <column1 [width1]=16 [value]="'name'" [header]="'Section Name'" [sortVal]=""></column1>
+                <column1 [width1]=16 [value]="'companyname'" [header]="'Company'" [sortVal]=""></column1>
+            </datatable1>
+
+
+            <!-- <div class="table-responsive tableFixHead">
 
                 <table class="table table-bordered">
                     <thead>
@@ -60,7 +67,7 @@
 
                     </tbody>
                 </table>
-            </div>
+            </div> -->
         </app-card>
     </div>
 </div>

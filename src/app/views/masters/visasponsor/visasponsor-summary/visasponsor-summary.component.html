@@ -37,8 +37,15 @@
             </nav>
 
 
+            <datatable1 [dataset]=data [enableFilter]="enableFilter" (searchEvent)="search($event)" (aTagEvent)="getRows($event)" [id]="'xvisasponsorId'">
+                <column1 [width1]=3 [value]="'xvisasponsorId'" [header]="''" [type]="'radio'" [sortVal]="'ASC'"></column1>
+                <column1 [width1]=16 [value]="'companyName'" [header]="'Company'" [sortVal]=""></column1>
+                <column1 [width1]=16 [value]="'description'" [header]="'Description'" [sortVal]=""></column1>
+            </datatable1>
 
-            <div class="table-responsive tableFixHead">
+
+
+            <!-- <div class="table-responsive tableFixHead">
 
                 <table class="table table-bordered">
                     <thead>
@@ -61,7 +68,7 @@
 
                     </tbody>
                 </table>
-            </div>
+            </div> -->
             <!--  -->
         </app-card>
     </div>

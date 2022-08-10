@@ -67,7 +67,12 @@ export class EduCatComponent implements OnInit {
   }
 
   getEduCatList() {
-    this.eduCatService.getEduCatList().subscribe(s => {
+    let list:any =JSON.parse(sessionStorage.getItem("company"));
+    var l:any=[];
+    for(var i=0;i<list.length;i++){
+       l.push(Number(list[i]));
+    }
+    this.eduCatService.getEduCatList(l).subscribe(s => {
       this.eduCatList = s;
     });
   }
@@ -88,4 +93,26 @@ export class EduCatComponent implements OnInit {
   //  this.excelService.exportAsExcelFile(this.reportSummaryList, "AttendanceSummary");
   
   }
+
+  // Datatable  
+ 
+  data: any = [];
+
+  search(data) {
+    this.data = {};
+    let list:any =JSON.parse(sessionStorage.getItem("company"));
+    var l:any=[];
+    for(var i=0;i<list.length;i++){
+       l.push(Number(list[i]));
+    }
+    this.eduCatService.searchEmpCat(data,l).subscribe(s => {
+    this.data = s;
+   });
+  }
+
+  getRows(data){
+   this.eduCatId = data.eduCatId;
+   if(data.key==""){ } else{ this.edit(); }
+  }
+  
 }

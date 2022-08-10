@@ -138,11 +138,11 @@ export class PayrollProcessingService {
   }
 
   publishPayslips(data,empId,moduleid){
-    return this.http.post(environment.IP+"/api/payroll/payrollprocessing/publishPayslips?cid="+data.cid+"&from_dt="+data.from_dt+"&to_dt="+data.to_dt+"&dept_id="+data.dept_id+"&sponsor="+data.sponsor+"&wps="+data.wps+"&moduleId="+moduleid,empId)
+    return this.http.post(environment.IP+"/api/payroll/payrollprocessing/publishPayslips?cid="+data.cid+"&from_dt="+data.from_dt+"&to_dt="+data.to_dt+"&dept_id="+data.dept_id+"&sponsor="+data.sponsor+"&wps="+data.wps+"&moduleId="+moduleid+"&monthId="+data.monthId,empId)
   }
 
   unpublishPayslips(data,empId,moduleid){
-    return this.http.post(environment.IP+"/api/payroll/payrollprocessing/unpublishPayslips?cid="+data.cid+"&from_dt="+data.from_dt+"&to_dt="+data.to_dt+"&dept_id="+data.dept_id+"&sponsor="+data.sponsor+"&wps="+data.wps+"&moduleId="+moduleid,empId)
+    return this.http.post(environment.IP+"/api/payroll/payrollprocessing/unpublishPayslips?cid="+data.cid+"&from_dt="+data.from_dt+"&to_dt="+data.to_dt+"&dept_id="+data.dept_id+"&sponsor="+data.sponsor+"&wps="+data.wps+"&moduleId="+moduleid+"&monthId="+data.monthId,empId)
   }
 
 }

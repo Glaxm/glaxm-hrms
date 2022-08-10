@@ -37,30 +37,11 @@
                 </div>
             </nav>
 
-            <div class="table-responsive tableFixHead">
-
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Sub section Name</th>
-                            <th>Company</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let dl of subsectionList">
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" (click)="getDataUsingRedioBtn(dl)">
-                                </div>
-                            </td>
-                            <td>{{dl.name}}</td>
-                            <td>{{dl.companyname}}</td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
+            <datatable1 [dataset]=data [enableFilter]="enableFilter" (searchEvent)="search($event)" (aTagEvent)="getRows($event)" [id]="'subsectionId'">
+                <column1 [width1]=3 [value]="'subsectionId'" [header]="''" [type]="'radio'" [sortVal]="'ASC'"></column1>
+                <column1 [width1]=16 [value]="'name'" [header]="'Sub section Name'" [sortVal]=""></column1>
+                <column1 [width1]=16 [value]="'companyname'" [header]="'Company'" [sortVal]=""></column1>
+            </datatable1>
         </app-card>
     </div>
 </div>

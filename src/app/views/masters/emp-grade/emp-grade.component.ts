@@ -51,8 +51,13 @@ export class EmpGradeComponent implements OnInit {
   }
 
   getEmpGradeList(){
-      this.empGradeService.getEmpGradeList().subscribe(success=>{
-        this.empGradeList = success;
+    let list:any =JSON.parse(sessionStorage.getItem("company"));
+     var l:any=[];
+     for(var i=0;i<list.length;i++){
+        l.push(Number(list[i]));
+     }
+      this.empGradeService.getEmpGradeList(l).subscribe(success=>{
+        this.data = success;
       });
   }
 
@@ -88,6 +93,28 @@ export class EmpGradeComponent implements OnInit {
   //  this.excelService.exportAsExcelFile(this.reportSummaryList, "AttendanceSummary");
   
   }
+
+     // Datatable  
+ 
+     data: any = [];
+
+     search(data) {
+       this.data = {};
+       let list:any =JSON.parse(sessionStorage.getItem("company"));
+       var l:any=[];
+       for(var i=0;i<list.length;i++){
+          l.push(Number(list[i]));
+       }
+       this.empGradeService.searchGrade(data,l).subscribe(s => {
+       this.data = s;
+      });
+     }
+   
+     getRows(data){
+      this.empGradeId = data.empGradeId;
+      if(data.key==""){ } else{ this.edit(); }
+     }
+  
   
 
 }

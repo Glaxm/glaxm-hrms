@@ -23,6 +23,8 @@ export class SectionComponent implements OnInit {
   importFlag:'',
   forSelf:''
   }
+  data: any = [];
+
   constructor(private router:Router,private sectionService:SectionService, private excelService:ExcelService) { }
   
   ngOnInit() {
@@ -48,8 +50,6 @@ export class SectionComponent implements OnInit {
       this.sectionService.sectionDatabase(l).subscribe(s=>{
           this.sectionList = s;
       });
-     // this.sectionList = [{"name":"section1","desc":"description","sectionId":1}];
-    
   }
 
 
@@ -73,9 +73,6 @@ export class SectionComponent implements OnInit {
   }
   delete(){ }
 
-  search(data){}
-  getRows(data){}
-
   exporttoexcel() {
     let title = "Section";
   
@@ -93,5 +90,26 @@ export class SectionComponent implements OnInit {
   //  this.excelService.exportAsExcelFile(this.reportSummaryList, "AttendanceSummary");
   
   }
+
+  // Database
+
+  search(data) {
+    this.data = {};
+    let list:any =JSON.parse(sessionStorage.getItem("company"));
+    var l:any=[];
+    for(var i=0;i<list.length;i++){
+       l.push(Number(list[i]));
+    }
+    this.sectionService.searchSection(data,l).subscribe(s => {
+    this.data = s;
+   });
+  }
+
+  getRows(data){
+   this.sectionId = data.xsectionId;
+   if(data.key==""){ } else{ this.edit(); }
+  }
+
+
   
 }

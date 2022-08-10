@@ -44,18 +44,15 @@
 
             <!--  -->
 
-            <!-- <datatable1 [dataset]=deptList [enableFilter]="enableFilter" (searchEvent)="search($event)" (aTagEvent)="getRows($event)"
-            [id]="'userId'">
-            <column1 [width1]=3 [value]="'userId'" [header]="''" [type]="'radio'" [sortVal]="'ASC'"></column1>
-            <column1 [width1]=16 [value]="'status'" [header]="'status'" [sortVal]=""></column1>
-            <column1 [width1]=16 [value]="'mobileNumber'" [header]="'Mobile'" [sortVal]=""></column1>
-            <column1 [width1]=16 [value]="'userType'" [header]="'User Type'" [sortVal]=""></column1>
-            <column1 [width1]=16 [value]="'userName'" [header]="'User Name'" [sortVal]=""></column1>
-            <column1 [width1]=16 [value]="'address'" [header]="'Address'" [sortVal]=""></column1>
-        </datatable1> -->
+            <datatable1 [dataset]=deptList [enableFilter]="enableFilter" (searchEvent)="search($event)" (aTagEvent)="getRows($event)" [id]="'deptId'">
+                <column1 [width1]=3 [value]="'deptId'" [header]="''" [type]="'radio'" [sortVal]="'ASC'"></column1>
+                <column1 [width1]=16 [value]="'name'" [header]="'Department Name'" [sortVal]=""></column1>
+                <column1 [width1]=16 [value]="'companyname'" [header]="'Companies'" [sortVal]=""></column1>
+
+            </datatable1>
 
 
-            <div class="table-responsive tableFixHead">
+            <!-- <div class="table-responsive tableFixHead">
 
                 <table class="table table-bordered">
                     <thead>
@@ -78,7 +75,7 @@
 
                     </tbody>
                 </table>
-            </div>
+            </div> -->
         </app-card>
     </div>
 </div>

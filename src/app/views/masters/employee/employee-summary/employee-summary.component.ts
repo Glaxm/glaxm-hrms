@@ -199,7 +199,7 @@ export class EmployeeSummaryComponent implements OnInit {
           "Company": this.exportList[i].company,
           "Employee ID": this.exportList[i].employeeId,
           "Biometrics ID": this.exportList[i].bioId,
-          "Employee Code": this.exportList[i].empcode,
+          "Internal ID": this.exportList[i].empcode,
           "Greeting": this.exportList[i].greeting,
           "First Name": this.exportList[i].firstName,
           "Middle Name": this.exportList[i].middleName,

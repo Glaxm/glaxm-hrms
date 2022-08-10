@@ -8,7 +8,7 @@ const routes: Routes = [
   { path:'role', loadChildren: ()=> import('./role/role.module').then(m=>m.RoleModule) },
   { path:'user', loadChildren: ()=> import('./user/user.module').then(m=>m.UserModule) },
   { path:'dashboard-setting', loadChildren: ()=> import('./dashboard-setting/dashboard-setting.module').then(m=>m.DashboardSettingModule) },
-   { path: "masters", loadChildren: ()=> import("./../masters/masters.module").then(m=>m.MastersModule)},
+  { path: "masters", loadChildren: ()=> import("./../masters/masters.module").then(m=>m.MastersModule)},
   
 ];
 

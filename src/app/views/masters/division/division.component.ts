@@ -9,7 +9,7 @@ import { DivisionService } from './division.service';
   styleUrls: ['./division.component.scss']
 })
 export class DivisionComponent implements OnInit {
-
+ 
   divisionId:any;
   divisionList:any=[];
   enableFilter = false;
@@ -23,6 +23,7 @@ export class DivisionComponent implements OnInit {
     importFlag:'',
     forSelf:''
   }
+  data: any = [];
   constructor(private router:Router,private divisionService:DivisionService, private excelService:ExcelService) { }
   
   ngOnInit() {
@@ -47,19 +48,10 @@ export class DivisionComponent implements OnInit {
        l.push(Number(list[i]));
     }
       this.divisionService.getAllDivision(l).subscribe(s=>{
-          this.divisionList = s;
+          this.data = s;
       });
-   //   this.divisionList = [{"name":"division1","desc":"desc","divisionId":1}];
-    
-  }
-
+   }
   
-  divisionDatabase(){
-    this.divisionService.divisionDatabase().subscribe(s=>{
-      
-    });        
-  }
-
 
 
   getDataUsingRedioBtn(data){
@@ -81,8 +73,6 @@ export class DivisionComponent implements OnInit {
   }
   delete(){ }
 
-  search(data){}
-  getRows(data){}
 
   exporttoexcel() {
     let title = "Division";
@@ -100,6 +90,26 @@ export class DivisionComponent implements OnInit {
     this.excelService.exportAsExcelFile(exportDataList, title);
   //  this.excelService.exportAsExcelFile(this.reportSummaryList, "AttendanceSummary");
   
+  }
+
+   // Datatable  
+ 
+ 
+  search(data) {
+    this.data = {};
+    let list:any =JSON.parse(sessionStorage.getItem("company"));
+    var l:any=[];
+    for(var i=0;i<list.length;i++){
+       l.push(Number(list[i]));
+    }
+    this.divisionService.searchDivision(data,l).subscribe(s => {
+    this.data = s;
+   });
+  }
+
+  getRows(data){
+   this.divisionId = data.xdivId;
+   if(data.key==""){ } else{ this.edit(); }
   }
   
 }

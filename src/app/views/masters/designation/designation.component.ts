@@ -69,8 +69,13 @@ export class DesignationComponent implements OnInit {
   }
 
   getDesignationList() {
-    this.desigService.getDesignationList().subscribe(s => {
-      this.designList = s;
+    let list:any =JSON.parse(sessionStorage.getItem("company"));
+    var l:any=[];
+    for(var i=0;i<list.length;i++){
+       l.push(Number(list[i]));
+    }
+    this.desigService.getDesignationList(l).subscribe(s => {
+      this.data = s;
     })
   }
   exporttoexcel() {
@@ -90,5 +95,27 @@ export class DesignationComponent implements OnInit {
   //  this.excelService.exportAsExcelFile(this.reportSummaryList, "AttendanceSummary");
   
   }
+
+   // Datatable  
+ 
+   data: any = [];
+
+   search(data) {
+     this.data = {};
+     let list:any =JSON.parse(sessionStorage.getItem("company"));
+     var l:any=[];
+     for(var i=0;i<list.length;i++){
+        l.push(Number(list[i]));
+     }
+     this.desigService.searchDesig(data,l).subscribe(s => {
+     this.data = s;
+    });
+   }
+ 
+   getRows(data){
+    this.designId = data.empDesignationId;
+    if(data.key==""){ } else{ this.edit(); }
+   }
+  
   
 }

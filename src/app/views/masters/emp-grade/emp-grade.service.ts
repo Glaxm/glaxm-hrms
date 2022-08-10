@@ -9,8 +9,8 @@ export class EmpGradeService {
 
   constructor(private http:HttpClient) { }
 
-  getEmpGradeList(){
-    return this.http.get(environment.IP+"/api/masters/empgrade/getallempgrade?userId="+sessionStorage.getItem("userId"));
+  getEmpGradeList(company){
+    return this.http.post(environment.IP+"/api/masters/empgrade/getempgradeSummary?userId="+sessionStorage.getItem("userId")+"&page=1&length=10",company);
   }
 
   getComapnyList(holdingId){
@@ -27,6 +27,10 @@ export class EmpGradeService {
 
   getEmpGradeById(id){
     return this.http.get(environment.IP+"/api/masters/empgrade/getempgradebyid/"+id)
+  }
+
+  searchGrade(data,company){
+    return this.http.post(environment.IP+"/api/masters/empgrade/getempgradeSummary?userId="+sessionStorage.getItem("userId")+"&"+data,company);
   }
 
 }

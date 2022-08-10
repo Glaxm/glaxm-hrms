@@ -75,7 +75,7 @@ export class VisasponsorSummaryComponent implements OnInit {
     }
  
     this.visasponsorService.getVisasponsorList(l).subscribe(s => {
-      this.visasponsorList = s;
+      this.data = s;
     })
   }
 
@@ -96,4 +96,28 @@ export class VisasponsorSummaryComponent implements OnInit {
   //  this.excelService.exportAsExcelFile(this.reportSummaryList, "AttendanceSummary");
   
   }
+
+       // Datatable  
+ 
+       data: any = [];
+
+       search(data) {
+         this.data = {};
+         let list:any =JSON.parse(sessionStorage.getItem("company"));
+         var l:any=[];
+         for(var i=0;i<list.length;i++){
+            l.push(Number(list[i]));
+         }
+         this.visasponsorService.searchVisaSponsor(data,l).subscribe(s => {
+         this.data = s;
+        });
+       }
+     
+       getRows(data){
+        this.visasponsorId = data.xvisasponsorId;
+        if(data.key==""){ } else{ this.edit(); }
+       }
+    
+
+       
 }

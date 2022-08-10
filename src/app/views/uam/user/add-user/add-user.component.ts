@@ -269,7 +269,10 @@ export class AddUserComponent implements OnInit {
       this.employeeList = s;
       if (this.userForm.value.userId) {
         let list = this.employeeList.filter(item => item.employeeId == this.userForm.value.employeeId);
-        this.selectedItemsemp = [{ 'employeeId': list[0].employeeId, 'displayName': list[0].displayName }];
+        if(list.length>0){
+          this.selectedItemsemp = [{ 'employeeId': list[0].employeeId, 'displayName': list[0].displayName }];
+        }
+        
       }
     });
   }
@@ -323,17 +326,21 @@ export class AddUserComponent implements OnInit {
     this.userForm.get('lastUpdateLogin').setValue(1);
     this.userForm.get('employeeId').setValue(Number(this.userForm.value.employeeId));
 
+    if(this.selectedEmpList){
     let comp: any = this.selectedEmpList!= null &&  this.selectedEmpList.length!= 0 ? this.setCompanyList(this.selectedEmpList):[];
-    this.userForm.get('companyId1').setValue(comp)
+    this.userForm.get('companyId1').setValue(comp)}
 
+    if(this.selectedworkflowList){
     let wrkflow: any = this.selectedworkflowList!= null &&  this.selectedworkflowList.length!= 0 ? this.setWorkflowList(this.selectedworkflowList):[];
-    this.userForm.get('workflowId').setValue(wrkflow);
+    this.userForm.get('workflowId').setValue(wrkflow);}
     
+    if(this.selectedDeptWiseList){
     let deptWiseEmp1: any = this.selectedDeptWiseList!= null &&  this.selectedDeptWiseList.length!= 0 ? this.setDeptWiseList1(this.selectedDeptWiseList):[];
-    this.userForm.get('deptWiseEmp').setValue(deptWiseEmp1);
+    this.userForm.get('deptWiseEmp').setValue(deptWiseEmp1);}
 
+    if(this.selectedDashSettingList){
     let dashsettList: any = this.setdashbrdSettList(this.selectedDashSettingList);
-    this.userForm.get('dashboardId').setValue(dashsettList);
+    this.userForm.get('dashboardId').setValue(dashsettList);}
 
     if (this.userForm.value.userId) {
       this.userForm.controls['userId'].setValue(Number(this.userForm.value.userId));

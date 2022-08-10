@@ -9,8 +9,8 @@ export class VisasponsorService {
 
   constructor(private http:HttpClient) { }
 
-  getVisasponsorList(data){
-    return this.http.post(environment.IP+"/api/masters/visasponsor/getallvisaSponser?userId="+sessionStorage.getItem("userId"),data);
+  getVisasponsorList(company){
+    return this.http.post(environment.IP+"/api/masters/visasponsor/getvisacompSummary?userId="+sessionStorage.getItem("userId")+"&page=1&length=10",company);
   }
 
   getCompanyListByHoldingId(id){
@@ -27,6 +27,10 @@ export class VisasponsorService {
 
   getVisasponsorDataById(id){
     return this.http.get(environment.IP+"/api/masters/visasponsor/getvisasponsorbyid/"+id);
+  }
+
+  searchVisaSponsor(data,company){
+    return this.http.post(environment.IP+"/api/masters/visasponsor/getvisacompSummary?userId="+sessionStorage.getItem("userId")+"&"+data,company);
   }
 
 }

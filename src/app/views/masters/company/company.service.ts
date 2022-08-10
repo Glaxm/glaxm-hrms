@@ -9,8 +9,8 @@ export class CompanyService {
 
   constructor(private http:HttpClient) { }
 
-  getAllComapny(){
-    return this.http.get(environment.IP+"/api/masters/company/getallcompanies?userId="+sessionStorage.getItem("userId"))
+  getAllComapny(company){
+    return this.http.post(environment.IP+"/api/masters/company/getcompanySummary?userId="+sessionStorage.getItem("userId")+"&page=1&length=10",company);
   }
   getAllHolding(){
     return this.http.get(environment.IP+"/api/masters/holding/getallholding")
@@ -23,5 +23,9 @@ export class CompanyService {
   }
   fileUpload(companyid,data){
     return this.http.post(environment.IP+"/api/masters/company/savecompanylogo/"+companyid,data);
+  }
+
+  searchCompany(data,company){
+    return this.http.post(environment.IP+"/api/masters/company/getcompanySummary?userId="+sessionStorage.getItem("userId")+"&"+data,company);
   }
 }

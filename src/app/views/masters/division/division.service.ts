@@ -10,7 +10,7 @@ export class DivisionService {
   constructor(private http:HttpClient) { }
 
   getAllDivision(data){
-    return this.http.post(environment.IP+"/api/division/getalldivision?userId="+sessionStorage.getItem("userId"),data);
+    return this.http.post(environment.IP+"/api/division/getdivSummary?userId="+sessionStorage.getItem("userId")+"&length=10&page=1",data);
   }
 
   getAllHolding(){
@@ -29,7 +29,7 @@ export class DivisionService {
     return this.http.get(environment.IP+"/api/division/getdivisionbyid/"+id);
   }
 
-  divisionDatabase(){
-    return this.http.get(environment.IP+"/api/masters/division/datatable");
+  searchDivision(data,company){
+    return this.http.post(environment.IP+"/api/division/getdivSummary?userId="+sessionStorage.getItem("userId")+"&"+data,company);
   }
 }

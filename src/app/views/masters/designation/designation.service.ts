@@ -9,8 +9,8 @@ export class DesignationService {
 
   constructor(private http:HttpClient) { }
 
-  getDesignationList(){
-    return this.http.get(environment.IP+"/api/masters/empdesig/getallempdesig?userId="+sessionStorage.getItem("userId"));
+  getDesignationList(company){
+    return this.http.post(environment.IP+"/api/masters/empdesig/getempdesigSummary?userId="+sessionStorage.getItem("userId")+"&page=1&length=10",company);
   }
 
   getCompanyListByHoldingId(id){
@@ -27,6 +27,10 @@ export class DesignationService {
 
   getDesigDataById(id){
     return this.http.get(environment.IP+"/api/masters/empdesig/getempdesigbyid/"+id);
+  }
+
+  searchDesig(data,company){
+    return this.http.post(environment.IP+"/api/masters/empdesig/getempdesigSummary?userId="+sessionStorage.getItem("userId")+"&"+data,company);
   }
 
 }

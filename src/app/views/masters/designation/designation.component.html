@@ -37,8 +37,13 @@
             </nav>
 
 
+            <datatable1 [dataset]=data [enableFilter]="enableFilter" (searchEvent)="search($event)" (aTagEvent)="getRows($event)" [id]="'empDesignationId'">
+                <column1 [width1]=3 [value]="'empCatId'" [header]="''" [type]="'radio'" [sortVal]="'ASC'"></column1>
+                <column1 [width1]=16 [value]="'name'" [header]="'Employee Category Name'" [sortVal]=""></column1>
+                <column1 [width1]=16 [value]="'companyname'" [header]="'Company'" [sortVal]=""></column1>
+            </datatable1>
 
-            <div class="table-responsive tableFixHead">
+            <!-- <div class="table-responsive tableFixHead">
 
                 <table class="table table-bordered">
                     <thead>
@@ -61,7 +66,7 @@
 
                     </tbody>
                 </table>
-            </div>
+            </div> -->
             <!--  -->
         </app-card>
     </div>

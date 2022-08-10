@@ -22,7 +22,10 @@ export class SubsectionComponent implements OnInit {
     exportFlag:'',
     importFlag:'',
     forSelf:''
-  }
+  };
+
+  data: any = [];
+
   constructor(private router:Router,private subsectionService:SubsectionService, private excelService:ExcelService) { }
   
   ngOnInit() {
@@ -45,8 +48,8 @@ export class SubsectionComponent implements OnInit {
    for(var i=0;i<list.length;i++){
       l.push(Number(list[i]));
    }
-      this.subsectionService.subsectionDatabase(l).subscribe(s=>{
-          this.subsectionList = s;
+      this.subsectionService.getSubsectionList(l).subscribe(s=>{
+          this.data = s;
       });
   }
 
@@ -71,9 +74,6 @@ export class SubsectionComponent implements OnInit {
   }
   delete(){ }
 
-  search(data){}
-  getRows(data){}
-
   exporttoexcel() {
     let title = "Sub_Section";
   
@@ -91,5 +91,25 @@ export class SubsectionComponent implements OnInit {
   //  this.excelService.exportAsExcelFile(this.reportSummaryList, "AttendanceSummary");
   
   }
+
+    // Database
+
+    search(data) {
+      this.data = {};
+      let list:any =JSON.parse(sessionStorage.getItem("company"));
+      var l:any=[];
+      for(var i=0;i<list.length;i++){
+         l.push(Number(list[i]));
+      }
+      this.subsectionService.subsectionDatabase(data,l).subscribe(s => {
+      this.data = s;
+     });
+    }
+  
+    getRows(data){
+     this.subsectionId = data.xsubsectionId;
+     if(data.key==""){ } else{ this.edit(); }
+    }
+  
   
 }
